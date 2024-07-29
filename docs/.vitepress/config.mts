@@ -5,6 +5,7 @@ export default defineConfig({
   title: "My Note",
   description: "A Blog site",
   // lang: 'zh',
+  base:'/my-note/',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     search: {
