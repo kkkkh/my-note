@@ -12,18 +12,25 @@ export default defineConfig({
       provider: 'local'
     },
     nav: [
-      { text: 'Home', link: '/' },
+      { text: '首页', link: '/' },
       { text: '前端', link: '/front-end' },
-      { text: '后端', link: '/back-end' }
+      { text: '后端', link: '/back-end' },
     ],
     sidebar: {
       '/front-end':
         [
           {
-            text: '工程化',
-            link: '/front-end/engineering',
+            text: 'Css',
+            link: '/front-end/Css',
             items: [
-              { text: 'vite', link: '/front-end/engineering/vite' },
+              { text: 'flex', link: '/front-end/Css/flex' },
+            ]
+          },
+          {
+            text: '工程化',
+            link: '/front-end/Engineering',
+            items: [
+              { text: 'vite', link: '/front-end/Engineering/vite' },
             ]
           }
         ]
