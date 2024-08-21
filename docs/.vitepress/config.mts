@@ -15,6 +15,8 @@ export default defineConfig({
       { text: '首页', link: '/' },
       { text: '前端', link: '/front-end' },
       { text: '后端', link: '/back-end' },
+      { text: '文档', link: '/tools' },
+      { text: '读书', link: '/books' },
     ],
     sidebar: {
       '/front-end':
