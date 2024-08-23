@@ -6,7 +6,14 @@ outline: deep
 ### js
 - [mozilla](https://developer.mozilla.org/zh-CN/)
 - [Can I use](https://caniuse.com/)
+### vue
+- [vue3官网](https://cn.vuejs.org/guide/introduction.html)
 
+- [vue2官网](https://v2.cn.vuejs.org/v2/guide/)
+- [element-ui](https://element.eleme.cn/#/zh-CN/component/installation)
+### 构建工具
+- [vite](https://cn.vitejs.dev/guide/)
+- esbuild
 ### npm
 - npm
 - [pnpm](https://www.pnpm.cn/installation) 
