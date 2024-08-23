@@ -27,6 +27,13 @@ export default defineConfig({
             items: [
               { text: 'flex', link: '/front-end/Css/flex' },
             ]
+          },{
+            text: 'Vue',
+            link: '/front-end/Engineering',
+            items: [
+              { text: 'vue2', link: '/front-end/Vue/vue2' },
+              { text: 'element-ui', link: '/front-end/Vue/element-ui' },
+            ]
           },
           {
             text: '工程化',
