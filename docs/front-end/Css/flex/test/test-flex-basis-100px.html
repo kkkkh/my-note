@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    by-zhangxinxu {
+        display: flex;
+    }
+    item-zxx {
+        padding: 1em;
+        border: 1em solid deepskyblue;
+        color: deepskyblue;
+        outline: 1px dashed #fff;
+        /* box-sizing: border-box; */
+        /* word-break:break-all; */
+    }
+    item-zxx:nth-child(1) {
+        width: 100px;
+    }
+    item-zxx:nth-child(2) {
+        flex-basis:200px;
+    }
+    item-zxx:nth-child(3) {
+        width: 100px;
+        flex-basis: 200px;
+    }
+    item-zxx:nth-child(4) {
+        width: 100px;
+    }
+    item-zxx:nth-child(5) {
+        flex-basis:200px;
+    }
+    item-zxx:nth-child(6) {
+        width: 100px;
+        flex-basis: 200px;
+    }
+  </style>
+</head>
+<body>
+  <by-zhangxinxu>
+    <item-zxx>我仅设置了width:100px，没有设置了flex-basis:100px。</item-zxx>
+    <item-zxx>我没有设置width：100px，但是设置了flex-basis:100px。</item-zxx>
+    <item-zxx>我设置了width：100px，同时设置了flex-basis:100px</item-zxx>
+    <item-zxx>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</item-zxx>
+    <item-zxx>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</item-zxx>
+    <item-zxx>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</item-zxx>
+</by-zhangxinxu>
+</body>
+</html>
