@@ -6,7 +6,7 @@ outline: deep
 ## Css
 #### flex
 
-## JS
+## Js
 
 ## Vue
 #### vue2
