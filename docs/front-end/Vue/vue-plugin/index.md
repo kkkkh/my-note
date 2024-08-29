@@ -1,3 +1,6 @@
+---
+outline: deep
+---
 ## Vue plugin (Vue 扩展组件)
 - [Vxe Table](https://vxetable.cn/#/start/install)
   - [v4.7+(vue 3.x)](https://vxetable.cn/v4/#/start/install)
