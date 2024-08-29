@@ -28,11 +28,15 @@ export default defineConfig({
               { text: 'flex', link: '/front-end/Css/flex' },
             ]
           },{
+            text: 'Js',
+            link: '/front-end/Js',
+          },{
             text: 'Vue',
             link: '/front-end/Engineering',
             items: [
               { text: 'vue2', link: '/front-end/Vue/vue2' },
               { text: 'element-ui', link: '/front-end/Vue/element-ui' },
+              { text: 'element-plugin', link: '/front-end/Vue/element-plugin' },
             ]
           },
           {
