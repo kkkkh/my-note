@@ -5,39 +5,42 @@ outline: deep
 ## Js
 
 ### String
-#### fromCharCode()/fromCodePoint()
+#### fromCharCode() / fromCodePoint()
 - String.fromCodePoint(num1)
   - 使用指定的`码位序列`创建的字符串
   - num1 -> Unicode 码位 -> 一个介于 0 和 0x10FFFF（1114111）（包括两者）之间的整数，表示一个 Unicode 码位
   ```js
-  console.log(String.fromCodePoint(9731, 9733, 9842, 0x2f804)); //"☃★♲你"
-  console.log(String.fromCharCode(9731, 9733, 9842, 0x2f804)); // "☃★♲ "
+  String.fromCodePoint(9731, 9733, 9842, 0x2f804); //"☃★♲你"
+  String.fromCharCode(9731, 9733, 9842, 0x2f804); // "☃★♲ "
   ```
   ```js
   // 相同,10进制和16进制都相同
-  console.log(String.fromCodePoint(0x10FFFF)); // '  '
-  console.log(String.fromCodePoint(1114111)); // '  '
+  String.fromCodePoint(0x10FFFF); // '  '
+  String.fromCodePoint(1114111); // '  '
   ```
 - UTF-16
   - 在 UTF-16 中，每个字符串索引是一个取值范围为 0 到 65535 的码元
   - 较高的Unicode 码位，由一对 16 位代理伪字符表示
   - fromCodePoint() 可能返回一个字符串，其在 UTF-16 码元中的 length 大于传递的参数个数
-  ```js
-  console.log(String.fromCodePoint(1114111).length); // 2
-  ```
+    ```js
+    String.fromCodePoint(1114111).length; // 2
+    ```
 - String.fromCharCode()
   - 指定的 UTF-16 码元序列创建的字符串
-  ```js
-  // 在 0 到 65535这个范围，返回值相同
-  String.fromCharCode(189, 43, 190, 61) //'½+¾='
-  String.fromCodePoint(189, 43, 190, 61) //'½+¾='
-  ```
+    ```js
+    // 在 0 到 65535这个范围，返回值相同
+    String.fromCharCode(189, 43, 190, 61) //'½+¾='
+    String.fromCodePoint(189, 43, 190, 61) //'½+¾='
+    ```
   - 无法通过指定其码位来返回补充字符(（即码位 0x010000 至 0x10FFFF）)，使用 UTF-16 代理对来返回补充字符
-  ```js
-  // 相同
-  String.fromCharCode(0xD87E,0xDC04) // '你'
-  String.fromCodePoint(0x2f804) // '你'
-  ```
+    ```js
+    // 代理只传一个部分，则返回16位编码单元
+    String.fromCharCode(55362) // \uD842
+    String.fromCharCode(57271); // \uDFB7
+    // 相同
+    String.fromCharCode(0xD87E,0xDC04) // '你'
+    String.fromCodePoint(0x2f804) // '你'
+    ```
 - UTF-16 字符、Unicode 码位和字素簇
   - UTF-16 编码中，每个码元都是 16 位长
   - 最多有 2^16 个或 65536 个可能的字符可表示为单个 UTF-16 码元
@@ -62,32 +65,198 @@ outline: deep
 - [UTF-16 字符、Unicode 码位和字素簇](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String#utf-16_%E5%AD%97%E7%AC%A6%E3%80%81unicode_%E7%A0%81%E4%BD%8D%E5%92%8C%E5%AD%97%E7%B4%A0%E7%B0%87)
 
 
-#### codePointAt()/charCodeAt()/charAt()
+#### codePointAt() / charCodeAt() / charAt()
 - codePointAt(index) 给定 index 处字符的码位值
-```js
-const icons = '☃★♲';
-console.log(icons.codePointAt(1)); 
-// 返回★的码位值
-// Expected output: "9733"
-```
+  ```js
+  const icons = '☃★♲';
+  icons.codePointAt(1); 
+  // 返回★的码位值
+  // "9733"
+  ```
 - charCodeAt(index) 给定索引index处的 UTF-16 码元
+  ```js
+  // 1
+  const sentence = 'The quick brown fox jumps over the lazy dog.';
+  const index = 4;
+
+    `Character code ${sentence.charCodeAt(index)} is equal to ${sentence.charAt(
+      index,
+    )}`,
+  );
+  // "Character code 113 is equal to q"
+  // 2
+  "ABC".charCodeAt(0); //65
+  // 如果索引处的字符是超出UTF-16码元，则返回代理对（代理码点）对应的Unicode编码
+  '𠮷'.charCodeAt(0)  // 55362
+  '𠮷'.charCodeAt(1)  // 57271
+  ```
 - charAt() 返回一个由给定索引处的单个 UTF-16 码元构成的新字符串。
-```js
-const sentence = 'The quick brown fox jumps over the lazy dog.';
-const index = 4;
-console.log(
-  `Character code ${sentence.charCodeAt(index)} is equal to ${sentence.charAt(
-    index,
-  )}`,
-);
-// Expected output: "Character code 113 is equal to q"
-```
+  ```js
+  '1234'.charAt(1) //2
+  // 如果索引处的字符是超出UTF-16码元，则返回代理对(代理码点)
+  '𠮷'.charAt(0) //'\uD842'
+  '𠮷'.charAt(1) //'\uDFB7'
+  '𠮷'.length // 2
+  ```
 参考：
 - [codePointAt](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/codePointAt)
 - [charCodeAt](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt)
 - [charAt](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/charAt)
 
+#### toLowerCase() / toUpperCase()
+- toLowerCase() 大写转小写
+```js
+const str = 'ABC';
+console.log(str.toLowerCase());
+// abc
+```
+- toUpperCase() 小写转大写
+```js
+const str = 'abc';
+console.log(str.toUpperCase());
+// ABC
+```
 
+### Math
+#### Math.max() / Math.min()
+- Math.max 给定数值中最大的数
+  ```js
+  console.log(Math.max(1, 3, 2));
+  // 3
+  console.log(Math.max(-1, -3, -2));
+  // -1
+  const array1 = [1, 3, 2];
+  console.log(Math.max(...array1));
+  // 3
+  ```
+#### Math.pow() / Math.hypot() / Math.pow()
+- Math.pow(base,exponent) 函数返回基数（base）的指数（exponent）次幂，即 base^exponent。
+- 形同：2**10 2的10次方（指数运算）
+  ```js
+  // 2的3次方
+  console.log(Math.pow(2, 3));
+  console.log(2**3);
+  // 8
+  console.log(Math.pow(4, 0.5));
+  // 2
+  console.log(Math.pow(7, -2));
+  // 0.02040816326530612
+  console.log(Math.pow(-7, 0.5));
+  // NaN
+  ```
+- Math.hypot(x1,x2) 函数返回所有参数的平方和的平方根
+  ```js
+  console.log(Math.hypot(3, 4));
+  // 3*3 + 4*4 平方根
+  // 5
+  console.log(Math.hypot(3, 4, 5));
+  // 7.0710678118654755
+  console.log(Math.hypot(-5));
+  // 5
+  ```
+  - Math.sqrt(x) 平方根
+  ```js
+  console.log(Math.sqrt(25));
+  // 5
+  ```
+#### Math.ceil() / Math.floor() / Math.round() 
+- Math.ceil(x) 向上取整
+  ```js
+  console.log(Math.ceil(1.2)) //2
+  ```
+- Math.floor(x) 向下取整
+  ```js
+  console.log(Math.floor(1.2)) //1
+  ```
+- Math.round() 四舍五入后最接近的整数
+  ```js
+  console.log(Math.round(1.5)) //2
+  console.log(Math.round(1.2)) //1
+  ```
+#### Math.random() / window.crypto.getRandomValues()
+- Math.random() 伪随机数在范围从0 到小于1（从 0（包括 0）往上，但是不包括 1（排除 1））
+  - 得到一个两数之间的随机数 
+  - `Math.random() * (max - min) + min;`
+    ```js
+    // 这个值不小于 min（有可能等于），并且小于（不等于）max。
+    function getRandomArbitrary(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+    console.log(getRandomArbitrary(1, 10));
+    ```
+  - 得到一个两数之间的随机整数 
+  - `minCeiled = Math.ceil(min);`
+  - `maxFloored = Math.floor(max);`
+  - `Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled)`
+    ```js
+    function getRandomInt(min, max) {
+      const minCeiled = Math.ceil(min);
+      const maxFloored = Math.floor(max);
+      return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); // 不包含最大值，包含最小值
+    }
+    console.log(getRandomInt(1, 10));
+    ```
+
+  - 得到一个两数之间的随机整数，包括两个数在内
+  - `minCeiled = Math.ceil(min);`
+  - `maxFloored = Math.floor(max);`
+  - `Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled)`
+    ```js
+    function getRandomIntInclusive(min, max) {
+      const minCeiled = Math.ceil(min);
+      const maxFloored = Math.floor(max);
+      return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled); // 包含最小值和最大值
+    }
+    ```
+- window.crypto.getRandomValues
+  ```js
+  var array = new Uint32Array(10);
+  window.crypto.getRandomValues(array);
+  console.log("Your lucky numbers:");
+  for (var i = 0; i < array.length; i++) {
+      console.log(array[i]);
+  }
+  //359997624, 1361574309, 688683877,.........
+  ```
+- 对比：
+  - Math.random() 不能提供像密码一样安全的随机数字。
+  - 使用 Web Crypto API 来代替，和更精确的window.crypto.getRandomValues() 方法。
+
+- 参考：
+  - [Math.random](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Math/random#%E7%A4%BA%E4%BE%8B)
+
+### Object
+#### object.fromEntries() / Object.entries()（逆操作）
+- object.fromEntries() 将一个数组/Map转为一个对象
+  ```js
+  const entries = new Map([
+    ['foo', 'bar'],
+    ['baz', 42],
+  ]);
+  // or
+  const entries = [
+    ['foo', 'bar'],
+    ['baz', 42],
+  ];
+  const obj = Object.fromEntries(entries);
+  console.log(obj);
+  // Object { foo: "bar", baz: 42 }
+  ```
+- Object.entries() 对象转为二维数组
+  ```js
+  const object1 = {
+    a: 'somestring',
+    b: 42,
+  };
+  console.log(Object.entries(object1))
+  // Array [Array ["a", "somestring"], Array ["b", 42]]
+  for (const [key, value] of Object.entries(object1)) {
+    console.log(`${key}: ${value}`);
+  }
+  //
+  // "a: somestring"
+  // "b: 42"
+  ```
 ### event
 #### keydown/keyup
 - <s>keypress</s><font color=red>(已弃用)</font> 当按下产生字符或符号值的键时，将触发 keypress 事件
