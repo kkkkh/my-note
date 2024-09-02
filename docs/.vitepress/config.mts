@@ -30,6 +30,9 @@ export default defineConfig({
           },{
             text: 'Js',
             link: '/front-end/Js',
+            items: [
+              { text: 'bom', link: '/front-end/Js/Bom' },
+            ]
           },{
             text: 'Vue',
             link: '/front-end/Engineering',
