@@ -226,7 +226,7 @@ console.log(str.toUpperCase());
   - [Math.random](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Math/random#%E7%A4%BA%E4%BE%8B)
 
 ### Object
-#### object.fromEntries() / Object.entries()（逆操作）
+#### Object.fromEntries() / Object.entries()（逆操作）
 - object.fromEntries() 将一个数组/Map转为一个对象
   ```js
   const entries = new Map([
@@ -257,6 +257,36 @@ console.log(str.toUpperCase());
   // "a: somestring"
   // "b: 42"
   ```
+#### Object.assign()
+```js
+const obj1={a:{b:1}}
+const obj2={a:{c:2}}
+//从顶层合并，下边层级的会被替换掉
+Object.assign(obj1,obj2)
+console.log(obj1)
+// {a:{c:2}}
+// 从下边层级合并，则都会加上
+Object.assign(obj1.a,obj2.a)
+console.log(obj1)
+// {a: {b: 1, c: 2}}
+```
+
+### RegExp
+- 示例一：
+```js
+// *?懒惰查找 默认是贪婪查找
+// $1 代表正则中第一个()
+// [^$] 代表非$的字符
+// $$t 插入一个 "$"
+const reg = /placeholder="([^$]*?)"/
+const str = `placeholder="请输入信息"`
+const res = str.replace(/placeholder="([^$]*?)"/,`:placeholder="$$t('N:$1')"`)
+console.log(res)
+// :placeholder="$t('N:请输入信息')"
+```
+参考：
+[String replace](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
+
 ### event
 #### keydown/keyup
 - <s>keypress</s><font color=red>(已弃用)</font> 当按下产生字符或符号值的键时，将触发 keypress 事件
@@ -274,7 +304,7 @@ document.getElementById("app").addEventListener('keydown',(e)=>{
 ```
 参考：
 - [keyup_event](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/keyup_event)
-- [KeyboardEven](https://developer.mozilla.org/zh-CN/docs/Web/API/KeyboardEvent)
+- [KeyboardEvent](https://developer.mozilla.org/zh-CN/docs/Web/API/KeyboardEvent)
 - [vue2 按键修饰符](https://v2.cn.vuejs.org/v2/guide/events.html#%E6%8C%89%E9%94%AE%E4%BF%AE%E9%A5%B0%E7%AC%A6)
 
 
