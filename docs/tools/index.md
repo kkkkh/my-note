@@ -1,6 +1,14 @@
 ---
 outline: deep
 ---
+## blog
+
+- [四火的唠叨](https://www.raychase.net/allarticles)
+- [阮一峰的网络日志](https://www.ruanyifeng.com/blog/archives.html)
+- [酷壳–CoolShell](https://coolshell.cn/)
+- [Web探索之旅](https://www.jianshu.com/nb/4686146)
+- [编程の趣](https://www.tangshuang.net/code)
+
 ## 前端
 
 ### js
@@ -14,6 +22,16 @@ outline: deep
 ### 构建工具
 - [vite](https://cn.vitejs.dev/guide/) 官网
 - esbuild
+### 可视化
+- [raphael](https://dmitrybaranovskiy.github.io/raphael/)
+- [fabricjs](http://fabricjs.com/)
+- [pixijs](https://pixijs.com/8.x/tutorials)   [pixijs教程](https://github.com/Zainking/LearningPixi/tree/master)
+- [echarts](https://echarts.apache.org/handbook/zh/get-started/)
+
+- [sigmajs](https://www.sigmajs.org/)
+- [getspringy](http://getspringy.com/)
+
+
 ### npm
 - npm
 - [pnpm](https://www.pnpm.cn/installation) 文档
@@ -31,3 +49,4 @@ outline: deep
 ## 其他工具
 - [Markdown](https://markdown.com.cn/) 文档
 - [tinypng](https://tinypng.com/) 压缩图片
+- [draw.io](https://www.drawio.com/) draw.io绘图（[diagrams](https://app.diagrams.net/?src=about)）
