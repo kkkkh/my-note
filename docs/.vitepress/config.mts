@@ -47,6 +47,7 @@ export default defineConfig({
             link: '/front-end/Engineering',
             items: [
               { text: 'vite', link: '/front-end/Engineering/vite' },
+              { text: 'git', link: '/front-end/Engineering/git' },
             ]
           }
         ]
