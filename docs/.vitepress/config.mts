@@ -15,6 +15,7 @@ export default defineConfig({
       { text: '首页', link: '/' },
       { text: '前端', link: '/front-end' },
       { text: '后端', link: '/back-end' },
+      { text: 'Linux', link: '/ops' },
       { text: '文档', link: '/tools' },
       { text: '读书', link: '/books' },
     ],
@@ -50,7 +51,15 @@ export default defineConfig({
               { text: 'git', link: '/front-end/Engineering/git' },
             ]
           }
-        ]
+        ],
+      '/ops':[
+        {
+          text: 'Command',
+          link: '/ops/Command',
+          items: [
+          ]
+        }
+      ]
     },
     socialLinks: [
       { icon: 'github', link: 'https://github.com/kkkkh' }
