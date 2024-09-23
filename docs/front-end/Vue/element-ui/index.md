@@ -4,14 +4,14 @@ outline: deep
 ## element-ui
 #### el-upload
 ##### 常用模板
-- 手动上传/limit size 200KB
+- 自定义上传 / 手动上传 / limit size 200KB
 ```vue
 <template>
   <el-form ref="form" label-width="130px" :model="form" :rules="rules">
     <el-form-item label="上传图片" prop="file">
       <el-upload
         ref="upload"
-        accept="image/png,image/jpeg,image/jpg"
+        :accept="acceptParams"
         action="/"
         :auto-upload="false"
         :before-upload="uploadBefore"
@@ -20,95 +20,13 @@ outline: deep
         :show-file-list="false"
       >
         <el-button slot="trigger" size="small" type="primary">选择文件</el-button>
-        <span style="margin-left: 6px; font-size: 12px">{{ form.file.name }}</span>
         <div slot="tip" class="el-upload__tip">
-          只能上传jpg/png文件，且不超过200KB
+          只能上传{{acceptParams}}文件，且不超过{{limitSize}}KB
         </div>
       </el-upload>
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="uploadSave"></el-button>
-    </el-form-item>
-  </el-form>
-</template>
-<script>
-  export default {
-    data(){
-      return {
-        form: {
-          file:'',
-        },
-        rules:{
-          file: [
-            {
-              required: true,
-              message: '请上传图片',
-              trigger: 'blur',
-            },
-          ],
-        },
-        limitSize:200
-      }
-    },
-    methods:{
-      uploadChange(file) {
-        this.form.file = file.raw
-        this.$refs.form.validateField('file')
-      },
-      uploadBefore(file) {
-        const isImg = file.type.includes('image/')
-        const isLt2M = file.size / 1024 < 200
-        if (!isImg) {
-          this.$message.error('只能上传图片格式!')
-        }
-        if (!isLt2M) {
-          this.$message.error('图片大小不能超过200KB!')
-        }
-        return isImg && isLt2M
-      },
-      async uploadHttpRequest() {
-        try {
-          const fromData = new FormData()
-          fromData.append('file', this.form.file)
-          const { data, message, success } = await ajaxNaME(fromData)
-          this.$message({
-            message,
-            type: success ? 'success' : 'error',
-          })
-        } catch (e) {
-          console.log(e)
-        }
-      },
-      async uploadSave() {
-        await this.$refs.form.validate()
-        this.$refs.upload.submit()
-      },
-    }
-  }
-</script>
-```
-- 自动上传 / File list / Limit Size 2MB
-```vue
-<template>
-  <el-form ref="form" label-width="130px" :model="form" :rules="rules">
-    <el-form-item label="上传图片" prop="file">
-    <el-upload
-      :accept="acceptParams"
-      action="/posts/"
-      :before-upload="uploadBefore"
-      :file-list="fileList"
-      :limit="1"
-      :multiple="false"
-      :on-remove="uploadRemove"
-      :on-success="uploadSuccess"
-      >
-      <el-button size="small" type="primary">
-      点击上传
-      </el-button>
-      <div slot="tip" class="el-upload__tip">
-      只能上传.png,.jpg,.rar,.zip,.doc,.docx,.pdf,.xls,.xlsx格式文件，且不超过2MB
-      </div>
-      </el-upload>
     </el-form-item>
   </el-form>
 </template>
@@ -133,6 +51,94 @@ outline: deep
       }
     },
     methods:{
+      uploadChange(file) {
+        this.form.file = file.raw
+        this.$refs.form.validateField('file')
+      },
+      uploadBefore(file) {
+        const files = file.name.split('.')
+        const type = files.length > 1 ? files.at(-1) : '*'
+        const isType = this.acceptParams.includes(type)
+
+        if (!isType) {
+          this.$message.error('文件格式不正确')
+        }
+        const isSize = file.size / 1024 / this.limitSize
+
+        if (!isSize) {
+          this.$message.error(`文件大小不超过${this.limitSize}KB!`)
+        }
+
+        return isType && isSize
+      },
+      async uploadHttpRequest() {
+        try {
+          const fromData = new FormData()
+          fromData.append('file', this.form.file)
+          const { data, message, success } = await ajaxNaME(fromData)
+          this.$message({
+            message,
+            type: success ? 'success' : 'error',
+          })
+        } catch (e) {
+          console.log(e)
+        }
+      },
+      async uploadSave() {
+        await this.$refs.form.validate()
+        this.$refs.upload.submit()
+      },
+    }
+  }
+</script>
+```
+- 默认上传 / 自动上传 / File list / Limit Size 2MB
+```vue
+<template>
+  <el-form ref="form" label-width="130px" :model="form" :rules="rules">
+    <el-form-item label="上传图片" prop="file">
+    <el-upload
+      :accept="acceptParams"
+      action="/posts/"
+      :before-upload="uploadBefore"
+      :file-list="fileList"
+      :limit="1"
+      :multiple="false"
+      :on-remove="uploadRemove"
+      :on-success="uploadSuccess"
+      >
+      <el-button size="small" type="primary">
+      点击上传
+      </el-button>
+      <div slot="tip" class="el-upload__tip">
+      只能上传{{acceptParams}}格式文件，且不超过{{limitSize}}MB
+      </div>
+      </el-upload>
+    </el-form-item>
+  </el-form>
+</template>
+<script>
+  export default {
+    data(){
+      return {
+        form: {
+          file:'',
+        },
+        fileList:[],
+        acceptParams: '.png,.jpg,.rar,.zip,.doc,.docx,.pdf,.xls,.xlsx',
+        rules:{
+          file: [
+            {
+              required: true,
+              message: '请上传图片',
+              trigger: 'blur',
+            },
+          ],
+        },
+        limitSize:2
+      }
+    },
+    methods:{
       updateRemove() {
         this.form.file = ''
         this.$refs.form.validateField('file')
@@ -145,27 +151,22 @@ outline: deep
         const files = file.name.split('.')
         const type = files.length > 1  ? files.at(-1) : '*'
         const isType = this.acceptParams.includes(type)
-
         if (!isType) {
           this.$message.error('文件格式不正确')
         }
-        const isSize = file.size / 1024 / 1024 < 10
-
+        const isSize = file.size / 1024 / 1024 /this.limitSize
         if (!isSize) {
-          this.$message.error('文件大小不超过10MB!')
+           this.$message.error(`文件大小不超过${this.limitSize}MB!`)
         }
-
         return isType && isSize
-      },
-      async handleSave() {
-        await this.$refs.form.validate()
-        this.$refs.upload.submit()
       },
     }
   }
 </script>
 ```
-[参考：el-upload](https://element.eleme.cn/#/zh-CN/component/upload)
+参考：
+- [el-upload](https://element.eleme.cn/#/zh-CN/component/upload)
+- [input file limiting_accepted_file_types](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#limiting_accepted_file_types)
 
 #### el-tree
 ##### 节点过滤的两种写法
