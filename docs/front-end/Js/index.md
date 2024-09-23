@@ -5,7 +5,7 @@ outline: deep
 ## Js
 
 ### String
-#### fromCharCode() / fromCodePoint()
+#### fromCodePoint() / fromCharCode()
 - String.fromCodePoint(num1)
   - 使用指定的`码位序列`创建的字符串
   - num1 -> Unicode 码位 -> 一个介于 0 和 0x10FFFF（1114111）（包括两者）之间的整数，表示一个 Unicode 码位
@@ -117,6 +117,33 @@ console.log(str.toUpperCase());
 // ABC
 ```
 
+#### localeCompare()
+- localeCompare
+- 字符串比较：参考字符串在排序顺序中是在给定字符串之前、之后还是与之相同
+```js
+console.log("a".localeCompare("c"));
+// -1
+console.log("check".localeCompare("against"));
+// 1
+console.log("check".localeCompare("checl"));
+// -1
+```
+参考：[Intl.Collator.prototype.compare()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator/compare)
+
+
+#### at() 
+```js
+const myString = "Every green bus drives fast.";
+// 使用 length 属性和 charAt() 方法
+const lengthWay = myString.charAt(myString.length - 2);
+console.log(lengthWay); // 't'
+// 使用 slice() 方法
+const sliceWay = myString.slice(-2, -1);
+console.log(sliceWay); // 't'
+// 使用 at() 方法
+const atWay = myString.at(-2);
+console.log(atWay); // 't'
+```
 ### Math
 #### Math.max() / Math.min()
 - Math.max 给定数值中最大的数
@@ -272,39 +299,71 @@ console.log(obj1)
 ```
 
 ### RegExp
+
+参考：[正则表达式](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_expressions#special-line-feed)
+
+RegExp 的 exec 和 test 方法
+String 的 match、matchAll、replace、search 和 split
+```js
+var re = /ab+c/;
+// 构造函数创建的正则表达式会被编译
+// 构造函数 可以动态生成正则
+var re = new RegExp("ab+c");
+```
+
+```js
+var re = /[a-z]\s/i
+var re = new RegExp("[a-z]\\s", "i")
+```
+#### 示例
 - 示例一：
 ```js
 // *?懒惰查找 默认是贪婪查找
 // $1 代表正则中第一个()
-// [^$] 代表非$的字符
+// [^$] 代表非$的字符 反向字符集
 // $$t 插入一个 "$"
 const reg = /placeholder="([^$]*?)"/
 const str = `placeholder="请输入信息"`
-const res = str.replace(/placeholder="([^$]*?)"/,`:placeholder="$$t('N:$1')"`)
+const res = str.replace(reg,`:placeholder="$$t('N:$1')"`)
 console.log(res)
 // :placeholder="$t('N:请输入信息')"
+const reg = /label="([^$]*?)"/
+const str = `label="重置"`
+const res = str.replace(reg,`:label="$$t('F:$1')"`)
+console.log(res)
 ```
 参考：
 [String replace](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
 
-### event
-#### keydown/keyup
-- <s>keypress</s><font color=red>(已弃用)</font> 当按下产生字符或符号值的键时，将触发 keypress 事件
-- keyup 事件在按键被松开时触发
-- keydown 事件在按键被松开时触发
-- 扫描枪触发就是 input事件 + keydown Enter事件
+#### 特殊字符
+\r 回车
+\n 换行符
+- 在 Unix 和 Linux 系统（包括 macOS）中，换行符用 \n（LF，Line Feed）表示。
+- 在 Windows 系统中，换行符用 \r\n（CR+LF，Carriage Return + Line Feed）表示。
+- 早期的 Mac OS（例如，Mac OS 9）使用 \r（CR，Carriage Return）表示换行。
+- 以\n为主流
 ```js
-// 按回车键时
-document.getElementById("app").addEventListener('keydown',(e)=>{
-  console.log(e.code) //Enter
-  console.log(e.key)//Enter
-  // e.keyCode弃用
-  console.log(e.keyCode)//13 
-})
+function queryCodeListTrim(strings) {
+  return strings
+    .split(/\r?\n+/)
+    .filter((val) => val !== '')
+    .map((item) => item.trim())
+}
 ```
-参考：
-- [keyup_event](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/keyup_event)
-- [KeyboardEvent](https://developer.mozilla.org/zh-CN/docs/Web/API/KeyboardEvent)
-- [vue2 按键修饰符](https://v2.cn.vuejs.org/v2/guide/events.html#%E6%8C%89%E9%94%AE%E4%BF%AE%E9%A5%B0%E7%AC%A6)
 
 
+### Array
+#### at()
+```js
+// 数组及数组元素
+const colors = ["red", "green", "blue"];
+// 使用长度属性
+const lengthWay = colors[colors.length - 2];
+console.log(lengthWay); // 输出：'green'
+// 使用 slice() 方法。注意会返回一个数组
+const sliceWay = colors.slice(-2, -1);
+console.log(sliceWay[0]); // 输出：'green'
+// 使用 at() 方法
+const atWay = colors.at(-2);
+console.log(atWay); // 输出：'green'
+```
