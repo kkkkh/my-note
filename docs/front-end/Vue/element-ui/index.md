@@ -93,7 +93,7 @@ outline: deep
   <el-form ref="form" label-width="130px" :model="form" :rules="rules">
     <el-form-item label="上传图片" prop="file">
     <el-upload
-      :accept="acceptPrarams"
+      :accept="acceptParams"
       action="/posts/"
       :before-upload="uploadBefore"
       :file-list="fileList"
@@ -256,3 +256,22 @@ outline: deep
 </script>
 ```
 [参考：el-tree](https://element.eleme.cn/#/zh-CN/component/tree#jie-dian-guo-lu)
+
+#### el-input
+```js
+<el-form-item prop="value">
+  <el-input
+    v-model="form.value"
+    :autosize="{ minRows: 1, maxRows: 10 }"
+    clearable
+    :placeholder="$t('N:扫描输入框')"
+    :rows="1"
+    type="textarea"
+    @keydown.enter.native="onKeyup"  // 扫码枪触发事件
+  />
+</el-form-item>
+```
+
+#### el-date-picker
+- el-date-picker放置到el-popover中，下拉框的div在el-date-picker中，此时计算位置有偏移；
+- el-date-picker放置到文本流/el-dialog中，下拉框的div在body中，计算位置无问题；
