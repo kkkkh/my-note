@@ -367,3 +367,140 @@ console.log(sliceWay[0]); // 输出：'green'
 const atWay = colors.at(-2);
 console.log(atWay); // 输出：'green'
 ```
+### Map
+```js
+const map1 = new Map();
+map1.set('bar', 'foo');
+console.log(map1.get('bar'));
+// Expected output: "foo"
+console.log(map1.get('baz'));
+// Expected output: undefined
+```
+### Error
+#### AggregateError
+```js
+Promise.any([Promise.reject(new Error("some error1")),Promise.reject(new Error("some error2"))]).catch((e) => {
+  console.log(e instanceof AggregateError); // true
+  console.log(e.message); // "All Promises rejected"
+  console.log(e.name); // "AggregateError"
+  console.log(e.errors); // [ Error: "some error1",Error: "some error2" ]
+});
+```
+```js
+try {
+  throw new AggregateError([new Error("some error1"),new Error("some error2")], "Hello");
+} catch (e) {
+  console.log(e instanceof AggregateError); // true
+  console.log(e.message); // "Hello"
+  console.log(e.name); // "AggregateError"
+  console.log(e.errors); // [ Error: "some error1", Error: "some error2"  ]
+}
+```
+
+### Promise
+#### Promise.all
+- 报错处理
+```js
+const promise1 = Promise.resolve(1);
+const promise2 = 42;
+const promise3 = new Promise((resolve, reject) => {
+  throw new Error("3")
+});
+Promise.all([promise1, promise2, promise3]).then((values) => {
+  console.log(values);
+}).catch((error)=>{
+  console.log(error)
+});
+//  Error: 3
+```
+```js
+const promise1 = Promise.resolve(1);
+const promise2 = new Promise((resolve, reject) => {
+  throw new Error("2")
+});
+const promise3 = new Promise((resolve, reject) => {
+  throw new Error("3")
+});
+Promise.all([promise1, promise2, promise3]).then((values) => {
+  console.log(values);
+}).catch((error)=>{
+  console.log(error)
+});
+//  Error: 2
+```
+```js
+const promise1 = Promise.resolve(1);
+const promise2 = 42;
+const promise3 = new Promise((resolve, reject) => {
+  setTimeout(()=>{
+    // reject(3)
+    throw new Error("3")
+  },1000)
+});
+Promise.all([promise1, promise2, promise3]).then((values) => {
+  console.log(values);
+}).catch((error)=>{
+  console.log(error)
+});
+//  then 和 catch 都不会被触发
+// setTimeout中的Error无法被捕获到，可使用reject报错处理
+```
+#### 对比
+- Promise.all()
+  - 返回一个兑现值数组，有reject，则catch
+- Promise.allSettled()
+  - 所有输入的 Promise 完成，不管resolve还是reject
+- Promise.any()
+  - 返回第一个兑现的 Promise
+  - 没有 Promise 被兑现，使用 AggregateError 进行拒绝
+- Promise.race()
+  - 第一个异步任务完成时，不管resolve还是reject
+
+- 参考：[Promise.all](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise/all)
+
+### FormData
+```js
+var formData = new FormData(); // 当前为空
+formData.append(name, value, filename); // filename 文件名称
+formData.append("username", "Chris1"); // 添加到集合
+formData.append("username", "Chris2"); // 添加到集合
+formData.get("username"); // Returns "Chris1"，返回第一个和 "username" 关联的值
+formData.getAll("username"); // Returns ["Chris1", "Chris2"]
+formData.set("username", "Chris3"); // 覆盖已有的值
+formData.delete("username");
+// formData。keys()、formData。value()
+for (var pair of formData.entries()) {
+  console.log(pair[0] + ", " + pair[1]);
+}
+```
+- \<form\>标签使用
+```html
+<form id="myForm" name="myForm">
+  <div>
+    <label for="username">Enter name:</label>
+    <input type="text" id="username" name="username" />
+  </div>
+  <div>
+    <label for="useracc">Enter account number:</label>
+    <input type="text" id="useracc" name="useracc" />
+  </div>
+  <div>
+    <label for="userfile">Upload file:</label>
+    <input type="file" id="userfile" name="userfile" />
+  </div>
+  <input type="submit" value="Submit!" />
+</form>
+```
+```js
+var myForm = document.getElementById("myForm");
+formData = new FormData(myForm);
+```
+- 参考：
+  - [FormData](https://developer.mozilla.org/zh-CN/docs/Web/API/FormData)
+  - [ajax FormData 对象的使用](https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest_API/Using_FormData_Objects)
+
+### Blob
+- 参考：[ajax 发送和接收二进制数据](https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest_API/Sending_and_Receiving_Binary_Data)
+
+### Ajax
+- 参考：[使用 XMLHttpRequest](https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest_API/Using_XMLHttpRequest)
