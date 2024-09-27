@@ -63,7 +63,7 @@ outline: deep
         if (!isType) {
           this.$message.error('文件格式不正确')
         }
-        const isSize = file.size / 1024 / this.limitSize
+        const isSize = file.size / 1024 < this.limitSize
 
         if (!isSize) {
           this.$message.error(`文件大小不超过${this.limitSize}KB!`)
@@ -154,7 +154,7 @@ outline: deep
         if (!isType) {
           this.$message.error('文件格式不正确')
         }
-        const isSize = file.size / 1024 / 1024 /this.limitSize
+        const isSize = file.size / 1024 / 1024 < this.limitSize
         if (!isSize) {
            this.$message.error(`文件大小不超过${this.limitSize}MB!`)
         }
