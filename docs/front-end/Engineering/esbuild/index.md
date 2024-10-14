@@ -95,3 +95,4 @@ echo 'fn = obj => { return obj.x }' | esbuild --minify-syntax
 # fn = (obj) => obj.x;
 ```
 
+- 参考：[esbuild api](https://esbuild.github.io/api/#overview)
