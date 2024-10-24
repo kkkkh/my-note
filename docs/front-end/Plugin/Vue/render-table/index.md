@@ -65,7 +65,7 @@ export default {
 }
 </script>
 ```
-参考：[render-table](../render-table/index.vue)
+参考：[render-table](./index.vue)
 - 内部筛选计算
 ```js
 // ./table-filter
@@ -166,7 +166,7 @@ export function filterValue(n, filterData) {
   return false
 }
 ```
-参考：[table-filter](../render-table/table-filter/filters.js)
+参考：[table-filter](./table-filter/filters.js)
 - 内部排序计算
 ```js
 // ./table-sort
@@ -207,4 +207,4 @@ export const sortValue = (a, b, val) => {
   }
 }
 ```
-参考：[table-sort](../render-table/table-sort/index.js)
+参考：[table-sort](./table-sort/index.js)
