@@ -65,7 +65,7 @@ export default {
 }
 </script>
 ```
-参考：[render-table](./index.vue)
+参考：./index.vue
 - 内部筛选计算
 ```js
 // ./table-filter
