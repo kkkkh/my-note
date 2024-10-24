@@ -17,18 +17,9 @@ export default defineConfig({
       { text: '后端', link: '/back-end' },
       { text: 'Linux', link: '/ops' },
       { text: '文档', link: '/tools' },
-      { text: 'web3', link: '/web3' },
-      // { text: '读书', link: '/books' },
+      { text: '读书', link: '/books' },
     ],
     sidebar: {
-      '/web3':[
-        {
-          text: 'Ton',
-          link: '/web3/Ton',
-          items: [
-            { text: 'TownSquare', link: '/web3/Ton/TownSquare' },
-          ]
-        },],
       '/front-end':
         [
           {
@@ -50,6 +41,14 @@ export default defineConfig({
               { text: 'vue2', link: '/front-end/Vue/vue2' },
               { text: 'element-ui', link: '/front-end/Vue/element-ui' },
               { text: 'vue-plugin', link: '/front-end/Vue/vue-plugin' },
+            ]
+          },{
+            text: 'Plugin',
+            link: '/front-end/Plugin',
+            items: [
+              { text: 'Lib', link: '/front-end/Plugin/Lib' },
+              { text: 'vue plugin', link: '/front-end/Plugin/Vue' },
+              { text: 'react plugin', link: '/front-end/Plugin/React' },
             ]
           },
           {
