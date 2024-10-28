@@ -9,6 +9,12 @@ outline: deep
 - [Jeffrey Zhao](http://blog.zhaojie.me/)
 - [Web探索之旅](https://www.jianshu.com/nb/4686146)
 - [编程の趣](https://www.tangshuang.net/code)
+- [TNT-Weekly](https://github.com/tnfe/TNT-Weekly/tree/master)
+- [大圣](https://shengxinjing.cn/)
+- [神奇海螺试验场](https://lab.magiconch.com/)
+- [小林coding](https://xiaolincoding.com/)
+- [egoist](https://egoist.dev/) eva.js
+
 ## 社区
 - [v2ex](https://www.v2ex.com/)
 ## 前端
@@ -19,7 +25,14 @@ outline: deep
 - [compatibility table](https://compat-table.github.io/compat-table/es6/) 兼容性表
 - [Reg Playground](https://regex101.com/)正则
 - [svg 转 path](https://www.zhangxinxu.com/sp/path.html)
-- [es 教程 阮一峰](https://es6.ruanyifeng.com/)
+- [svg在线编辑器](https://www.jyshare.com/more/svgeditor/)
+
+- [jsont](https://www.jsont.run/)
+- [es6 教程 阮一峰](https://es6.ruanyifeng.com/)
+### ts/typescript
+- js to ts
+  - [javascript-to-typescript-converter](https://www.codeconvert.ai/javascript-to-typescript-converter)
+  - [javascript-to-typescrip](https://syntha.ai/converters/javascript-to-typescript)
 ### 框架
 #### vue
 - [vue3](https://cn.vuejs.org/guide/introduction.html) 官网
@@ -28,22 +41,29 @@ outline: deep
 - [vuex](https://vuex.vuejs.org/zh/)
 - [vue cli](https://cli.vuejs.org/zh/guide/creating-a-project.html#vue-create) vue2 处于维护模式 -> [create-vue](https://github.com/vuejs/create-vue) vue3 vite
 #### vue ui 组件库
+- pc端
 - [element-plus](https://element-plus.org/zh-CN/component/overview.html) 官网
 - [element-ui](https://element.eleme.cn/#/zh-CN/component/installation) 官网
+- 移动端
 - [naive-ui](https://www.naiveui.com/zh-CN/light/components/button)
 - [vant ui](https://vant.pro/vant-weapp/#/quickstart)
-- [mui](https://mui.com/material-ui/all-components/)
 #### react
 - [React](https://react.dev/learn) ([React中文](https://zh-hans.react.dev/learn))
 - [ReactRouter](https://reactrouter.com/en/main)
+- [create-react-app](https://create-react-app.dev/docs/getting-started)
+- [jsx](https://facebook.github.io/jsx/)
 - [Redux](https://redux.js.org/introduction/getting-started) ([Redux 中文](https://cn.redux.js.org/introduction/getting-started))
 - [nextjs](https://nextjs.org/docs/getting-started/installation) ([nextjs中文](https://www.nextjs.cn/learn/basics/create-nextjs-app))
 - [Remix](https://remix.run/docs/en/main/start/quickstart)
 - [preact](https://preactjs.com/guide/v10/getting-started)
 #### react ui 组件库
+- pc端
 - [ant design](https://ant-design.antgroup.com/docs/react/getting-started-cn)
+- 移动端
+- [mui](https://mui.com/material-ui/all-components/) 
 #### 其他框架
 - [alpinejs](https://alpinejs.dev/start-here)
+- [htmx](https://htmx.org/docs/)
 ### 小程序
 - [开发文档](https://developers.weixin.qq.com/miniprogram/dev/framework/quickstart/#%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%AE%80%E4%BB%8B)
 - [uniapp](https://uniapp.dcloud.net.cn/)
@@ -59,6 +79,16 @@ outline: deep
   - [lightningcss](https://lightningcss.dev/)
 - tailwind css
   - [tailwind css 中文](https://www.tailwindcss.cn/)
+- flex
+  - [interactive-guide-to-flexbox](https://www.joshwcomeau.com/css/interactive-guide-to-flexbox/)
+- unocss
+
+#### icons
+- iconify
+  - [iconify](https://iconify.design/)
+  - [iconify docs](https://iconify.design/docs/)
+  - [Browse Icons](https://icon-sets.iconify.design/)
+  - [icones](https://icones.js.org/) Icon Explorer with Instant searching, powered by Iconify
 ### 工程化
 #### 构建工具
 - [vite](https://cn.vitejs.dev/guide/) 官网
@@ -76,8 +106,7 @@ outline: deep
 - [esbuild](https://esbuild.github.io/api/#overview)
 - [parcel](https://parceljs.org/docs/)
 - [webpack](https://webpack.js.org/concepts/)
-  - [vue-loader](https://github.com/vuejs/
-  vue-loader)
+  - [vue-loader](https://github.com/vuejs/vue-loader)
   - [ts-loader](https://github.com/TypeStrong/ts-loader)
 #### 代码规范
 - [prettier](https://prettier.io/)
@@ -101,6 +130,11 @@ outline: deep
 - [pixijs教程](https://github.com/Zainking/LearningPixi/tree/master)
 - [echarts](https://echarts.apache.org/handbook/zh/get-started/)
 - [d3js](https://d3js.org/getting-started)
+- [g6](http://g6-v3-2.antv.vision/zh/docs/manual/introduction)
+- [bpmn](https://bpmn.io/)
+- [jsplumb](https://docs.jsplumbtoolkit.com/toolkit/6.x/)
+- [jsplumb community](https://docs.jsplumbtoolkit.com/community/6.x/)
+- [kepler.gl](https://kepler.gl/)
 
 - [sigmajs](https://www.sigmajs.org/)
 - [getspringy](http://getspringy.com/)
@@ -129,7 +163,7 @@ outline: deep
   - [nodejs 中文](https://nodejs.cn/api/)
 ## OPS
 - CI/CD
-- [drone](https://www.drone.io/)
+  - [drone](https://www.drone.io/)
 ## UI
 ### 原型
 - [蓝湖](https://lanhuapp.com/)
@@ -148,6 +182,7 @@ outline: deep
 - [Upsource](https://www.jetbrains.com/) 代码审查 
 - [draw.io](https://www.drawio.com/) draw.io绘图（[diagrams](https://app.diagrams.net/?src=about)）
 - [trello](https://trello.com/) 看板/任务
+- [lottiefiles](https://lottiefiles.com/) lotties动画
 - [Markdown](https://markdown.com.cn/) 文档
 - [gitbook](https://www.gitbook.com/)
 - [tinypng](https://tinypng.com/) 压缩图片
