@@ -22,7 +22,7 @@ https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Template_liter
 - diffing 算法
     - 从根元素开始，React 将递归对比两棵树的根元素和子元素；
     - 对比不同类型的元素，如对比 HTML 元素和 React 组件元素，React 会直接清理旧的元素和它的子树，然后建立新的树；
-    - 对比同为 HTML 元素，但 Tag 不同的元素，如从 <a> 变成 <div> ，React 会直接清理旧的元素和子树，然后建立新的树；
+    - 对比同为 HTML 元素，但 Tag 不同的元素，如从 \<a\> 变成 \<div\> ，React 会直接清理旧的元素和子树，然后建立新的树；
     - 对比同为 React 组件元素，但组件类或组件函数不同的元素，如从 KanbanNewCard 变成 KanbanCard ，React 会卸载旧的元素和子树，然后挂载新的元素树；
     - 对比 Tag 相同的 HTML 元素，如  <input type="text" value="old" /> 和 <input type="text" value="new" /> ，React 将会保留该元素，并记录有改变的属性，在这个例子里就是 value 的值从 "old" 变成了 "new" ；
     - 对比组件类或组件函数相同的组件元素，如 <KanbanCard title="老卡片" /> 和 <KanbanCard title="新卡片" /> ，React 会保留组件实例，更新 props，并触发组件的生命周期方法或者 Hooks。
