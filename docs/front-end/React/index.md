@@ -10,7 +10,7 @@
 - jsx优点：
   - JSX 提供的类 HTML/XML 的语法会让声明代码更加直观，在 IDE 的支持下，语法高亮更醒目，比起纯 JS（createElement） 也更容易维护
   - Java SSH（Spring+Struts2+Hibernate）技术栈, Struts2 用 XML 定义了一套名为标签库的 DSL（Domain-Specific Language，领域特定语言）,JSX 则直接利用了 JS 语句。很明显，JS 表达式能做的，JSX 都能做，不需要开发者再去学习一套新的 DSL。
-  ```jsp
+  ```java
     <s:if test="showAdd">
         <div>KanbanNewCard ...</div>
     </s:if>
