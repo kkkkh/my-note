@@ -36,11 +36,17 @@ export default defineConfig({
             ]
           },{
             text: 'Vue',
-            link: '/front-end/Engineering',
+            link: '/front-end/Vue',
             items: [
               { text: 'vue2', link: '/front-end/Vue/vue2' },
               { text: 'element-ui', link: '/front-end/Vue/element-ui' },
               { text: 'vue-plugin', link: '/front-end/Vue/vue-plugin' },
+            ]
+          },{
+            text: 'React',
+            link: '/front-end/React',
+            items: [
+              { text: 'react', link: '/front-end/React/index' },
             ]
           },{
             text: 'Plugin',
