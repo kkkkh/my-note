@@ -1,4 +1,5 @@
 ## Command
+### base 命令
 #### read
 ```bash
 #!/bin/bash
@@ -124,15 +125,15 @@ rename 's/Imag/logo/' *
 - rename -n 'y/A-Z/a-z/' W*
   - y 表示更改大小写
   - W* 带 W 字母前缀的文件
-### scp
+#### scp
 ```bash
 scp -r localfile.txt username@192.168.0.1:/home/username/
 ```
-### 查看linux版本
+#### 查看linux版本
 ```bash
 uname -a
 ```
-# 查看端口
+#### 查看端口
 ```bash
 netstat -tanlp
 netstat -apn | grep 80 # 查看 80 端口
@@ -173,4 +174,31 @@ runas
 ```bash
 yum install ddd
 yum remove ddd
+```
+
+### shell 脚本
+#### 条件 if elif else
+```bash
+if [ $1 = "1" ]
+then
+  echo "Hello $1 "
+elif [ $1 = "2" ]
+then
+  echo "hello $1"
+else
+  echo "hello no"
+fi
+```
+#### func
+```bash
+devPush () {
+    git checkout dev
+    git pull
+    git merge feature_v2.1.$version
+    sleep 3
+    echo "----push：dev,please confirm--------"
+    read
+    git push
+}
+devPush()
 ```
