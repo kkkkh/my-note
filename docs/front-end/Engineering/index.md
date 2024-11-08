@@ -2,4 +2,22 @@
 outline: deep
 ---
 # 工程化
-## vite
+
+## build tool
+### vite
+### esbuild
+
+## package magnage
+### npm
+### yarn
+### pnpm
+
+## node magnage
+### nvm
+### fnm
+- [fnm github](https://github.com/Schniz/fnm)
+
+## plugin
+### vscode & vscodePlugin
+
+## git
