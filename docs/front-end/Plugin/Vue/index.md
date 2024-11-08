@@ -55,6 +55,32 @@ const {
   },
 )
 ```
+### vueuse
+```vue
+<script setup>
+import { useLocalStorage, useMouse, usePreferredDark } from '@vueuse/core'
+// tracks mouse position
+const { x, y } = useMouse()
+
+// is user prefers dark theme
+const isDark = usePreferredDark()
+
+// persist state in localStorage
+const store = useLocalStorage(
+  'my-storage',
+  {
+    name: 'Apple',
+    color: 'red',
+  },
+)
+</script>
+```
+## mitt
+- mitt 支持 vue3 (事件总线)
+- EventBus 支持 vue2（创建一个Vue实例充当eventBus）
+- [参考](https://juejin.cn/post/6973106775755063333)
+
+# my lib
 ## [Render-table](./render-table/index.md)
 ### 前端计算table => filter/sort/page
 - 外层触发计算
