@@ -1,7 +1,7 @@
 ---
 outline: deep
 ---
-## element-ui
+### element-ui
 #### el-upload
 ##### 常用模板
 - 自定义上传 / 手动上传 / limit size 200KB
@@ -259,6 +259,7 @@ outline: deep
 [参考：el-tree](https://element.eleme.cn/#/zh-CN/component/tree#jie-dian-guo-lu)
 
 #### el-input
+##### 扫描枪触发
 ```js
 <el-form-item prop="value">
   <el-input
@@ -274,5 +275,47 @@ outline: deep
 ```
 
 #### el-date-picker
+##### el-popover中偏移
 - el-date-picker放置到el-popover中，下拉框的div在el-date-picker中，此时计算位置有偏移；
 - el-date-picker放置到文本流/el-dialog中，下拉框的div在body中，计算位置无问题；
+##### disbaledDate
+```vue
+<el-date-picker
+  v-model="form.time"
+  :end-placeholder="$t('N:结束日期')"
+  :picker-options="pickerOptions"
+  range-separator="-"
+  :start-placeholder="$t('N:开始日期')"
+  type="datetimerange"
+  value-format="yyyy-MM-dd HH:mm:ss"
+></el-date-picker>
+```
+```js
+let date = null
+export default {
+  data() {
+    return {
+      pickerOptions: {
+        disabledDate(time) {
+          // 为null则都是可选
+          if (!date) return false
+          // 选中一个时间(开始时间/结束时间)，则往后+3个月或往前-3个月
+          const range = 3 * 30 * 24 * 60 * 60 * 1000
+          return time.getTime() > date.getTime() + range || time.getTime() < date.getTime() - range
+        },
+        onPick({ maxDate, minDate }) {
+          // 当选中一个时间(开始时间/结束时间)，给date赋值
+          // 否则设置为null
+          if (maxDate && !minDate) {
+            date = maxDate
+          } else if (!maxDate && minDate) {
+            date = minDate
+          } else {
+            date = null
+          }
+        },
+      },
+    }
+  }
+}
+```
