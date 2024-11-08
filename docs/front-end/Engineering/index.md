@@ -18,6 +18,9 @@ outline: deep
 - [fnm github](https://github.com/Schniz/fnm)
 
 ## plugin
-### vscode & vscodePlugin
+### vscode
+### brower
 
-## git
+## version manage
+### git
+### svn
