@@ -10,8 +10,9 @@ outline: deep
   - [jszpl](https://www.npmjs.com/package/jszpl) 生成 ZPL
 - [popper.js](https://floating-ui.com/docs/getting-started)
 - [Cookies.js](https://github.com/ScottHamper/Cookies)
-- [slatejs](https://docs.slatejs.org/) 富文本
-- [svg4everybody](https://www.npmjs.com/package/svg4everybody)
+- 富文本
+  - [slatejs](https://docs.slatejs.org/) 
+- [svg4everybody](https://www.npmjs.com/package/svg4everybody) 兼容
 
 ## Vue plugin (Vue 扩展组件)
 ### component
@@ -25,5 +26,6 @@ outline: deep
   - [useRequest](https://cn.attojs.org/api/#%E5%85%AC%E5%85%B1-api)
   - `import { usePagination } from 'vue-request';`
   - [usePagination](https://cn.attojs.org/api/pagination.html)
-
+- [VueUse](https://vueuse.org/guide/)
+- [mitt](https://github.com/developit/mitt) vue3 事件总线
 ## React plugin (React 扩展组件)
