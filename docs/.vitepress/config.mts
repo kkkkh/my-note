@@ -27,12 +27,12 @@ export default defineConfig({
           items: [{ text: 'flex', link: '/front-end/Css/flex' }],
         },
         {
-          text: 'Js',
-          link: '/front-end/Js',
+          text: 'JavaScript',
+          link: '/front-end/JavaScript',
           items: [
-            { text: 'js', link: '/front-end/Js/js' },
-            { text: 'dom', link: '/front-end/Js/Dom' },
-            { text: 'bom', link: '/front-end/Js/Bom' },
+            { text: 'js', link: '/front-end/JavaScript/Js' },
+            { text: 'dom', link: '/front-end/JavaScript/Dom' },
+            { text: 'bom', link: '/front-end/JavaScript/Bom' },
           ],
         },
         {
