@@ -13,6 +13,5 @@ outline: deep
 #### MongoDb
 #### MySQL
 #### SQLite
-
-## DB manage
-### Navicat
+### DB manage
+#### Navicat
