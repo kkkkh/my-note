@@ -29,7 +29,7 @@ outline: deep
 - [VueUse](https://vueuse.org/guide/)
 - [mitt](https://github.com/developit/mitt) vue3 事件总线
 ### vite
-### [unplugin-vue-components](https://www.npmjs.com/package/unplugin-vue-components#Configuration) 
-### [unplugin-icons](https://www.npmjs.com/package/unplugin-icons#auto-importing#Migrate%20from%20vite-plugin-icons)
+- [unplugin-vue-components](https://www.npmjs.com/package/unplugin-vue-components#Configuration) 
+- [unplugin-icons](https://www.npmjs.com/package/unplugin-icons#auto-importing#Migrate%20from%20vite-plugin-icons)
 
 ## React plugin (React 扩展组件)
