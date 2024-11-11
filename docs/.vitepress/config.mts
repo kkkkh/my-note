@@ -91,6 +91,7 @@ export default defineConfig({
               items: [
                 { text: 'vscode插件', link: '/front-end/Engineering/plugin/vscode' },
                 { text: '浏览器插件', link: '/front-end/Engineering/plugin/brower' },
+                { text: 'markdown', link: '/front-end/Engineering/plugin/markdown' },
               ],
             },
             {
@@ -98,6 +99,7 @@ export default defineConfig({
               link: '/front-end/Engineering/version-manage',
               items: [
                 { text: 'git', link: '/front-end/Engineering/version-manage/git' },
+                { text: 'github', link: '/front-end/Engineering/version-manage/github' },
                 { text: 'svn', link: '/front-end/Engineering/version-manage/svn' },
               ],
             },
