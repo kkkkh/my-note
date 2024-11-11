@@ -105,6 +105,14 @@ export default defineConfig({
             },
           ],
         },
+        {
+          text: '其他端',
+          link: '/front-end/OtherEnd',
+          items: [
+            { text: '小程序', link: '/front-end/OtherEnd/小程序' },
+            { text: 'Electron', link: '/front-end/OtherEnd/Electron' }, 
+          ],
+        },
       ],
       '/ops': [
         {
