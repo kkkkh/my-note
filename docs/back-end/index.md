@@ -4,5 +4,15 @@ outline: deep
 # 后端
 
 ## 开发语言
+### NodeJs
+### Go
+### Python
+### Java
 
-### nodejs
+## DB
+#### MongoDb
+#### MySQL
+#### SQLite
+
+## DB manage
+### Navicat
