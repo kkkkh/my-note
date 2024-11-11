@@ -45,9 +45,9 @@ export default defineConfig({
           text: 'Vue',
           link: '/front-end/Vue',
           items: [
+            { text: 'vue3', link: '/front-end/Vue/vue3' },
             { text: 'vue2', link: '/front-end/Vue/vue2' },
             { text: 'element-ui', link: '/front-end/Vue/element-ui' },
-            { text: 'vue-plugin', link: '/front-end/Vue/vue-plugin' },
           ],
         },
         {
