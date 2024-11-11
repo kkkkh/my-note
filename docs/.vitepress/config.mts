@@ -36,7 +36,7 @@ export default defineConfig({
           ],
         },
         {
-          text: 'Ts/TypeScript',
+          text: 'TypeScript',
           link: '/front-end/TypeScript',
           items: [
             { text: 'ts', link: '/front-end/TypeScript/index' }],
