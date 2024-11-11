@@ -266,8 +266,8 @@ const routes = {
 navigate(routes.HOME.path) // ✅ - as desired
 navigate('/invalid-path')  // ❌ - as desired
 ```
-参考：https://article.juejin.cn/post/7240805459288113208
-参考：https://cloud.tencent.com/developer/article/2212264
+- 参考：https://article.juejin.cn/post/7240805459288113208
+- 参考：https://cloud.tencent.com/developer/article/2212264
 ## 实践
 ### 兼容旧代码
 - 场景：
