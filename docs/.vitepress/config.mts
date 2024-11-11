@@ -29,7 +29,17 @@ export default defineConfig({
         {
           text: 'Js',
           link: '/front-end/Js',
-          items: [{ text: 'bom', link: '/front-end/Js/Bom' }],
+          items: [
+            { text: 'js', link: '/front-end/Js/js' },
+            { text: 'dom', link: '/front-end/Js/Dom' },
+            { text: 'bom', link: '/front-end/Js/Bom' },
+          ],
+        },
+        {
+          text: 'Ts/TypeScript',
+          link: '/front-end/TypeScript',
+          items: [
+            { text: 'ts', link: '/front-end/TypeScript/index' }],
         },
         {
           text: 'Vue',
