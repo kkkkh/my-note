@@ -1,5 +1,32 @@
 # typescript
+## tsc
+```bash
+npm install -g typescript
+tsc --init --target es2020 --module es2020 --lib es2020
+```
 ## 基础
+### 类型标注
+const/var/let/function/class
+### 类型兼容
+子类型可以赋值给父类型
+
+| 字面类型 | 原始类型 | 包装类型 | Object(祖先类) | Empty{}(空接口/空白对象)  |
+| ------ | --------| ------ | -------------- | ---------------------- |
+| 'abc'  | string  | String | Object         | Empty                  |
+| {...}  | object  | Obejct |                | Empty                  | 
+
+- 特殊类型
+- 字面类型：原始值类型、类/构造兼容（子类型兼容）（赋值兼容）
+- 接口类型：对象类型、函数类型、类/构造兼容（结构类型兼容）（赋值兼容）
+
+![类型兼容](./类型兼容.png)
+### 交叉、联合类型
+- 基础类型 
+  - 联合：往合并方向 -> any (并集)
+  - 交叉：收敛方向 -> never (交集)
+  
+![交叉、联合类型](./交叉、联合类型.png)
+
 ### 接口&类型别名
 - 接口与类型别名区别
   - 相同：
@@ -69,9 +96,19 @@ class SomePartialPoint implements PartialPoint { // 与类型别名有不同
 let num: 1 | 2 = 1;
 type EventNames = "click" | "scroll" | "mousemove";
 // 2 可辨识联合
- type PartialPointX = { x: number };
+type PartialPointX = { x: number };
 type PartialPointY = { y: number };
 type PartialPoint = PartialPointX | PartialPointY; 
+let point: Point = {
+  x: 1,
+  y: 1,
+};
+let point1: Point = {
+  x: 1,
+};
+let point2: Point = {
+  y: 1,
+};
 ```
 ### 交叉类型
 ```ts
@@ -84,6 +121,11 @@ interface Y {
   e: string;
 }
 type XY = X & Y;
+let value: XY = {
+  c: "1",
+  d: "1",
+  e: "1",
+};
 // 类型
 type PartialPointX = { x: number };
 type Point = PartialPointX & { y: number };
@@ -92,6 +134,7 @@ let point: Point = {
   y: 1,
 };
 ```
+
 ### 泛型
 ```ts
 interface activity {

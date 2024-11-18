@@ -9,6 +9,9 @@ View -> Command Palette / 查看 -> 命令面板 / ctrl + shift + p
 命令行 code /path/to/my/project 的方式打开 VSCode
 ```
 ### 插件
+#### 通用
+- [Reload](https://marketplace.visualstudio.com/items?itemName=natqe.reload) 
+- [ESLint Chinese Rules](https://marketplace.visualstudio.com/items?itemName=maggie.eslint-rules-zh-plugin) ESLint规则中文辅助提示插件，帮助更便捷的查询引用的规则，理解规则。 （
 #### css
 - [easy Less](https://developers.weixin.qq.com/community/develop/article/doc/000e427c49c218e6b9781bfdf5b013) 
 #### vue
