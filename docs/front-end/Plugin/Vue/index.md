@@ -22,27 +22,49 @@
   - refreshDeps：当 refreshDeps 里面的内容发生变化时，如果没有设置 refreshDepsAction, 就会触发 refresh 的重新执行。
   - refreshDepsAction：当 refreshDeps 里面的内容发生变化时，会被调用
 - usePagination
+```html
+<n-data-table
+  :row-key="(row) => row.id"
+  remote
+  :loading="loading"
+  :columns="columns"
+  :data="dataList"
+  :pagination="{
+    page: current,
+    pageSize,
+    itemCount: total,
+    onUpdatePage: changeCurrent,
+    onUpdatePageSize: changePageSize,
+    pageSizes: [10, 20, 50, 100],
+    showSizePicker: true,
+  }"
+  :max-height="500"
+/>
+```
 ```js
 import { usePagination, useRequest } from 'vue-request'
+const dataList = ref([])
 const {
   current,
   loading,
   pageSize,
-  run: runGetPackageScanDetail,
+  changeCurrent,
+  changePageSize,
+  run: runGetData,
   total,
 } = usePagination(
   (params: Record<'current' | 'size', number>) =>
-    getPackageScanDetailList({
+    getList({
       current: params.current,
       size: params.size,
-      descs: 'createdTime',
       param: { boxNo: boxNoModel.value! },
     }),
   {
+    defaultParams: [{ current: 1, size: 10 }],
     ready: computed(() => !!boxNoModel.value),
     refreshDeps: () => boxNoModel.value,
     refreshDepsAction: () => {
-      runGetPackageScanDetail({
+      runGetData({
         current: 1,
         size: pageSize.value,
       })
@@ -53,7 +75,7 @@ const {
       totalKey: 'data.total',
     },
     onSuccess(res) {
-      boxScanDataRef.value = res.data.records
+      dataList.value = res.data.records
     },
   },
 )
