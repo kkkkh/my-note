@@ -13,20 +13,79 @@ const/var/let/function/class
 | 字面类型 | 原始类型 | 包装类型 | Object(祖先类) | Empty{}(空接口/空白对象)  |
 | ------ | --------| ------ | -------------- | ---------------------- |
 | 'abc'  | string  | String | Object         | Empty                  |
-| {...}  | object  | Obejct |                | Empty                  | 
+| \{...\}  | object  | Obejct |                | Empty                  | 
 
-- 特殊类型
+- 特殊类型 this/nerver/void/any/unknown
 - 字面类型：原始值类型、类/构造兼容（子类型兼容）（赋值兼容）
 - 接口类型：对象类型、函数类型、类/构造兼容（结构类型兼容）（赋值兼容）
 
 ![类型兼容](./类型兼容.png)
 ### 交叉、联合类型
-- 基础类型 
+- 基础类型的交叉联合
   - 联合：往合并方向 -> any (并集)
   - 交叉：收敛方向 -> never (交集)
-  
-![交叉、联合类型](./交叉、联合类型.png)
+![交叉、联合类型](./交叉、联合类型1.png)
+![交叉、联合类型1](./交叉、联合类型2.png)
+- 接口类型的交叉联合
+![交叉、联合类型2](./交叉、联合类型3.png)
+  ```ts
+  /*
+    接口的联合
+      - 1、接口联合类型可以被求值（结果是“Bird与Horse的公共父类”）
+      - 2、求值并不一定有意义
+      - 3、 type Animal = Omit<T, never> 获得是属性的交集
+  */
+  interface Animal {
+      weight: string | number;
+      leg: number;
+  }
+  interface Bird extends Animal {
+      weight: number;
+      wings: number;
+  }
+  interface Horse extends Animal {
+      weight: string;
+      id: string;
+  }
+  type T = Bird | Horse;
+  // type Animal = Omit<T, never>; // clone
+  let bird!: Bird;
+  let horse!: Horse;
 
+  let x1: T = bird;
+  let x2: Animal = bird;
+  let x3: Bird | Horse = bird;
+  ```
+  ```ts
+  /*
+    接口的交叉
+      - 1、会深度遍历每一个成员的交叉（例如weight的类型交叉结果是never）
+      - 2、交叉类型总是尽量向never收敛的
+      - 3、 type BirdAndHorse = Omit<T, never> 获得是属性的并集
+  */
+  interface Bird {
+      weight: number;
+      leg: number;
+      wings: number;
+  }
+  interface Horse {
+      weight: string;
+      leg: number;
+      id: string;
+  }
+  type T = Bird & Horse; // & undefined & void & null & ...
+  type BirdAndHorse = Omit<T, never>; // clone 
+  // class MyClass implements T {
+  // class MyClass implements Bird, Horse {
+  class MyClass implements BirdAndHorse {
+      weight: never;
+      leg: number;
+      id: string;
+      wings: number;
+  }
+
+  let x:MyClass = new MyClass;
+  ```
 ### 接口&类型别名
 - 接口与类型别名区别
   - 相同：
@@ -81,11 +140,16 @@ class SomePoint2 implements Point2 {
   x = 1;
   y = 2;
 }
-type PartialPoint = { x: number } | { y: number };
-// A class can only implement an object type or
-// intersection of object types with statically known members.
-class SomePartialPoint implements PartialPoint { // 与类型别名有不同
+// A class can only implement an object type or intersection of object types with statically known members.
+type PartialPoint1 = { x: number } | { y: number };
+class SomePartialPoint implements PartialPoint1 { // 与类型别名有不同
   // Error
+  x = 1;
+  y = 2;
+}
+// ok
+type PartialPoint2 = { x: number } & { y: number };
+class SomePartialPoint implements PartialPoint2 {
   x = 1;
   y = 2;
 }
