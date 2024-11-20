@@ -11,9 +11,13 @@ View -> Command Palette / 查看 -> 命令面板 / ctrl + shift + p
 ### 插件
 #### 通用
 - [Reload](https://marketplace.visualstudio.com/items?itemName=natqe.reload) 
-- [ESLint Chinese Rules](https://marketplace.visualstudio.com/items?itemName=maggie.eslint-rules-zh-plugin) ESLint规则中文辅助提示插件，帮助更便捷的查询引用的规则，理解规则。 （
+- [ESLint Chinese Rules](https://marketplace.visualstudio.com/items?itemName=maggie.eslint-rules-zh-plugin) ESLint规则中文辅助提示插件，帮助更便捷的查询引用的规则，理解规则。
+- [Comment Translate](https://github.com/intellism/vscode-comment-translate/blob/HEAD/doc/README_ZH.md) 直接翻译
 #### css
 - [easy Less](https://developers.weixin.qq.com/community/develop/article/doc/000e427c49c218e6b9781bfdf5b013) 
+#### react
+- [react hooks snippets](https://marketplace.visualstudio.com/items?itemName=AlDuncanson.react-hooks-snippets)
+  - ush	useState
 #### vue
   - [vetur](https://vuejs.github.io/vetur/)
   - vue.volar ~~原 TypeScript Vue Plugin(Volar) 废弃~~ -> Vue-Official
