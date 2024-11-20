@@ -156,7 +156,7 @@ console.log(atWay); // 't'
   console.log(Math.max(...array1));
   // 3
   ```
-#### Math.pow() / Math.hypot() / Math.pow()
+#### Math.pow() / Math.hypot() / Math.sqrt()
 - Math.pow(base,exponent) 函数返回基数（base）的指数（exponent）次幂，即 base^exponent。
 - 形同：2**10 2的10次方（指数运算）
   ```js
@@ -297,7 +297,110 @@ Object.assign(obj1.a,obj2.a)
 console.log(obj1)
 // {a: {b: 1, c: 2}}
 ```
-
+#### Object.prototype.hasOwnProperty/Object.hasOwn()
+- 替代 Object.prototype.hasOwnProperty()，
+  - Object.hasOwn()适用于使用 Object.create(null) 创建的对象，以及重写了继承的 hasOwnProperty() 方法的对象。
+  - 尽管可以通过在外部对象上调用 Object.prototype.hasOwnProperty() 解决这些问题，但是 Object.hasOwn() 更加直观。
+- Object.hasOwn()
+```js
+const foo = Object.create(null);
+foo.prop = "exists";
+if (Object.hasOwn(foo, "prop")) {
+  console.log(foo.prop); //true——无论对象是如何创建的，它都可以运行。
+}
+```
+```js
+const foo = {
+  hasOwnProperty() {
+    return false;
+  },
+  bar: "The dragons be out of office",
+};
+if (Object.hasOwn(foo, "bar")) {
+  console.log(foo.bar); //true——重新实现 hasOwnProperty() 不会影响 Object
+}
+```
+- Object.prototype.hasOwnProperty
+```js
+const example = {};
+example.prop = "exists";
+// `hasOwnProperty` 仅对直接属性返回 true：
+example.hasOwnProperty("prop"); // 返回 true
+example.hasOwnProperty("toString"); // 返回 false
+example.hasOwnProperty("hasOwnProperty"); // 返回 false
+// 对于直接或继承的属性，`in` 运算符将返回 true：
+"prop" in example; // 返回 true
+"toString" in example; // 返回 true
+"hasOwnProperty" in example; // 返回 true
+```
+```js
+const foo = Object.create(null);
+foo.prop = "exists";
+foo.hasOwnProperty("prop"); // Uncaught TypeError: foo.hasOwnProperty is not a function
+```
+```js
+// 重写了hasOwnProperty
+const foo = {
+  hasOwnProperty() {
+    return false;
+  },
+  bar: "Here be dragons",
+};
+foo.hasOwnProperty("bar"); // 该重新实现始终返回 false
+```
+https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwn
+https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty
+#### Object.create()
+以一个现有对象作为原型，创建一个新对象
+```js
+o = {};
+// 等价于：
+o = Object.create(Object.prototype);
+o = { __proto__: Object.prototype };
+```
+```js
+o = Object.create(null);
+// 等价于：
+o = { __proto__: null };
+```
+```js
+function Constructor() {}
+o = new Constructor();
+// 等价于：
+o = Object.create(Constructor.prototype);
+```
+https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf
+https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/create
+#### Object.is()
+```js
+console.log(Object.is('1', 1));
+// Expected output: false
+console.log(Object.is(NaN, NaN));
+// Expected output: true
+console.log(Object.is(-0, 0));
+// Expected output: false
+const obj = {};
+console.log(Object.is(obj, {}));
+// Expected output: false
+console.log(Object.is(obj, obj));
+// Expected output: true
+```
+- Object.is() 确定两个值是否为相同值。如果以下其中一项成立，则两个值相同：
+  - 都是 undefined
+  - 都是 null
+  - 都是 true 或者都是 false
+  - 都是长度相同、字符相同、顺序相同的字符串
+  - 都是相同的对象（意味着两个值都引用了内存中的同一对象）
+  - 都是 BigInt 且具有相同的数值
+  - 都是 symbol 且引用相同的 symbol 值
+  - 都是数字且
+    - 都是 +0
+    - 都是 -0
+    - 都是 NaN
+  - 都有相同的值，非零且都不是 NaN
+- === 运算符（和 == 运算符）
+  - 将数值 -0 和 +0 视为相等，
+  - 但是会将 NaN 视为彼此不相等。
 ### RegExp
 
 参考：[正则表达式](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_expressions#special-line-feed)
@@ -392,10 +495,15 @@ console.log(arr2.flat(Infinity));
 ```js
 const map1 = new Map();
 map1.set('bar', 'foo');
-console.log(map1.get('bar'));
-// Expected output: "foo"
-console.log(map1.get('baz'));
-// Expected output: undefined
+console.log(map1.get('bar')); //"foo"
+console.log(map1.get('baz')); //undefined
+```
+### Map
+```js
+const set1 = new Set([1, 2, 3, 4, 5]);
+console.log(set1.has(1)); // true
+console.log(set1.has(5)); // true
+console.log(set1.has(6)); // true
 ```
 ### Error
 #### AggregateError
