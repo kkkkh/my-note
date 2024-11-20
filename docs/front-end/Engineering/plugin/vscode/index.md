@@ -17,7 +17,7 @@ View -> Command Palette / 查看 -> 命令面板 / ctrl + shift + p
 - [easy Less](https://developers.weixin.qq.com/community/develop/article/doc/000e427c49c218e6b9781bfdf5b013) 
 #### react
 - [react hooks snippets](https://marketplace.visualstudio.com/items?itemName=AlDuncanson.react-hooks-snippets)
-  - ush	useState
+  - ush	-> useState
 #### vue
   - [vetur](https://vuejs.github.io/vetur/)
   - vue.volar ~~原 TypeScript Vue Plugin(Volar) 废弃~~ -> Vue-Official
