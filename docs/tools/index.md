@@ -6,6 +6,7 @@ outline: deep
 - [张鑫旭](https://www.zhangxinxu.com/wordpress/)
 - [阮一峰的网络日志](https://www.ruanyifeng.com/blog/archives.html)
 - [酷壳–CoolShell](https://coolshell.cn/)
+- [周爱民](https://blog.csdn.net/aimingoo)
 - [Jeffrey Zhao](http://blog.zhaojie.me/)
 - [Web探索之旅](https://www.jianshu.com/nb/4686146)
 - [编程の趣](https://www.tangshuang.net/code)
@@ -30,6 +31,9 @@ outline: deep
 - [jsont](https://www.jsont.run/)
 - [es6 教程 阮一峰](https://es6.ruanyifeng.com/)
 ### ts/typescript
+- ts
+  - [ts docs](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
+  - [ts play](https://www.typescriptlang.org/play/)
 - js to ts
   - [javascript-to-typescript-converter](https://www.codeconvert.ai/javascript-to-typescript-converter)
   - [javascript-to-typescrip](https://syntha.ai/converters/javascript-to-typescript)
@@ -38,7 +42,8 @@ outline: deep
 - [vue3](https://cn.vuejs.org/guide/introduction.html) 官网
 - [vue2](https://v2.cn.vuejs.org/v2/guide/) 官网
 - [vueRouter](https://router.vuejs.org/zh/installation.html)
-- [vuex](https://vuex.vuejs.org/zh/)
+- [vuex](https://vuex.vuejs.org/zh/) 
+- [pinia](https://pinia.vuejs.org/zh/introduction.html)
 - [vue cli](https://cli.vuejs.org/zh/guide/creating-a-project.html#vue-create) vue2 处于维护模式 -> [create-vue](https://github.com/vuejs/create-vue) vue3 vite
 #### vue ui 组件库
 - pc端
@@ -124,20 +129,27 @@ outline: deep
   - [degit](https://github.com/Rich-Harris/degit)
 
 ### 可视化
+#### canvas
 - [raphael](https://dmitrybaranovskiy.github.io/raphael/)
 - [fabricjs](http://fabricjs.com/)
-- [pixijs](https://pixijs.com/8.x/tutorials)
-- [pixijs教程](https://github.com/Zainking/LearningPixi/tree/master)
 - [echarts](https://echarts.apache.org/handbook/zh/get-started/)
-- [d3js](https://d3js.org/getting-started)
 - [g6](http://g6-v3-2.antv.vision/zh/docs/manual/introduction)
-- [bpmn](https://bpmn.io/)
+#### svg
+- [d3js](https://d3js.org/getting-started)
 - [jsplumb](https://docs.jsplumbtoolkit.com/toolkit/6.x/)
 - [jsplumb community](https://docs.jsplumbtoolkit.com/community/6.x/)
+#### 3d
+- [pixijs](https://pixijs.com/8.x/tutorials)
+- [pixijs教程](https://github.com/Zainking/LearningPixi/tree/master)
+#### flowble
+- [bpmn](https://bpmn.io/)
 - [kepler.gl](https://kepler.gl/)
-
+#### art
+- [p5js](https://p5js.org/zh-Hans/)
+#### other
 - [sigmajs](https://www.sigmajs.org/)
 - [getspringy](http://getspringy.com/)
+
 ### http
 - [charlesproxy](https://www.charlesproxy.com/) 抓包
 - [graphql](https://graphql.cn/learn/)中文1
@@ -151,6 +163,8 @@ outline: deep
 - [Ariskywi/fe-style-guid](https://github.com/Ariskywi/fe-style-guid)
 ### 模板库
 - [argon-dashboard](https://www.creative-tim.com/product/argon-dashboard)
+### 微前端
+- [single-spa](https://single-spa.js.org/docs/configuration)
 ## 后端
 ### 接口服务 & mock
 - [apifox](https://apifox.com/)
