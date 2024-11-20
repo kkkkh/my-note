@@ -10,9 +10,9 @@ View -> Command Palette / 查看 -> 命令面板 / ctrl + shift + p
 ```
 ### 插件
 #### 通用
-- [Reload](https://marketplace.visualstudio.com/items?itemName=natqe.reload) 
+- [Reload](https://marketplace.visualstudio.com/items?itemName=natqe.reload) 重新加载
 - [ESLint Chinese Rules](https://marketplace.visualstudio.com/items?itemName=maggie.eslint-rules-zh-plugin) ESLint规则中文辅助提示插件，帮助更便捷的查询引用的规则，理解规则。
-- [Comment Translate](https://github.com/intellism/vscode-comment-translate/blob/HEAD/doc/README_ZH.md) 直接翻译
+- [Comment Translate](https://github.com/intellism/vscode-comment-translate/blob/HEAD/doc/README_ZH.md) 代码翻译
 #### css
 - [easy Less](https://developers.weixin.qq.com/community/develop/article/doc/000e427c49c218e6b9781bfdf5b013) 
 #### react
