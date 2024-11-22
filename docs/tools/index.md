@@ -15,7 +15,7 @@ outline: deep
 - [神奇海螺试验场](https://lab.magiconch.com/)
 - [小林coding](https://xiaolincoding.com/)
 - [egoist](https://egoist.dev/) eva.js
-
+- [若川](https://juejin.cn/user/1415826704971918/posts) 源码解读
 ## 社区
 - [v2ex](https://www.v2ex.com/)
 ## 前端
@@ -203,6 +203,8 @@ outline: deep
 - [compresspng](https://compresspng.com/zh/)压缩图片
 - [gopng](https://alloyteam.github.io/gopng/) sprite图
 - [openvpn](https://openvpn.net/download-open-vpn/)下载
+- [hourse](https://www.cq315house.com/)
+## 软件安装
 - Android
   - [Android File Transfer](https://teamandroid.com/download-android-file-transfer/)
   - [Android File Transfer](https://www.pc6.com/mac/136165.html)
@@ -215,6 +217,5 @@ outline: deep
   - 应用商店
     - [xclient](https://xclient.info/)
     - [macbl 马可菠萝](https://www.macbl.com/)
-- [hourse](https://www.cq315house.com/)
 
 
