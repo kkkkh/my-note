@@ -3,7 +3,7 @@ outline: deep
 ---
 # 后端
 
-## 开发语言
+## Lang
 ### NodeJs
 ### Go
 ### Python
@@ -13,5 +13,6 @@ outline: deep
 #### MongoDb
 #### MySQL
 #### SQLite
-### DB manage
+
+## DB manage
 #### Navicat
