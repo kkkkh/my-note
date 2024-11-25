@@ -156,6 +156,7 @@ class MyClass {
   accessor x = 100;
 }
 ```
+### 类实现接口 implements
 ```ts
 interface Point {
   x: number;
@@ -187,6 +188,8 @@ class SomePartialPoint implements PartialPoint2 {
   y = 2;
 }
 ```
+- implements 实现：class专有
+- extends 继承：class、interface都可以
 ### 联合类型
 ```ts
 // 1
