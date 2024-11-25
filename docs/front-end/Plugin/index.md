@@ -3,17 +3,20 @@ outline: deep
 ---
 # Plugin
 ## Lib
-- [xlsx](https://docs.sheetjs.com/docs/getting-started/examples/export#live-demo)
+- [xlsx](https://docs.sheetjs.com/docs/getting-started/examples/export#live-demo) excel
+- [immutable](https://immutable-js.com/) 数据比较
+
+- [slatejs](https://docs.slatejs.org/) 富文本
+- [svg4everybody](https://www.npmjs.com/package/svg4everybody) 兼容
+- [Cookies.js](https://github.com/ScottHamper/Cookies)
+
+- 创建“浮动”元素
+  - [popper.js v2](https://popper.js.org/docs/v2/) 
+  - [floating-ui](https://floating-ui.com/docs/getting-started) 
 - zpl
   - [zpl-image](https://www.npmjs.com/package/zpl-image) 
   - [zpl-image-2](https://www.npmjs.com/package/zpl-image-2) 图像转换为 Z64 编码或 ACS 编码的 GRF 位图以与 ZPL 一起使用
   - [jszpl](https://www.npmjs.com/package/jszpl) 生成 ZPL
-- [popper.js](https://floating-ui.com/docs/getting-started)
-- [Cookies.js](https://github.com/ScottHamper/Cookies)
-- 富文本
-  - [slatejs](https://docs.slatejs.org/) 
-- [svg4everybody](https://www.npmjs.com/package/svg4everybody) 兼容
-
 ## Vue plugin (Vue 扩展组件)
 ### component
 - [DMap(谛听)](https://juejin.cn/post/6844903593284206605) ([vue-bigdata-table](https://github.com/lison16/vue-bigdata-table))
@@ -28,8 +31,5 @@ outline: deep
   - [usePagination](https://cn.attojs.org/api/pagination.html)
 - [VueUse](https://vueuse.org/guide/)
 - [mitt](https://github.com/developit/mitt) vue3 事件总线
-### vite
-- [unplugin-vue-components](https://www.npmjs.com/package/unplugin-vue-components#Configuration) 
-- [unplugin-icons](https://www.npmjs.com/package/unplugin-icons#auto-importing#Migrate%20from%20vite-plugin-icons)
 
 ## React plugin (React 扩展组件)
