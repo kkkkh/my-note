@@ -69,6 +69,7 @@ outline: deep
 #### 其他框架
 - [alpinejs](https://alpinejs.dev/start-here)
 - [htmx](https://htmx.org/docs/)
+- [elm](https://elm-lang.org/)
 ### 小程序
 - [开发文档](https://developers.weixin.qq.com/miniprogram/dev/framework/quickstart/#%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%AE%80%E4%BB%8B)
 - [uniapp](https://uniapp.dcloud.net.cn/)
@@ -87,6 +88,7 @@ outline: deep
 - flex
   - [interactive-guide-to-flexbox](https://www.joshwcomeau.com/css/interactive-guide-to-flexbox/)
 - unocss
+- [emotion](https://emotion.sh/docs/introduction)
 
 #### icons
 - iconify
