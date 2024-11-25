@@ -345,6 +345,10 @@ function queryCodeListTrim(strings) {
 }
 ```
 ### Function
+- 判断是否是Function
+  - func && func(args)
+  - ES2020的新语法func?.(args)
+  - typeof func === 'function'
 #### bind
 - bind() 方法创建一个新函数，
 - 当调用该新函数时，它会调用原始函数并将其 this 关键字设置为给定的值，
