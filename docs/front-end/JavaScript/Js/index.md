@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-## Js 1
+## Js
 ### String
 #### fromCodePoint() / fromCharCode()
 - String.fromCodePoint(num1)
