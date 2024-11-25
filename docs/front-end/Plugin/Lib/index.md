@@ -40,4 +40,11 @@ exportToExcel(data);
   - xls库
     - 它会把数据组织成表格、行和单元格的形式，转换为符合Excel格式的XML结构
     - 本质上是多个XML文件压缩打包而成的ZIP文件，包含表格数据、样式、公式等信息
-
+## immutable
+```js
+const { Map } = require('immutable');
+const map1 = Map({ a: 1, b: 2, c: 3 });
+const map2 = Map({ a: 1, b: 2, c: 3 });
+map1.equals(map2); // true
+map1 === map2; // false
+```

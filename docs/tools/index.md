@@ -15,7 +15,7 @@ outline: deep
 - [神奇海螺试验场](https://lab.magiconch.com/)
 - [小林coding](https://xiaolincoding.com/)
 - [egoist](https://egoist.dev/) eva.js
-
+- [若川](https://juejin.cn/user/1415826704971918/posts) 源码解读
 ## 社区
 - [v2ex](https://www.v2ex.com/)
 ## 前端
@@ -69,6 +69,7 @@ outline: deep
 #### 其他框架
 - [alpinejs](https://alpinejs.dev/start-here)
 - [htmx](https://htmx.org/docs/)
+- [elm](https://elm-lang.org/)
 ### 小程序
 - [开发文档](https://developers.weixin.qq.com/miniprogram/dev/framework/quickstart/#%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%AE%80%E4%BB%8B)
 - [uniapp](https://uniapp.dcloud.net.cn/)
@@ -87,6 +88,7 @@ outline: deep
 - flex
   - [interactive-guide-to-flexbox](https://www.joshwcomeau.com/css/interactive-guide-to-flexbox/)
 - unocss
+- [emotion](https://emotion.sh/docs/introduction)
 
 #### icons
 - iconify
@@ -203,6 +205,8 @@ outline: deep
 - [compresspng](https://compresspng.com/zh/)压缩图片
 - [gopng](https://alloyteam.github.io/gopng/) sprite图
 - [openvpn](https://openvpn.net/download-open-vpn/)下载
+- [hourse](https://www.cq315house.com/)
+## 软件安装
 - Android
   - [Android File Transfer](https://teamandroid.com/download-android-file-transfer/)
   - [Android File Transfer](https://www.pc6.com/mac/136165.html)
@@ -215,6 +219,5 @@ outline: deep
   - 应用商店
     - [xclient](https://xclient.info/)
     - [macbl 马可菠萝](https://www.macbl.com/)
-- [hourse](https://www.cq315house.com/)
 
 

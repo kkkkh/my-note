@@ -105,45 +105,6 @@ const store = useLocalStorage(
 - EventBus 支持 vue2（创建一个Vue实例充当eventBus）
 - [参考](https://juejin.cn/post/6973106775755063333)
 
-## vite
-### unplugin-vue-components 
-- On-demand components auto importing for Vue.
-- 按需加载组件
-```js
-// vite.config.js
-import Components from 'unplugin-vue-components/vite'
-import {
-  AntDesignVueResolver,
-  ElementPlusResolver,
-  VantResolver,
-} from 'unplugin-vue-components/resolvers'
-// your plugin installation
-Components({
-  resolvers: [
-    AntDesignVueResolver(),
-    ElementPlusResolver(),
-    VantResolver(),
-  ],
-})
-```
-### unplugin-icons
-- 按需加载图标
-```js
-import Components from 'unplugin-vue-components/vite'
-import Icons from 'unplugin-icons/vite'
-import IconsResolver from 'unplugin-icons/resolver'
-export default {
-  plugins: [
-    Components({
-      resolvers: [
-        IconsResolver()
-      ],
-    }),
-    Icons(),
-  ],
-}
-```
-
 # my Lib
 
 ## [Render-table](./render-table/index.md)

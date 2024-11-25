@@ -3,11 +3,20 @@
 - 所有折叠：Ctrl + k & Ctrl + 0
 - 所有展开：Ctrl + k & Ctrl + j
 - code /path/to/my/project 的方式打开 VSCode
-```bash
-View -> Command Palette / 查看 -> 命令面板 / ctrl + shift + p 
-输入install code -> 选择提示的Shell Command: Install 'code' command in PATH 回车
-命令行 code /path/to/my/project 的方式打开 VSCode
-```
+  ```bash
+  View -> Command Palette / 查看 -> 命令面板 / ctrl + shift + p 
+  输入install code -> 选择提示的Shell Command: Install 'code' command in PATH 回车
+  命令行 code /path/to/my/project 的方式打开 VSCode
+  ```
+- 重构
+  ```js
+  const handleBoard = async () => {
+    ...
+  }
+  ```
+  - 选中下边的代码
+  - ⌃⇧R/ctrl+shift+R 或右键打开重构菜单，选择“移动到新文件”/“转换为命名函数”/“将命名导出项转换为默认导出项”
+
 ### 插件
 #### 通用
 - [Reload](https://marketplace.visualstudio.com/items?itemName=natqe.reload) 重新加载

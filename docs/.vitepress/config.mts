@@ -73,6 +73,7 @@ export default defineConfig({
               link: '/front-end/Engineering/build-tools',
               items: [
                 { text: 'vite', link: '/front-end/Engineering/build-tools/vite' },
+                { text: 'vite app', link: '/front-end/Engineering/build-tools/vite/app.md' },
                 { text: 'esbuild', link: '/front-end/Engineering/build-tools/esbuild' },
               ],
             },
@@ -111,6 +112,15 @@ export default defineConfig({
           items: [
             { text: '小程序', link: '/front-end/OtherEnd/小程序' },
             { text: 'Electron', link: '/front-end/OtherEnd/Electron' }, 
+          ],
+        },
+      ],
+      '/back-end': [
+        {
+          text: 'Lang',
+          link: '/back-end/Lang',
+          items: [
+            { text: 'NodeJs', link: '/back-end/Lang/NodeJs' },
           ],
         },
       ],
