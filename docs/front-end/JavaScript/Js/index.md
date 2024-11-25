@@ -2,8 +2,7 @@
 outline: deep
 ---
 
-## Js
-
+## Js 1
 ### String
 #### fromCodePoint() / fromCharCode()
 - String.fromCodePoint(num1)
@@ -144,114 +143,6 @@ console.log(sliceWay); // 't'
 const atWay = myString.at(-2);
 console.log(atWay); // 't'
 ```
-### Math
-#### Math.max() / Math.min()
-- Math.max 给定数值中最大的数
-  ```js
-  console.log(Math.max(1, 3, 2));
-  // 3
-  console.log(Math.max(-1, -3, -2));
-  // -1
-  const array1 = [1, 3, 2];
-  console.log(Math.max(...array1));
-  // 3
-  ```
-#### Math.pow() / Math.hypot() / Math.sqrt()
-- Math.pow(base,exponent) 函数返回基数（base）的指数（exponent）次幂，即 base^exponent。
-- 形同：2**10 2的10次方（指数运算）
-  ```js
-  // 2的3次方
-  console.log(Math.pow(2, 3));
-  console.log(2**3);
-  // 8
-  console.log(Math.pow(4, 0.5));
-  // 2
-  console.log(Math.pow(7, -2));
-  // 0.02040816326530612
-  console.log(Math.pow(-7, 0.5));
-  // NaN
-  ```
-- Math.hypot(x1,x2) 函数返回所有参数的平方和的平方根
-  ```js
-  console.log(Math.hypot(3, 4));
-  // 3*3 + 4*4 平方根
-  // 5
-  console.log(Math.hypot(3, 4, 5));
-  // 7.0710678118654755
-  console.log(Math.hypot(-5));
-  // 5
-  ```
-  - Math.sqrt(x) 平方根
-  ```js
-  console.log(Math.sqrt(25));
-  // 5
-  ```
-#### Math.ceil() / Math.floor() / Math.round() 
-- Math.ceil(x) 向上取整
-  ```js
-  console.log(Math.ceil(1.2)) //2
-  ```
-- Math.floor(x) 向下取整
-  ```js
-  console.log(Math.floor(1.2)) //1
-  ```
-- Math.round() 四舍五入后最接近的整数
-  ```js
-  console.log(Math.round(1.5)) //2
-  console.log(Math.round(1.2)) //1
-  ```
-#### Math.random() / window.crypto.getRandomValues()
-- Math.random() 伪随机数在范围从0 到小于1（从 0（包括 0）往上，但是不包括 1（排除 1））
-  - 得到一个两数之间的随机数 
-  - `Math.random() * (max - min) + min;`
-    ```js
-    // 这个值不小于 min（有可能等于），并且小于（不等于）max。
-    function getRandomArbitrary(min, max) {
-      return Math.random() * (max - min) + min;
-    }
-    console.log(getRandomArbitrary(1, 10));
-    ```
-  - 得到一个两数之间的随机整数 
-  - `minCeiled = Math.ceil(min);`
-  - `maxFloored = Math.floor(max);`
-  - `Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled)`
-    ```js
-    function getRandomInt(min, max) {
-      const minCeiled = Math.ceil(min);
-      const maxFloored = Math.floor(max);
-      return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); // 不包含最大值，包含最小值
-    }
-    console.log(getRandomInt(1, 10));
-    ```
-
-  - 得到一个两数之间的随机整数，包括两个数在内
-  - `minCeiled = Math.ceil(min);`
-  - `maxFloored = Math.floor(max);`
-  - `Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled)`
-    ```js
-    function getRandomIntInclusive(min, max) {
-      const minCeiled = Math.ceil(min);
-      const maxFloored = Math.floor(max);
-      return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled); // 包含最小值和最大值
-    }
-    ```
-- window.crypto.getRandomValues
-  ```js
-  var array = new Uint32Array(10);
-  window.crypto.getRandomValues(array);
-  console.log("Your lucky numbers:");
-  for (var i = 0; i < array.length; i++) {
-      console.log(array[i]);
-  }
-  //359997624, 1361574309, 688683877,.........
-  ```
-- 对比：
-  - Math.random() 不能提供像密码一样安全的随机数字。
-  - 使用 Web Crypto API 来代替，和更精确的window.crypto.getRandomValues() 方法。
-
-- 参考：
-  - [Math.random](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Math/random#%E7%A4%BA%E4%BE%8B)
-
 ### Object
 #### Object.fromEntries() / Object.entries()（逆操作）
 - object.fromEntries() 将一个数组/Map转为一个对象
@@ -453,8 +344,43 @@ function queryCodeListTrim(strings) {
     .map((item) => item.trim())
 }
 ```
-
-
+### Function
+#### bind
+- bind() 方法创建一个新函数，
+- 当调用该新函数时，它会调用原始函数并将其 this 关键字设置为给定的值，
+- 同时，还可以传入一系列指定的参数，这些参数会插入到调用新函数时传入的参数的前面。
+```js
+"use strict"; // 防止 `this` 被封装到到包装对象中
+function log(...args) {
+  console.log(this, ...args);
+}
+const boundLog = log.bind("this value", 1, 2);
+const boundLog2 = boundLog.bind("new this value", 3, 4);
+boundLog2(5, 6); // "this value", 1, 2, 3, 4, 5, 6
+```
+#### call
+```js
+function Product(name, price) {
+  this.name = name;
+  this.price = price;
+}
+function Food(name, price) {
+  Product.call(this, name, price);
+  this.category = 'food';
+}
+console.log(new Food('cheese', 5).name);
+// Expected output: "cheese"
+```
+#### apply
+```js
+const numbers = [5, 6, 2, 3, 7];
+const max = Math.max.apply(null, numbers);
+console.log(max);
+// Expected output: 7
+const min = Math.min.apply(null, numbers);
+console.log(min);
+// Expected output: 2
+```
 ### Array
 #### at()
 ```js
@@ -491,20 +417,113 @@ console.log(arr2.flat(2));
 console.log(arr2.flat(Infinity));
 // expected output: Array [0, 1, 2, 3, 4, 5]
 ```
-### Map
-```js
-const map1 = new Map();
-map1.set('bar', 'foo');
-console.log(map1.get('bar')); //"foo"
-console.log(map1.get('baz')); //undefined
-```
-### Map
-```js
-const set1 = new Set([1, 2, 3, 4, 5]);
-console.log(set1.has(1)); // true
-console.log(set1.has(5)); // true
-console.log(set1.has(6)); // true
-```
+### Math
+#### Math.max() / Math.min()
+- Math.max 给定数值中最大的数
+  ```js
+  console.log(Math.max(1, 3, 2));
+  // 3
+  console.log(Math.max(-1, -3, -2));
+  // -1
+  const array1 = [1, 3, 2];
+  console.log(Math.max(...array1));
+  // 3
+  ```
+#### Math.pow() / Math.hypot() / Math.sqrt()
+- Math.pow(base,exponent) 函数返回基数（base）的指数（exponent）次幂，即 base^exponent。
+- 形同：2**10 2的10次方（指数运算）
+  ```js
+  // 2的3次方
+  console.log(Math.pow(2, 3));
+  console.log(2**3);
+  // 8
+  console.log(Math.pow(4, 0.5));
+  // 2
+  console.log(Math.pow(7, -2));
+  // 0.02040816326530612
+  console.log(Math.pow(-7, 0.5));
+  // NaN
+  ```
+- Math.hypot(x1,x2) 函数返回所有参数的平方和的平方根
+  ```js
+  console.log(Math.hypot(3, 4));
+  // 3*3 + 4*4 平方根
+  // 5
+  console.log(Math.hypot(3, 4, 5));
+  // 7.0710678118654755
+  console.log(Math.hypot(-5));
+  // 5
+  ```
+  - Math.sqrt(x) 平方根
+  ```js
+  console.log(Math.sqrt(25));
+  // 5
+  ```
+#### Math.ceil() / Math.floor() / Math.round() 
+- Math.ceil(x) 向上取整
+  ```js
+  console.log(Math.ceil(1.2)) //2
+  ```
+- Math.floor(x) 向下取整
+  ```js
+  console.log(Math.floor(1.2)) //1
+  ```
+- Math.round() 四舍五入后最接近的整数
+  ```js
+  console.log(Math.round(1.5)) //2
+  console.log(Math.round(1.2)) //1
+  ```
+#### Math.random() / window.crypto.getRandomValues()
+- Math.random() 伪随机数在范围从0 到小于1（从 0（包括 0）往上，但是不包括 1（排除 1））
+  - 得到一个两数之间的随机数 
+  - `Math.random() * (max - min) + min;`
+    ```js
+    // 这个值不小于 min（有可能等于），并且小于（不等于）max。
+    function getRandomArbitrary(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+    console.log(getRandomArbitrary(1, 10));
+    ```
+  - 得到一个两数之间的随机整数 
+  - `minCeiled = Math.ceil(min);`
+  - `maxFloored = Math.floor(max);`
+  - `Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled)`
+    ```js
+    function getRandomInt(min, max) {
+      const minCeiled = Math.ceil(min);
+      const maxFloored = Math.floor(max);
+      return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); // 不包含最大值，包含最小值
+    }
+    console.log(getRandomInt(1, 10));
+    ```
+
+  - 得到一个两数之间的随机整数，包括两个数在内
+  - `minCeiled = Math.ceil(min);`
+  - `maxFloored = Math.floor(max);`
+  - `Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled)`
+    ```js
+    function getRandomIntInclusive(min, max) {
+      const minCeiled = Math.ceil(min);
+      const maxFloored = Math.floor(max);
+      return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled); // 包含最小值和最大值
+    }
+    ```
+- window.crypto.getRandomValues
+  ```js
+  var array = new Uint32Array(10);
+  window.crypto.getRandomValues(array);
+  console.log("Your lucky numbers:");
+  for (var i = 0; i < array.length; i++) {
+      console.log(array[i]);
+  }
+  //359997624, 1361574309, 688683877,.........
+  ```
+- 对比：
+  - Math.random() 不能提供像密码一样安全的随机数字。
+  - 使用 Web Crypto API 来代替，和更精确的window.crypto.getRandomValues() 方法。
+
+- 参考：
+  - [Math.random](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Math/random#%E7%A4%BA%E4%BE%8B)
 ### Error
 #### AggregateError
 ```js
@@ -525,7 +544,20 @@ try {
   console.log(e.errors); // [ Error: "some error1", Error: "some error2"  ]
 }
 ```
-
+### Map
+```js
+const map1 = new Map();
+map1.set('bar', 'foo');
+console.log(map1.get('bar')); //"foo"
+console.log(map1.get('baz')); //undefined
+```
+### Set
+```js
+const set1 = new Set([1, 2, 3, 4, 5]);
+console.log(set1.has(1)); // true
+console.log(set1.has(5)); // true
+console.log(set1.has(6)); // true
+```
 ### Promise
 #### Promise.all
 - 报错处理
@@ -586,7 +618,6 @@ Promise.all([promise1, promise2, promise3]).then((values) => {
   - 第一个异步任务完成时，不管resolve还是reject
 
 - 参考：[Promise.all](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise/all)
-
 ### FormData
 ```js
 var formData = new FormData(); // 当前为空
@@ -627,9 +658,58 @@ formData = new FormData(myForm);
 - 参考：
   - [FormData](https://developer.mozilla.org/zh-CN/docs/Web/API/FormData)
   - [ajax FormData 对象的使用](https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest_API/Using_FormData_Objects)
-
+### new URL(url, import.meta.url)
+- 示例代码：
+  ```js
+  // 1
+  const imgUrl = new URL('./img.png', import.meta.url).href
+  document.getElementById('hero-img').src = imgUrl
+  // 2支持动态
+  function getImageUrl(name) {
+    return new URL(`./dir/${name}.png`, import.meta.url).href
+  }
+  ```
+- new URL(url, base)
+  - url：一个表示绝对或相对 URL
+  - base：一个表示基准 URL 的字符串，当 url 为相对 URL 时，它才会生效
+  - new URL(`./dir/${name}.png`, import.meta.url)
+- import.meta.url
+  - import.meta.url 是一个 ESM 的原生功能，会暴露`当前模块的 URL`
+  - 在一个项目中 console.log(import.meta.url) => `http://localhost:8000/xx/src/views/xx.vue?t=172196193xxxx` 相当于当前模块的路径所在，作为基准值，第一个参数再为一个相对路径
+- import.meta.reslove()
+  ```js
+  // Approach 1
+  console.log(await import("./lib/helper.js"));
+  // Approach 2
+  const helperPath = import.meta.resolve("./lib/helper.js");
+  console.log(helperPath);
+  console.log(await import(helperPath));
+  ```
+  ```js
+  const helperPath = import.meta.resolve("./lib/helper.js");
+  console.log(helperPath);
+  // 相同
+  const helperPath = new URL("./lib/helper.js", import.meta.url).href;
+  console.log(helperPath);
+  ```
+- 参考：
+  - [new URL()](https://developer.mozilla.org/zh-CN/docs/Web/API/URL/URL)
+  - [URL](https://developer.mozilla.org/zh-CN/docs/Web/API/URL)
+  - [import.meta](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/import.meta) 元属性将特定上下文的元数据暴露给 JavaScript 模块，vite 在原生的基础上拓展了功能，例如 import.meta.env
+- 在 esm 中路径解析，[参考 import.meta](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/import.meta)
+  ```js
+  // 之前（CommonJS）：
+  const fs = require('fs/promises')
+  const path = require('path')
+  const filePath = path.join(__dirname, 'someFile.txt')
+  fs.readFile(filePath, 'utf8').then(console.log)
+  // 之后（ES 模块）：
+  import fs from 'node:fs/promises'
+  const fileURL = new URL('./someFile.txt', import.meta.url)
+  fs.readFile(fileURL, 'utf8').then(console.log)
+  ```
 ### Blob
 - 参考：[ajax 发送和接收二进制数据](https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest_API/Sending_and_Receiving_Binary_Data)
-
 ### Ajax
 - 参考：[使用 XMLHttpRequest](https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest_API/Using_XMLHttpRequest)
+
