@@ -89,7 +89,10 @@ export default defineConfig({
             {
               text: '代码规范',
               link: '/front-end/Engineering/code-standard',
-              items: [{ text: 'eslint', link: '/front-end/Engineering/code-standard/eslint' }],
+              items: [
+                { text: 'eslint', link: '/front-end/Engineering/code-standard/eslint' },
+                { text: 'husky', link: '/front-end/Engineering/code-standard/husky' },
+              ],
             },
             {
               text: 'plugin',
