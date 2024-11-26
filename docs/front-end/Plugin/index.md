@@ -2,10 +2,9 @@
 outline: deep
 ---
 # Plugin
+
 ## Lib
 - [xlsx](https://docs.sheetjs.com/docs/getting-started/examples/export#live-demo) excel
-- [immutable](https://immutable-js.com/) 数据比较
-
 - [slatejs](https://docs.slatejs.org/) 富文本
 - [svg4everybody](https://www.npmjs.com/package/svg4everybody) 兼容
 - [Cookies.js](https://github.com/ScottHamper/Cookies)
@@ -17,6 +16,8 @@ outline: deep
   - [zpl-image](https://www.npmjs.com/package/zpl-image) 
   - [zpl-image-2](https://www.npmjs.com/package/zpl-image-2) 图像转换为 Z64 编码或 ACS 编码的 GRF 位图以与 ZPL 一起使用
   - [jszpl](https://www.npmjs.com/package/jszpl) 生成 ZPL
+- [web-vitals](https://www.npmjs.com/package/web-vitals)
+
 ## Vue plugin (Vue 扩展组件)
 ### component
 - [DMap(谛听)](https://juejin.cn/post/6844903593284206605) ([vue-bigdata-table](https://github.com/lison16/vue-bigdata-table))
@@ -33,3 +34,5 @@ outline: deep
 - [mitt](https://github.com/developit/mitt) vue3 事件总线
 
 ## React plugin (React 扩展组件)
+- [immutable](https://immutable-js.com/) 不可变数据
+- [immerjs](https://immerjs.github.io/immer/zh-CN/)
