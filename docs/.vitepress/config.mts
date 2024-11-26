@@ -87,6 +87,11 @@ export default defineConfig({
               link: '/front-end/Engineering/node-manage',
             },
             {
+              text: '代码规范',
+              link: '/front-end/Engineering/code-standard',
+              items: [{ text: 'eslint', link: '/front-end/Engineering/code-standard/eslint' }],
+            },
+            {
               text: 'plugin',
               link: '/front-end/Engineering/plugin',
               items: [
