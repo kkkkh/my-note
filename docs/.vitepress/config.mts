@@ -16,10 +16,36 @@ export default defineConfig({
       { text: '前端', link: '/front-end' },
       { text: '后端', link: '/back-end' },
       { text: 'Linux', link: '/ops' },
-      { text: '文档', link: '/tools' },
+      { text: '文档', link: '/tools/front-end' },
       { text: '读书', link: '/books' },
     ],
     sidebar: {
+      '/tools': [
+        {
+          text: 'blog',
+          link: '/tools/blog',
+        },
+        {
+          text: '前端',
+          link: '/tools/front-end',
+        },
+        {
+          text: '后端',
+          link: '/tools/back-end',
+        },
+        {
+          text: 'UI',
+          link: '/tools/ui',
+        },
+        {
+          text: '其他工具',
+          link: '/tools/other',
+        },
+        {
+          text: '软件安装',
+          link: '/tools/software',
+        },
+      ],
       '/front-end': [
         {
           text: 'Css',
