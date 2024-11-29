@@ -25,9 +25,14 @@ outline: deep
 - [vue3](https://cn.vuejs.org/guide/introduction.html) 官网
 - [vue2](https://v2.cn.vuejs.org/v2/guide/) 官网
 - [vueRouter](https://router.vuejs.org/zh/installation.html)
-- [vuex](https://vuex.vuejs.org/zh/) 
+- [vuex](https://vuex.vuejs.org/zh/)
 - [pinia](https://pinia.vuejs.org/zh/introduction.html)
 - [vue cli](https://cli.vuejs.org/zh/guide/creating-a-project.html#vue-create) vue2 处于维护模式 -> [create-vue](https://github.com/vuejs/create-vue) vue3 vite
+- [nuxt](https://nuxt.com/docs/getting-started/installation)
+- [vitest](https://vitest.dev/guide/) &nbsp;&nbsp;&nbsp; [vitest 中文](https://cn.vitest.dev/guide/why.html)
+- [vue termui](https://vue-termui.dev/) 构建现代终端应用程序
+- [histoire](https://histoire.dev/guide/getting-started.html)
+
 #### vue ui 组件库
 - pc端
 - [element-plus](https://element-plus.org/zh-CN/component/overview.html) 官网
@@ -41,6 +46,7 @@ outline: deep
 - [create-react-app](https://create-react-app.dev/docs/getting-started)
 - [jsx](https://facebook.github.io/jsx/)
 - [Redux](https://redux.js.org/introduction/getting-started) ([Redux 中文](https://cn.redux.js.org/introduction/getting-started))
+- [redux-toolkit](https://redux-toolkit.js.org/introduction/getting-started)
 - [nextjs](https://nextjs.org/docs/getting-started/installation) ([nextjs中文](https://www.nextjs.cn/learn/basics/create-nextjs-app))
 - [Remix](https://remix.run/docs/en/main/start/quickstart)
 - [preact](https://preactjs.com/guide/v10/getting-started)
@@ -54,9 +60,7 @@ outline: deep
 - [htmx](https://htmx.org/docs/)
 - [elm](https://elm-lang.org/)
 ### css
-- sass
-  - [sass](https://sass-lang.com/)
-  - [sass 中文](https://www.sass.hk/guide/#google_vignette)
+- [sass](https://sass-lang.com/documentation/)&nbsp;&nbsp;&nbsp;[sass 中文](https://www.sass.hk/guide/#google_vignette)
 - [postcss](https://github.com/postcss/postcss#usage)
   - [postcss-load-config](https://github.com/postcss/postcss-load-config)
   - [postcss-nesting](https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-nesting)
@@ -135,6 +139,7 @@ outline: deep
 ### 其他端
 #### 客户端
 - [electron](https://www.electronjs.org/zh/docs/latest/tutorial/quick-start) 文档
+- [electron-builder](https://www.electron.build/)
 #### 小程序
 - [开发文档](https://developers.weixin.qq.com/miniprogram/dev/framework/quickstart/#%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%AE%80%E4%BB%8B)
 - [uniapp](https://uniapp.dcloud.net.cn/)
@@ -144,7 +149,10 @@ outline: deep
 ### 测试
 - [jestjs](https://jestjs.io/zh-Hans/docs/getting-started)
 - [playwright](https://playwright.dev/docs/intro)
-- [cypress](https://docs.cypress.io/app/get-started/why-cypress)
+- [cypress](https://docs.cypress.io/app/get-started/
+- [vitest](https://vitest.dev/guide/) &nbsp;&nbsp;&nbsp; [vitest 中文](https://cn.vitest.dev/guide/why.html)
+why-cypress)
+- [vite-node](https://github.com/vitest-dev/vitest/tree/main/packages/#readme) The engine that powers Vitest and Nuxt 3 Dev SSR.
 ### 微前端
 - [single-spa](https://single-spa.js.org/docs/configuration)
 ### 前端规范
