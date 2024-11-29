@@ -3,6 +3,58 @@ outline: deep
 ---
 
 ## Js
+### 操作符
+https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators
+### BigInt
+- BigInt 是一种内置对象，它提供了一种方法来表示大于 2^53 - 1 的整数。
+- 这原本是 Javascript 中可以用 Number 表示的最大数字。BigInt 可以表示任意大的整数。
+```js
+const theBiggestInt = 9007199254740991n;
+const alsoHuge = BigInt(9007199254740991);
+// ↪ 9007199254740991n
+const hugeString = BigInt("9007199254740991");
+// ↪ 9007199254740991n
+const hugeHex = BigInt("0x1fffffffffffff");
+// ↪ 9007199254740991n
+const hugeBin = BigInt(
+  "0b11111111111111111111111111111111111111111111111111111",
+);
+// ↪ 9007199254740991n
+```
+- 以下操作符可以和 BigInt 一起使用： +、*、-、**、%。
+- 除 >>> （无符号右移）之外的 位操作 也可以支持。
+- 因为 BigInt 都是有符号的， >>> （无符号右移）不能用于 BigInt。
+- 为了兼容 asm.js，BigInt 不支持单目 (+) 运算符。
+```js
+const previousMaxSafe = BigInt(Number.MAX_SAFE_INTEGER);
+// ↪ 9007199254740991n
+const maxPlusOne = previousMaxSafe + 1n;
+// ↪ 9007199254740992n
+const theFuture = previousMaxSafe + 2n;
+// ↪ 9007199254740993n, this works now!
+const multi = previousMaxSafe * 2n;
+// ↪ 18014398509481982n
+const subtr = multi – 10n;
+// ↪ 18014398509481972n
+const mod = multi % 10n;
+// ↪ 2n
+const bigN = 2n ** 54n;
+// ↪ 18014398509481984n
+bigN * -1n
+// ↪ –18014398509481984n
+```
+- 当使用 BigInt 时，带小数的运算会被取整。
+```js
+const expected = 4n / 2n;
+// ↪ 2n
+const rounded = 5n / 2n;
+// ↪ 2n, not 2.5n
+```
+- 建议：
+  - 由于在 Number 与 BigInt 之间进行转换会损失精度，
+  - 因而建议仅在值可能大于 2^53 时使用 BigInt 类型，
+  - 并且不在两种类型之间进行相互转换。
+
 ### String
 #### fromCodePoint() / fromCharCode()
 - String.fromCodePoint(num1)
@@ -292,6 +344,60 @@ console.log(Object.is(obj, obj));
 - === 运算符（和 == 运算符）
   - 将数值 -0 和 +0 视为相等，
   - 但是会将 NaN 视为彼此不相等。
+#### Object.freeze()
+- 阻止其扩展然后将所有现有属性的描述符的 configurable 特性更改为 false
+- 将同时把 writable 特性更改为 false
+- 任何这样的尝试都将失败，可能是静默失败，也可能抛出一个 TypeError 异常（通常情况下，在严格模式中抛出）
+```js
+const obj = {
+  prop: 42,
+};
+Object.freeze(obj);
+obj.prop = 33;
+// Throws an error in strict mode
+console.log(obj.prop); //42
+```
+- 浅冻结：如果这些属性的值本身是对象，这些对象不会被冻结
+```js
+const employee = {
+  name: "Mayank",
+  designation: "Developer",
+  address: {
+    street: "Rohini",
+    city: "Delhi",
+  },
+};
+Object.freeze(employee);
+employee.name = "Dummy"; // 在非严格模式下静默失败
+employee.address.city = "Noida"; // 可以修改子对象的属性
+console.log(employee.address.city); // "Noida"
+```
+- 深冻结
+```js
+function deepFreeze(object) {
+  // 获取对象的属性名
+  const propNames = Reflect.ownKeys(object);
+  // 冻结自身前先冻结属性
+  for (const name of propNames) {
+    const value = object[name];
+
+    if ((value && typeof value === "object") || typeof value === "function") {
+      deepFreeze(value);
+    }
+  }
+  return Object.freeze(object);
+}
+
+const obj2 = {
+  internal: {
+    a: null,
+  },
+};
+deepFreeze(obj2);
+obj2.internal.a = "anotherValue"; // 非严格模式下会静默失败
+obj2.internal.a; // null
+
+```
 ### RegExp
 
 参考：[正则表达式](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_expressions#special-line-feed)
