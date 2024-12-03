@@ -28,9 +28,7 @@ outline: deep
   - [v3.0~3.8(vue 2.6)](https://vxetable.cn/v3.8/#/table/start/install)
 ### api
 - [VueRequest](https://cn.attojs.org/guide/introduction.html#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9-vuerequest)
-  - `import { useRequest } from 'vue-request';`
   - [useRequest](https://cn.attojs.org/api/#%E5%85%AC%E5%85%B1-api)
-  - `import { usePagination } from 'vue-request';`
   - [usePagination](https://cn.attojs.org/api/pagination.html)
 - [VueUse](https://vueuse.org/guide/)
 - [mitt](https://github.com/developit/mitt) vue3 事件总线
