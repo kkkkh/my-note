@@ -9,11 +9,11 @@ outline: deep
 - [lottiefiles](https://lottiefiles.com/) lotties动画
 - [Markdown](https://markdown.com.cn/) 文档
 - [gitbook](https://www.gitbook.com/)
-- [tinypng](https://tinypng.com/) &nbsp;&nbsp;&nbsp; [compresspng](https://compresspng.com/zh/)压缩图片
+- [tinypng](https://tinypng.com/)&nbsp; [compresspng](https://compresspng.com/zh/) 压缩图片
 - [gopng](https://alloyteam.github.io/gopng/) sprite图
 - [openvpn](https://openvpn.net/download-open-vpn/)下载
 - [hourse](https://www.cq315house.com/)
-- [snipaste](https://www.snipaste.com/download.html) &nbsp;&nbsp;&nbsp; [Lightshot](https://app.prntscr.com/zh-cn/help.html) 截图
+- [snipaste](https://www.snipaste.com/download.html)&nbsp; [Lightshot](https://app.prntscr.com/zh-cn/help.html) 截图
 - [Everything](https://www.voidtools.com/zh-cn/) windows检索系统的文件
 - [ilovepdf](https://www.ilovepdf.com/) pdf
 - [Clover](http://cn.ejie.me/) 为Windows增加类似浏览器的多标签页功能
