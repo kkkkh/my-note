@@ -1,15 +1,16 @@
-# Eletron
-## 文档：
-- [electronjs](https://www.electronjs.org/zh/docs/latest/)
+---
+outline: deep
+---
+## Eletron
+### 其他文档：
 - [chromium](https://www.chromium.org/chromium-projects/)
 - [nodejs](https://nodejs.org/en/learn/getting-started/introduction-to-nodejs)
-- [electronforge](https://www.electronforge.io/)
-## 基本原理
-### electron
+### electron 基本原理
 - app 模块，它控制应用程序的事件生命周期。
 - BrowserWindow 模块，它创建和管理应用程序 窗口。
 ```js
-// commonjs
+// index.js
+// commonjs 写法
 const { app, BrowserWindow } = require('electron')
 const path = require('node:path')
 const createWindow = () => {
@@ -24,9 +25,7 @@ const createWindow = () => {
   // D:\\WorkSpace\\1MOM\\my-electron-app\\preload.js
   win.loadFile('index.html')
 }
-```
-```js
-//esm
+//esm 写法
 import { fileURLToPath } from 'node:url'
 import {app, BrowserWindow} from "electron"
 const createWindow = () => {
@@ -60,12 +59,72 @@ app.on('window-all-closed', () => {
 })
 ```
 - 使用预加载脚本来增强渲染器：为了将 Electron 的不同类型的进程桥接在一起，我们需要使用被称为 预加载 的特殊脚本。
-### build
-- [electron-builder](https://www.electron.build/)
-- [electronforge](https://www.electronforge.io/)
-### dev
-- [@tomjs/electron-devtools-installer](https://www.npmjs.com/package/@tomjs/electron-devtools-installer)
-
+```js
+// preload.js
+const { contextBridge,ipcRenderer } = require('electron')
+contextBridge.exposeInMainWorld('versions', {
+  node: () => process.versions.node,
+  chrome: () => process.versions.chrome,
+  electron: () => process.versions.electron,
+  ping: () => ipcRenderer.invoke('ping')
+  // 除函数之外，我们也可以暴露变量
+})
+```
+- 渲染进程
+```js
+// renderer.js
+const information = document.getElementById('info')
+information.innerText = `本应用正在使用 
+Chrome (v${versions.chrome()}), 
+Node.js (v${versions.node()}), 和 
+Electron (v${versions.electron()})`
+const func = async () => {
+  const response = await window.versions.ping()
+  console.log(response) // 打印 'pong'
+}
+func()
+```
+- build工具
+  - [electron-builder](https://www.electron.build/)
+  - [electron forge](https://www.electronforge.io/)
+### electron forge
+- 使用electron forge
+  - 脚手架初始化一个项目 vite + ts [初始化](https://www.electronforge.io/templates/vite-+-typescript)
+    ```bash
+    npm init electron-app@latest my-new-app -- --template=vite-typescript
+    ```
+  - 在原项目使用 [electron-forge](https://www.electronjs.org/zh/docs/latest/tutorial/%E6%89%93%E5%8C%85%E6%95%99%E7%A8%8B)
+    ```bash
+    npm install --save-dev @electron-forge/cli
+    npx electron-forge import
+    ```
+    ```json
+    // package.json
+    //...
+    "scripts": {
+      "start": "electron-forge start",
+      "package": "electron-forge package",
+      "make": "electron-forge make"
+    },
+    //...
+    ```
+    ```bash
+    # 分发文件 运行了 electron-forge make 命令
+    npm run make
+    ```
+  - [支持vite](https://www.electronforge.io/config/plugins/vite)
+    ```bash
+    npm install --save-dev @electron-forge/plugin-vite
+    ```
+- 开发工具
+  - [@tomjs/electron-devtools-installer](https://www.npmjs.com/package/@tomjs/electron-devtools-installer)（[中文](https://github.com/tomjs/electron-devtools-installer/blob/HEAD/README.zh_CN.md) ）为 Electron 安装 Chrome 扩展
+- 参考：
+  - [详解 Electron 打包](https://juejin.cn/post/7250085815430430781) Electron Builder、Electron Forge对比
+  - [详解 Electron 中的 asar 文件](https://juejin.cn/post/7213171235577036860) [@electron/asar](https://github.com/electron/asar)
+  - [前端工程化之强大的glob语法](https://juejin.cn/post/6876363718578405384)
+### electron-builder
+- 开发工具
+  - [vite-plugin-electron](https://www.npmjs.com/package/vite-plugin-electron) vite支持electron
 ### 模块
 #### winax COM接口
 - Node.js 的 npm 包，专门帮助在 Windows 系统上通过 `COM（Component Object Model 组件对象模型）接口`与`本地应用程序进行交互`。
