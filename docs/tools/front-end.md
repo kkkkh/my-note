@@ -20,6 +20,8 @@ outline: deep
 - js to ts
   - [javascript-to-typescript-converter](https://www.codeconvert.ai/javascript-to-typescript-converter)
   - [javascript-to-typescrip](https://syntha.ai/converters/javascript-to-typescript)
+- jsdoc
+  - [jsDoc](https://jsdoc.app/) &nbsp;&nbsp;&nbsp; [jsdoc 中文](https://www.jsdoc.com.cn/)
 ### 框架
 #### vue
 - [vue3](https://cn.vuejs.org/guide/introduction.html) 官网
@@ -32,6 +34,7 @@ outline: deep
 - [vitest](https://vitest.dev/guide/) &nbsp;&nbsp;&nbsp; [vitest 中文](https://cn.vitest.dev/guide/why.html)
 - [vue termui](https://vue-termui.dev/) 构建现代终端应用程序
 - [histoire](https://histoire.dev/guide/getting-started.html)
+- [vite-node](https://github.com/vitest-dev/vitest/tree/main/packages/#readme) The engine that powers Vitest and Nuxt 3 Dev SSR.
 
 #### vue ui 组件库
 - pc端
@@ -140,6 +143,7 @@ outline: deep
 #### 客户端
 - [electron](https://www.electronjs.org/zh/docs/latest/tutorial/quick-start) 文档
 - [electron-builder](https://www.electron.build/)
+- [electron forge](https://www.electronforge.io/)
 #### 小程序
 - [开发文档](https://developers.weixin.qq.com/miniprogram/dev/framework/quickstart/#%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%AE%80%E4%BB%8B)
 - [uniapp](https://uniapp.dcloud.net.cn/)
@@ -152,7 +156,6 @@ outline: deep
 - [cypress](https://docs.cypress.io/app/get-started/
 - [vitest](https://vitest.dev/guide/) &nbsp;&nbsp;&nbsp; [vitest 中文](https://cn.vitest.dev/guide/why.html)
 why-cypress)
-- [vite-node](https://github.com/vitest-dev/vitest/tree/main/packages/#readme) The engine that powers Vitest and Nuxt 3 Dev SSR.
 ### 微前端
 - [single-spa](https://single-spa.js.org/docs/configuration)
 ### 前端规范
