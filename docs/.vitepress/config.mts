@@ -133,7 +133,7 @@ export default defineConfig({
               link: '/front-end/Engineering/version-manage',
               items: [
                 { text: 'git', link: '/front-end/Engineering/version-manage/git' },
-                { text: 'git hooks', link: '/front-end/Engineering/version-manage/git-hooks' },
+                { text: 'git hooks', link: '/front-end/Engineering/version-manage/git/git-hooks' },
                 { text: 'github', link: '/front-end/Engineering/version-manage/github' },
                 { text: 'svn', link: '/front-end/Engineering/version-manage/svn' },
               ],
