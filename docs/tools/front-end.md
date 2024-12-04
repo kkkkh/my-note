@@ -99,12 +99,10 @@ outline: deep
 - [webpack](https://webpack.js.org/concepts/)
   - [vue-loader](https://github.com/vuejs/vue-loader)
   - [ts-loader](https://github.com/TypeStrong/ts-loader)
-#### 代码规范
+#### 代码管理
 - [prettier](https://prettier.io/)
-- [eslint](https://eslint.org/)
-- [eslint中文](https://zh-hans.eslint.org/docs/latest/use/getting-started)
+- [eslint](https://eslint.org/) &nbsp;[eslint中文](https://zh-hans.eslint.org/docs/latest/use/getting-started) &nbsp;[typescript-eslint](https://typescript-eslint.io/getting-started)
 - [EditorConfig](https://editorconfig.org/)
-- [husky](https://typicode.github.io/husky/)
 #### 包管理
 - npm
 - [pnpm](https://www.pnpm.cn/installation) 文档
@@ -112,6 +110,9 @@ outline: deep
 - git
   - [git](https://git-scm.com/book/zh/v2)
   - [degit](https://github.com/Rich-Harris/degit)
+- git hooks
+  - [husky](https://typicode.github.io/husky/)
+  - [lint-staged](https://www.npmjs.com/package/lint-staged#configuration)
 ### 可视化
 #### canvas
 - [raphael](https://dmitrybaranovskiy.github.io/raphael/)
