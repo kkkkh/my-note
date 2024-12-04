@@ -117,7 +117,6 @@ export default defineConfig({
               link: '/front-end/Engineering/code-standard',
               items: [
                 { text: 'eslint', link: '/front-end/Engineering/code-standard/eslint' },
-                { text: 'husky', link: '/front-end/Engineering/code-standard/husky' },
               ],
             },
             {
@@ -134,6 +133,7 @@ export default defineConfig({
               link: '/front-end/Engineering/version-manage',
               items: [
                 { text: 'git', link: '/front-end/Engineering/version-manage/git' },
+                { text: 'git hooks', link: '/front-end/Engineering/version-manage/git-hooks' },
                 { text: 'github', link: '/front-end/Engineering/version-manage/github' },
                 { text: 'svn', link: '/front-end/Engineering/version-manage/svn' },
               ],
