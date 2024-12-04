@@ -21,6 +21,8 @@ git branch -D <branch name>
 git branch -a --contains <commit id>
 # 建立本地分支和远程分支的关联
 git branch --set-upstream-to=origin/dev dev
+# 查看哪些分支包含 commit 45e9fd72345
+git branch --contains 45e9fd72345
 ```
 #### git stash
 - 当前工作现场“储藏”起来
@@ -246,7 +248,6 @@ git check-ignore -v App.class #找出来到底哪个规则写错
 #### 优点
 - Git 比其他版本控制系统设计得优秀，因为 Git 跟踪并管理的是修改，而非文件。
 ### git 总结
-
 #### git rebase 后代码不见了, 找回消失的commit
 - 使用git log看不到
 - 使用`git reflog`
@@ -298,3 +299,14 @@ Critical dependency: the request of a dependency is an expression
   - 在submodule中的引用，要使用这个别名`import {get} from 'name/src/main'`
   - 因为这样对于主项目来说，也可以通过这个路径找到的，
   - 如果只按照submodule自己的路径设置，按照自己的tsconfig.json和vite.config.js理解，就不一致会报错
+#### git clone ssh失败
+- git clone git@github.com:xxxx/xxxx.git 失败
+- git clone https://github.com/xxxx/xxxx.git 成功
+- git@github.com 使用SSH协议，有些网络限制SSH的端口（默认是22），导致SSH无法连接，但HTTPS通常不会被限制。
+参考：（进参考，与ssh无关）
+- https://github.com/vernesong/OpenClash/issues/2074
+- https://github.com/vernesong/OpenClash/issues/1960
+#### gitlab merge
+- gitlab 修改bug分支线上合并到uat分支（受保护分支，无法本地合并提交）
+- 如果线上产生了冲突，解决完冲突以后，会有一个大坑，uat会反向合并到修改bug的分支
+- 参考：https://segmentfault.com/a/1190000041546988
