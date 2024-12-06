@@ -1,4 +1,7 @@
-# React
+---
+outline: deep
+---
+# React plugin
 ## immutable
 ```js
 const { Map } = require('immutable');
