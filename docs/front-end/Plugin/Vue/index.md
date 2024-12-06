@@ -1,4 +1,4 @@
-# vue Plugin
+# Vue Plugin
 ## component
 ### vxe-table
 - 本地数据，简单筛查：https://vxetable.cn/v3.8/#/table/base/filter
