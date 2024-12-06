@@ -1,7 +1,7 @@
 ---
 outline: deep
 ---
-## Vite
+## Vite plugin
 ### unplugin-vue-components 
 - On-demand components auto importing for Vue.
 - 按需加载组件
