@@ -88,6 +88,7 @@ export default defineConfig({
             { text: 'Lib', link: '/front-end/Plugin/Lib' },
             { text: 'vue plugin', link: '/front-end/Plugin/Vue' },
             { text: 'react plugin', link: '/front-end/Plugin/React' },
+            { text: 'Vite plugin', link: '/front-end/Plugin/Vite' },
           ],
         },
         {
