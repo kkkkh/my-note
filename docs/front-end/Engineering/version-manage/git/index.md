@@ -87,9 +87,10 @@ git push --recurse-submodules=check
 git push --recurse-submodules=on-demand
 ```
 #### git rebase
+- git rebase
 ```bash
 ## 目前在dev分支
-git rebase -i #合并本地commit
+git branch # dev
 # master
 git checkout master
 git pull
@@ -104,6 +105,27 @@ git push #提交 冲突，解决冲突
 git checkout dev
 git rebase master # 变基
 git push
+```
+- git rebase -i 合并本地commit
+```bash
+git log --oneline
+# 开始合并操作
+git rebase -i HEAD~n
+git rebase -i HEAD~3
+# 出现以下信息
+pick 123abc Commit message 1
+pick 456def Commit message 2
+pick 789ghi Commit message 3
+# 将需要合并的提交修改为 squash 或 s
+pick 123abc Commit message 1
+squash 456def Commit message 2
+squash 789ghi Commit message 3
+
+# 合并提交信息
+# 按照需要调整后保存即可。
+
+# rebase 会自动完成，git log 检查是否合并成功。
+git log 
 ```
 #### git remote
 ```bash
@@ -141,6 +163,7 @@ git config --global --unset http.proxy
 #### git log/reflog
 ```bash
 git log
+git log --oneline
 git log --pretty=oneline  #简洁 log
 git log --graph --pretty=oneline --abbrev-commit # graph - 分支合并图
 git reflog #记录你的每一次命令，用来返回未来版本
