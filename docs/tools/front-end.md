@@ -74,12 +74,6 @@ outline: deep
   - [interactive-guide-to-flexbox](https://www.joshwcomeau.com/css/interactive-guide-to-flexbox/)
 - unocss
 - [emotion](https://emotion.sh/docs/introduction)
-#### icons
-- iconify
-  - [iconify](https://iconify.design/)
-  - [iconify docs](https://iconify.design/docs/)
-  - [Browse Icons](https://icon-sets.iconify.design/)
-  - [icones](https://icones.js.org/) Icon Explorer with Instant searching, powered by Iconify
 ### 工程化
 #### 构建工具
 - [vite](https://cn.vitejs.dev/guide/) 官网
@@ -104,8 +98,8 @@ outline: deep
 - [eslint](https://eslint.org/) &nbsp;[eslint中文](https://zh-hans.eslint.org/docs/latest/use/getting-started) &nbsp;[typescript-eslint](https://typescript-eslint.io/getting-started)
 - [EditorConfig](https://editorconfig.org/)
 #### 包管理
-- npm
-- [pnpm](https://www.pnpm.cn/installation) 文档
+- [npm](https://docs.npmjs.com/about-npm) &nbsp;[npm 中文](https://www.npmjs.cn/getting-started/what-is-npm/)
+- [pnpm](https://www.pnpm.cn/installation) &nbsp;[pnpm中文](https://www.pnpm.cn/motivation)
 #### 版本管理
 - git
   - [git](https://git-scm.com/book/zh/v2)
@@ -145,6 +139,8 @@ outline: deep
 - [electron](https://www.electronjs.org/zh/docs/latest/tutorial/quick-start) 文档
 - [electron-builder](https://www.electron.build/)
 - [electron forge](https://www.electronforge.io/)
+- [NW.js](https://nwjs.io/) &nbsp;&nbsp;&nbsp;[NW.js 中文](https://nwjs-cn.readthedocs.io/zh-cn/latest/Base/Getting%20Started/index.html)
+- [Tauri](https://v2.tauri.app/start/)
 #### 小程序
 - [开发文档](https://developers.weixin.qq.com/miniprogram/dev/framework/quickstart/#%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%AE%80%E4%BB%8B)
 - [uniapp](https://uniapp.dcloud.net.cn/)
@@ -154,9 +150,8 @@ outline: deep
 ### 测试
 - [jestjs](https://jestjs.io/zh-Hans/docs/getting-started)
 - [playwright](https://playwright.dev/docs/intro)
-- [cypress](https://docs.cypress.io/app/get-started/
+- [cypress](https://docs.cypress.io/app/get-started/why-cypress)
 - [vitest](https://vitest.dev/guide/) &nbsp;&nbsp;&nbsp; [vitest 中文](https://cn.vitest.dev/guide/why.html)
-why-cypress)
 ### 微前端
 - [single-spa](https://single-spa.js.org/docs/configuration)
 ### 前端规范
