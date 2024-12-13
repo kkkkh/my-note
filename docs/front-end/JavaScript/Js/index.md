@@ -5,6 +5,14 @@ outline: deep
 ## Js
 ### 操作符
 https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators
+```js
+var  a= {b:1}
+a.b ||= 3
+// a.b = 1
+a.b = 0
+a.b ||= 3
+// a.b = 3
+```
 ### BigInt
 - BigInt 是一种内置对象，它提供了一种方法来表示大于 2^53 - 1 的整数。
 - 这原本是 Javascript 中可以用 Number 表示的最大数字。BigInt 可以表示任意大的整数。
@@ -181,7 +189,57 @@ console.log("check".localeCompare("checl"));
 ```
 参考：[Intl.Collator.prototype.compare()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator/compare)
 
-
+#### replace() / replaceAll()
+- replaceAll()与 replace() 不同，该方法将替换所有匹配的字符串，而不仅仅是第一个。
+- 如果字符串不是静态已知的，那么这特别有用，因为调用 RegExp() 构造函数而不转义特殊字符可能会意外地改变它的语义。
+- 关键点不同
+```js
+// replace 替换 ha.*er，只能替换一个，使用 reg /g，想全部替换，结果贪婪
+function unsafeRedactName(text, name) {
+  return text.replace(new RegExp(name, "g"), "[REDACTED]");
+}
+// replaceAll 替换 ha.*er，不适用正则，全部更换
+function safeRedactName(text, name) {
+  return text.replaceAll(name, "[REDACTED]");
+}
+const report =
+  "A hacker called ha.*er used special characters in their name to breach the system.";
+console.log(unsafeRedactName(report, "ha.*er")); // "A [REDACTED]s in their name to breach the system."
+console.log(safeRedactName(report, "ha.*er")); // "A hacker called [REDACTED] used special characters in their name to breach the system."
+```
+- 全部情况查看
+```js
+function unsafeRedactName1(text, name) {
+  return text.replace(name, "[REDACTED]");
+}
+function unsafeRedactName2(text, name) {
+  return text.replace(new RegExp(name, "g"), "[REDACTED]");
+}
+function safeRedactName1(text, name) {
+  return text.replaceAll(name, "[REDACTED]");
+}
+function safeRedactName2(text, name) {
+  return text.replaceAll(new RegExp(name, "g"), "[REDACTED]");
+}
+const report =
+  "A hacker called ha.*er used special characters in their name to breach the system. ha.*er";
+console.log("1-1", unsafeRedactName1(report, "ha.*er"));
+console.log("1-2", unsafeRedactName1(report, /ha\.\*er/g));
+console.log("1-3", unsafeRedactName2(report, "ha.*er"));
+console.log("1-4", unsafeRedactName2(report, "ha\\.\\*er"));
+// "1-1" "A hacker called [REDACTED] used special characters in their name to breach the system. ha.*er"
+// "1-2" "A hacker called [REDACTED] used special characters in their name to breach the system. [REDACTED]"
+// "1-3" "A [REDACTED]"
+// "1-4" "A hacker called [REDACTED] used special characters in their name to breach the system. [REDACTED]"
+console.log("2-1", safeRedactName1(report, "ha.*er"));
+console.log("2-2", safeRedactName1(report, /ha\.\*er/g));
+console.log("2-3", safeRedactName2(report, "ha.*er"));
+console.log("2-4", safeRedactName2(report, "ha\\.\\*er"));
+// "2-1" "A hacker called [REDACTED] used special characters in their name to breach the system. [REDACTED]"
+// "2-2" "A hacker called [REDACTED] used special characters in their name to breach the system. [REDACTED]"
+// "2-3" "A [REDACTED]"
+// "2-4" "A hacker called [REDACTED] used special characters in their name to breach the system. [REDACTED]"
+```
 #### at() 
 ```js
 const myString = "Every green bus drives fast.";
@@ -401,37 +459,41 @@ obj2.internal.a; // null
 ### RegExp
 
 参考：[正则表达式](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_expressions#special-line-feed)
+- RegExp 涉及的api
+  - RegExp 的 exec 和 test 方法
+  - String 的 match、matchAll、replace、replaceAll、search 和 split
 
-RegExp 的 exec 和 test 方法
-String 的 match、matchAll、replace、search 和 split
-```js
-var re = /ab+c/;
-// 构造函数创建的正则表达式会被编译
-// 构造函数 可以动态生成正则
-var re = new RegExp("ab+c");
-```
+  - exec
+  ```js
 
-```js
-var re = /[a-z]\s/i
-var re = new RegExp("[a-z]\\s", "i")
-```
-#### 示例
+  ```
+- 两种方式创建 
+  ```js
+  // 1
+  var re = /ab+c/;
+  // 构造函数创建的正则表达式会被编译
+  // 构造函数 可以动态生成正则
+  var re = new RegExp("ab+c");
+  // 2
+  var re = /[a-z]\s/i
+  var re = new RegExp("[a-z]\\s", "i")
+  ```
 - 示例一：
-```js
-// *?懒惰查找 默认是贪婪查找
-// $1 代表正则中第一个()
-// [^$] 代表非$的字符 反向字符集
-// $$t 插入一个 "$"
-const reg = /placeholder="([^$]*?)"/
-const str = `placeholder="请输入信息"`
-const res = str.replace(reg,`:placeholder="$$t('N:$1')"`)
-console.log(res)
-// :placeholder="$t('N:请输入信息')"
-const reg = /label="([^$]*?)"/
-const str = `label="重置"`
-const res = str.replace(reg,`:label="$$t('F:$1')"`)
-console.log(res)
-```
+  ```js
+  // *?懒惰查找 默认是贪婪查找
+  // $1 代表正则中第一个()
+  // [^$] 代表非$的字符 反向字符集
+  // $$t 插入一个 "$"
+  const reg = /placeholder="([^$]*?)"/
+  const str = `placeholder="请输入信息"`
+  const res = str.replace(reg,`:placeholder="$$t('N:$1')"`)
+  console.log(res)
+  // :placeholder="$t('N:请输入信息')"
+  const reg = /label="([^$]*?)"/
+  const str = `label="重置"`
+  const res = str.replace(reg,`:label="$$t('F:$1')"`)
+  console.log(res)
+  ```
 参考：
 [String replace](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
 
@@ -728,46 +790,6 @@ Promise.all([promise1, promise2, promise3]).then((values) => {
   - 第一个异步任务完成时，不管resolve还是reject
 
 - 参考：[Promise.all](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise/all)
-### FormData
-```js
-var formData = new FormData(); // 当前为空
-formData.append(name, value, filename); // filename 文件名称
-formData.append("username", "Chris1"); // 添加到集合
-formData.append("username", "Chris2"); // 添加到集合
-formData.get("username"); // Returns "Chris1"，返回第一个和 "username" 关联的值
-formData.getAll("username"); // Returns ["Chris1", "Chris2"]
-formData.set("username", "Chris3"); // 覆盖已有的值
-formData.delete("username");
-// formData。keys()、formData。value()
-for (var pair of formData.entries()) {
-  console.log(pair[0] + ", " + pair[1]);
-}
-```
-- \<form\>标签使用
-```html
-<form id="myForm" name="myForm">
-  <div>
-    <label for="username">Enter name:</label>
-    <input type="text" id="username" name="username" />
-  </div>
-  <div>
-    <label for="useracc">Enter account number:</label>
-    <input type="text" id="useracc" name="useracc" />
-  </div>
-  <div>
-    <label for="userfile">Upload file:</label>
-    <input type="file" id="userfile" name="userfile" />
-  </div>
-  <input type="submit" value="Submit!" />
-</form>
-```
-```js
-var myForm = document.getElementById("myForm");
-formData = new FormData(myForm);
-```
-- 参考：
-  - [FormData](https://developer.mozilla.org/zh-CN/docs/Web/API/FormData)
-  - [ajax FormData 对象的使用](https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest_API/Using_FormData_Objects)
 ### new URL(url, import.meta.url)
 - 示例代码：
   ```js
@@ -818,8 +840,5 @@ formData = new FormData(myForm);
   const fileURL = new URL('./someFile.txt', import.meta.url)
   fs.readFile(fileURL, 'utf8').then(console.log)
   ```
-### Blob
-- 参考：[ajax 发送和接收二进制数据](https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest_API/Sending_and_Receiving_Binary_Data)
-### Ajax
-- 参考：[使用 XMLHttpRequest](https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest_API/Using_XMLHttpRequest)
+
 
