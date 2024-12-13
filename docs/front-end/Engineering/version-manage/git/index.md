@@ -3,6 +3,11 @@ outline: deep
 ---
 ## git
 ### git 常用命令
+#### git clone 
+```bash
+git clone xxxx 
+git clone xxxx dic/\*/\*\*/
+```
 #### git branch
 ```bash
 # 拉去远程分支 <基于一个commit>
