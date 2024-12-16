@@ -1,3 +1,6 @@
+---
+outline: deep
+---
 # pnpm
 ## pnpm command [官方连接](https://pnpm.io/cli/add)
 ### pnpm remove
