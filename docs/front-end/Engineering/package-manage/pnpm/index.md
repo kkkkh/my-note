@@ -6,7 +6,7 @@ Aliases: rm, uninstall, un
 pnpm remove
 ```
 ### pnpm link / unlink
-- pnpm link <dir> 和 pnpm link --dir <dir> 之间的区别​
+- pnpm link \<dir\> 和 pnpm link --dir \<dir\> 之间的区别​
 ```bash
 # The current directory is foo
 # 在一个项目下，link到外部的包
@@ -41,7 +41,7 @@ pnpm unlink <package>
 # 彻底删除
 pnpm uninstall --global <package>
 ```
-### [pnpm update](https://pnpm.io/cli/update)
+### pnpm update
 ```bash
 # 更新所有依赖项，遵守 package.json 中指定的范围
 pnpm up
