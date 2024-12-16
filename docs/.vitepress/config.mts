@@ -107,7 +107,10 @@ export default defineConfig({
             {
               text: '包管理',
               link: '/front-end/Engineering/package-manage',
-              items: [{ text: 'npm', link: '/front-end/Engineering/package-manage/npm' }],
+              items: [
+                { text: 'npm', link: '/front-end/Engineering/package-manage/npm' },
+                { text: 'pnpm', link: '/front-end/Engineering/package-manage/pnpm' }
+              ],
             },
             {
               text: 'node管理',
