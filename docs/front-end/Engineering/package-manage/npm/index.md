@@ -1,3 +1,6 @@
+---
+outline: deep
+---
 # npm
 ## npm command
 ### npm tag
