@@ -50,7 +50,10 @@ export default defineConfig({
         {
           text: 'Css',
           link: '/front-end/Css',
-          items: [{ text: 'flex', link: '/front-end/Css/flex' }],
+          items: [
+            { text: 'flex', link: '/front-end/Css/flex' },
+            { text: 'sass', link: '/front-end/Css/sass' },
+          ],
         },
         {
           text: 'JavaScript',
