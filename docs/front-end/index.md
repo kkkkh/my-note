@@ -16,9 +16,9 @@ outline: deep
   - [ts](./TypeScript/index.md)
 
 - [Vue](./Vue/index)
+  - [vue3](./Vue/vue3/index)
   - [vue2](./Vue/vue2/index)
   - [element-ui](./Vue/element-ui/index)
-  - [vue3](./Vue/vue3/index)
 
 - [React](./React/index.md)
 
