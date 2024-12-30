@@ -5,6 +5,7 @@ outline: deep
 
 - [Css](./Css/index)
   - [flex](./Css/flex/index)
+  - [sass](./Css/sass/index)
 
 - [Js](./JavaScript/index)
   - [js](./JavaScript/Js/index)
