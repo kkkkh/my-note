@@ -1,3 +1,6 @@
+---
+outline: deep
+---
 # 浏览器
 ## 浏览器引擎前缀
 -webkit-（Chrome、Safari、新版 Opera 浏览器以及几乎所有 iOS 系统中的浏览器（包括 iOS 系统中的火狐浏览器）；简单的说，所有基于 WebKit 内核的浏览器）
