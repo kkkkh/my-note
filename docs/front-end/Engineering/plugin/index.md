@@ -44,7 +44,7 @@ outline: deep
 - [Markdown Snippets](https://marketplace.visualstudio.com/items?itemName=robole.markdown-snippets)
 - [Snippets Ranger](https://marketplace.visualstudio.com/items?itemName=robole.snippets-ranger)
 
-### snippets
+### 片段 snippets
 #### html
 - 1、ctrl + shift + p
 - 2、snippets 配置用户代码片段
