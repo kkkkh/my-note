@@ -11,3 +11,5 @@ eval "$(fnm env --use-on-cd)"
 # node lts（Long Term Support 长期支持）
 fnm install --lts
 ```
+参考：
+- [fnm github](https://github.com/Schniz/fnm)
