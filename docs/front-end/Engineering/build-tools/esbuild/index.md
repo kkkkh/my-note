@@ -1,4 +1,8 @@
-# esbuild 常用命令
+---
+outline: deep
+---
+# esbuild 
+## 常用命令
 ```bash
 esbuild `find src \\( -name '*.js' \\)` --platform=node --format=cjs --outdir=dist --minify
 esbuild src/app.js --platform=node --format=cjs --outdir=dist --bundle --minify --packages=external
