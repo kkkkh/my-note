@@ -589,6 +589,63 @@ console.log(arr2.flat(2));
 console.log(arr2.flat(Infinity));
 // expected output: Array [0, 1, 2, 3, 4, 5]
 ```
+#### splice
+最大的问题是会改变原数组
+- splice(start, deleteCount, item1, item2, /* …, */ itemN) 
+- start 
+  - 负索引从数组末尾开始计算——如果 -buffer.length <= start < 0，使用 start + array.length。
+  - 如果 start < -array.length，使用 0。
+  - 如果 start >= array.length，则不会删除任何元素，但是该方法会表现为添加元素的函数，添加所提供的那些元素。
+- deleteCount 可选
+  - 一个整数，表示数组中要从 start 开始删除的元素数量。
+  - 如果省略了 deleteCount，或者其值大于或等于由 start 指定的位置到数组末尾的元素数量，那么从 start 到数组末尾的所有元素将被删除。
+  - 如果你想要传递任何 itemN 参数，则应向 deleteCount 传递 Infinity 值，以删除 start 之后的所有元素，
+- 返回值
+  - 一个包含了删除的元素的数组。
+```js
+// 增加元素
+const myFish = ["angel", "clown", "mandarin", "sturgeon"];
+const removed = myFish.splice(2, 0, "drum");
+// myFish 是 ["angel", "clown", "drum", "mandarin", "sturgeon"]
+// removed 是 []，没有移除的元素
+```
+```js
+// 刪除元素
+const myFish = ["angel", "clown", "drum", "mandarin", "sturgeon"];
+const removed = myFish.splice(3, 1);
+// myFish 是 ["angel", "clown", "drum", "sturgeon"]
+// removed 是 ["mandarin"]
+```
+```js
+// 替換元素
+const myFish = ["angel", "clown", "drum", "sturgeon"];
+const removed = myFish.splice(2, 1, "trumpet");
+
+// myFish 是 ["angel", "clown", "trumpet", "sturgeon"]
+// removed 是 ["drum"]
+```
+#### toSpliced
+- 对splice完善
+- 它返回一个新数组，而不是修改原始数组。此方法不会返回已删除的元素。
+- 其他与splice基本相同
+```js
+const months = ["Jan", "Mar", "Apr", "May"];
+// 在索引 1 处添加一个元素
+const months2 = months.toSpliced(1, 0, "Feb");
+console.log(months2); // ["Jan", "Feb", "Mar", "Apr", "May"]
+
+// 从第 2 个索引开始删除两个元素
+const months3 = months2.toSpliced(2, 2);
+console.log(months3); // ["Jan", "Feb", "May"]
+
+// 在索引 1 处用两个新元素替换一个元素
+const months4 = months3.toSpliced(1, 1, "Feb", "Mar");
+console.log(months4); // ["Jan", "Feb", "Mar", "May"]
+
+// 原数组不会被修改
+console.log(months); // ["Jan", "Mar", "Apr", "May"]
+
+```
 ### Math
 #### Math.max() / Math.min()
 - Math.max 给定数值中最大的数
