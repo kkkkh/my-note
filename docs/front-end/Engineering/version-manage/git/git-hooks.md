@@ -1,3 +1,6 @@
+---
+outline: deep
+---
 ## git hooks
 - [husky](https://typicode.github.io/husky/) 触发git hooks
 ```bash
