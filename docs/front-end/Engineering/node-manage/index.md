@@ -1,5 +1,7 @@
+---
+outline: deep
+---
 # node manage
-
 ## fnm
 ```bash
 # 安装
