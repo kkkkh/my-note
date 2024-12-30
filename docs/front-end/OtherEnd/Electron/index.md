@@ -88,6 +88,159 @@ func()
 - build工具
   - [electron-builder](https://www.electron.build/)
   - [electron forge](https://www.electronforge.io/)
+### 实现原理
+#### 渲染进程对 Node.js API 的直接访问
+- nodeIntegration: true
+  - Electron 使用 V8 引擎同时运行 Chromium 和 Node.js，这使得在渲染进程中可以直接注入 Node.js 的核心模块。
+  - Electron 会通过注入机制将 Node.js 的全局变量（如 require、process）添加到渲染进程的 JavaScript 上下文中，使得你可以像在 Node.js 环境中一样访问这些模块。
+- contextIsolation: false 
+  - 禁用了上下文隔离，网页 JavaScript 和 Electron 的内部上下文运行在同一个环境中，直接共享全局对象。
+  - 由于没有隔离，网页的 JS 代码和 Electron 注入的 Node.js API（如 require、process）运行在同一作用域中，开发者可以直接调用 Node.js 的功能。
+- 安全性问题
+  - 直接访问 Node.js：因为 nodeIntegration: true 允许网页 JavaScript 访问 Node.js API，这意味着任何在渲染进程中运行的脚本（包括第三方库或恶意代码）都可以执行文件操作、网络请求或访问敏感数据。
+  - 缺乏隔离：contextIsolation: false 会进一步增加安全风险，因为它允许不受信任的网页代码直接与 Node.js API 交互。
+- 技术细节的核心原理
+  - Bridge Injection: Electron 创建了一个桥接层，将 Node.js 的模块加载系统注入到渲染进程的上下文中。
+  - 全局对象挂载：
+    - global 对象（Node.js）与 window 对象（DOM）合并，允许 JS 脚本调用 Node.js API。
+    - 例如，require('fs') 会通过 Node.js 的模块系统加载模块，而这些功能本应不存在于普通浏览器环境中。
+  - 内置模块加载器：
+    - Electron 在渲染进程启动时会加载内置的模块加载器，将 Node.js 和 Web 环境无缝结合。
+- 建议
+  - 实际开发中不推荐使用此配置，建议通过 preload 脚本显式暴露必要的 API 并启用 contextIsolation 来保障安全性。
+### 进程之间的通信
+#### 渲染进程 -> 主进程 通信
+- invoke / handle （通过 channel 向主过程发送消息，并异步等待结果）
+  ```js
+  // 渲染进程
+  import {ipcRenderer} from 'electron'
+  async () => {
+    const result = await ipcRenderer.invoke('my-invokable-ipc', arg1, arg2)
+    // ...
+  }
+  // 主进程
+  import {ipcMain} from 'electron'
+  ipcMain.handle('my-invokable-ipc', async (event, ...args) => {
+    const result = await somePromise(...args)
+    return result
+  })
+  ```
+- send / on （通过channel向主进程发送异步消息，可以发送任意参数）
+  ```js
+  // 渲染进程
+  import {ipcRenderer} from 'electron'
+  ipcRenderer.send(channel, ...args)
+  // 主进程
+  import {ipcMain} from 'electron'
+  ipcMain.on(channel, listener)
+  ```
+- postMessage / on
+  ```js
+  // 渲染进程
+  import {ipcRenderer} from 'electron'
+  const channel = new MessageChannel()
+  const port1 = channel.port1
+  const port2 = channel.port2
+  port2.postMessage({ answer: 42 })
+  ipcRenderer.postMessage('port', null, [port1])
+  // 主进程
+  import {ipcMain} from 'electron'
+  ipcMain.on('port', (event) => {
+    const port = event.ports[0]
+    port.on('message', (event) => {
+      const data = event.data
+    })
+    port.start()
+  })
+  ```
+#### 主进程 -> 渲染进程 通信
+- send / on
+  ```js
+  // 主进程
+  import { BrowserWindow } from 'electron'
+  const allWindows = BrowserWindow.getAllWindows()
+  for (const win of allWindows) {
+    win.webContents.send("browserWindow-webContents", value)
+  }
+  // 渲染进程
+  import {ipcRenderer} from 'electron'
+  ipcRenderer.on("browserWindow-webContents",(value)=>{
+    console.log(value)
+  })
+  ```
+- postMessage / on
+  ```javascript
+  const { BrowserWindow, app, ipcMain, MessageChannelMain } = require('electron')
+  app.whenReady().then(async () => {
+    // Worker 进程是一个隐藏的 BrowserWindow
+    // 它具有访问完整的Blink上下文（包括例如 canvas、音频、fetch()等）的权限
+    const worker = new BrowserWindow({
+      show: false,
+      webPreferences: { nodeIntegration: true }
+    })
+    await worker.loadFile('worker.html')
+
+    // main window 将发送内容给 worker process 同时通过 MessagePort 接收返回值
+    const mainWindow = new BrowserWindow({
+      webPreferences: { nodeIntegration: true }
+    })
+    mainWindow.loadFile('app.html')
+
+    // 在这里我们不能使用 ipcMain.handle() , 因为回复需要传输
+    // MessagePort.
+    // 监听从顶级 frame 发来的消息
+    mainWindow.webContents.mainFrame.ipc.on('request-worker-channel', (event) => {
+      // 建立新通道  ...
+      const { port1, port2 } = new MessageChannelMain()
+      // ... 将其中一个端口发送给 Worker ...
+      worker.webContents.postMessage('new-client', null, [port1])
+      // ... 将另一个端口发送给主窗口
+      event.senderFrame.postMessage('provide-worker-channel', null, [port2])
+      // 现在主窗口和工作进程可以直接相互通信，无需经过主进程！
+    })
+  })
+  // 渲染进程 1
+  const { ipcRenderer } = require('electron')
+  const doWork = (input) => {
+    // 一些对CPU要求较高的任务
+    return input * 2
+  }
+  // 我们可能会得到多个 clients, 比如有多个 windows,
+  // 或者假如 main window 重新加载了.
+  ipcRenderer.on('new-client', (event) => {
+    const [ port ] = event.ports
+    port.onmessage = (event) => {
+      // 事件数据可以是任何可序列化的对象 (事件甚至可以
+      // 携带其他 MessagePorts 对象!)
+      const result = doWork(event.data)
+      port.postMessage(result)
+    }
+  })
+  // 渲染进程 2
+  const { ipcRenderer } = require('electron')
+  // 我们请求主进程向我们发送一个通道
+  // 以便我们可以用它与 Worker 进程建立通信
+  ipcRenderer.send('request-worker-channel')
+  ipcRenderer.once('provide-worker-channel', (event) => {
+    // 一旦收到回复, 我们可以这样做...
+    const [ port ] = event.ports
+    // ... 注册一个接收结果处理器 ...
+    port.onmessage = (event) => {
+      console.log('received result:', event.data)
+    }
+    // ... 并开始发送消息给 work!
+    port.postMessage(21)
+  })
+  ```
+- postmessage 优势
+  - 传输复杂数据（如果数据中包含非可序列化对象（如 Map、Set、ArrayBuffer 或循环引用）或需要更高效的数据传输）
+  - 兼容window.postMessage，支持与 MessagePort 交互的场景
+- 参考：
+  - [electron postMessage](https://www.electronjs.org/zh/docs/latest/tutorial/message-ports)
+- 其他通信参考
+  - [web worker 通信](../../JavaScript/Dom/index.md#web-worker)
+  - [iframe 通信](../../JavaScript/Dom/index.md#iframe)
+  - [MessageChannel 通信](../../JavaScript/Dom/index.md#messagechannel--messageport)
 ### api
 #### ipcRenderer
 - ipcRenderer.invoke
@@ -102,6 +255,7 @@ func()
 - ipcMain.handle(channel, listener)
 - 为一个 invokeable的IPC 添加一个handler。 每当一个渲染进程调用 ipcRenderer.invoke(channel, ...args) 时这个处理器就会被调用。
 ```js
+import {ipcMain} from 'electron'
 ipcMain.handle('my-invokable-ipc', async (event, ...args) => {
   const result = await somePromise(...args)
   return result
@@ -148,6 +302,55 @@ import { shell } from 'electron'
 shell.openPath('path') //以桌面的默认方式打开给定的文件。
 shell.openExternal('https://github.com') // 打开网址
 ```
+#### session
+session 管理浏览器会话、cookie、缓存、代理设置等。
+- 创建自定义会话
+```js
+const customSession = session.fromPartition('persist:user1');
+const customWindow = new BrowserWindow({
+    webPreferences: {
+        session: customSession,
+    },
+});
+
+```
+- api
+  - setPermissionCheckHandler(handler: (webContents, permission, requestingOrigin) => boolean)
+    - 用于拦截和处理权限检查。
+    - 在特定权限（如通知、摄像头、麦克风等）被请求时，调用自定义逻辑以决定是否允许。
+    - 返回值为布尔值：true 表示允许，false 表示拒绝。
+    ```js
+    win.webContents.session.setPermissionCheckHandler((webContents, permission, requestingOrigin) => {
+      if (permission === 'notifications') return true; // 允许通知
+      return false; // 禁止其他权限
+    });
+    ```
+  - setDevicePermissionHandler(handler: (details) => boolean)
+    - 用于处理设备权限（如访问 USB、hid(蓝牙)、串口设备等）的请求。
+    - 返回值为布尔值：true 表示允许访问设备，false 表示拒绝。
+    - 参数 details 提供有关请求的信息，包括设备类型和来源。
+    ```js
+    win.webContents.session.setDevicePermissionHandler((details) => {
+      console.log(details.deviceType); // 打印请求的设备类型
+      return details.deviceType === 'usb'; // 仅允许 USB 设备
+    });
+    ```
+  - setCertificateVerifyProc(proc: (request, callback) => void)
+    - 自定义证书验证逻辑。
+    - 在安全连接中遇到证书问题（如自签名证书或无效证书）时调用，用于决定是否信任该证书。
+    - 回调函数 callback 的参数：第一个参数为证书验证结果（0 表示成功，其他为错误代码）。
+    ```js
+    win.webContents.session.setCertificateVerifyProc((request, callback) => {
+      // 每当一个服务器证书请求验证，proc 将被这样 proc(request, callback) 调用，为 session 设置证书验证过程。
+      // 回调函数 callback(0) 接受证书，callback(-2) 驳回证书。
+      console.log(request.hostname); // 打印请求的主机名
+      if (request.hostname === 'trusted.com') {
+          callback(0); // 信任证书
+      } else {
+          callback(-2); // 拒绝证书
+      }
+    });
+    ```
 ### electron forge
 - 使用electron forge
   - 脚手架初始化一个项目 vite + ts [初始化](https://www.electronforge.io/templates/vite-+-typescript)
@@ -188,8 +391,16 @@ shell.openExternal('https://github.com') // 打开网址
   - [vite-plugin-electron](https://www.npmjs.com/package/vite-plugin-electron) vite支持electron
   - [electron-log](https://www.npmjs.com/package/electron-log) electron 打印日志
   - [winax](https://www.npmjs.com/package/winax) Windows C++ Node.JS 插件，实现 COM IDispatch 对象包装器，模拟 cscript.exe 上的 ActiveXObject
-
-### 模块
+  - [config](https://www.npmjs.com/package/conf) -> [electron-store](https://www.npmjs.com/package/electron-store) 主进程进行数据持久化存储
+  - [serialport](https://serialport.io/docs/api-serialport) 窜口模块
+    - [NodeBot](https://nodebots.io/) &nbsp;[NodeBot github](https://github.com/nodebots)
+    - [johnny-five](https://johnny-five.io/)
+#### config / electron-store
+- electron-store 相对于 localStorage 的优势
+- localStorage 仅在浏览器进程中工作。
+- localStorage 的容错能力较差，因此如果您的应用程序遇到错误并意外退出，您可能会丢失数据。
+- localStorage 仅支持持久字符串。该模块支持任何 JSON 支持的类型。
+- 该模块的 API 更好。您可以设置和获取嵌套属性。您可以设置默认初始配置。
 #### winax COM接口
 - Node.js 的 npm 包，专门帮助在 Windows 系统上通过 `COM（Component Object Model 组件对象模型）接口`与`本地应用程序进行交互`。
 - 特别是在 Electron 项目中，winax 常用于自动化任务，比如控制 Microsoft Office 等 Windows 原生应用程序，调用 Windows 系统级 API，访问文件系统或服务等。
@@ -209,7 +420,6 @@ shell.openExternal('https://github.com') // 打开网址
   - 'Lppx2.Application' 看起来不像是 Windows 系统或常见的软件（如 Microsoft Office 等）的标准 ProgID，
   - 可能是与某个自定义或行业特定的应用程序相关联的 COM 对象。
   - 你可以检查本地注册表中的 HKEY_CLASSES_ROOT 路径下，寻找 Lppx2.Application 的详细信息，了解它对应的具体软件。
-
 - winax
   ```js
   /** 
@@ -231,6 +441,33 @@ shell.openExternal('https://github.com') // 打开网址
   */
   winax.release(con, rs, fields)
   ```
+#### serialport 窜口
+```js
+import { SerialPort, type SerialPortOpenOptions } from 'serialport'
+// 连接窜口
+const port = new SerialPort({
+  path:'/dev/ttyUSB',
+  baudRate: 9600,     // 波特率
+  dataBits: 8,        // 数据位：5, 6, 7, 8
+  parity: 'none',     // 校验位：'none', 'even', 'odd', 'mark', 'space'
+  stopBits: 1,        // 停止位：1, 1.5, 2
+  flowControl: false  // 是否启用流控制
+});
+// 窜口列表
+SerialPort.list()
+// 发送数据
+port?.write(res)
+// 关闭连接
+port?.close((err) => {})
+// 连接成功 - 监听事件
+port?.on('open', () => { console.log(`Connected`) })
+// 报错 - 监听事件
+port?.on('error', (err) => { port = null })
+// 接受数据 - 监听事件
+port.on('data', (data) => {})
+// 断开连接 - 监听事件
+port?.on('close', ()=>{ port = null })
+```
 ### 其他框架
 - [NW.js](https://nwjs.io/) &nbsp;[中文](https://nwjs-cn.readthedocs.io/zh-cn/latest/Base/Getting%20Started/index.html)
 - [Tauri](https://v2.tauri.app/start/)
