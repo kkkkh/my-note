@@ -1,3 +1,6 @@
+---
+outline: deep
+---
 ## Vscode
 ### 快捷键
 - 所有折叠：Ctrl + k & Ctrl + 0
@@ -38,3 +41,88 @@
   - nfn→	creates a named function const add = (params) => {}
 - [vue3-snippets-for-vscode](https://marketplace.visualstudio.com/items?itemName=wejectchan.vue3-snippets-for-vscode)
   - vinit -> `<template></template><script setup lang="ts"></script><style></style>`
+- [Markdown Snippets](https://marketplace.visualstudio.com/items?itemName=robole.markdown-snippets)
+- [Snippets Ranger](https://marketplace.visualstudio.com/items?itemName=robole.snippets-ranger)
+
+### 片段 snippets
+#### html
+- 1、ctrl + shift + p
+- 2、snippets 配置用户代码片段
+- 3、html -> html.json
+- 4、增加模板
+  ```json
+  {
+  	// Place your snippets for html here. Each snippet is defined under a snippet name and has a prefix, body and
+  	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+  	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the
+  	// same ids are connected.
+  	// Example:
+  	"html-base": {
+  		"prefix": "htmlb",
+  		"body": [
+  			"<!DOCTYPE html>",
+  			"<html lang='en'>",
+  				"<head>",
+  					"<meta charset='UTF-8'>",
+  						"<meta name='viewport' content='width=device-width, initial-scale=1.0'>",
+  					"<title>Document</title>",
+  					"<style>",
+  					"</style>",
+  				"</head>",
+  				"<body>",
+  					"<div>",
+  					"</div>",
+  					"<script>",
+  					"$1"
+  					"</script>",
+  				"</body>",
+  			"</html>",
+  		],
+  		"description": "html-module"
+  	},
+  	"html-module": {
+  		"prefix": "htmlm",
+  		"body": [
+  			"<!DOCTYPE html>",
+  			"<html lang='en'>",
+  				"<head>",
+  					"<meta charset='UTF-8'>",
+  						"<meta name='viewport' content='width=device-width, initial-scale=1.0'>",
+  					"<title>Document</title>",
+  					"<style>",
+  					"</style>",
+  				"</head>",
+  				"<body>",
+  					"<div>",
+  					"</div>",
+  					"<script type='module' src='./index.js'>",
+  					"$1"
+  					"</script>",
+  				"</body>",
+  			"</html>",
+  		],
+  		"description": "html-module"
+  	}
+  }
+  ```
+- 5、新建 Hhtml 文件，输入 htmlb 即可,$1 光标插入位置
+#### markdown
+- 3、html -> markdown.json
+```json
+{
+	// Place your snippets for markdown here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected.
+	// Example:
+	"markdown": {
+		"prefix": "mkbb",
+		"body": [
+			"```$1",
+			"```"
+		],
+		"description": "Log output to console"
+	}
+}
+```
+
