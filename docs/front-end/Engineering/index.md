@@ -15,7 +15,6 @@ outline: deep
 ## node magnage
 ### nvm
 ### fnm
-- [fnm github](https://github.com/Schniz/fnm)
 
 ## code-standard
 ### eslint
@@ -27,4 +26,7 @@ outline: deep
 
 ## version manage
 ### git
+### git hooks
+### github
 ### svn
+
