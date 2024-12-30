@@ -1,6 +1,10 @@
+---
+outline: deep
+---
 ## Ajax
 ### XMLHttpRequest
 - 参考：[使用 XMLHttpRequest](https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest_API/Using_XMLHttpRequest)
+- [cors](https://www.ruanyifeng.com/blog/2016/04/cors.html)
 ### FormData
 ```js
 var formData = new FormData(); // 当前为空
