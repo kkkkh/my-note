@@ -21,7 +21,9 @@ outline: deep
   - [javascript-to-typescript-converter](https://www.codeconvert.ai/javascript-to-typescript-converter)
   - [javascript-to-typescrip](https://syntha.ai/converters/javascript-to-typescript)
 - jsdoc
-  - [jsDoc](https://jsdoc.app/) &nbsp;&nbsp;&nbsp; [jsdoc 中文](https://www.jsdoc.com.cn/)
+  - [jsDoc](https://jsdoc.app/) &nbsp;&nbsp;&nbsp; [jsdoc 中文](https://www.jsdoc.com.cn/) 注释 + 类型
+- tsdoc
+  - [tsDoc](https://tsdoc.org/) 注释（比jsdoc更规范，针对ts）
 ### 框架
 #### vue
 - [vue3](https://cn.vuejs.org/guide/introduction.html) 官网
@@ -35,7 +37,7 @@ outline: deep
 - [vue termui](https://vue-termui.dev/) 构建现代终端应用程序
 - [histoire](https://histoire.dev/guide/getting-started.html)
 - [vite-node](https://github.com/vitest-dev/vitest/tree/main/packages/#readme) The engine that powers Vitest and Nuxt 3 Dev SSR.
-
+- [vuepress](https://vuepress.vuejs.org/guide/getting-started.html)
 #### vue ui 组件库
 - pc端
 - [element-plus](https://element-plus.org/zh-CN/component/overview.html) 官网
@@ -63,17 +65,22 @@ outline: deep
 - [htmx](https://htmx.org/docs/)
 - [elm](https://elm-lang.org/)
 ### css
-- [sass](https://sass-lang.com/documentation/)&nbsp;&nbsp;&nbsp;[sass 中文](https://www.sass.hk/guide/#google_vignette)
-- [postcss](https://github.com/postcss/postcss#usage)
+- flex
+  - [interactive-guide-to-flexbox](https://www.joshwcomeau.com/css/interactive-guide-to-flexbox/)
+- 预处理
+  - [sass](https://sass-lang.com/documentation/)&nbsp;&nbsp;&nbsp;[sass 中文](https://www.sass.hk/guide/#google_vignette)
+  - [less](https://lesscss.org/)
+- postcss
+  - [postcss](https://postcss.org/) [postcss github](https://github.com/postcss/postcss#usage)
   - [postcss-load-config](https://github.com/postcss/postcss-load-config)
   - [postcss-nesting](https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-nesting)
   - [lightningcss](https://lightningcss.dev/)
 - tailwind css
-  - [tailwind css 中文](https://www.tailwindcss.cn/)
-- flex
-  - [interactive-guide-to-flexbox](https://www.joshwcomeau.com/css/interactive-guide-to-flexbox/)
+  - [tailwind css](https://tailwindcss.com/docs/installation) &nbsp;&nbsp;&nbsp;[tailwind css 中文](https://www.tailwindcss.cn/)
 - unocss
-- [emotion](https://emotion.sh/docs/introduction)
+  - [unocss](https://unocss.dev/)
+- emotion
+  - [emotion](https://emotion.sh/docs/introduction)
 ### 工程化
 #### 构建工具
 - [vite](https://cn.vitejs.dev/guide/) 官网
@@ -161,7 +168,5 @@ outline: deep
 ### 面试
 - [leetcode](https://leetcode.cn/)
 - [牛客](https://www.nowcoder.com/interview/center?entranceType=%E5%AF%BC%E8%88%AA%E6%A0%8F)
-### 极客时间(代码地址)
-- 现代 React Web 开发实战
-  - [oh-my-kanban](https://gitee.com/evisong/geektime-column-oh-my-kanban)
-  - [oh-my-kit](https://gitee.com/evisong/geektime-column-oh-my-kit)
+### job
+- [javascript jobs](https://jobs.date-fns.org/)
