@@ -4,25 +4,28 @@ outline: deep
 # Plugin
 
 ## Lib
-- [xlsx](https://docs.sheetjs.com/docs/getting-started/examples/export#live-demo) excel
-- [slatejs](https://docs.slatejs.org/) 富文本
-- [svg4everybody](https://www.npmjs.com/package/svg4everybody) 兼容
-- [Cookies.js](https://github.com/ScottHamper/Cookies)
-- 创建“浮动”元素
-  - [popper.js v2](https://popper.js.org/docs/v2/)
-  - [floating-ui](https://floating-ui.com/docs/getting-started) 
+- 功能
+  - [xlsx](https://docs.sheetjs.com/docs/getting-started/examples/export#live-demo) excel
+  - [slatejs](https://docs.slatejs.org/) 富文本
+  - [svg4everybody](https://www.npmjs.com/package/svg4everybody) svg兼容
+  - [Cookies.js](https://github.com/ScottHamper/Cookies)
+  - [web-vitals](https://www.npmjs.com/package/web-vitals)
+- 交互
+  - 创建“浮动”元素
+    - [popper.js v2](https://popper.js.org/docs/v2/) &nbsp;&nbsp;&nbsp;[floating-ui](https://floating-ui.com/docs/getting-started) 
+  - 拖拽
+    - [sortablejs](https://github.com/SortableJS/Sortable) &nbsp;&nbsp;&nbsp;[sortablejs demo](https://sortablejs.github.io/Sortable/) 
 - zpl
   - [zpl-image](https://www.npmjs.com/package/zpl-image)
   - [zpl-image-2](https://www.npmjs.com/package/zpl-image-2) 图像转换为 Z64 编码或 ACS 编码的 GRF 位图以与 ZPL 一起使用
   - [jszpl](https://www.npmjs.com/package/jszpl) 生成 ZPL
-- [web-vitals](https://www.npmjs.com/package/web-vitals)
 - mock数据
-  - [fakerjs](https://fakerjs.dev/guide/)
-  - [mockm](https://github.com/wll8/mockm)
-  - [mockjs](https://github.com/nuysoft/Mock/wiki/Getting-Started) 停止维护
+  - [fakerjs](https://fakerjs.dev/guide/) &nbsp;&nbsp;&nbsp;[mockm](https://github.com/wll8/mockm) &nbsp;&nbsp;&nbsp;[mockjs(停止维护)](https://github.com/nuysoft/Mock/wiki/Getting-Started) 
 - icons
   - [iconify 文档](https://iconify.design/docs/) &nbsp;&nbsp;&nbsp;[Browse Icons](https://icon-sets.iconify.design/) &nbsp;&nbsp;&nbsp;[icones](https://icones.js.org/)(Icon Explorer with Instant searching, powered by Iconify)
-
+- date
+  - [date-fns](https://date-fns.org/docs/Getting-Started) 日期操作
+  - [datejs](https://day.js.org/docs/en/installation/installation)
 ## Vue plugin (Vue 扩展组件)
 ### component
 - [DMap(谛听)](https://juejin.cn/post/6844903593284206605) ([vue-bigdata-table](https://github.com/lison16/vue-bigdata-table))
@@ -34,7 +37,12 @@ outline: deep
   - [useRequest](https://cn.attojs.org/api/#%E5%85%AC%E5%85%B1-api)
   - [usePagination](https://cn.attojs.org/api/pagination.html)
 - [VueUse](https://vueuse.org/guide/)
+- eventBus vue2 事件总线
 - [mitt](https://github.com/developit/mitt) vue3 事件总线
+### vuepress
+- [vuepress-theme-hope](https://github.com/vuepress-theme-hope/vuepress-theme-hope?tab=readme-ov-file)
+- [vuepress-theme-antdocs](https://github.com/zpfz/vuepress-theme-antdocs)
+- [vuepress-theme-reco](https://github.com/vuepress-reco/vuepress-theme-reco)
 
 ## React plugin (React 扩展组件)
 - [immutable](https://immutable-js.com/) 不可变数据
@@ -45,3 +53,19 @@ outline: deep
 - [unplugin-icons](https://www.npmjs.com/package/unplugin-icons#auto-importing#Migrate%20from%20vite-plugin-icons) 图标
 - [rollup-plugin-visualizer](https://www.npmjs.com/package/rollup-plugin-visualizer) build分析可视化
 
+## typescript
+#### jsdoc
+- [jsDoc](https://jsdoc.app/) &nbsp;&nbsp;&nbsp; [jsdoc 中文](https://www.jsdoc.com.cn/) 注释 + 类型
+#### tsdoc
+- [tsDoc](https://tsdoc.org/) 注释（比jsdoc更规范，针对ts）
+- [typedoc](https://typedoc.org/) 为ts项目生成文档（一个 API 参考生成器，支持jsdoc/tsdoc）
+- [api-extractor](https://api-extractor.com/pages/setup/invoking/) （API 报告、d.ts 汇总、API 文档）
+- [api-documenter](https://www.npmjs.com/package/@microsoft/) 将api-extractor生成的文档模型文件转换为markdown
+- [rushstack](https://rushstack.io/zh-cn/) 为 web 项目的大规模 monorepo 仓库来提供可复用技术
+
+## 极客时间(代码地址)
+- 现代 React Web 开发实战
+  - [oh-my-kanban](https://gitee.com/evisong/geektime-column-oh-my-kanban)
+  - [oh-my-kit](https://gitee.com/evisong/geektime-column-oh-my-kit)
+- 重学 TypeScript
+  - [jike2](https://github.com/aimingoo/jike2)
