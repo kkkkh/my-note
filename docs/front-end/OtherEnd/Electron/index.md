@@ -1,10 +1,8 @@
 ---
 outline: deep
 ---
-## Eletron
-### 其他文档：
-- [chromium](https://www.chromium.org/chromium-projects/)
-- [nodejs](https://nodejs.org/en/learn/getting-started/introduction-to-nodejs)
+# Eletron
+## 原理
 ### electron 基本原理
 - app 模块，它控制应用程序的事件生命周期。
 - BrowserWindow 模块，它创建和管理应用程序 窗口。
@@ -85,9 +83,6 @@ const func = async () => {
 }
 func()
 ```
-- build工具
-  - [electron-builder](https://www.electron.build/)
-  - [electron forge](https://www.electronforge.io/)
 ### 实现原理
 #### 渲染进程对 Node.js API 的直接访问
 - nodeIntegration: true
@@ -108,6 +103,7 @@ func()
     - Electron 在渲染进程启动时会加载内置的模块加载器，将 Node.js 和 Web 环境无缝结合。
 - 建议
   - 实际开发中不推荐使用此配置，建议通过 preload 脚本显式暴露必要的 API 并启用 contextIsolation 来保障安全性。
+## 实践
 ### 进程之间的通信
 #### 渲染进程 -> 主进程 通信
 - invoke / handle （通过 channel 向主过程发送消息，并异步等待结果）
@@ -351,7 +347,21 @@ const customWindow = new BrowserWindow({
       }
     });
     ```
-### electron forge
+
+### 开发Lib
+  - build工具
+    - [electron-builder](https://www.electron.build/)
+    - [electron forge](https://www.electronforge.io/)
+  - [@tomjs/electron-devtools-installer](https://www.npmjs.com/package/@tomjs/electron-devtools-installer)（[中文](https://github.com/tomjs/electron-devtools-installer/blob/HEAD/README.zh_CN.md) ）为 Electron 安装 Chrome 扩展
+  - [vite-plugin-electron](https://www.npmjs.com/package/vite-plugin-electron) vite支持electron
+  - [electron-log](https://www.npmjs.com/package/electron-log) electron 打印日志
+  - [winax](https://www.npmjs.com/package/winax) Windows C++ Node.JS 插件，实现 COM IDispatch 对象包装器，模拟 cscript.exe 上的 ActiveXObject
+  - [config](https://www.npmjs.com/package/conf) -> [electron-store](https://www.npmjs.com/package/electron-store) 主进程进行数据持久化存储
+  - [serialport](https://serialport.io/docs/api-serialport) 窜口模块
+    - [NodeBot](https://nodebots.io/) &nbsp;[NodeBot github](https://github.com/nodebots)
+    - [johnny-five](https://johnny-five.io/)
+#### electron-builder
+#### electron forge
 - 使用electron forge
   - 脚手架初始化一个项目 vite + ts [初始化](https://www.electronforge.io/templates/vite-+-typescript)
     ```bash
@@ -385,16 +395,6 @@ const customWindow = new BrowserWindow({
   - [详解 Electron 打包](https://juejin.cn/post/7250085815430430781) Electron Builder、Electron Forge对比
   - [详解 Electron 中的 asar 文件](https://juejin.cn/post/7213171235577036860) [@electron/asar](https://github.com/electron/asar)
   - [前端工程化之强大的glob语法](https://juejin.cn/post/6876363718578405384)
-### electron-builder
-### 开发Lib
-  - [@tomjs/electron-devtools-installer](https://www.npmjs.com/package/@tomjs/electron-devtools-installer)（[中文](https://github.com/tomjs/electron-devtools-installer/blob/HEAD/README.zh_CN.md) ）为 Electron 安装 Chrome 扩展
-  - [vite-plugin-electron](https://www.npmjs.com/package/vite-plugin-electron) vite支持electron
-  - [electron-log](https://www.npmjs.com/package/electron-log) electron 打印日志
-  - [winax](https://www.npmjs.com/package/winax) Windows C++ Node.JS 插件，实现 COM IDispatch 对象包装器，模拟 cscript.exe 上的 ActiveXObject
-  - [config](https://www.npmjs.com/package/conf) -> [electron-store](https://www.npmjs.com/package/electron-store) 主进程进行数据持久化存储
-  - [serialport](https://serialport.io/docs/api-serialport) 窜口模块
-    - [NodeBot](https://nodebots.io/) &nbsp;[NodeBot github](https://github.com/nodebots)
-    - [johnny-five](https://johnny-five.io/)
 #### config / electron-store
 - electron-store 相对于 localStorage 的优势
 - localStorage 仅在浏览器进程中工作。
