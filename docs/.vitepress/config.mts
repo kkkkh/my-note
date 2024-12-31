@@ -49,130 +49,131 @@ export default defineConfig({
       '/front-end': [
         {
           text: 'Html',
-          link: '/front-end/Html',
+          link: '/front-end/Html/',
           items: [
             { text: 'html', link: '/front-end/Html/' },
           ],
         },
         {
           text: 'Css',
-          link: '/front-end/Css',
+          link: '/front-end/Css/',
           items: [
-            { text: 'flex', link: '/front-end/Css/flex' },
-            { text: 'sass', link: '/front-end/Css/sass' },
+            { text: 'flex', link: '/front-end/Css/flex/' },
+            { text: 'sass', link: '/front-end/Css/sass/' },
           ],
         },
         {
           text: 'JavaScript',
-          link: '/front-end/JavaScript',
+          link: '/front-end/JavaScript/',
           items: [
-            { text: 'js', link: '/front-end/JavaScript/Js' },
-            { text: 'dom', link: '/front-end/JavaScript/Dom' },
-            { text: 'bom', link: '/front-end/JavaScript/Bom' },
+            { text: 'js', link: '/front-end/JavaScript/Js/' },
+            { text: 'dom', link: '/front-end/JavaScript/Dom/' },
+            { text: 'bom', link: '/front-end/JavaScript/Bom/' },
+            { text: 'brower', link: '/front-end/JavaScript/Browser/' },
           ],
         },
         {
           text: 'TypeScript',
-          link: '/front-end/TypeScript',
+          link: '/front-end/TypeScript/',
           items: [
-            { text: 'ts', link: '/front-end/TypeScript/index' }],
+            { text: 'ts', link: '/front-end/TypeScript/' }],
         },
         {
           text: 'Http',
-          link: '/front-end/Http',
+          link: '/front-end/Http/',
           items: [
-            { text: 'ajax', link: '/front-end/Http/Ajax' },
-            { text: '抓包', link: '/front-end/Http/PacketCapture' },
+            { text: 'ajax', link: '/front-end/Http/Ajax/' },
+            { text: '抓包', link: '/front-end/Http/PacketCapture/' },
           ],
         },
         {
           text: 'Vue',
-          link: '/front-end/Vue',
+          link: '/front-end/Vue/',
           items: [
-            { text: 'vue3', link: '/front-end/Vue/vue3' },
-            { text: 'vue2', link: '/front-end/Vue/vue2' },
-            { text: 'element-ui', link: '/front-end/Vue/element-ui' },
+            { text: 'vue3', link: '/front-end/Vue/vue3/' },
+            { text: 'vue2', link: '/front-end/Vue/vue2/' },
+            { text: 'element-ui', link: '/front-end/Vue/element-ui/' },
           ],
         },
         {
           text: 'React',
-          link: '/front-end/React',
+          link: '/front-end/React/',
           items: [
-            { text: 'react', link: '/front-end/React/index' },
-            { text: 'preact', link: '/front-end/React/Preact' }
+            { text: 'react', link: '/front-end/React/' },
+            { text: 'preact', link: '/front-end/React/Preact/' }
           ],
         },
         {
           text: 'Plugin',
-          link: '/front-end/Plugin',
+          link: '/front-end/Plugin/',
           items: [
-            { text: 'Lib', link: '/front-end/Plugin/Lib' },
-            { text: 'vue plugin', link: '/front-end/Plugin/Vue' },
-            { text: 'react plugin', link: '/front-end/Plugin/React' },
-            { text: 'Vite plugin', link: '/front-end/Plugin/Vite' },
-            { text: 'Ts plugin', link: '/front-end/Plugin/Ts' },
+            { text: 'Lib', link: '/front-end/Plugin/Lib/' },
+            { text: 'vue plugin', link: '/front-end/Plugin/Vue/' },
+            { text: 'react plugin', link: '/front-end/Plugin/React/' },
+            { text: 'Vite plugin', link: '/front-end/Plugin/Vite/' },
+            { text: 'Ts plugin', link: '/front-end/Plugin/Ts/' },
           ],
         },
         {
           text: '工程化',
-          link: '/front-end/Engineering',
+          link: '/front-end/Engineering/',
           items: [
             {
               text: '构建工具',
-              link: '/front-end/Engineering/build-tools',
+              link: '/front-end/Engineering/build-tools/',
               items: [
-                { text: 'vite', link: '/front-end/Engineering/build-tools/vite' },
+                { text: 'vite', link: '/front-end/Engineering/build-tools/vite/' },
                 { text: 'vite app', link: '/front-end/Engineering/build-tools/vite/app.md' },
-                { text: 'esbuild', link: '/front-end/Engineering/build-tools/esbuild' },
+                { text: 'esbuild', link: '/front-end/Engineering/build-tools/esbuild/' },
               ],
             },
             {
               text: '包管理',
-              link: '/front-end/Engineering/package-manage',
+              link: '/front-end/Engineering/package-manage/',
               items: [
-                { text: 'npm', link: '/front-end/Engineering/package-manage/npm' },
-                { text: 'pnpm', link: '/front-end/Engineering/package-manage/pnpm' }
+                { text: 'npm', link: '/front-end/Engineering/package-manage/npm/' },
+                { text: 'pnpm', link: '/front-end/Engineering/package-manage/pnpm/' }
               ],
             },
             {
               text: 'node管理',
-              link: '/front-end/Engineering/node-manage',
+              link: '/front-end/Engineering/node-manage/',
             },
             {
               text: '代码规范',
-              link: '/front-end/Engineering/code-standard',
+              link: '/front-end/Engineering/code-standard/',
               items: [
-                { text: 'eslint', link: '/front-end/Engineering/code-standard/eslint' },
+                { text: 'eslint', link: '/front-end/Engineering/code-standard/eslint/' },
               ],
             },
             {
               text: 'plugin',
-              link: '/front-end/Engineering/plugin',
+              link: '/front-end/Engineering/plugin/',
               items: [
-                { text: 'vscode插件', link: '/front-end/Engineering/plugin/vscode' },
-                { text: '浏览器插件', link: '/front-end/Engineering/plugin/brower' },
-                { text: 'markdown', link: '/front-end/Engineering/plugin/markdown' },
+                { text: 'vscode插件', link: '/front-end/Engineering/plugin/vscode/' },
+                { text: '浏览器插件', link: '/front-end/Engineering/plugin/brower/' },
+                { text: 'markdown', link: '/front-end/Engineering/plugin/markdown/' },
               ],
             },
             {
               text: '版本管理',
-              link: '/front-end/Engineering/version-manage',
+              link: '/front-end/Engineering/version-manage/',
               items: [
-                { text: 'git', link: '/front-end/Engineering/version-manage/git' },
-                { text: 'git hooks', link: '/front-end/Engineering/version-manage/git/git-hooks' },
-                { text: 'github', link: '/front-end/Engineering/version-manage/github' },
-                { text: 'svn', link: '/front-end/Engineering/version-manage/svn' },
+                { text: 'git', link: '/front-end/Engineering/version-manage/git/' },
+                { text: 'git hooks', link: '/front-end/Engineering/version-manage/git/git-hooks/' },
+                { text: 'github', link: '/front-end/Engineering/version-manage/github/' },
+                // { text: 'svn', link: '/front-end/Engineering/version-manage/svn' },
               ],
             },
           ],
         },
         {
           text: '其他端',
-          link: '/front-end/OtherEnd',
+          link: '/front-end/OtherEnd/',
           items: [
-            { text: '小程序', link: '/front-end/OtherEnd/小程序' },
-            { text: 'Electron', link: '/front-end/OtherEnd/Electron' },
-            { text: '终端', link: '/front-end/OtherEnd/terminal' },
+            { text: '小程序', link: '/front-end/OtherEnd/小程序/' },
+            { text: 'Electron', link: '/front-end/OtherEnd/Electron/' },
+            { text: '终端', link: '/front-end/OtherEnd/terminal/' },
 
           ],
         },
@@ -180,16 +181,16 @@ export default defineConfig({
       '/back-end': [
         {
           text: 'Lang',
-          link: '/back-end/Lang',
+          link: '/back-end/Lang/',
           items: [
-            { text: 'NodeJs', link: '/back-end/Lang/NodeJs' },
+            { text: 'NodeJs', link: '/back-end/Lang/NodeJs/' },
           ],
         },
       ],
       '/ops': [
         {
           text: 'Command',
-          link: '/ops/Command',
+          link: '/ops/Command/',
           items: [],
         },
       ],
