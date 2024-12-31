@@ -402,45 +402,59 @@ const customWindow = new BrowserWindow({
 - localStorage 仅支持持久字符串。该模块支持任何 JSON 支持的类型。
 - 该模块的 API 更好。您可以设置和获取嵌套属性。您可以设置默认初始配置。
 #### winax COM接口
-- Node.js 的 npm 包，专门帮助在 Windows 系统上通过 `COM（Component Object Model 组件对象模型）接口`与`本地应用程序进行交互`。
-- 特别是在 Electron 项目中，winax 常用于自动化任务，比如控制 Microsoft Office 等 Windows 原生应用程序，调用 Windows 系统级 API，访问文件系统或服务等。
-- 主要功能包括：
-  - 通过 JavaScript 调用 Windows 的 COM 对象。
-  - 访问和执行 COM 方法、属性以及处理事件。
-  - 在 Electron 应用中集成 Windows 本地功能。
-  - 适用于需要与 Windows 原生组件或服务交互的场景。
-```js
-  const app = new winax.Object('Lppx2.Application', {
-    activate: true,
-  })
-```
-- Lppx2.Application
-  - 'Lppx2.Application' 指的是一个通过 COM 对象与某个特定 Windows 应用程序进行交互的实例。
-  - 通常，这种格式用于引用已注册的 COM 程序的标识符 (ProgID)。
-  - 'Lppx2.Application' 看起来不像是 Windows 系统或常见的软件（如 Microsoft Office 等）的标准 ProgID，
-  - 可能是与某个自定义或行业特定的应用程序相关联的 COM 对象。
-  - 你可以检查本地注册表中的 HKEY_CLASSES_ROOT 路径下，寻找 Lppx2.Application 的详细信息，了解它对应的具体软件。
 - winax
-  ```js
-  /** 
-   * Create ADO Connection throw global function
-   * 创建ADO连接抛出全局函数
-  */
-  require('winax');
-  var con = new ActiveXObject('ADODB.Connection');
-
-  /**
-   * Or using Object prototype
-   * 或者使用对象原型
-  */
-  var winax = require('winax');
-  var con = new winax.Object('ADODB.Connection');
-  /**
-  * Release COM objects (but other temporary objects may be keep references too)
-  * 释放 COM 对象（但其他临时对象也可能保留引用）
-  */
-  winax.release(con, rs, fields)
-  ```
+  - Windows C++ Node.JS 插件，实现 COM IDispatch 对象包装器，模拟 cscript.exe 上的 ActiveXObject
+  - 涉及名词解释
+    - COM 是微软开发的一种组件软件框架，用于在 Windows 应用程序之间提供互操作性。它允许不同语言编写的程序共享功能和对象。
+    - IDispatch: 这是 COM 的一个接口，支持运行时动态调用（例如方法调用、属性访问）。
+    - ActiveXObject 是 JavaScript 在 Windows 环境（如 Internet Explorer 或 cscript.exe 脚本宿主）中用于访问和操作 COM 对象的内置接口。`new ActiveXObject('Scripting.FileSystemObject')`
+    - cscript.exe: cscript 是 Windows 提供的命令行脚本解释器，用于运行 .vbs 或 .js 脚本。它允许开发者直接在 Windows 环境下通过脚本调用 COM 接口。
+    - COM 集成到 Node.js: winax 实现了一个 C++ 插件，用于在 Node.js 中调用 COM 对象。它模拟了 ActiveXObject 的功能，让 Node.js 程序能够像在 cscript.exe 中一样通过 COM 操作 Windows 应用。
+    - ActiveXObject 是一个专门用于 Windows 脚本的功能，但 Node.js 本身没有类似能力。winax 实际上复现了 ActiveXObject 的核心功能，即通过 IDispatch 动态操作 COM 对象。因此，这种实现方式被称为“模拟”。
+  - winax作用
+    - Node.js 的 npm 包，专门帮助在 Windows 系统上通过 `COM（Component Object Model 组件对象模型）接口`与`本地应用程序进行交互`。
+    - 特别是在 Electron 项目中，winax 常用于自动化任务，比如控制 Microsoft Office 等 Windows 原生应用程序，调用 Windows 系统级 API，访问文件系统或服务等。
+    - 通过 JavaScript 调用 Windows 的 COM 对象、访问和执行 COM 方法、属性以及处理事件。
+    ```js
+    /** 
+     * Create ADO Connection throw global function
+     * 创建ADO连接抛出全局函数
+    */
+    require('winax');
+    var con = new ActiveXObject('ADODB.Connection');
+    /**
+     * Or using Object prototype
+     * 或者使用对象原型
+    */
+    var winax = require('winax');
+    var con = new winax.Object('ADODB.Connection');
+    const app = new winax.Object('Lppx2.Application', {
+      activate: true,
+    })
+    /**
+    * Release COM objects (but other temporary objects may be keep references too)
+    * 释放 COM 对象（但其他临时对象也可能保留引用）
+    */
+    winax.release(con, rs, fields)
+    ```
+- 其他
+  - COM
+    - 参考：[COM 官方](https://learn.microsoft.com/en-us/windows/win32/com/component-object-model--com--portal)
+  - Lppx2.Application
+    - COM 对象的 ProgID（程序标识符），标识了应用程序的 COM 接口，用来实例化应用对象
+    - 'Lppx2.Application' 指的是一个通过 COM 对象与某个特定 Windows 应用程序进行交互的实例。
+    - 參考：
+      - [JAVA调用CODESOFT的重要代码](https://www.codesoft.hk/archives/category/support/page/35)
+      - [JAVA调用CODESOFT打印条形码标签](https://www.codesoft.hk/archives/6555)
+  - codesoft
+    - CodeSoft 的 COM 接口文档并没有完全公开到网上，通常只有在购买了产品并成为其授权用户之后，才能获得开发者文档。
+  - 注册表查找：
+    - 1、通过注册表查找 ProgID
+      - 按下 Win + R，输入 regedit，然后按 Enter，打开注册表编辑器。
+      - HKEY_CLASSES_ROOT\CLSID：包含注册的所有 COM 类标识符（CLSID）信息。
+      - HKEY_CLASSES_ROOT\<ProgID>：包含与 ProgID 相关的详细信息。
+      - 使用 Ctrl + F 搜索特定的 ProgID，例如 Excel.Application，或者直接搜索软件相关的名称，注册表会返回匹配项。
+    - 2、OLE/COM Object Viewer。
 #### serialport 窜口
 ```js
 import { SerialPort, type SerialPortOpenOptions } from 'serialport'
