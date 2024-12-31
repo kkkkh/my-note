@@ -1,3 +1,6 @@
+---
+outline: deep
+---
 # Vue Plugin
 ## component
 ### vxe-table
@@ -11,6 +14,11 @@
 - 本地数据，分页：https://vxetable.cn/v3.8/#/table/advanced/page
 - 数据代理，分页：https://vxetable.cn/v3.8/#/table/grid/pageProxy
 
+### [Render-table](./render-table/index.md)
+- 前端计算table => filter/sort/page
+  - 外层触发计算
+  - 内部筛选计算
+  - 内部排序计算
 ## api
 ### vue-request
 - useRequest
@@ -100,15 +108,42 @@ const store = useLocalStorage(
 )
 </script>
 ```
+### eventBus
+- EventBus 支持 vue2（创建一个Vue实例充当eventBus）
+- 适用：父组件想要调用很深层级子组件的api
+```js
+import Vue from 'vue'
+Vue.prototype.$EventBus = new Vue()
+```
+```js
+// 在子组件
+this.$EventBus.$on('eventName1', (val) => {
+  
+})
+this.$EventBus.$on('eventName2', (callback) => {
+  // 调取函数,并传入
+  callback(vals)
+})
+```
+```js
+// 父组件
+methods:{
+  getSome1(){
+    this.$EventBus.$emit('eventName1', val)
+  },
+  getSome2(){
+    return new Promise((resolve) => {
+      // 传入函数
+      this.$EventBus.$emit('eventName2', (vals) => {
+        // 接到返回值
+        // 利用promise resolve 返回
+        resolve(vals)
+      })
+    })
+  }
+}
+```
 ### mitt
 - mitt 支持 vue3 (事件总线)
-- EventBus 支持 vue2（创建一个Vue实例充当eventBus）
 - [参考](https://juejin.cn/post/6973106775755063333)
 
-# my Lib
-
-## [Render-table](./render-table/index.md)
-### 前端计算table => filter/sort/page
-- 外层触发计算
-- 内部筛选计算
-- 内部排序计算
