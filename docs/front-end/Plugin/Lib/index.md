@@ -43,3 +43,96 @@ exportToExcel(data);
   - xls库
     - 它会把数据组织成表格、行和单元格的形式，转换为符合Excel格式的XML结构
     - 本质上是多个XML文件压缩打包而成的ZIP文件，包含表格数据、样式、公式等信息
+## sortablejs
+```js
+/**
+ * 给vxe-table 添加 拖拽表头
+ */
+import Sortable from 'sortablejs'
+import Vue from 'vue'
+
+Vue.directive('sortable-drag', {
+  bind(el, binding, vnode) {
+    app.$nextTick(() => {
+      const header = el.querySelector('.vxe-header--row')
+
+      if (header) {
+        header.style.cursor = 'move'
+
+        Sortable.create(header, {
+          animation: 500,
+          delay: 0,
+          draggable: 'th',
+          handle: '.vxe-cell',
+          ghostClass: 'sortable-ghost', // drop placeholder
+          chosenClass: 'sortable-chosen', // chosen item 被选择元素 优先级高于 sortable-ghost
+          dragClass: 'sortable-drag', // dragging item 拖拽中的元素
+          // forceFallback: true,
+          filter: '.col--fixed',
+          onMove(e) {
+            // 这里也永远不会返回false,原因如下：
+            // 另外一个为fixed服务的.vxe-header--row，会覆盖在当前的.vxe-header--row的上边，
+            // 永远无法经过当前.vxe-header--row的col--fixed元素
+            return !e.related.className.includes('col--fixed')
+          },
+          onFilter(evt) {
+            // 这里不会触发，
+            // 因为filter: '.col--fixed'中.col--fixed元素并不在当前的.vxe-header--row中
+            // fixed列会生成在另外一个.vxe-header--row中
+            console.log('onFilter: 试图选中一个被filter过滤的列表单元的回调函数,', evt)
+          },
+          onEnd: async (event) => {
+            if (event.oldIndex === event.newIndex) {
+              // 当拖拽到fixed列的时候，上边两个都无法触发，但是event.oldIndex === event.newIndex是相同的，
+              // 无效移动，不需要更新，return即可
+              return
+            }
+            const oldCol = await vnode.child.getColumns()
+
+            const oldTarget = oldCol.splice(event.oldIndex, 1)
+
+            oldCol.splice(event.newIndex, 0, oldTarget[0])
+            await vnode.child.loadColumn([])
+            app.$nextTick(() => {
+              vnode.child.loadColumn(oldCol)
+            })
+          },
+        })
+      } else {
+        console.info(`v-drag 调用 el.querySelector 未找到 '.vxe-header--row'`)
+      }
+    })
+  },
+})
+```
+- 参考：[使用sortablejs给vxe-table添加表头左右拖的能力](https://juejin.cn/post/7227003813571313725)
+## dayjs
+- 获取时间
+```js
+dayjs().hour() // gets current hour
+dayjs().minute() // gets current minute
+```
+- 计算时间
+```js
+// 提前7天
+const lastWeekDate = dayjs().subtract(7, 'day').format('YYYY-MM-DD')
+// 推后7天
+const nextWeekDate = dayjs().add(7, 'day').format('YYYY-MM-DD')
+
+```
+- 计算时间差
+```js
+const updateDate = () => {
+  /** 增加定时器
+   * 获取第二天日期，计算第二天毫秒数
+   * 定时器启动时间 = 第二天毫秒数- 当前毫秒
+   * 更新时间
+   */
+  const nextDay = dayjs().add(1, 'day').format('YYYY-MM-DD')
+  const time = dayjs(nextDay).valueOf() - Date.now()
+
+  setTimeout(() => {
+    ...
+  }, time)
+},
+```
