@@ -15,7 +15,7 @@ outline: deep
 - [NavicatPremium16](https://www.cnblogs.com/kkdaj/p/16260681.html) 安装
 ### lang
 - nodejs
-  - [nodejs 中文](https://nodejs.cn/api/)
+  - [nodejs](https://nodejs.org/docs/latest/api/) &nbsp;&nbsp;&nbsp;[nodejs 中文](https://nodejs.cn/api/)
 ## OPS
 - CI/CD
   - [drone](https://www.drone.io/)
