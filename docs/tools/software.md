@@ -8,6 +8,7 @@ outline: deep
   - [handshaker](https://www.smartisan.com/apps/#/handshaker)
 - windows
   - [windows10](https://www.microsoft.com/zh-cn/software-download/windows10)
+  - [雷电安卓模拟器](https://www.ldmnq.com)
 - Mac
   - [macs-fan-control](https://crystalidea.com/macs-fan-control) 风扇
   - [Cornerstone](https://xclient.info/s/cornerstone.html#versions)mac SVN
