@@ -1,3 +1,6 @@
+---
+outline: deep
+---
 # typescript
 ## tsc
 ```bash
