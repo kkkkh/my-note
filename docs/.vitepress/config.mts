@@ -48,6 +48,13 @@ export default defineConfig({
       ],
       '/front-end': [
         {
+          text: 'Html',
+          link: '/front-end/Html',
+          items: [
+            { text: 'html', link: '/front-end/Html/' },
+          ],
+        },
+        {
           text: 'Css',
           link: '/front-end/Css',
           items: [
@@ -71,6 +78,14 @@ export default defineConfig({
             { text: 'ts', link: '/front-end/TypeScript/index' }],
         },
         {
+          text: 'Http',
+          link: '/front-end/Http',
+          items: [
+            { text: 'ajax', link: '/front-end/Http/Ajax' },
+            { text: '抓包', link: '/front-end/Http/PacketCapture' },
+          ],
+        },
+        {
           text: 'Vue',
           link: '/front-end/Vue',
           items: [
@@ -82,7 +97,10 @@ export default defineConfig({
         {
           text: 'React',
           link: '/front-end/React',
-          items: [{ text: 'react', link: '/front-end/React/index' }],
+          items: [
+            { text: 'react', link: '/front-end/React/index' },
+            { text: 'preact', link: '/front-end/React/Preact' }
+          ],
         },
         {
           text: 'Plugin',
@@ -92,6 +110,7 @@ export default defineConfig({
             { text: 'vue plugin', link: '/front-end/Plugin/Vue' },
             { text: 'react plugin', link: '/front-end/Plugin/React' },
             { text: 'Vite plugin', link: '/front-end/Plugin/Vite' },
+            { text: 'Ts plugin', link: '/front-end/Plugin/Ts' },
           ],
         },
         {
@@ -152,7 +171,9 @@ export default defineConfig({
           link: '/front-end/OtherEnd',
           items: [
             { text: '小程序', link: '/front-end/OtherEnd/小程序' },
-            { text: 'Electron', link: '/front-end/OtherEnd/Electron' }, 
+            { text: 'Electron', link: '/front-end/OtherEnd/Electron' },
+            { text: '终端', link: '/front-end/OtherEnd/terminal' },
+
           ],
         },
       ],
