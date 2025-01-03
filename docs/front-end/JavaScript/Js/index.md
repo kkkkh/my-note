@@ -2,7 +2,8 @@
 outline: deep
 ---
 
-## Js
+# Js
+## 数据类型
 ### 操作符
 https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators
 ```js
@@ -13,6 +14,54 @@ a.b = 0
 a.b ||= 3
 // a.b = 3
 ```
+### Number
+#### 进制转化
+- 10进制转为16进制
+```js
+var num = 65535
+var str = num.toString(16)
+console.log(str) //'ffff'
+```
+- 16进制转为10进制
+```js
+// parseInt()转为10进制，第2参数按照什么进制转10进制
+var num = parseInt('0xffff',16)
+var num = parseInt('ffff',16) 
+console.log(num) // 65535
+// or
+Number('0xffff') // 65535
+Number(0xffff) // 65535
+// or
+var str = (0xffff).toString(10);
+console.log(str); //65535
+```
+- 2进制 与 10进制转化
+```js
+var num = 65535
+var str = num.toString(2)
+console.log(str) // '1111111111111111'
+var num = parseInt('1111111111111111',2)
+console.log(num) // '65535'
+```
+- 2进制 与 16进制相互转化
+```js
+// 都先转为10进制，再转为对应进制
+// 2 转 16
+const binary = "1101"; // 二进制字符串
+const hex = parseInt(binary, 2).toString(16); // 解析为十进制并转换为十六进制
+console.log(hex); // 输出: "d"
+// 16 转 2
+const hex = "1f"; // 示例十六进制字符串
+const binary = parseInt(hex, 16).toString(2); // 转为二进制字符串
+console.log(binary); // 输出: "11111"
+```
+#### parseInt
+- parseInt(string, radix) 解析一个字符串并返回指定基数的十进制整数
+  - radix，可选，从 2 到 36 的整数，表示进制的基数。
+  ```js
+  parseInt("1010",10) // 1010
+  parseInt("1010",2)  // 10
+  ```
 ### BigInt
 - BigInt 是一种内置对象，它提供了一种方法来表示大于 2^53 - 1 的整数。
 - 这原本是 Javascript 中可以用 Number 表示的最大数字。BigInt 可以表示任意大的整数。
@@ -62,7 +111,6 @@ const rounded = 5n / 2n;
   - 由于在 Number 与 BigInt 之间进行转换会损失精度，
   - 因而建议仅在值可能大于 2^53 时使用 BigInt 类型，
   - 并且不在两种类型之间进行相互转换。
-
 ### String
 #### fromCodePoint() / fromCharCode()
 - String.fromCodePoint(num1)
@@ -131,6 +179,7 @@ const rounded = 5n / 2n;
   icons.codePointAt(1); 
   // 返回★的码位值
   // "9733"
+  '𠮷'.codePointAt(0) // 134071
   ```
 - charCodeAt(index) 给定索引index处的 UTF-16 码元
   ```js
@@ -253,6 +302,61 @@ console.log(sliceWay); // 't'
 const atWay = myString.at(-2);
 console.log(atWay); // 't'
 ```
+#### substring / substr 已弃用 / slice
+- 从 indexStart 开始提取字符，直到（但不包括）indexEnd。
+- 如果省略了 indexEnd，则 substring() 提取字符直到字符串的末尾。
+- 如果 indexStart 等于 indexEnd，则 substring() 返回一个空字符串。
+- 如果 indexStart 大于 indexEnd，则 substring() 的效果就像交换了这两个参数一样；
+  ```js
+  // Expected output: "zilla"
+  const anyString = "Mozilla";
+  console.log(anyString.substring(0, 1)); // 'M'
+  console.log(anyString.substring(1, 0)); // 'M'
+  console.log(anyString.substring(0, 6)); // 'Mozill'
+  console.log(anyString.substring(4)); // 'lla'
+  console.log(anyString.substring(4, 7)); // 'lla'
+  console.log(anyString.substring(7, 4)); // 'lla'
+  console.log(anyString.substring(0, 7)); // 'Mozilla'
+  console.log(anyString.substring(0, 10)); // 'Mozilla'
+  ```
+- 对比 substr
+  - substr() 方法的两个参数是 start 和 length，而 substring() 方法的参数是 start 和 end。
+  - substr() 的 start 索引为负数，它将循环到字符串的末尾，而 substring() 会将其限制为 0
+  - 在 substr() 中，如果长度为负数，将被视为零；而在 substring() 中，如果 end 小于 start ，则会交换这两个索引。
+  - substr() 被认为是 ECMAScript 中的遗留特性，因此如果可能的话最好避免使用它
+- 对比 slice
+  - slice() indexStart 大于 indexEnd，返回一个空字符串。
+    ```js
+    const text = "Mozilla";
+    console.log(text.substring(5, 2)); // "zil"
+    console.log(text.slice(5, 2)); // ""
+    ```
+  - 如果两个参数中的任何一个或两个都是负数或 NaN，substring() 方法将把它们视为 0。
+    ```js
+    const text = "Mozilla";
+    console.log(text.substring(-5, 2)); // "Mo"
+    console.log(text.substring(-5, -2)); // ""
+    ```
+  - slice() 方法也将 NaN 参数视为 0，但当给定负值时，它会从字符串的末尾开始反向计数以找到索引。
+  - 更准确的说是：max(indexStart + str.length, 0) 计算负数
+    ```js
+    const text = "Mozilla";
+    console.log(text.slice(-5, 2)); // ""
+    console.log(text.slice(-5, -2)); // "zil"
+    ```
+#### padStart
+```js
+var res = "abc".padStart(10); // "       abc"
+console.log(res);
+var res = "abc".padStart(10, "foo"); // "foofoofabc"
+console.log(res);
+var res = "abc".padStart(6, "123465"); // "123abc"
+console.log(res);
+var res = "abc".padStart(8, "0"); // "00000abc"
+console.log(res);
+var res = "abc".padStart(1); // "abc"
+console.log(res);
+```
 ### Object
 #### Object.fromEntries() / Object.entries()（逆操作）
 - object.fromEntries() 将一个数组/Map转为一个对象
@@ -281,7 +385,6 @@ console.log(atWay); // 't'
   for (const [key, value] of Object.entries(object1)) {
     console.log(`${key}: ${value}`);
   }
-  //
   // "a: somestring"
   // "b: 42"
   ```
@@ -454,20 +557,42 @@ const obj2 = {
 deepFreeze(obj2);
 obj2.internal.a = "anotherValue"; // 非严格模式下会静默失败
 obj2.internal.a; // null
-
+```
+#### toString
+Object.prototype.toString.call
+```js
+var res1 = Object.prototype.toString.call([]); //  "[object Array]"
+console.log(res1);
+var res1 = Object.prototype.toString.call({}); //  "[object Object]"
+console.log(res1);
+var res1 = Object.prototype.toString.call("ssss"); //  "[object String]"
+console.log(res1);
+var res1 = Object.prototype.toString.call(111); //  "[object Number]"
+console.log(res1);
+var res1 = Object.prototype.toString.call(false); //  "[object Boolean]"
+console.log(res1);
+var res1 = Object.prototype.toString.call(undefined); //  "[object Undefined]"
+console.log(res1);
+var res1 = Object.prototype.toString.call(null); //  "[object Null]"
+console.log(res1);
 ```
 ### RegExp
-
-参考：[正则表达式](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_expressions#special-line-feed)
-- RegExp 涉及的api
-  - RegExp 的 exec 和 test 方法
-  - String 的 match、matchAll、replace、replaceAll、search 和 split
-
-  - exec
+#### 基础
+- 特殊字符
+- #### 对比
   ```js
-
+  /\d/  // \d 范围大 也包含中文全角0-9
+  /[0-9]/ // 0-9 范围小
+  /[\u4e00-\u9fa5]/ //汉字
+  /\r/ // 匹配一个回车符
+  /\n/ // 换行符匹配;
+  // 在 Unix 和 Linux 系统（包括 macOS）中，换行符用 \n（LF，Line Feed）表示。
+  // 在 Windows 系统中，换行符用 \r\n（CR+LF，Carriage Return + Line Feed）表示。
+  // 早期的 Mac OS（例如，Mac OS 9）使用 \r（CR，Carriage Return）表示换行。
+  // 以\n为主流
   ```
-- 两种方式创建 
+
+- 创建
   ```js
   // 1
   var re = /ab+c/;
@@ -478,8 +603,14 @@ obj2.internal.a; // null
   var re = /[a-z]\s/i
   var re = new RegExp("[a-z]\\s", "i")
   ```
-- 示例一：
+- RegExp 涉及的api
+  - RegExp 的 exec 和 test 方法
+  - String 的 match、matchAll、replace、replaceAll、search 和 split
+- u 修饰符
+#### 案例
+- 示例：[String replace](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
   ```js
+  // 1
   // *?懒惰查找 默认是贪婪查找
   // $1 代表正则中第一个()
   // [^$] 代表非$的字符 反向字符集
@@ -494,24 +625,38 @@ obj2.internal.a; // null
   const res = str.replace(reg,`:label="$$t('F:$1')"`)
   console.log(res)
   ```
-参考：
-[String replace](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
-
-#### 特殊字符
-\r 回车
-\n 换行符
-- 在 Unix 和 Linux 系统（包括 macOS）中，换行符用 \n（LF，Line Feed）表示。
-- 在 Windows 系统中，换行符用 \r\n（CR+LF，Carriage Return + Line Feed）表示。
-- 早期的 Mac OS（例如，Mac OS 9）使用 \r（CR，Carriage Return）表示换行。
-- 以\n为主流
-```js
-function queryCodeListTrim(strings) {
-  return strings
-    .split(/\r?\n+/)
-    .filter((val) => val !== '')
-    .map((item) => item.trim())
-}
-```
+  ```js
+  //2
+  function queryCodeListTrim(strings) {
+    return strings
+      .split(/\r?\n+/)
+      .filter((val) => val !== '')
+      .map((item) => item.trim())
+  }
+  ```
+  ```js
+  // 贪婪
+  var str = "bbaabbaa";
+  var reg1 = /.*aa/;
+  console.log(reg1.exec(str));
+  // 增加?，非贪婪
+  var reg2 = /.*?aa/;
+  console.log(reg2.exec(str));
+  ```
+- 常用正则
+  ```js
+  // 邮箱
+  /^[A-Za-z0-9\u4E00-\u9FA5]+(\.[A-Za-z0-9\u4E00-\u9FA5]+)+@[a-zA-Z0-9_-]+(.[a-zA-Z0-9_-]+)+$/
+  // 手机号
+  const reg = /^1[3456789]\d{9}$/
+  // 数字要求：最大13位，小数最大4位
+  const regNumber = /^([1-9]\d{0,12}(\.\d{1,4})?|0\.\d{1,4})$/
+  // 数字要求：最大9位，小数最大2位（排除0）
+  const regNumber =  /^([1-9]\d{0,8}(\.\d{1,2})?|0\.0[1-9]|0\.[1-9]\d{0,1})$/
+  ```
+- 参考：
+  - [正则表达式](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_expressions#special-line-feed)
+  - [learn-regex-zh](https://github.com/cdoco/learn-regex-zh)
 ### Function
 - 判断是否是Function
   - func && func(args)
@@ -553,6 +698,9 @@ const min = Math.min.apply(null, numbers);
 console.log(min);
 // Expected output: 2
 ```
+#### arguments.callee()
+- 调用当前执行的函数，匿名函数场景使用
+- es5严格模式废弃
 ### Array
 #### at()
 ```js
@@ -688,19 +836,30 @@ console.log(months); // ["Jan", "Mar", "Apr", "May"]
   console.log(Math.sqrt(25));
   // 5
   ```
-#### Math.ceil() / Math.floor() / Math.round() 
+#### Math.ceil() / Math.floor() / Math.round() / Math.trunc()
 - Math.ceil(x) 向上取整
   ```js
   console.log(Math.ceil(1.2)) //2
+  console.log(Math.ceil(-1.2)) //-1
   ```
 - Math.floor(x) 向下取整
   ```js
   console.log(Math.floor(1.2)) //1
+  console.log(Math.floor(-1.2)) //-2
   ```
 - Math.round() 四舍五入后最接近的整数
   ```js
   console.log(Math.round(1.5)) //2
   console.log(Math.round(1.2)) //1
+  console.log(Math.round(-1.6)) //2
+  console.log(Math.round(-1.5)) //1
+  ```
+- Math.trunc(x) 删除掉数字的小数部分和小数点，不管参数是正数还是负数
+  ```js
+  Math.trunc(1.2); // 1
+  Math.trunc(1.8); // 1
+  Math.trunc(-1.2); // -1
+  Math.trunc(-1.8); // -1
   ```
 #### Math.random() / window.crypto.getRandomValues()
 - Math.random() 伪随机数在范围从0 到小于1（从 0（包括 0）往上，但是不包括 1（排除 1））
@@ -787,6 +946,7 @@ console.log(set1.has(1)); // true
 console.log(set1.has(5)); // true
 console.log(set1.has(6)); // true
 ```
+## web API
 ### Promise
 #### Promise.all
 - 报错处理
@@ -897,5 +1057,81 @@ Promise.all([promise1, promise2, promise3]).then((values) => {
   const fileURL = new URL('./someFile.txt', import.meta.url)
   fs.readFile(fileURL, 'utf8').then(console.log)
   ```
-
-
+### TextEncoder / TextDecoder
+#### TextEncoder
+- 接受码位流作为输入，并提供 UTF-8 字节流作为输出
+- encode
+  ```js
+  // 1、TextEncoder utf-8
+  const textEncoder = new TextEncoder();
+  let encoded = textEncoder.encode("Ï");
+  console.log(encoded);
+  const textDecoder = new TextDecoder();
+  const decoded = textDecoder.decode(encoded);
+  console.log(decoded);
+  // 2、TextEncoder 非utf-8，只能utf-8
+  const textEncoder1 = new TextEncoder("windows-1251");
+  // 并不生效
+  const encoded1 = textEncoder1.encode("Привет, мир!");
+  const encoded2 = textEncoder.encode("Привет, мир!");
+  console.log(encoded1);
+  console.log(encoded2);
+  ```
+  ```js
+  // 当时不理解，为什么对base64解码的密钥的二进制字节流的处理
+  // 1、超码位的情况，这种二进制字符串不会有（0-255）
+  // 2、二进制字符处理是基于utf-16的，而 new TextEncoder().encode()是utf-8的实现不同
+  // 以下是chartgpt 提供实现思路，增强版的与str2ab，结果与源码不一样，为什么不一样呢？因为无论如何实现都是基于，utf-16的实现，应该是这样
+  function encodeStringToUtf8ByteArray(str) {
+    const utf8Bytes = [];
+    for (let i = 0; i < str.length; i++) {
+      const codePoint = str.codePointAt(i);
+      if (codePoint < 0x80) {
+        utf8Bytes.push(codePoint);
+      } else if (codePoint < 0x800) {
+        utf8Bytes.push((codePoint >> 6) | 0xc0);
+        utf8Bytes.push((codePoint & 0x3f) | 0x80);
+      } else if (codePoint < 0x10000) {
+        utf8Bytes.push((codePoint >> 12) | 0xe0);
+        utf8Bytes.push(((codePoint >> 6) & 0x3f) | 0x80);
+        utf8Bytes.push((codePoint & 0x3f) | 0x80);
+      } else {
+        utf8Bytes.push((codePoint >> 18) | 0xf0);
+        utf8Bytes.push(((codePoint >> 12) & 0x3f) | 0x80);
+        utf8Bytes.push(((codePoint >> 6) & 0x3f) | 0x80);
+        utf8Bytes.push((codePoint & 0x3f) | 0x80);
+      }
+    }
+    return new Uint8Array(utf8Bytes);
+  }
+  encodeStringToUtf8ByteArray("𠮷") // [240, 160, 174, 183, 237, 190, 183]
+  let str = "𠮷";
+  // new TextEncoder().encode() 底层是基于utf-8的
+  let uint8Array = = new TextEncoder().encode(str);
+  console.log("𠮷 uint8Array", uint8Array);  // [240, 160, 174, 183]
+  ```
+- encodeInto
+  - TextEncoder.encodeInto() 方法接受一个要编码的字符串和一个目标 Uint8Array，将生成的 UTF-8 编码的文本放入目标数组中，并返回一个指示编码进度的字典对象。
+  - 这相比于旧的 encode() 方法性能更高——尤其是当目标缓冲区是 WASM 堆视图时。
+#### TextDecoder
+- 接口表示一个文本解码器，一个解码器只支持一种特定文本编码，例如 UTF-8、ISO-8859-2、KOI8-R、GBK，等等。
+- 解码器将字节流作为输入，并提供码位流作为输出（从技术上说，字符串的每个字符对应的是 Unicode 码位，因此可以视作“码位流的表示”。）
+- decode
+  ```js
+  // 3、TextDecoder utf-8
+  let utf8decoder = new TextDecoder(); // default 'utf-8' or 'utf8'
+  let u8arr = new Uint8Array([240, 160, 174, 183]);
+  let i8arr = new Int8Array([-16, -96, -82, -73]);
+  let u16arr = new Uint16Array([41200, 47022]);
+  let i16arr = new Int16Array([-24336, -18514]);
+  let i32arr = new Int32Array([-1213292304]);
+  console.log(utf8decoder.decode(u8arr));
+  console.log(utf8decoder.decode(i8arr));
+  console.log(utf8decoder.decode(u16arr));
+  console.log(utf8decoder.decode(i16arr));
+  console.log(utf8decoder.decode(i32arr));
+  // 4、TextDecoder 非utf-8
+  const win1251decoder = new TextDecoder("windows-1251");
+  const bytes = new Uint8Array([207, 240, 232, 226, 229, 242, 44, 32, 236, 232, 240, 33]);
+  console.log(win1251decoder.decode(bytes)); // Привет, мир!
+  ```
