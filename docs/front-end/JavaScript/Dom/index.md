@@ -108,7 +108,8 @@ document.getElementById("app").addEventListener('keydown',(e)=>{
 参考：
 - [navigator.clipboard](https://developer.mozilla.org/zh-CN/docs/Web/API/Clipboard)
 
-### AbortController
+### Signal
+#### AbortController
 ```js
 const controller = new AbortController();
 const signal = controller.signal;
@@ -132,7 +133,7 @@ function fetchVideo() {
 ```
 参考：
 - [AbortController](https://developer.mozilla.org/zh-CN/docs/Web/API/AbortController/AbortController)
-### AbortSignal
+#### AbortSignal
 AbortSignal 接口表示一个信号对象（signal object），它允许你通过 AbortController 对象与 DOM 请求（如 Fetch）进行通信并在需要时将其中止。
 ```js
 // 中止超时的读取操作 AbortSignal.timeout()
@@ -173,8 +174,9 @@ try {
   clearTimeout(timeoutId);
 }
 ```
-## 通信
-### iframe
+
+### 通信
+#### iframe
 ```html
 <!-- index.html -->
 <iframe src="child.html" id="myIframe"></iframe>
@@ -199,7 +201,7 @@ window.addEventListener('message', (event) => {
   console.log('收到父页面的消息:', event.data);
 });
 ```
-### web Worker 
+#### web Worker 
 #### 专用 worker
 ```js
 // index.html
@@ -250,8 +252,7 @@ onconnect = (e) => {
 };
 ```
 参考：[Web_Workers_API](https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Workers_API/Using_web_workers)
-
-### MessageChannel / MessagePort
+#### MessageChannel / MessagePort
 不同的脚本直接通信，通过两端都有端口的双向频道（或管道）相互传递消息。
 ```js
 // index.html
@@ -302,4 +303,13 @@ function onMessage(e) {
   // 发送消息
   port2.postMessage(`IFrame 收到的消息：“${e.data}”`);
 }
+```
+
+### base64
+#### btoa / atob
+```js
+// 编码
+const encodedData = window.btoa("Hello, world");
+// 解码
+const decodedData = window.atob(encodedData);
 ```
