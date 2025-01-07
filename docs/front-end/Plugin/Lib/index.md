@@ -143,7 +143,7 @@ import jsencrypt from "jsencrypt";
 const form = {
   password: "123",
 };
-const publicKey = `-----BEGIN RSA PRIVATE KEY-----
+const publicKey = `-----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAv29TH2Ukhs9RnKHmPrLO
 jwFmvvQCJh7jy6GFQgMoQdh408qcqI43fu09SrdZwmvBYTYImnCWDnpbvJjUAex6
 B2XFgIFxaZ403MhQNomJnmG/5q3dN9Zjucb0jeShkuvYvtEfy5Q2tBv5mC8DxR1G
@@ -151,7 +151,7 @@ WO3/t7cZlI6bkZjvznmUPx2sJC9PzSmqAscn1nrO7zB8SNn2rxFeW+m73XHIgKDj
 PBL3yFHI5xuk2BF18cK5TkGL6sND8eHAE4+gPqoR/RR2QvRBujFU60hHnxxbaawi
 LDI93ShX6uSs/D7E/i6N3vDIKgiWxmmpXHb/Wk2IqyDEmOYxECh1Y75gnw6x0H4A
 kQIDAQAB
------END RSA PRIVATE KEY-----`
+-----END PUBLIC KEY-----`;
 // 2、密码hash
 const hashValue = hashSha256(form.password).toString();
 // 3、公钥加密
