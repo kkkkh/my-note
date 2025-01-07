@@ -34,17 +34,18 @@ outline: deep
     - privateKey
   - 参考：`ssh-keygen -t rsa -b 2048 -C "email@example.com" -f ~/.ssh/id_rsa`
   ```js
+  const crypto = require("crypto");
   crypto.generateKeyPair(
     "rsa",
     {
       modulusLength: 2048,
       publicKeyEncoding: {
-        type: "spki",
+        type: "spki", // 公钥的标准格式
         format: "pem",
         passphrase: "top secret",
       },
       privateKeyEncoding: {
-        type: "pkcs8",
+        type: "pkcs8", // 支持公钥和私钥的新式密钥格式。
         format: "pem",
         // 如果指定，则将使用基于 PKCS#5 v2.0 密码的加密，使用给定的密码和密码对私钥进行加密
         cipher: "aes-256-cbc", // AES-256-CBC是一种对称加密算法
@@ -56,6 +57,14 @@ outline: deep
       console.log("privateKey",privateKey)
     }
   );
+  ```
+- Base64 编码的公钥被解析为标准化的 KeyObject
+  ```js
+  const iPublicKey = crypto.createPublicKey({
+    key: Buffer.from(base64PublicKey, 'base64'),
+    format: 'der', // 二进制
+    type: 'spki', // Subject Public Key Info 结构化的密钥对象
+  })
   ```
 ### 数据摘要 (sha-256)
 - 数据摘要
@@ -141,17 +150,11 @@ outline: deep
     // node --security-revert=CVE-2023-46809 ./index.js 恢复使用
     // const padding = crypto.constants.RSA_PKCS1_PADDING;
   const padding = crypto.constants.RSA_OAEP_PADDING;
-  // 2 createPublicKey
-  const iPublicKey = crypto.createPublicKey({
-    key: Buffer.from(publicKey, 'base64'),
-    format: 'pem',
-    type: 'spki',
-  })
   // 3 publicEncrypt
   const encryptValue = crypto
     .publicEncrypt(
       {
-        key: iPublicKey,
+        key: publicKey, // key 必须是一个标准化的公钥对象（KeyObject）或者 PEM 格式的公钥字符串。
         padding,
       },
       Buffer.from(hashValue, "hex")
@@ -215,7 +218,7 @@ outline: deep
   const hashValue = hashSha256(form.password).toString();
   // 3、公钥加密
   const JSencrypt = new jsencrypt();
-  JSencrypt.setPublicKey(publicKey.value);
+  JSencrypt.setPublicKey(publicKey);
   const encryptValue = JSencrypt.encrypt(hashValue);
   console.log(encryptValue);
   ```
