@@ -48,3 +48,8 @@ formData = new FormData(myForm);
 ### Blob
 - 参考：[ajax 发送和接收二进制数据](https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest_API/Sending_and_Receiving_Binary_Data)
 
+### MIME
+- Content-Type
+- [MIME](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/MIME_types)
+- [MIME 所有类型](https://www.iana.org/assignments/media-types/media-types.xhtml)
+- [MIME 常用类型](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/MIME_types/Common_types)
