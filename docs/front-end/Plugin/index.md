@@ -8,7 +8,7 @@ outline: deep
   - [xlsx](https://docs.sheetjs.com/docs/getting-started/examples/export#live-demo) excel
   - [slatejs](https://docs.slatejs.org/) 富文本
   - [svg4everybody](https://www.npmjs.com/package/svg4everybody) svg兼容
-  - [Cookies.js](https://github.com/ScottHamper/Cookies)
+  - [Cookies.js](https://github.com/ScottHamper/Cookies) cookie
   - [web-vitals](https://www.npmjs.com/package/web-vitals)
 - 交互
   - 创建“浮动”元素
@@ -26,6 +26,9 @@ outline: deep
 - date
   - [date-fns](https://date-fns.org/docs/Getting-Started) 日期操作
   - [datejs](https://day.js.org/docs/en/installation/installation)
+- crypto
+  - [jsencrypt](https://github.com/travist/jsencrypt) 加密
+  - [crypto-js](https://github.com/brix/crypto-js) 数据摘要（停止维护：NodeJS 和现代浏览器都有原生 Crypto 模块）
 ## Vue plugin (Vue 扩展组件)
 ### component
 - [DMap(谛听)](https://juejin.cn/post/6844903593284206605) ([vue-bigdata-table](https://github.com/lison16/vue-bigdata-table))
