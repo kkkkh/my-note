@@ -134,16 +134,24 @@ outline: deep
   const data = "12345";
   console.log("pwd", data);
   // 加密由前端完成（模拟前端加密）
+  // 1 hash
   const hash = crypto.createHash("sha256");
   const hashValue = hash.update(data).digest("hex").toString();
+    // 有安全漏洞
+    // node --security-revert=CVE-2023-46809 ./index.js 恢复使用
+    // const padding = crypto.constants.RSA_PKCS1_PADDING;
   const padding = crypto.constants.RSA_OAEP_PADDING;
-  // 有安全漏洞
-  // node --security-revert=CVE-2023-46809 ./index.js 恢复使用
-  // const padding = crypto.constants.RSA_PKCS1_PADDING;
+  // 2 createPublicKey
+  const iPublicKey = crypto.createPublicKey({
+    key: Buffer.from(publicKey, 'base64'),
+    format: 'pem',
+    type: 'spki',
+  })
+  // 3 publicEncrypt
   const encryptValue = crypto
     .publicEncrypt(
       {
-        key: publicKey,
+        key: iPublicKey,
         padding,
       },
       Buffer.from(hashValue, "hex")
@@ -194,21 +202,15 @@ outline: deep
   const form = {
     password: "123",
   };
-  const publicKey = `-----BEGIN RSA PRIVATE KEY-----
-  MIICXgIBAAKBgQDHikastc8+I81zCg/qWW8dMr8mqvXQ3qbPAmu0RjxoZVI47tvs
-  kYlFAXOf0sPrhO2nUuooJngnHV0639iTTEYG1vckNaW2R6U5QTdQ5Rq5u+uV3pMk
-  7w7Vs4n3urQ6jnqt2rTXbC1DNa/PFeAZatbf7ffBBy0IGO0zc128IshYcwIDAQAB
-  AoGBALTNl2JxTvq4SDW/3VH0fZkQXWH1MM10oeMbB2qO5beWb11FGaOO77nGKfWc
-  bYgfp5Ogrql4yhBvLAXnxH8bcqqwORtFhlyV68U1y4R+8WxDNh0aevxH8hRS/1X5
-  031DJm1JlU0E+vStiktN0tC3ebH5hE+1OxbIHSZ+WOWLYX7JAkEA5uigRgKp8ScG
-  auUijvdOLZIhHWq7y5Wz+nOHUuDw8P7wOTKU34QJAoWEe771p9Pf/GTA/kr0BQnP
-  QvWUDxGzJwJBAN05C6krwPeryFKrKtjOGJIniIoY72wRnoNcdEEs3HDRhf48YWFo
-  riRbZylzzzNFy/gmzT6XJQTfktGqq+FZD9UCQGIJaGrxHJgfmpDuAhMzGsUsYtTr
-  iRox0D1Iqa7dhE693t5aBG010OF6MLqdZA1CXrn5SRtuVVaCSLZEL/2J5UcCQQDA
-  d3MXucNnN4NPuS/L9HMYJWD7lPoosaORcgyK77bSSNgk+u9WSjbH1uYIAIPSffUZ
-  bti+jc1dUg5wb+aeZlgJAkEAurrpmpqj5vg087ZngKfFGR5rozDiTsK5DceTV97K
-  a3Y+Nzl+XWTxDBWk4YPh2ZlKv402hZEfWBYxUDn5ZkH/bw==
-  -----END RSA PRIVATE KEY-----`
+  const publicKey = `-----BEGIN PUBLIC KEY-----
+  MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAv29TH2Ukhs9RnKHmPrLO
+  jwFmvvQCJh7jy6GFQgMoQdh408qcqI43fu09SrdZwmvBYTYImnCWDnpbvJjUAex6
+  B2XFgIFxaZ403MhQNomJnmG/5q3dN9Zjucb0jeShkuvYvtEfy5Q2tBv5mC8DxR1G
+  WO3/t7cZlI6bkZjvznmUPx2sJC9PzSmqAscn1nrO7zB8SNn2rxFeW+m73XHIgKDj
+  PBL3yFHI5xuk2BF18cK5TkGL6sND8eHAE4+gPqoR/RR2QvRBujFU60hHnxxbaawi
+  LDI93ShX6uSs/D7E/i6N3vDIKgiWxmmpXHb/Wk2IqyDEmOYxECh1Y75gnw6x0H4A
+  kQIDAQAB
+  -----END PUBLIC KEY-----`;
   // 2、密码hash
   const hashValue = hashSha256(form.password).toString();
   // 3、公钥加密
