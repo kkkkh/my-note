@@ -492,7 +492,7 @@ outline: deep
       - 使用charCodeAt是因为二进制字符串中的每个字符实际上代表一个字节的值（范围是 0~255 的整数值）
       - JavaScript 字符串的基础是 UTF-16
     - 普通字符串
-      - window.atob(window.btoa("我和你"))得到的是普通字符串
+      - window.atob(window.btoa("我和你"))得到的是普通字符串（实际上这里是不成功的，window.btoa 最高为 0x7f的码位，255）
       - 这是因为普通字符串本身就是可读的字符序列，Base64 仅仅对其重新编码，而没有改变其本质。
 - TextEncoder 
   - 实现思路
