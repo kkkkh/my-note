@@ -183,7 +183,13 @@ export default defineConfig({
           text: 'Lang',
           link: '/back-end/Lang/',
           items: [
-            { text: 'NodeJs', link: '/back-end/Lang/NodeJs/' },
+            {
+              text: 'NodeJs',
+              link: '/back-end/Lang/NodeJs/',
+              items: [
+                { text: 'crypto', link: '/back-end/Lang/NodeJs/Crypto/' },
+              ]
+            },
           ],
         },
       ],
