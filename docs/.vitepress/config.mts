@@ -177,6 +177,10 @@ export default defineConfig({
                 // { text: 'svn', link: '/front-end/Engineering/version-manage/svn' },
               ],
             },
+            {
+              text: '微前端',
+              link: '/front-end/Engineering/micro-frontend/',
+            },
           ],
         },
         {
