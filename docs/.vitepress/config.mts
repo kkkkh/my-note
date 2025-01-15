@@ -26,6 +26,10 @@ export default defineConfig({
           link: '/tools/blog',
         },
         {
+          text: 'UI',
+          link: '/tools/ui',
+        },
+        {
           text: '前端',
           link: '/tools/front-end',
         },
@@ -34,8 +38,12 @@ export default defineConfig({
           link: '/tools/back-end',
         },
         {
-          text: 'UI',
-          link: '/tools/ui',
+          text: '测试',
+          link: '/tools/test',
+        },
+        {
+          text: 'Ops',
+          link: '/tools/ops',
         },
         {
           text: '其他工具',
@@ -44,6 +52,10 @@ export default defineConfig({
         {
           text: '软件安装',
           link: '/tools/software',
+        },
+        {
+          text: '业务',
+          link: '/tools/business',
         },
       ],
       '/front-end': [
