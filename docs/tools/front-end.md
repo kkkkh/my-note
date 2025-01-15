@@ -2,17 +2,17 @@
 outline: deep
 ---
 ## 前端
-### js
-- [mozilla](https://developer.mozilla.org/zh-CN/) 开发者社区
-- [web.dev](https://web.dev/about?hl=zh-cn)
-- [chromium](https://www.chromium.org/chromium-projects/)
-- [Can I use](https://caniuse.com/) 新语法兼容
-- [polyfill](https://cdnjs.cloudflare.com/polyfill/)
-- [compatibility table](https://compat-table.github.io/compat-table/es6/) 兼容性表
+### tool
 - [Reg Playground](https://regex101.com/)正则
 - [svg 转 path](https://www.zhangxinxu.com/sp/path.html)
 - [svg在线编辑器](https://www.jyshare.com/more/svgeditor/)
 - [jsont](https://www.jsont.run/)
+### js
+- [mozilla](https://developer.mozilla.org/zh-CN/) 开发者社区
+- [web.dev](https://web.dev/about?hl=zh-cn)
+- [Can I use](https://caniuse.com/) 新语法兼容
+- [polyfill](https://cdnjs.cloudflare.com/polyfill/)
+- [compatibility table](https://compat-table.github.io/compat-table/es6/) 兼容性表
 - [es6 教程 阮一峰](https://es6.ruanyifeng.com/)
 ### ts/typescript
 - ts
@@ -106,6 +106,7 @@ outline: deep
 - [eslint](https://eslint.org/) &nbsp;[eslint中文](https://zh-hans.eslint.org/docs/latest/use/getting-started) &nbsp;[typescript-eslint](https://typescript-eslint.io/getting-started)
 - [EditorConfig](https://editorconfig.org/)
 #### 包管理
+- [turborepo](https://turbo.build/repo/docs) 扩展 monorepos
 - [npm](https://docs.npmjs.com/about-npm) &nbsp;[npm 中文](https://www.npmjs.cn/getting-started/what-is-npm/)
 - [pnpm](https://www.pnpm.cn/installation) &nbsp;[pnpm中文](https://www.pnpm.cn/motivation)
 #### 版本管理
@@ -142,6 +143,8 @@ outline: deep
 - [graphql](https://graphql.js.cool/)中文2
 - cdn
   - [bootcdn](https://www.bootcdn.cn/)
+  - [jsdelivr](https://www.jsdelivr.com/)
+  - [unpkg](https://unpkg.com/)
 ### 其他端
 #### 客户端
 - [electron](https://www.electronjs.org/zh/docs/latest/tutorial/quick-start) 文档
@@ -152,14 +155,10 @@ outline: deep
 #### 小程序
 - [开发文档](https://developers.weixin.qq.com/miniprogram/dev/framework/quickstart/#%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%AE%80%E4%BB%8B)
 - [uniapp](https://uniapp.dcloud.net.cn/)
+- [taro](https://docs.taro.zone/docs/)
 - [omi](https://omi.cdn-go.cn/home/latest/zh/introduction.html)
 - [westore](https://github.com/Tencent/westore)
 - [微信调试](chrome://inspect/#devices)
-### 测试
-- [jestjs](https://jestjs.io/zh-Hans/docs/getting-started)
-- [playwright](https://playwright.dev/docs/intro)
-- [cypress](https://docs.cypress.io/app/get-started/why-cypress)
-- [vitest](https://vitest.dev/guide/) &nbsp;&nbsp;&nbsp; [vitest 中文](https://cn.vitest.dev/guide/why.html)
 ### 微前端
 - [single-spa](https://single-spa.js.org/docs/configuration)
 ### 前端规范
@@ -171,3 +170,6 @@ outline: deep
 - [牛客](https://www.nowcoder.com/interview/center?entranceType=%E5%AF%BC%E8%88%AA%E6%A0%8F)
 ### job
 - [javascript jobs](https://jobs.date-fns.org/)
+### 浏览器
+- [chromium](https://www.chromium.org/chromium-projects/) &nbsp;&nbsp;&nbsp;[chromium blog](https://blog.chromium.org/) &nbsp;&nbsp;&nbsp;[chromium issues](https://issues.chromium.org/issues?q=status:open)
+- [brave](https://brave.com/zh/)
