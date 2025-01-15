@@ -17,5 +17,7 @@ outline: deep
 - [egoist](https://egoist.dev/) eva.js
 - [若川](https://juejin.cn/user/1415826704971918/posts) 源码解读
 - [Anthony Fu](https://antfu.me/)
+
 ## 社区
 - [v2ex](https://www.v2ex.com/)
+- [stonybrook](https://www.cs.stonybrook.edu/) stonybrook university Department of Computer Science 石溪大学科学部
