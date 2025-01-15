@@ -237,16 +237,7 @@ func()
   - [web worker 通信](../../JavaScript/Dom/index.md#web-worker)
   - [iframe 通信](../../JavaScript/Dom/index.md#iframe)
   - [MessageChannel 通信](../../JavaScript/Dom/index.md#messagechannel--messageport)
-### api
-#### ipcRenderer
-- ipcRenderer.invoke
-  ```js
-  import {ipcRenderer} from 'electron'
-  async () => {
-    const result = await ipcRenderer.invoke('my-invokable-ipc', arg1, arg2)
-    // ...
-  }
-  ```
+### 主进程 api
 #### ipcMain
 - ipcMain.handle(channel, listener)
 - 为一个 invokeable的IPC 添加一个handler。 每当一个渲染进程调用 ipcRenderer.invoke(channel, ...args) 时这个处理器就会被调用。
@@ -292,25 +283,47 @@ console.log("app.getPath('logs')", app.getPath('logs'))
   - Electron 使用的 app.getPath() 方法依赖于操作系统 API，可能返回短文件名以确保兼容旧版 Windows 和 MS-DOS 等不支持长文件名的系统。
 - app.getVersion()
   - 返回 string - 加载应用程序的版本号。 如果应用程序的 package. json 文件中找不到版本号, 则返回当前包或者可执行文件的版本。
-#### shell
+- app.commandLine 操作Chromium读取的应用程序的命令行参数
+  ```js
+    app.commandLine.appendSwitch('charset', 'utf8')
+    app.commandLine.appendSwitch('lang', 'en')
+  ```
+- app.requestSingleInstanceLock
+- 如果当前进程是应用程序的主要实例，则此方法返回true，同时你的应用会继续运行。 
+- 如果当它返回 false如果你的程序没有取得锁，它应该立刻退出
 ```js
-import { shell } from 'electron'
-shell.openPath('path') //以桌面的默认方式打开给定的文件。
-shell.openExternal('https://github.com') // 打开网址
+const lock= app.requestSingleInstanceLock({ appCode: "test" })
+if(lock){
+  // 继续
+}else{
+  app.quit()
+}
 ```
-#### session
-session 管理浏览器会话、cookie、缓存、代理设置等。
-- 创建自定义会话
-```js
-const customSession = session.fromPartition('persist:user1');
-const customWindow = new BrowserWindow({
-    webPreferences: {
-        session: customSession,
-    },
-});
-
-```
-- api
+#### BrowserWindow
+- [BaseWindowConstructorOptions(类参数)](https://www.electronjs.org/zh/docs/latest/api/structures/base-window-options)
+  - [webPreferences](https://www.electronjs.org/zh/docs/latest/api/structures/web-preferences)
+    - partition
+      - 决定页面所使用的 session，不同的 partition 值可以隔离页面的会话数据；
+      - 如果 partition 以persist:开头, 那么该页面会使用持久化的会话，这些数据会保存在磁盘中，即使应用关闭后再次启动，这些数据仍然存在；
+      - 如果没有 persist: 前缀, 页面会使用内存中的会话. 通过分配相同的 partition, 多个页可以共享同一会话；
+      - 如果没有设置 partition，页面将使用 Electron 提供的 默认会话
+    - webview
+      - 启用后，可以在渲染进程中使用 `<webview>` 标签来嵌入其他网页。
+      - `<webview>` 标签类似于 iframe，但具有更多的功能，例如独立的上下文和进程隔离，提供额外的控制能力，例如与主进程通信。
+      - 利用 will-attach-webview 事件可帮助防范潜在风险。
+      - 参考：[WebView性能、体验分析与优化](https://tech.meituan.com/2017/06/09/webviewperf.html)
+    - skipTaskbar 是否在任务栏中显示窗口。默认为 false
+  - frame 指定 false 以创建无框架窗口
+- 实例 
+  - win <= `const win = new BrowserWindow()`
+  - win.webContent 渲染以及控制 web 页面
+#### win.webContent
+- win.webContents.setZoomFactor
+  - 设置窗口缩放比
+- win.webContent.setWindowOpenHandler
+  - 用于处理由窗口内的网页触发的 window.open() 调用。
+  - 通过这个方法，开发者可以完全控制新窗口的行为，例如允许、拒绝打开，或者对新窗口的配置进行自定义
+- win.webContents.session
   - setPermissionCheckHandler(handler: (webContents, permission, requestingOrigin) => boolean)
     - 用于拦截和处理权限检查。
     - 在特定权限（如通知、摄像头、麦克风等）被请求时，调用自定义逻辑以决定是否允许。
@@ -332,9 +345,7 @@ const customWindow = new BrowserWindow({
     });
     ```
   - setCertificateVerifyProc(proc: (request, callback) => void)
-    - 自定义证书验证逻辑。
-    - 在安全连接中遇到证书问题（如自签名证书或无效证书）时调用，用于决定是否信任该证书。
-    - 回调函数 callback 的参数：第一个参数为证书验证结果（0 表示成功，其他为错误代码）。
+    - 自定义证书验证逻辑。在安全连接中遇到证书问题（如自签名证书或无效证书）时调用，用于决定是否信任该证书。
     ```js
     win.webContents.session.setCertificateVerifyProc((request, callback) => {
       // 每当一个服务器证书请求验证，proc 将被这样 proc(request, callback) 调用，为 session 设置证书验证过程。
@@ -347,7 +358,102 @@ const customWindow = new BrowserWindow({
       }
     });
     ```
-
+  - setCertificateVerifyProc 解决内网 HTTPS 请求问题:
+    - SSL 验证的核心是浏览器通过检查证书链的有效性，确保通信的安全性和合法性。
+    - setCertificateVerifyProc 替代了 Chromium 内部的默认证书验证流程，使你可以完全自定义验证逻辑。callback(0) 明确告诉 Electron 跳过所有验证，即认为任何证书都是合法的。
+    - 完整安全验证
+      ```js
+      const { session } = require('electron');
+      // 设置自定义证书验证过程
+      session.defaultSession.setCertificateVerifyProc((request, callback) => {
+        const { hostname, certificate, errorCode } = request;
+        // 定义内网可信的域名列表（根据实际情况配置）
+        const trustedInternalDomains = ['intranet.local', 'internal.company.com'];
+        // 定义内网的可信证书指纹（SHA-256）
+        const trustedFingerprints = [
+          '11:22:33:44:55:66:77:88:99:AA:BB:CC:DD:EE:FF:00:11:22:33:44',
+        ];
+        // 定义内网环境的 IP 地址范围（如 10.0.0.0/8 或 192.168.0.0/16 等）
+        const isInternalIP = (hostname) => {
+          return /^10\.\d+\.\d+\.\d+$/.test(hostname) || /^192\.168\.\d+\.\d+$/.test(hostname);
+        };
+        // 1. 允许内网可信域名
+        if (trustedInternalDomains.includes(hostname)) {
+          console.log(`Trusted internal domain: ${hostname}`);
+          callback(0); // 信任
+          return;
+        }
+        // 2. 允许内网可信证书指纹
+        if (trustedFingerprints.includes(certificate.fingerprint)) {
+          console.log(`Trusted certificate fingerprint: ${certificate.fingerprint}`);
+          callback(0); // 信任
+          return;
+        }
+        // 3. 允许特定的内网 IP 地址
+        if (isInternalIP(hostname)) {
+          console.log(`Trusted internal IP: ${hostname}`);
+          callback(0); // 信任
+          return;
+        }
+        // 4. 在开发环境中可以放宽限制
+        if (process.env.NODE_ENV === 'development') {
+          console.warn(`Development mode: Ignoring untrusted certificate for ${hostname}`);
+          callback(0); // 信任
+          return;
+        }
+        // 默认拒绝未知的证书
+        console.error(`Untrusted certificate for ${hostname}`);
+        callback(-2); // 拒绝
+      });
+      ```
+  - win.webContents.session.on('select-serial-port',...)
+#### session
+session 管理浏览器会话、cookie、缓存、代理设置等。
+- 创建自定义会话
+```js
+// 从指定的 partition（webPreferences: {partition:"***"}）获取一个对应的会话 (session) 对象
+const customSession = session.fromPartition('persist:user1');
+const customWindow = new BrowserWindow({
+    webPreferences: {
+        session: customSession,
+    },
+});
+// 动态设置是否始终为 HTTP NTLM 发送凭据或协商身份验证。
+session.defaultSession.allowNTLMCredentialsForDomains('*')
+```
+#### process
+Electron's process 对象继承 Node.js process object。 它新增了事件、属性和方法
+- process.resourcesPath 只读
+  - 一个 string 值，表示 resources 目录的路径
+  - 这个目录通常包含 Electron 应用程序的静态资源文件。
+  - 在开发模式下，process.resourcesPath 通常指向 Electron 自带的 resources 目录，而不是你的项目目录。
+  - 在生产模式下，process.resourcesPath 指向 Electron 应用的打包资源路径。
+#### shell
+```js
+import { shell } from 'electron'
+shell.openPath('path') //以桌面的默认方式打开给定的文件。
+shell.openExternal('https://github.com') // 打开网址
+```
+#### crashReporter
+```js
+// 将崩溃日志提交给远程服务器
+import { crashReporter } from 'electron'
+crashReporter.start({
+  uploadToServer: "",
+})
+```
+### 渲染进程 api
+#### ipcRenderer
+- ipcRenderer.invoke
+  ```js
+  import {ipcRenderer} from 'electron'
+  async () => {
+    const result = await ipcRenderer.invoke('my-invokable-ipc', arg1, arg2)
+    // ...
+  }
+  ```
+#### window.open
+从渲染进程打开窗口 window.open(url[, frameName][, features])
 ### 开发Lib
   - build工具
     - [electron-builder](https://www.electron.build/)
@@ -362,7 +468,7 @@ const customWindow = new BrowserWindow({
     - [johnny-five](https://johnny-five.io/)
 #### electron-builder
 #### electron forge
-- 使用electron forge
+- 使用
   - 脚手架初始化一个项目 vite + ts [初始化](https://www.electronforge.io/templates/vite-+-typescript)
     ```bash
     npm init electron-app@latest my-new-app -- --template=vite-typescript
@@ -390,7 +496,9 @@ const customWindow = new BrowserWindow({
     ```bash
     npm install --save-dev @electron-forge/plugin-vite
     ```
-- 开发工具
+- bug
+  - An unhandled rejection has occurred inside Forge:Error: Unable to use specified module loaders for ".ts".
+  - 将`forge.config.ts` 改为 `forge.config.mts` 解决 不知道为什么识别不.ts
 - 参考：
   - [详解 Electron 打包](https://juejin.cn/post/7250085815430430781) Electron Builder、Electron Forge对比
   - [详解 Electron 中的 asar 文件](https://juejin.cn/post/7213171235577036860) [@electron/asar](https://github.com/electron/asar)
@@ -482,6 +590,8 @@ port.on('data', (data) => {})
 // 断开连接 - 监听事件
 port?.on('close', ()=>{ port = null })
 ```
+### electron-updater 更新应用程序
+参考：[Auto Update](https://www.electron.build/auto-update)
 ### 其他框架
 - [NW.js](https://nwjs.io/) &nbsp;[中文](https://nwjs-cn.readthedocs.io/zh-cn/latest/Base/Getting%20Started/index.html)
 - [Tauri](https://v2.tauri.app/start/)
@@ -489,3 +599,53 @@ port?.on('close', ()=>{ port = null })
 - Electron 则是通过各操作系统的，打通了 Node.js 和 Chromium 的事件循环机制（新版本的 Electron 是通过一个独立的线程完成这项工作的）。
 - Tauri使用Rust作为底层，通过Web技术（HTML、CSS和JavaScript）构建用户界面。它与Chromium和Node.js没有直接依赖关系，因此可以更轻量级和高效。
 - 参考：[NW.js和Electron优缺点综合对比](https://blog.csdn.net/LIangell/article/details/122055029)
+### 功能实现思路
+#### 启动窗口
+- 是否单例锁
+- 启动时向 Chromium 命令行传递参数
+- 崩溃日志
+- 启动窗口
+- 自定义控制新窗口的行为
+- 注册监听事件
+- session 权限设置
+- 计算窗口大小
+- 从partition获取session，安装浏览器插件
+- 设置代理（app、session）
+- 初始化托盘 Tray
+- 注册 ipcMain
+- 注册版本升级
+- 注册全局快捷键
+#### 关闭窗口
+- 退出登录
+- 注销监听事件
+- 注销 session 权限设置
+- 移除所有事件 `win.removeAllListeners()`
+- 注销版本升级
+- 注销全局快捷键 `import { globalShortcut } from 'electron'`
+- 注销 ipcMain
+- 第三方软件quit
+#### 接口请求
+- 登录：公钥加密密码
+- 发起登录请求：
+  - fetch：`session.defaultSession.fetch(url,opts)`
+  - opts：`{header:{Accept: 'application/json; charset=utf-8',}}` 等其他请求头
+- 存储token到store
+- 其他接口请求：
+  - 获取token
+  - `header:{Authorization: `Bearer ${token}`}` + 其他请求头
+#### 获取token
+- 1、是否有accessToken，
+  - 有 ✅
+  - 没有：则没有登录
+- 2、是否过期
+  - 未过期 ✅
+  - 过期：如果当前时间 > 过期时间-间隔时间 
+- 3、是否有 tokenRefreshTask
+  - 有 ✅
+  - 没有
+- 4、是否有refreshToken：
+    - 没有：没有登录
+    - 有：tokenRefreshTask
+- 5、发起刷新token请求 
+  - tokenRefreshTask(tokenData.accessToken, tokenData.refreshToken)
+  - 成功：返回token✅
