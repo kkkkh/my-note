@@ -17,7 +17,6 @@ export default defineConfig({
       { text: '后端', link: '/back-end' },
       { text: 'Linux', link: '/ops' },
       { text: '文档', link: '/tools/front-end' },
-      { text: '读书', link: '/books' },
     ],
     sidebar: {
       '/tools': [
