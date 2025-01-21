@@ -15,10 +15,20 @@ export default defineConfig({
       { text: '首页', link: '/' },
       { text: '前端', link: '/front-end' },
       { text: '后端', link: '/back-end' },
-      { text: 'Linux', link: '/ops' },
+      { text: '运维', link: '/ops' },
       { text: '文档', link: '/tools/front-end' },
+      { text: '文章', link: '/article' },
     ],
     sidebar: {
+      '/article': [
+        {
+          text: '算法',
+          link: '/article/algorithm/',
+          items: [
+            { text: 'js', link: '/article/algorithm/js/' },
+          ],
+        },
+      ],
       '/tools': [
         {
           text: 'blog',
