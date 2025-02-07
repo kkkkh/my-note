@@ -25,7 +25,7 @@ export default defineConfig({
           text: '算法',
           link: '/article/algorithm/',
           items: [
-            { text: 'js', link: '/article/algorithm/js/' },
+            { text: 'js', link: '/article/algorithm/js/index.md' },
           ],
         },
       ],
@@ -79,6 +79,7 @@ export default defineConfig({
           text: 'Css',
           link: '/front-end/Css/',
           items: [
+            { text: 'base', link: '/front-end/Css/base/' },
             { text: 'flex', link: '/front-end/Css/flex/' },
             { text: 'sass', link: '/front-end/Css/sass/' },
           ],
@@ -181,7 +182,6 @@ export default defineConfig({
               link: '/front-end/Engineering/version-manage/',
               items: [
                 { text: 'git', link: '/front-end/Engineering/version-manage/git/' },
-                { text: 'git hooks', link: '/front-end/Engineering/version-manage/git/git-hooks/' },
                 { text: 'github', link: '/front-end/Engineering/version-manage/github/' },
                 // { text: 'svn', link: '/front-end/Engineering/version-manage/svn' },
               ],
