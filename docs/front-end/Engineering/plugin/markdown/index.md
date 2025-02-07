@@ -33,9 +33,9 @@ export function foo (value) {
 import {foo} from "./index.js"
 </script>
 <!-- 不是代码片段 -->
-<pre><code class="language-javascript">{{ childArrIsSame.toString() }}</code></pre>
+<pre><code class="language-javascript">{{ foo.toString() }}</code></pre>
 <!-- 代码不高亮 -->
-\```bash-vue
+\`\`\`bash-vue
 {{ foo }}
-\```
+\`\`\`
 ```
