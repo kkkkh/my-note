@@ -11,16 +11,14 @@ outline: deep
   - [Cookies.js](https://github.com/ScottHamper/Cookies) cookie
   - [web-vitals](https://www.npmjs.com/package/web-vitals)
 - 交互
-  - 创建“浮动”元素
-    - [popper.js v2](https://popper.js.org/docs/v2/) &nbsp;&nbsp;&nbsp;[floating-ui](https://floating-ui.com/docs/getting-started) 
-  - 拖拽
-    - [sortablejs](https://github.com/SortableJS/Sortable) &nbsp;&nbsp;&nbsp;[sortablejs demo](https://sortablejs.github.io/Sortable/) 
+  - [popper.js v2](https://popper.js.org/docs/v2/) &nbsp;&nbsp;&nbsp;[floating-ui](https://floating-ui.com/docs/getting-started) 创建“浮动”元素
+  - [sortablejs](https://github.com/SortableJS/Sortable) &nbsp;&nbsp;&nbsp;[sortablejs demo](https://sortablejs.github.io/Sortable/) 拖拽
 - zpl
   - [zpl-image](https://www.npmjs.com/package/zpl-image)
   - [zpl-image-2](https://www.npmjs.com/package/zpl-image-2) 图像转换为 Z64 编码或 ACS 编码的 GRF 位图以与 ZPL 一起使用
   - [jszpl](https://www.npmjs.com/package/jszpl) 生成 ZPL
 - mock数据
-  - [fakerjs](https://fakerjs.dev/guide/) &nbsp;&nbsp;&nbsp;[mockm](https://github.com/wll8/mockm) &nbsp;&nbsp;&nbsp;[mockjs(停止维护)](https://github.com/nuysoft/Mock/wiki/Getting-Started) 
+  - [fakerjs](https://fakerjs.dev/guide/) &nbsp;&nbsp;&nbsp;[mockm](https://github.com/wll8/mockm) &nbsp;&nbsp;&nbsp;[mockjs(停止维护)](https://github.com/nuysoft/Mock/wiki/Getting-Started)
 - icons
   - [iconify 文档](https://iconify.design/docs/) &nbsp;&nbsp;&nbsp;[Browse Icons](https://icon-sets.iconify.design/) &nbsp;&nbsp;&nbsp;[icones](https://icones.js.org/)(Icon Explorer with Instant searching, powered by Iconify)
 - date
@@ -29,6 +27,22 @@ outline: deep
 - crypto
   - [jsencrypt](https://github.com/travist/jsencrypt) 加密
   - [crypto-js](https://github.com/brix/crypto-js) 数据摘要（停止维护：NodeJS 和现代浏览器都有原生 Crypto 模块）
+- pdf
+  - [jspdf](https://parall.ax/products/jspdf)
+  - [html2pdf](https://github.com/eKoopmans/html2pdf.js)
+  - [html2canvas](https://html2canvas.hertzen.com/)
+- http
+  - [mime](https://www.npmjs.com/package/mime)
+- env
+  - [cross-env](https://github.com/kentcdodds/cross-env) 解决跨平台环境变量问题
+  - [dotenv](https://dotenvx.com/docs/) 管理本地的 .env 配置文件
+- git
+  - [degit](https://github.com/Rich-Harris/degit)
+  - git hooks
+    - [husky](https://typicode.github.io/husky/)
+    - [lint-staged](https://www.npmjs.com/package/lint-staged#configuration)
+    - [release-it](https://github.com/release-it/release-it)
+    - [release-it/conventional-changelog](https://github.com/release-it/conventional-changelog) 版本提交日志
 ## Vue plugin (Vue 扩展组件)
 ### component
 - [DMap(谛听)](https://juejin.cn/post/6844903593284206605) ([vue-bigdata-table](https://github.com/lison16/vue-bigdata-table))
@@ -55,6 +69,7 @@ outline: deep
 - [unplugin-vue-components](https://www.npmjs.com/package/unplugin-vue-components#Configuration) 按需加载
 - [unplugin-icons](https://www.npmjs.com/package/unplugin-icons#auto-importing#Migrate%20from%20vite-plugin-icons) 图标
 - [rollup-plugin-visualizer](https://www.npmjs.com/package/rollup-plugin-visualizer) build分析可视化
+- [vite-plugin-inspect](https://github.com/antfu-collective/vite-plugin-inspect) 检查Vite插件的中间状态-调试和创作插件
 
 ## typescript
 #### jsdoc
