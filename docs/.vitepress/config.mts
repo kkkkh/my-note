@@ -134,6 +134,7 @@ export default defineConfig({
             { text: 'react plugin', link: '/front-end/Plugin/React/' },
             { text: 'Vite plugin', link: '/front-end/Plugin/Vite/' },
             { text: 'Ts plugin', link: '/front-end/Plugin/Ts/' },
+            { text: 'git', link: '/front-end/Plugin/Git/' },
           ],
         },
         {
