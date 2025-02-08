@@ -19,3 +19,7 @@ outline: deep
 - Unicode 表情符号
   - [emojipedia](https://emojipedia.org/)
   - [symbl](https://symbl.cc/)
+- 平台
+  - [Behance](https://www.behance.net/)
+- 字体
+  - [100font](https://www.100font.com/)
