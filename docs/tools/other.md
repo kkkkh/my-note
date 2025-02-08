@@ -4,15 +4,22 @@ outline: deep
 ## 其他工具
 - [Upsource](https://www.jetbrains.com/) 代码审查
 - [draw.io](https://www.drawio.com/) draw.io绘图（[diagrams](https://app.diagrams.net/?src=about)）
-- [trello](https://trello.com/) 看板/任务
 - [lottiefiles](https://lottiefiles.com/) lotties动画
-- [Markdown](https://markdown.com.cn/) 文档
-- [gitbook](https://www.gitbook.com/)
-- [tinypng](https://tinypng.com/)&nbsp; [compresspng](https://compresspng.com/zh/) 压缩图片
-- [gopng](https://alloyteam.github.io/gopng/) sprite图
-- [openvpn](https://openvpn.net/download-open-vpn/) vpn
 - [hourse](https://www.cq315house.com/)
-- [snipaste](https://www.snipaste.com/download.html)&nbsp; [Lightshot](https://app.prntscr.com/zh-cn/help.html)&nbsp; [Umi-OCR](https://github.com/hiroi-sora/Umi-OCR?tab=readme-ov-file) 截图
+- 图片
+  - [tinypng](https://tinypng.com/) 压缩图片
+  - [compresspng](https://compresspng.com/zh/) 压缩图片
+  - [gopng](https://alloyteam.github.io/gopng/) sprite图
+- 文档
+  - [trello](https://trello.com/) 看板/任务
+  - [语雀](https://www.yuque.com/)
+  - [Markdown](https://markdown.com.cn/)
+  - [gitbook](https://www.gitbook.com/)
+  - [石墨文档](https://shimo.im)
+- 截图
+  - [snipaste](https://www.snipaste.com/download.html)
+  - [Lightshot](https://app.prntscr.com/zh-cn/help.html)
+  - [Umi-OCR](https://github.com/hiroi-sora/Umi-OCR?tab=readme-ov-file)
 - [Everything](https://www.voidtools.com/zh-cn/) windows检索系统的文件
 - [ilovepdf](https://www.ilovepdf.com/) pdf
 - [Clover](http://cn.ejie.me/) 为Windows增加类似浏览器的多标签页功能
@@ -21,3 +28,8 @@ outline: deep
 - 工业软件
   - [电路板](https://lceda.cn/)
   - [CAD](https://www.onshape.com/en/)
+- vpn
+  - [openvpn](https://openvpn.net/download-open-vpn/)
+  - [一元机场](https://xn--4gq62f52gdss.com/#/login) 需翻
+  - [一元机场](https://xn--4gq62f52gdss.ink/#/login)
+  - [丛雨云](https://cn.congyu.org/)
