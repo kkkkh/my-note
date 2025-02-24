@@ -1,9 +1,26 @@
 ---
 outline: deep
 ---
-
 # Js
+[JavaScript 参考](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference)
 ## 数据类型
+### 变量声明
+#### let
+let可以创建暂时性死区，以屏蔽变量提升带来的问题，帮助开发者轻松捕获错误。
+变量提升是指变量的声明会提升到所在作用域的顶部
+```js
+for (var i = 0; i < 10; i++) {
+  setTimeout(() => {
+    console.log(i)
+  }, 300) //输出10次，全部输出10
+}
+// let声明会将变量绑定到块级作用域，虽然每次循环也会给变量加1，但每次循环都会创建一个新的绑定，也就是说每次执行setTimeout回调时，都是使用自己的i变量。
+for (let i = 0; i < 10; i++) {
+  setTimeout(() => {
+    console.log(i)
+  }, 300) //输出10次，依次为0、1、2、…、9
+}
+```
 ### 操作符
 https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators
 ```js
@@ -45,15 +62,47 @@ console.log(num) // '65535'
 ```
 - 2进制 与 16进制相互转化
 ```js
-// 都先转为10进制，再转为对应进制
 // 2 转 16
+// 都先转为10进制，再转为对应进制
 const binary = "1101"; // 二进制字符串
 const hex = parseInt(binary, 2).toString(16); // 解析为十进制并转换为十六进制
 console.log(hex); // 输出: "d"
+// 将二进制数据（ArrayBuffer 或 Uint8Array）转换为十六进制
+function binaryToHex(buffer) {
+  return Array.from(buffer) // 将 buffer 转为数组
+    .map(byte => byte.toString(16).padStart(2, '0')) // 转换为十六进制，确保两位
+    .join(''); // 合并为字符串
+}
+const binaryData = new Uint8Array([0b10101010, 0b11110000, 0b11001100]); // 示例二进制数据
+console.log(binaryToHex(binaryData)); // 输出: "aaf0cc"
+// 使用 BigInt 处理超大二进制字符串
+const longBinary = "1010101010101010101010101010101010101010";
+const hex = BigInt(`0b${longBinary}`).toString(16);
+console.log(hex); // 输出: "aaaaaaa"
+```
+```js
 // 16 转 2
+// 都先转为10进制，再转为对应进制
 const hex = "1f"; // 示例十六进制字符串
 const binary = parseInt(hex, 16).toString(2); // 转为二进制字符串
 console.log(binary); // 输出: "11111"
+// 保证输出固定长度的二进制字符串
+const hex = "1f"; // 示例十六进制字符串
+const binary = parseInt(hex, 16).toString(2).padStart(hex.length * 4, '0');
+console.log(binary); // 输出: "00011111"
+// 将多个十六进制字符逐一转换为二进制
+function hexToBinary(hex) {
+  return hex
+    .split('') // 将字符串拆分成单个字符
+    .map(char => parseInt(char, 16).toString(2).padStart(4, '0')) // 每个字符转为二进制并补齐 4 位
+    .join(''); // 合并为完整二进制字符串
+}
+const hexString = "1fa9";
+console.log(hexToBinary(hexString)); // 输出: "0001111110101001"
+// 使用 BigInt 处理长十六进制字符串
+const longHex = "1fa9b3c4";
+const binary = BigInt(`0x${longHex}`).toString(2); // 使用 BigInt 转换
+console.log(binary); // 输出: "11111101010011011001111000100"
 ```
 #### parseInt
 - parseInt(string, radix) 解析一个字符串并返回指定基数的十进制整数
@@ -452,8 +501,9 @@ const foo = {
 };
 foo.hasOwnProperty("bar"); // 该重新实现始终返回 false
 ```
-https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwn
-https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty
+参考：
+- [hasOwn](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwn)
+- [hasOwnProperty](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty)
 #### Object.create()
 以一个现有对象作为原型，创建一个新对象
 ```js
@@ -473,8 +523,9 @@ o = new Constructor();
 // 等价于：
 o = Object.create(Constructor.prototype);
 ```
-https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf
-https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/create
+参考：
+- [setPrototypeOf](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf)
+- [create](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/create)
 #### Object.is()
 ```js
 console.log(Object.is('1', 1));
@@ -577,22 +628,46 @@ var res1 = Object.prototype.toString.call(null); //  "[object Null]"
 console.log(res1);
 ```
 ### RegExp
-#### 基础
-- 特殊字符
-- #### 对比
-  ```js
-  /\d/  // \d 范围大 也包含中文全角0-9
-  /[0-9]/ // 0-9 范围小
-  /[\u4e00-\u9fa5]/ //汉字
-  /\r/ // 匹配一个回车符
-  /\n/ // 换行符匹配;
-  // 在 Unix 和 Linux 系统（包括 macOS）中，换行符用 \n（LF，Line Feed）表示。
-  // 在 Windows 系统中，换行符用 \r\n（CR+LF，Carriage Return + Line Feed）表示。
-  // 早期的 Mac OS（例如，Mac OS 9）使用 \r（CR，Carriage Return）表示换行。
-  // 以\n为主流
-  ```
-
-- 创建
+#### 特殊字符
+```js
+/\d/  // \d 范围大 也包含中文全角0-9
+/[0-9]/ // 0-9 范围小
+/\w/ // A-Za-z0-9_
+/[\u4e00-\u9fa5]/ //汉字
+/\r/ // 匹配一个回车符
+/\n/ // 换行符匹配;
+// 数量
+/\d?/ //0次 或 1次
+/\d*/ //0次 或 多次
+/\d+/ //1次 或 多次
+// 在 Unix 和 Linux 系统（包括 macOS）中，换行符用 \n（LF，Line Feed）表示。
+// 在 Windows 系统中，换行符用 \r\n（CR+LF，Carriage Return + Line Feed）表示。
+// 早期的 Mac OS（例如，Mac OS 9）使用 \r（CR，Carriage Return）表示换行。
+// 以\n为主流
+```
+#### 匹配规则
+```js
+// 匹配 "x" 或 "y" 任意一个字符。
+/x|y/
+/green|red/ // 在 "green apple" 里匹配 "green"，且在 "red apple" 里匹配 "red" 。
+// 匹配任何一个包含的字符
+/[xyz]/
+/[a-c]/ // [abc]相同
+// 一个否定的或被补充的字符集
+/[^xyz]/
+/[^a-c]/
+// 捕获组
+/(x)/ // 捕获组会带来性能损失。如果不需要收回匹配的子字符串，请选择非捕获括号，下边的例子
+// \n 非捕获括号
+/apple(\,)orange\1/.exec("apple,orange,cherry,peach") // 其中 \1 引用了 之前使用 () 捕获的
+// (?<Name>x) 具名捕获组：匹配"x"并将其存储在返回的匹配项的 groups 属性中，
+/-(?<customName>\w)/ // 匹配“web-doc” 中的“d”
+'web-doc'.match(/-(?<customName>\w)/).groups //{customName: "d"}
+// (?:x) 非捕获组：匹配 “x”，但不记得匹配。不能从结果数组的元素中收回匹配的子字符串
+/(a)(?:b)(c)/.exec("abc") // ['abc', 'a', 'c', index: 0, input: 'abc', groups: undefined]
+```
+参考：[Groups and ranges](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_expressions/Groups_and_backreferences)
+#### RegExp
   ```js
   // 1
   var re = /ab+c/;
@@ -603,10 +678,163 @@ console.log(res1);
   var re = /[a-z]\s/i
   var re = new RegExp("[a-z]\\s", "i")
   ```
-- RegExp 涉及的api
+#### RegExp涉及的api
   - RegExp 的 exec 和 test 方法
   - String 的 match、matchAll、replace、replaceAll、search 和 split
-- u 修饰符
+#### exec
+```js
+const regex1 = RegExp('foo(?<rGroup>[^foo]*)', 'dg');
+const str1 = 'table foooof, football, foosball';
+let array1;
+console.log("regex1.lastIndex",regex1.lastIndex)
+while ((array1 = regex1.exec(str1)) !== null) {
+	console.log("array1",array1)
+	console.log("array1.input",array1.input) // 匹配到的字符串和所有被记住的子字符串。
+	console.log("array1.groups",array1.groups) // 一个命名捕获组对象，其键是名称，值是捕获组。
+	console.log("array1.index",array1.index) //	在输入的字符串中匹配到的以 0 开始的索引值。
+	console.log("array1.indices",array1.indices) // 此属性仅在设置了 d 标志位时存在。它是一个数组，其中每一个元素表示一个子字符串的边界。
+  console.log("------------------------")
+	console.log("regex1",regex1)
+	console.log("regex1.source",regex1.source) // 模式字面文本
+  console.log("regex1.lastIndex",regex1.lastIndex) // 开始下一个匹配的起始索引值。这个属性只有在使用 g 参数时可用在
+  console.log("~~~~~~~~~~~~~~~~~~~~~~~~")
+}
+/*
+> "regex1.lastIndex" 0
+> "array1" Array ["foo", ""]
+> "array1.input" "table foooof, football, foosball"
+> "array1.groups" Object { rGroup: "" }
+> "array1.index" 6
+> "array1.indices" Array [Array [6, 9], Array [9, 9]]
+> "------------------------"
+> "regex1" /foo(?<rGroup>[^foo]*)/dg
+> "regex1.source" "foo(?<rGroup>[^foo]*)"
+> "regex1.lastIndex" 9
+> "~~~~~~~~~~~~~~~~~~~~~~~~"
+> "array1" Array ["football, ", "tball, "]
+> "array1.input" "table foooof, football, foosball"
+> "array1.groups" Object { rGroup: "tball, " }
+> "array1.index" 14
+> "array1.indices" Array [Array [14, 24], Array [17, 24]]
+> "------------------------"
+> "regex1" /foo(?<rGroup>[^foo]*)/dg
+> "regex1.source" "foo(?<rGroup>[^foo]*)"
+> "regex1.lastIndex" 24
+> "~~~~~~~~~~~~~~~~~~~~~~~~"
+> "array1" Array ["foosball", "sball"]
+> "array1.input" "table foooof, football, foosball"
+> "array1.groups" Object { rGroup: "sball" }
+> "array1.index" 24
+> "array1.indices" Array [Array [24, 32], Array [27, 32]]
+> "------------------------"
+> "regex1" /foo(?<rGroup>[^foo]*)/dg
+> "regex1.source" "foo(?<rGroup>[^foo]*)"
+> "regex1.lastIndex" 32
+> "~~~~~~~~~~~~~~~~~~~~~~~~"
+*/
+```
+- 如果你只是为了判断是否匹配，请使用 `RegExp.prototype.test()` 方法代替。
+- 如果你只是为了找出所有匹配正则表达式的字符串而又不关心捕获组，请使用 `String.prototype.match()` 方法代替。
+- 此外，`String.prototype.matchAll()` 允许你对匹配项进行迭代，这有助于简化匹配字符串的多个部分（带有匹配组）。
+- 如果你只是为了查找在字符串中匹配的索引，请使用 `String.prototype.search()` 方法代替。
+#### matchAll / match
+matchAll(regexp)
+- 如果 regexp 是一个正则表达式，那么它必须设置了全局（g）标志，否则会抛出 TypeError 异常。
+- 返回值：一个匹配结果的可迭代迭代器对象（它不可重新开始）。每个匹配结果都是一个数组，其形状与 RegExp.prototype.exec() 的返回值相同。
+```js
+const regexp = /t(e)(st(\d?))/g;
+const str = 'test1test2';
+console.log(str.matchAll(regexp))
+const array = [...str.matchAll(regexp)];
+console.log(array[0]);
+console.log(array[1]);
+// > [object RegExp String Iterator]
+// > Array ["test1", "e", "st1", "1"]
+// > Array ["test2", "e", "st2", "2"]
+```
+与 exec 比对
+- matchAll() 方法，则可以避免使用 while 循环和带有 g 标志的 exec
+- matchAll 内部做了一个 regexp 的复制，lastIndex 在字符串扫描后不会改变（不像 regexp.exec()）
+```js
+const regexp = /foo[a-z]*/g;
+const str = "table football, foosball";
+let match;
+while ((match = regexp.exec(str)) !== null) {
+  console.log(
+    `找到 ${match[0]} 起始位置=${match.index} 结束位置=${regexp.lastIndex}。`,
+  );
+}
+// 找到 football 起始位置=6 结束位置=14。
+// 找到 foosball 起始位置=16 结束位置=24。
+```
+```js
+const regexp = /foo[a-z]*/g;
+const str = "table football, foosball";
+const matches = str.matchAll(regexp);
+for (const match of matches) {
+  console.log(
+    `找到 ${match[0]} 起始位置=${match.index} 结束位置=${
+      match.index + match[0].length
+    }.`,
+  );
+}
+// 找到 football 起始位置=6 结束位置=14.
+// 找到 foosball 起始位置=16 结束位置=24.
+// 匹配迭代器在 for...of 迭代后用尽
+// 再次调用 matchAll 以创建新的迭代器
+Array.from(str.matchAll(regexp), (m) => m[0]);
+// [ "football", "foosball" ]
+```
+与 match 比对
+- 比 String.prototype.match() 更好的捕获组获取方式
+- 当使用全局 g 标志调用 match() 方法时，捕获组会被忽略
+```js
+const regexp = /t(e)(st(\d?))/g;
+const str = "test1test2";
+str.match(regexp); // ['test1', 'test2']
+```
+```js
+const array = [...str.matchAll(regexp)];
+array[0];
+// ['test1', 'e', 'st1', '1', index: 0, input: 'test1test2', length: 4]
+array[1];
+// ['test2', 'e', 'st2', '2', index: 5, input: 'test1test2', length: 4]
+```
+#### 修饰符
+| 标志 | 描述 |
+|------|------|
+| g    | 全局搜索。 |
+| i    | 不区分大小写搜索。 |
+| m    | 多行搜索。 |
+| s    | 允许 . 匹配换行符。 |
+| u    | 使用 unicode 码的模式进行匹配。 |
+| y    | 执行“粘性 (sticky)”搜索，匹配从目标字符串的当前位置开始。 |
+| d    | 表示正则表达式匹配的结果应该包含每个捕获组子字符串开始和结束的索引。 |
+
+##### -y
+- RegExp.prototype.sticky
+- sticky 属性反映了搜索是否具有粘性（仅从正则表达式的 lastIndex 属性表示的索引处搜索）
+- 如果一个表达式同时指定了 sticky 和 global，其将会忽略 global 标志。
+```js
+const str1 = 'table football';
+const regex1 = new RegExp('foo', 'y');
+regex1.lastIndex = 6;
+console.log(regex1.sticky); // true
+console.log(regex1.test(str1));// true
+console.log(regex1.lastIndex);// 9
+console.log(regex1.test(str1));// false
+```
+- 当使用带有 y 标识的匹配模式时，^ 断言总是会匹配输入的开始位置或者（如果是多行模式）每一行的开始位置。
+```js
+var regex = /^foo/y;
+regex.lastIndex = 2;
+regex.test("..foo"); // false - 索引 2 不是字符串的开始
+var regex2 = /^foo/my; // m 多行搜索
+regex2.lastIndex = 2;
+regex2.test("..foo"); // false - 索引 2 不是字符串或行的开始
+regex2.lastIndex = 2;
+regex2.test(".\nfoo"); // true - 索引 2 是行的开始
+```
 #### 案例
 - 示例：[String replace](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
   ```js
@@ -657,6 +885,8 @@ console.log(res1);
 - 参考：
   - [正则表达式](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_expressions#special-line-feed)
   - [learn-regex-zh](https://github.com/cdoco/learn-regex-zh)
+  - [learn-regex](https://github.com/ziishaned/learn-regex/blob/master/translations/README-cn.md)
+  - [common-regex](https://github.com/cdoco/common-regex)
 ### Function
 - 判断是否是Function
   - func && func(args)
@@ -793,6 +1023,27 @@ console.log(months4); // ["Jan", "Feb", "Mar", "May"]
 // 原数组不会被修改
 console.log(months); // ["Jan", "Mar", "Apr", "May"]
 
+```
+#### sort
+```js
+function compareFn(a, b) {
+  // 升序
+  if (a < b) {// < 0，a 在 b 前，如 [a, b]
+    return -1;
+  }
+  if (a > b) {// > 0，a 在 b 后，如 [b, a]
+    return 1;
+  }
+  // a 一定等于 b
+  return 0; // === 0	保持 a 和 b 原来的顺序
+}
+```
+要比较数字而非字符串，比较函数可以简单的用 a 减 b，如下的函数将会将数组升序排列（如果它不包含 Infinity 和 NaN）：
+```js
+// 升序排列
+function compareNumbers(a, b) {
+  return a - b;
+}
 ```
 ### Math
 #### Math.max() / Math.min()
@@ -946,192 +1197,3 @@ console.log(set1.has(1)); // true
 console.log(set1.has(5)); // true
 console.log(set1.has(6)); // true
 ```
-## web API
-### Promise
-#### Promise.all
-- 报错处理
-```js
-const promise1 = Promise.resolve(1);
-const promise2 = 42;
-const promise3 = new Promise((resolve, reject) => {
-  throw new Error("3")
-});
-Promise.all([promise1, promise2, promise3]).then((values) => {
-  console.log(values);
-}).catch((error)=>{
-  console.log(error)
-});
-//  Error: 3
-```
-```js
-const promise1 = Promise.resolve(1);
-const promise2 = new Promise((resolve, reject) => {
-  throw new Error("2")
-});
-const promise3 = new Promise((resolve, reject) => {
-  throw new Error("3")
-});
-Promise.all([promise1, promise2, promise3]).then((values) => {
-  console.log(values);
-}).catch((error)=>{
-  console.log(error)
-});
-//  Error: 2
-```
-```js
-const promise1 = Promise.resolve(1);
-const promise2 = 42;
-const promise3 = new Promise((resolve, reject) => {
-  setTimeout(()=>{
-    // reject(3)
-    throw new Error("3")
-  },1000)
-});
-Promise.all([promise1, promise2, promise3]).then((values) => {
-  console.log(values);
-}).catch((error)=>{
-  console.log(error)
-});
-//  then 和 catch 都不会被触发
-// setTimeout中的Error无法被捕获到，可使用reject报错处理
-```
-#### 对比
-- Promise.all()
-  - 返回一个兑现值数组，有reject，则catch
-- Promise.allSettled()
-  - 所有输入的 Promise 完成，不管resolve还是reject
-- Promise.any()
-  - 返回第一个兑现的 Promise
-  - 没有 Promise 被兑现，使用 AggregateError 进行拒绝
-- Promise.race()
-  - 第一个异步任务完成时，不管resolve还是reject
-
-- 参考：[Promise.all](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise/all)
-### new URL(url, import.meta.url)
-- 示例代码：
-  ```js
-  // 1
-  const imgUrl = new URL('./img.png', import.meta.url).href
-  document.getElementById('hero-img').src = imgUrl
-  // 2支持动态
-  function getImageUrl(name) {
-    return new URL(`./dir/${name}.png`, import.meta.url).href
-  }
-  ```
-- new URL(url, base)
-  - url：一个表示绝对或相对 URL
-  - base：一个表示基准 URL 的字符串，当 url 为相对 URL 时，它才会生效
-  - new URL(`./dir/${name}.png`, import.meta.url)
-- import.meta.url
-  - import.meta.url 是一个 ESM 的原生功能，会暴露`当前模块的 URL`
-  - 在一个项目中 console.log(import.meta.url) => `http://localhost:8000/xx/src/views/xx.vue?t=172196193xxxx` 相当于当前模块的路径所在，作为基准值，第一个参数再为一个相对路径
-- import.meta.reslove()
-  ```js
-  // Approach 1
-  console.log(await import("./lib/helper.js"));
-  // Approach 2
-  const helperPath = import.meta.resolve("./lib/helper.js");
-  console.log(helperPath);
-  console.log(await import(helperPath));
-  ```
-  ```js
-  const helperPath = import.meta.resolve("./lib/helper.js");
-  console.log(helperPath);
-  // 相同
-  const helperPath = new URL("./lib/helper.js", import.meta.url).href;
-  console.log(helperPath);
-  ```
-- 参考：
-  - [new URL()](https://developer.mozilla.org/zh-CN/docs/Web/API/URL/URL)
-  - [URL](https://developer.mozilla.org/zh-CN/docs/Web/API/URL)
-  - [import.meta](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/import.meta) 元属性将特定上下文的元数据暴露给 JavaScript 模块，vite 在原生的基础上拓展了功能，例如 import.meta.env
-- 在 esm 中路径解析，[参考 import.meta](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/import.meta)
-  ```js
-  // 之前（CommonJS）：
-  const fs = require('fs/promises')
-  const path = require('path')
-  const filePath = path.join(__dirname, 'someFile.txt')
-  fs.readFile(filePath, 'utf8').then(console.log)
-  // 之后（ES 模块）：
-  import fs from 'node:fs/promises'
-  const fileURL = new URL('./someFile.txt', import.meta.url)
-  fs.readFile(fileURL, 'utf8').then(console.log)
-  ```
-### TextEncoder / TextDecoder
-#### TextEncoder
-- 接受码位流作为输入，并提供 UTF-8 字节流作为输出
-- encode
-  ```js
-  // 1、TextEncoder utf-8
-  const textEncoder = new TextEncoder();
-  let encoded = textEncoder.encode("Ï");
-  console.log(encoded);
-  const textDecoder = new TextDecoder();
-  const decoded = textDecoder.decode(encoded);
-  console.log(decoded);
-  // 2、TextEncoder 非utf-8，只能utf-8
-  const textEncoder1 = new TextEncoder("windows-1251");
-  // 并不生效
-  const encoded1 = textEncoder1.encode("Привет, мир!");
-  const encoded2 = textEncoder.encode("Привет, мир!");
-  console.log(encoded1);
-  console.log(encoded2);
-  ```
-  ```js
-  // 当时不理解，为什么对base64解码的密钥的二进制字节流的处理
-  // 1、超码位的情况，这种二进制字符串不会有（0-255）
-  // 2、二进制字符处理是基于utf-16的，而 new TextEncoder().encode()是utf-8的实现不同
-  // 以下是chartgpt 提供实现思路，增强版的与str2ab，结果与源码不一样，为什么不一样呢？因为无论如何实现都是基于，utf-16的实现，应该是这样
-  function encodeStringToUtf8ByteArray(str) {
-    const utf8Bytes = [];
-    for (let i = 0; i < str.length; i++) {
-      const codePoint = str.codePointAt(i);
-      if (codePoint < 0x80) {
-        utf8Bytes.push(codePoint);
-      } else if (codePoint < 0x800) {
-        utf8Bytes.push((codePoint >> 6) | 0xc0);
-        utf8Bytes.push((codePoint & 0x3f) | 0x80);
-      } else if (codePoint < 0x10000) {
-        utf8Bytes.push((codePoint >> 12) | 0xe0);
-        utf8Bytes.push(((codePoint >> 6) & 0x3f) | 0x80);
-        utf8Bytes.push((codePoint & 0x3f) | 0x80);
-      } else {
-        utf8Bytes.push((codePoint >> 18) | 0xf0);
-        utf8Bytes.push(((codePoint >> 12) & 0x3f) | 0x80);
-        utf8Bytes.push(((codePoint >> 6) & 0x3f) | 0x80);
-        utf8Bytes.push((codePoint & 0x3f) | 0x80);
-      }
-    }
-    return new Uint8Array(utf8Bytes);
-  }
-  encodeStringToUtf8ByteArray("𠮷") // [240, 160, 174, 183, 237, 190, 183]
-  let str = "𠮷";
-  // new TextEncoder().encode() 底层是基于utf-8的
-  let uint8Array = = new TextEncoder().encode(str);
-  console.log("𠮷 uint8Array", uint8Array);  // [240, 160, 174, 183]
-  ```
-- encodeInto
-  - TextEncoder.encodeInto() 方法接受一个要编码的字符串和一个目标 Uint8Array，将生成的 UTF-8 编码的文本放入目标数组中，并返回一个指示编码进度的字典对象。
-  - 这相比于旧的 encode() 方法性能更高——尤其是当目标缓冲区是 WASM 堆视图时。
-#### TextDecoder
-- 接口表示一个文本解码器，一个解码器只支持一种特定文本编码，例如 UTF-8、ISO-8859-2、KOI8-R、GBK，等等。
-- 解码器将字节流作为输入，并提供码位流作为输出（从技术上说，字符串的每个字符对应的是 Unicode 码位，因此可以视作“码位流的表示”。）
-- decode
-  ```js
-  // 3、TextDecoder utf-8
-  let utf8decoder = new TextDecoder(); // default 'utf-8' or 'utf8'
-  let u8arr = new Uint8Array([240, 160, 174, 183]);
-  let i8arr = new Int8Array([-16, -96, -82, -73]);
-  let u16arr = new Uint16Array([41200, 47022]);
-  let i16arr = new Int16Array([-24336, -18514]);
-  let i32arr = new Int32Array([-1213292304]);
-  console.log(utf8decoder.decode(u8arr));
-  console.log(utf8decoder.decode(i8arr));
-  console.log(utf8decoder.decode(u16arr));
-  console.log(utf8decoder.decode(i16arr));
-  console.log(utf8decoder.decode(i32arr));
-  // 4、TextDecoder 非utf-8
-  const win1251decoder = new TextDecoder("windows-1251");
-  const bytes = new Uint8Array([207, 240, 232, 226, 229, 242, 44, 32, 236, 232, 240, 33]);
-  console.log(win1251decoder.decode(bytes)); // Привет, мир!
-  ```
