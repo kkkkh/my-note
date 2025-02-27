@@ -33,6 +33,7 @@ outline: deep
   @checkbox-change="selectChangeEvent"
 >
   <template #headerLeftStart></template>
+  <template #operate="{ row }"></template>
 </PackRichTable>
 ```
 ```js{1-3,5-6,9-10,14-16,20}
