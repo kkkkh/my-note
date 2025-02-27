@@ -19,6 +19,47 @@ outline: deep
   - 外层触发计算
   - 内部筛选计算
   - 内部排序计算
+### Pack-table
+
+```html
+<PackRichTable
+  ref="packRichTable"
+  :filters="filters"
+  :immediate="false"
+  is-query-vo
+  :load="load"
+  :query-form="form"
+  :table-id="tableId"
+  @checkbox-change="selectChangeEvent"
+>
+  <template #headerLeftStart></template>
+</PackRichTable>
+```
+```js{1-3,5-6,9-10,14-16,20}
+import { TableIdMap } from '@/const/index'
+import { tablePack } from '@/mixins/table-pack'
+import PackRichTable from '@/views/common/PackRichTable.vue'
+export default {
+  components: { PackRichTable },
+  mixins: [tablePack],
+  data(){
+    return {
+      load: queryPageV2,
+      filters: {},
+    }
+  },
+  computed:{
+    tableId() {
+      return TableIdMap.xx.xx
+    },
+  },
+  methods:{
+    async handleExport() {
+      const params = this.$refs.packRichTable.mergeParams()
+    },
+  }
+}
+```
 ## api
 ### vue-request
 - useRequest
