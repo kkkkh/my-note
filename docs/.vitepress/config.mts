@@ -1,11 +1,22 @@
 import { defineConfig } from 'vitepress'
 
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: 'My Note',
   description: 'A Blog site',
   // lang: 'zh',
   base: '/my-note/',
+  vite: {
+    resolve: {
+      alias: [{ find: '@', replacement: '/docs' },]
+    },
+  },
+  head: [
+    // ['link', { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css' }],
+    // ['link', { rel: 'stylesheet', href: 'https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css' }],
+    // ['script', { src: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js' }]
+  ],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     search: {
@@ -91,7 +102,9 @@ export default defineConfig({
             { text: 'js', link: '/front-end/JavaScript/Js/' },
             { text: 'dom', link: '/front-end/JavaScript/Dom/' },
             { text: 'bom', link: '/front-end/JavaScript/Bom/' },
+            { text: 'webapi', link: '/front-end/JavaScript/WebApi/' },
             { text: 'brower', link: '/front-end/JavaScript/Browser/' },
+            { text: 'es', link: '/front-end/JavaScript/ES6/' },
           ],
         },
         {
@@ -136,6 +149,10 @@ export default defineConfig({
             { text: 'Ts plugin', link: '/front-end/Plugin/Ts/' },
             { text: 'git', link: '/front-end/Plugin/Git/' },
           ],
+        },
+        {
+          text: '设计模式',
+          link: '/front-end/DesignPatterns/',
         },
         {
           text: '工程化',
@@ -213,7 +230,14 @@ export default defineConfig({
               text: 'NodeJs',
               link: '/back-end/Lang/NodeJs/',
               items: [
-                { text: 'crypto', link: '/back-end/Lang/NodeJs/Crypto/' },
+                { text: 'Base', link: '/back-end/Lang/NodeJs/Base/' },
+                { text: 'Book', items: [
+                  { text: '深入浅出nodejs', link: '/back-end/Lang/NodeJs/Book/note/' },
+                ]},
+                { text: '脚本', link: '/back-end/Lang/NodeJs/Script/' },
+                { text: 'Module', items:
+                  [{ text: 'crypto', link: '/back-end/Lang/NodeJs/Module/Crypto/' },]
+                 },
               ]
             },
           ],
@@ -228,5 +252,14 @@ export default defineConfig({
       ],
     },
     socialLinks: [{ icon: 'github', link: 'https://github.com/kkkkh' }],
+  },
+  markdown: {
+  // Markdown 配置选项 參考：https://github.com/vuejs/vitepress/blob/main/src/node/markdown/markdown.ts
+  // lineNumbers: true,  // 如果希望代码块显示行号
+    config: (md) => {
+      // console.log( md.renderer.rules)
+      // 自定义 Markdown-It 插件
+      // md.use(require('markdown-it-emoji'))  // 示例：添加 emoji 支持
+    }
   },
 })
