@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitepress'
-
-
+import {fileURLToPath} from 'node:url'
 // https://vitepress.dev/reference/site-config
+console.log(fileURLToPath(new URL('../../docs', import.meta.url)))
 export default defineConfig({
   title: 'My Note',
   description: 'A Blog site',
@@ -9,7 +9,9 @@ export default defineConfig({
   base: '/my-note/',
   vite: {
     resolve: {
-      alias: [{ find: '@', replacement: '/docs' },]
+      alias: [
+        { find: '@', replacement: fileURLToPath(new URL('../../docs', import.meta.url))},
+      ]
     },
   },
   head: [
