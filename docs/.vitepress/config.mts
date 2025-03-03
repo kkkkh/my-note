@@ -1,7 +1,8 @@
 import { defineConfig } from 'vitepress'
 import {fileURLToPath} from 'node:url'
+
+
 // https://vitepress.dev/reference/site-config
-console.log(fileURLToPath(new URL('../../docs', import.meta.url)))
 export default defineConfig({
   title: 'My Note',
   description: 'A Blog site',
@@ -106,7 +107,7 @@ export default defineConfig({
             { text: 'bom', link: '/front-end/JavaScript/Bom/' },
             { text: 'webapi', link: '/front-end/JavaScript/WebApi/' },
             { text: 'brower', link: '/front-end/JavaScript/Browser/' },
-            { text: 'es', link: '/front-end/JavaScript/ES6/' },
+            // { text: 'es', link: '/front-end/JavaScript/ES6/' },
           ],
         },
         {
@@ -114,14 +115,6 @@ export default defineConfig({
           link: '/front-end/TypeScript/',
           items: [
             { text: 'ts', link: '/front-end/TypeScript/' }],
-        },
-        {
-          text: 'Http',
-          link: '/front-end/Http/',
-          items: [
-            { text: 'ajax', link: '/front-end/Http/Ajax/' },
-            { text: '抓包', link: '/front-end/Http/PacketCapture/' },
-          ],
         },
         {
           text: 'Vue',
@@ -151,10 +144,6 @@ export default defineConfig({
             { text: 'Ts plugin', link: '/front-end/Plugin/Ts/' },
             { text: 'git', link: '/front-end/Plugin/Git/' },
           ],
-        },
-        {
-          text: '设计模式',
-          link: '/front-end/DesignPatterns/',
         },
         {
           text: '工程化',
@@ -221,6 +210,18 @@ export default defineConfig({
             { text: '终端', link: '/front-end/OtherEnd/terminal/' },
 
           ],
+        },
+        {
+          text: 'Http',
+          link: '/front-end/Http/',
+          items: [
+            { text: 'ajax', link: '/front-end/Http/Ajax/' },
+            { text: '抓包', link: '/front-end/Http/PacketCapture/' },
+          ],
+        },
+        {
+          text: '设计模式',
+          link: '/front-end/DesignPatterns/',
         },
       ],
       '/back-end': [
