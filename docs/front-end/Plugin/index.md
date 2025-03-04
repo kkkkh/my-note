@@ -5,11 +5,12 @@ outline: deep
 
 ## Lib
 ### ui
-- ui
+- book
   - [storybook](https://storybook.js.org/docs)
+  - [histoire](https://histoire.dev/guide/getting-started.html)
 - 表格
   - [xlsx](https://docs.sheetjs.com/docs/getting-started/examples/export#live-demo) excel
-  - [<s>Luckysheet</s>](https://dream-num.github.io/LuckysheetDocs/zh/guide/) (停止维护) => [univer](https://github.com/dream-num/univer/blob/dev/README-zh.md)
+  - [~~Luckysheet~~](https://dream-num.github.io/LuckysheetDocs/zh/guide/) (停止维护) => [univer](https://github.com/dream-num/univer/blob/dev/README-zh.md)
 - 富文本
   - [slatejs](https://docs.slatejs.org/) 富文本
   - [wangeditor](https://www.wangeditor.com/v5/getting-started.html)
@@ -25,9 +26,15 @@ outline: deep
   - [clipboard.js](https://clipboardjs.com/) 剪切
   - [vue-seamless-scroll](https://chenxuan0000.github.io/vue-seamless-scroll/guide/) 滚动
 - 高亮 & 代码编辑 & 解析器
-  - [prismjs](https://prismjs.com/)
-  - [monaco-editor](https://github.com/microsoft/monaco-editor)
+  - highlightjs
+    - [highlightjs](https://highlightjs.org/) 高亮
+    - [@highlightjs/vue-plugin](https://www.npmjs.com/package/@highlightjs/vue-plugin)
+    - [highlightjs-copy](https://www.npmjs.com/package/highlightjs-copy)
+    - [marked-highlight](https://github.com/markedjs/marked-highlight)
+  - [prismjs](https://prismjs.com/) 高亮
+  - [monaco-editor](https://github.com/microsoft/monaco-editor) 代码编辑
   - [marked](https://marked.js.org/) markdown 解析器
+  - [markdown-it](https://github.com/markdown-it/markdown-it)
   - json
     - [JSON Editor](https://github.com/josdejong/jsoneditor) => [json-editor-vue3](https://github.com/guyue88/json-editor-vue3)
     - [JSON Editor doc](https://jsoneditoronline.org/docs/)
@@ -38,14 +45,26 @@ outline: deep
   - [iconify 文档](https://iconify.design/docs/) &nbsp;&nbsp;&nbsp;[Browse Icons](https://icon-sets.iconify.design/) &nbsp;&nbsp;&nbsp;[icones](https://icones.js.org/)(Icon Explorer with Instant searching, powered by Iconify)
   - [svg4everybody](https://www.npmjs.com/package/svg4everybody) svg兼容
 - pdf
-  - [jspdf](https://parall.ax/products/jspdf)
   - [html2pdf](https://github.com/eKoopmans/html2pdf.js)
   - [html2canvas](https://html2canvas.hertzen.com/)
+  - [PDF.js](https://mozilla.github.io/pdf.js/) mozilla
+  - [pdfkith](ttps://pdfkit.org/)
+  - [pdfjs](https://github.com/rkusa/pdfjs)
+  - [jspdf](https://parall.ax/products/jspdf) [jspdf github](https://github.com/parallax/jsPDF) 
 - css
   - [normalize.css](https://necolas.github.io/normalize.css/)
+  - postcss
+    - [postcss](https://postcss.org/)
+    - [postcss-load-config](https://github.com/postcss/postcss-load-config)
+    - [postcss-nesting](https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-nesting)
 - 动画
   - [lottie-ios](https://github.com/airbnb/lottie-ios)
 ### 功能
+- cdn
+  - [bootcdn](https://www.bootcdn.cn/)
+  - [jsdelivr](https://www.jsdelivr.com/)
+  - [unpkg](https://unpkg.com/)
+  - [githack](http://raw.githack.com/)
 - 工具函数
   - [lodash](https://lodash.com/docs/4.17.15)
   - [qs](https://github.com/ljharb/qs) Querystring
@@ -68,11 +87,17 @@ outline: deep
   - [jsencrypt](https://github.com/travist/jsencrypt) 加密
   - [crypto-js](https://github.com/brix/crypto-js) 数据摘要（停止维护：NodeJS 和现代浏览器都有原生 Crypto 模块）
   - [SparkMD5](https://github.com/satazor/js-spark-md5) md5 实现
+  - [hash-wasm](https://github.com/Daninet/hash-wasm) hash function library
 - http
+  - [axios](https://axios-http.com/zh/docs/intro)
   - cookie
     - [Cookies.js](https://github.com/ScottHamper/Cookies)
     - [js-cookie](https://github.com/js-cookie/js-cookie)
   - [mime](https://www.npmjs.com/package/mime)
+- 前端规范
+  - [Ariskywi/fe-style-guid](https://github.com/Ariskywi/fe-style-guid)
+- 模板库
+  - [argon-dashboard](https://www.creative-tim.com/product/argon-dashboard)
 ### 基建
 - env
   - [cross-env](https://github.com/kentcdodds/cross-env) 解决跨平台环境变量问题
@@ -92,7 +117,7 @@ outline: deep
     - [release-it/conventional-changelog](https://github.com/release-it/conventional-changelog) 版本提交日志
 ## Vue plugin (Vue 扩展)
 ### cli
-- [<s>Vue CLI</s>](https://cli.vuejs.org/)(停止维护) => [create-vue](https://github.com/vuejs/create-vue)
+- [~~Vue CLI~~](https://cli.vuejs.org/)(停止维护) => [create-vue](https://github.com/vuejs/create-vue)
 ### component
 - [DMap(谛听)](https://juejin.cn/post/6844903593284206605) ([vue-bigdata-table](https://github.com/lison16/vue-bigdata-table))
 - [Vxe Table](https://vxetable.cn/#/start/install)
@@ -122,10 +147,16 @@ outline: deep
 - [vue-loader](https://vue-loader.vuejs.org/zh/)
 
 ## Vite plugin (Vite 扩展)
+- [awesome-vite](https://github.com/vitejs/awesome-vite#templates)
 - [unplugin-vue-components](https://www.npmjs.com/package/unplugin-vue-components#Configuration) 按需加载
 - [unplugin-icons](https://www.npmjs.com/package/unplugin-icons#auto-importing#Migrate%20from%20vite-plugin-icons) 图标
 - [rollup-plugin-visualizer](https://www.npmjs.com/package/rollup-plugin-visualizer) build分析可视化
 - [vite-plugin-inspect](https://github.com/antfu-collective/vite-plugin-inspect) 检查Vite插件的中间状态-调试和创作插件
+
+
+## webpack
+  - [vue-loader](https://github.com/vuejs/vue-loader)
+  - [ts-loader](https://github.com/TypeStrong/ts-loader)
 
 ## typescript
 ### jsdoc
@@ -142,7 +173,6 @@ outline: deep
   - [raphael](https://dmitrybaranovskiy.github.io/raphael/)
   - [fabricjs](http://fabricjs.com/)
 - svg
-
 - flowble
   - [bpmn](https://bpmn.io/) bpmn
 - gl
@@ -153,6 +183,10 @@ outline: deep
 - other
   - [sigmajs](https://www.sigmajs.org/) 节点
   - [getspringy](http://getspringy.com/) 图形布局
+
+## 其他端
+- uniapp
+  - [ucharts](https://www.ucharts.cn/v2/#/guide/index)
 
 ## 极客时间(代码地址)
 - 现代 React Web 开发实战
