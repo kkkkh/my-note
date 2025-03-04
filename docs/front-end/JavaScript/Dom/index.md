@@ -2,6 +2,27 @@
 outline: deep
 ---
 ## Dom
+[文档对象模型（DOM）](https://developer.mozilla.org/zh-CN/docs/Web/API/Document_Object_Model)
+### Document
+#### activeElement
+Document 接口的 activeElement 只读属性返回 DOM 中当前拥有焦点的 Element。
+```js
+function onMouseUp(e) {
+  const activeTextarea = document.activeElement;
+  const selection = activeTextarea.value.substring(
+    activeTextarea.selectionStart,
+    activeTextarea.selectionEnd,
+  );
+  const outputElement = document.getElementById("output-element");
+  const outputText = document.getElementById("output-text");
+  outputElement.innerHTML = activeTextarea.id;
+  outputText.innerHTML = selection;
+}
+const textarea1 = document.getElementById("ta-example-one");
+const textarea2 = document.getElementById("ta-example-two");
+textarea1.addEventListener("mouseup", onMouseUp, false);
+textarea2.addEventListener("mouseup", onMouseUp, false);
+```
 ### event
 #### 事件捕获（capture）、事件冒泡（propagation）
 - 父子关系：div1 -> div2 -> div3
@@ -42,7 +63,7 @@ outline: deep
   }
 ```
 #### keydown/keyup
-- <s>keypress</s><font color=red>(已弃用)</font> 当按下产生字符或符号值的键时，将触发 keypress 事件
+- ~~keypress~~<font color=red>(已弃用)</font> 当按下产生字符或符号值的键时，将触发 keypress 事件
 - keyup 事件在按键被松开时触发
 - keydown 事件在按键被松开时触发
 - 扫描枪触发就是 input事件 + keydown Enter事件（生成的条形码中包含英文，输入法是英文状态下，才会触发keydown/keyup事件）
@@ -60,7 +81,52 @@ document.getElementById("app").addEventListener('keydown',(e)=>{
 - [keyup_event](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/keyup_event)
 - [KeyboardEvent](https://developer.mozilla.org/zh-CN/docs/Web/API/KeyboardEvent)
 - [vue2 按键修饰符](https://v2.cn.vuejs.org/v2/guide/events.html#%E6%8C%89%E9%94%AE%E4%BF%AE%E9%A5%B0%E7%AC%A6)
-
+#### contextmenu
+contextmenu 事件会在用户尝试打开上下文菜单时触发。
+该事件通常在鼠标点击右键或者按下键盘上的菜单键时被触发。
+```js
+// 自定义右键菜单
+document.addEventListener('contextmenu', (event) => {
+  event.preventDefault();
+  // 动态生成菜单
+  const menu = document.createElement('div');
+  menu.style.position = 'absolute';
+  menu.style.top = `${event.clientY}px`;
+  menu.style.left = `${event.clientX}px`;
+  menu.style.background = 'white';
+  menu.style.border = '1px solid #ccc';
+  menu.style.padding = '5px';
+  // 添加菜单选项
+  menu.innerHTML = '<div>选项 1</div><div>选项 2</div>';
+  document.body.appendChild(menu);
+  // 点击其他地方时移除菜单
+  document.addEventListener('click', () => menu.remove(), { once: true });
+});
+```
+```js
+// 用于保护页面内容（如图片）或限制右键行为：
+document.addEventListener('contextmenu', (event) => {
+  event.preventDefault();
+  alert('右键菜单已被禁用');
+});
+```
+#### CustomEvent/dispatchEvent
+```js
+const input = document.getElementById("input");
+input.addEventListener("input", function (e) {
+  // write by zhangxinxu
+  console.log("input chufa");
+  console.log(e.detail); // 打印 {a:1}
+});
+const myEvent = new CustomEvent("input", {
+  detail: { a: 1 },
+});
+input.dispatchEvent(myEvent); // 触发
+```
+```js
+// bubbles 只读属性表明事件是否会沿 DOM 树向上冒泡。
+activeElement.dispatchEvent(new Event('input', { bubbles: true }))
+```
 ### navigator
 #### navigator.clipboard
 - writeText() 写入特定字符串到操作系统的剪切板，返回一个promise
@@ -107,7 +173,6 @@ document.getElementById("app").addEventListener('keydown',(e)=>{
   ```
 参考：
 - [navigator.clipboard](https://developer.mozilla.org/zh-CN/docs/Web/API/Clipboard)
-
 ### Signal
 #### AbortController
 ```js
@@ -174,7 +239,6 @@ try {
   clearTimeout(timeoutId);
 }
 ```
-
 ### 通信
 #### iframe
 ```html
@@ -304,7 +368,6 @@ function onMessage(e) {
   port2.postMessage(`IFrame 收到的消息：“${e.data}”`);
 }
 ```
-
 ### Base64
 #### base64
 - 概念
@@ -406,3 +469,133 @@ function onMessage(e) {
   | '='       | %3D      |
   | '%'       | %25      |
   | ' '       | %20 或 + |
+#### encodeURIComponent
+```js
+console.log(`?x=${encodeURIComponent("test?")}`);
+console.log(`?x=${encodeURIComponent("шеллы")}`);
+console.log(`?x=${encodeURIComponent("我和你")}`);
+// ?x=test%3F
+// index.html:14 ?x=%D1%88%D0%B5%D0%BB%D0%BB%D1%8B
+// index.html:16 ?x=%E6%88%91%E5%92%8C%E4%BD%A0
+```
+- 转义序列来编码 URI：过将特定字符的每个实例替换成代表字符的 UTF-8 编码的一个、两个、三个或四个转义序列来编码 URI
+- 不转义的字符： A-Z a-z 0-9 - _ . ! ~ * ' ( )
+
+- 模拟实现（chartgpt）
+  ```js
+  function encodeURIComponent(str) {
+      let encodedStr = "";
+      for (let i = 0; i < str.length; i++) {
+          let code = str.charCodeAt(i);
+          if (
+          code === 0x2D || // -
+          code === 0x2E || // .
+          code === 0x5F || // _
+          code === 0x7E || // ~
+          (code >= 0x30 && code <= 0x39) || // 0-9
+          (code >= 0x41 && code <= 0x5A) || // A-Z
+          (code >= 0x61 && code <= 0x7A)    // a-z
+          ) {
+          encodedStr += str.charAt(i);
+          } else {
+          let hexCode = code.toString(16).toUpperCase();
+          if (hexCode.length < 2) {
+              hexCode = "0" + hexCode;
+          }
+          encodedStr += "%" + hexCode;
+          }
+      }
+      return encodedStr;
+  }
+  // 或者
+  // 思路，charCodeAt对应Unicode编码，转为16进制，加"%"
+  // 真正思路较复杂，有一个、两个、三个或四个转义序列不同处理
+  function customEncodeURIComponent(str) {
+      const replacer = function(character) {
+          const hex = character.charCodeAt(0).toString(16);
+          const prefix = hex.length === 1 ? '0' : '';
+          return '%' + prefix + hex.toUpperCase();
+      };
+      // 非字母数字字符以及部分特殊字符需要被编码
+      return str.replace(/[^a-zA-Z0-9\-_.!~*'()]/g, replacer);
+  }
+  ```
+### JSON
+#### 序列化和反序列化
+- 序列化（Serialization）：
+  - 将对象或数据结构（如 JavaScript 对象、数组）转换为 JSON 格式的字符串。
+  - 这是为了使数据可以被传输（如通过网络）或存储（如写入文件）。
+- 反序列化（Deserialization）：
+  - 将 JSON 格式的字符串解析回 JavaScript 对象或数据结构。
+  - 这是为了在应用程序中使用数据。
+- 使用场景：
+  - 网络通信、数据存储、配置文件、跨语言数据交换
+#### JSON api
+```js
+const obj = { name: "Alice", age: 25 };
+const jsonString = JSON.stringify(obj); // '{"name":"Alice","age":25}'
+const jsonString = '{"name":"Alice","age":25}';
+const obj = JSON.parse(jsonString); // { name: "Alice", age: 25 }
+```
+### Element
+#### Element
+- Element.tagName 等同于 Element.nodeName
+  ```js
+  var span = document.getElementById("born");
+  alert(span.tagName); // SPAN
+  ```
+#### HTMLInputElement
+- selectionStart
+  - 一个表示选择文本的开始索引的数字。
+  - 当没有选择时，它返回当前文本输入光标位置的偏移量。
+- selectionEnd
+  - 一个表示选择文本的结束索引的数字。
+  - 当没有选择时，它返回当前文本输入光标位置后面的字符的偏移量。
+- setSelectionRange() 设定当前选中文本的起始和结束位置。
+#### Element.getBoundingClientRect()
+![alt text](getBoundingClientRect-1.png)
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body{margin:0,padding:0}
+      div {
+        width: 400px;
+        height: 200px;
+        padding: 20px;
+        margin: 50px 60px;
+        background: purple;
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+    <script>
+      let elem = document.querySelector('div');
+      let rect = elem.getBoundingClientRect();
+      for (var key in rect) {
+        if(typeof rect[key] !== 'function') {
+          let para = document.createElement('p');
+          para.textContent  = `${ key } : ${ rect[key] }`;
+          document.body.appendChild(para);
+          /*
+          x :60
+          y : 50
+          width : 440
+          height : 240
+          top : 50
+          right : 500
+          bottom : 290
+          left : 60
+          */
+        }
+      }
+    </script>
+  </body>
+</html>
+```
