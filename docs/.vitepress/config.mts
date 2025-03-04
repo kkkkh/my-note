@@ -207,7 +207,7 @@ export default defineConfig({
           items: [
             { text: '小程序', link: '/front-end/OtherEnd/小程序/' },
             { text: 'Electron', link: '/front-end/OtherEnd/Electron/' },
-            { text: '终端', link: '/front-end/OtherEnd/terminal/' },
+            // { text: '终端', link: '/front-end/OtherEnd/terminal/' },
 
           ],
         },
