@@ -42,6 +42,13 @@ export default defineConfig({
             { text: 'js', link: '/article/algorithm/js/index.md' },
           ],
         },
+        {
+          text: '文件',
+          link: '/article/file/',
+          items: [
+            { text: '分片', link: '/article/file/sharding/index.md' },
+          ],
+        },
       ],
       '/tools': [
         {
