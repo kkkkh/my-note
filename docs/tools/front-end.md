@@ -3,10 +3,25 @@ outline: deep
 ---
 ## 前端
 ### tool
-- [Reg Playground](https://regex101.com/)正则
-- [svg 转 path](https://www.zhangxinxu.com/sp/path.html)
-- [svg在线编辑器](https://www.jyshare.com/more/svgeditor/)
-- [jsont](https://www.jsont.run/)
+- reg
+  - [Reg Playground](https://regex101.com/)正则
+- code palyground
+  - [codepen](https://codepen.io/)
+  - [jsfiddle](https://jsfiddle.net/)
+  - [Online IDE](https://www.online-ide.com/) 多语言
+  - [codesandbox](https://codesandbox.io/templates) 多语言多场景
+- json
+  - [json-schema](https://json-schema.org/)
+  - [jsont](https://www.jsont.run/)
+  - json-to-json-schema
+    - [jsonschema](https://jsonschema.net/app/schemas/0)
+    - [transform/json-to-json-schema](https://transform.tools/json-to-json-schema)
+- svg
+  - [svg 转 path](https://www.zhangxinxu.com/sp/path.html)
+  - [svg在线编辑器](https://www.jyshare.com/more/svgeditor/)
+- 浏览器
+  - [chromium](https://www.chromium.org/chromium-projects/) &nbsp;&nbsp;&nbsp;[chromium blog](https://blog.chromium.org/) &nbsp;&nbsp;&nbsp;[chromium issues](https://issues.chromium.org/issues?q=status:open)
+  - [brave](https://brave.com/zh/)
 ### js
 - [mozilla](https://developer.mozilla.org/zh-CN/) 开发者社区
 - [web.dev](https://web.dev/about?hl=zh-cn)
@@ -14,7 +29,6 @@ outline: deep
 - [polyfill](https://cdnjs.cloudflare.com/polyfill/)
 - [compatibility table](https://compat-table.github.io/compat-table/es6/) 兼容性表
 - [es6 教程 阮一峰](https://es6.ruanyifeng.com/)
-- [json-schema](https://json-schema.org/)
 ### ts/typescript
 - ts
   - [ts docs](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
@@ -108,6 +122,9 @@ outline: deep
 - [pnpm](https://www.pnpm.cn/installation) &nbsp;[pnpm中文](https://www.pnpm.cn/motivation)
 #### 版本管理
 - [git](https://git-scm.com/) &nbsp;[git book](https://git-scm.com/book/zh/v2)
+#### 微前端
+- [single-spa](https://single-spa.js.org/docs/configuration)
+- [micro-app](https://jd-opensource.github.io/micro-app/docs.html#/)
 ### 可视化
 #### canvas
 - [echarts](https://echarts.apache.org/handbook/zh/get-started/)
@@ -124,7 +141,6 @@ outline: deep
 - [charlesproxy](https://www.charlesproxy.com/) 抓包
 - [graphql](https://graphql.cn/learn/)中文1
 - [graphql](https://graphql.js.cool/)中文2
-
 ### 其他端
 #### 客户端
 - [electron](https://www.electronjs.org/zh/docs/latest/tutorial/quick-start) 文档
@@ -139,13 +155,9 @@ outline: deep
 - [omi](https://omi.cdn-go.cn/home/latest/zh/introduction.html)
 - [westore](https://github.com/Tencent/westore)
 - [微信调试](chrome://inspect/#devices)
-### 微前端
-- [single-spa](https://single-spa.js.org/docs/configuration)
-- [micro-app](https://jd-opensource.github.io/micro-app/docs.html#/)
+
 ### 面试 & job
 - [leetcode](https://leetcode.cn/)
 - [牛客](https://www.nowcoder.com/interview/center?entranceType=%E5%AF%BC%E8%88%AA%E6%A0%8F)
 - [javascript jobs](https://jobs.date-fns.org/)
-### 浏览器
-- [chromium](https://www.chromium.org/chromium-projects/) &nbsp;&nbsp;&nbsp;[chromium blog](https://blog.chromium.org/) &nbsp;&nbsp;&nbsp;[chromium issues](https://issues.chromium.org/issues?q=status:open)
-- [brave](https://brave.com/zh/)
+
