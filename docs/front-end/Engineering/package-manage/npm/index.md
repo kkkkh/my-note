@@ -3,6 +3,10 @@ outline: deep
 ---
 # npm
 ## npm command
+### npm config
+```bash
+npm config registry https://registry.npmmirror.com
+```
 ### npm tag
 ```bash
 npm dist-tag ls vue
@@ -56,6 +60,18 @@ npm link backageName
     }
   }
   ```
+- overrides 改变依赖关系
+```json
+{
+  "overrides": {
+    "@npm/foo": {
+      ".": "1.0.0",
+      "@npm/bar": "1.0.0"
+    }
+  }
+}
+```
+参考：[overrides](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#overrides)
 ### sideEffects
 问题：
 - lib的
@@ -166,5 +182,8 @@ a();
   - 只是对模块有影响的副作用代码就可以移除；
 - `sideEffects:false` 代表所有代码都没有副作用，就会将有导出export，没有加载，这种情况中的，副作用代码去掉；
 - 有些副作用是需要保留的：`"sideEffects": ["./src/**/*.css"]` 代表这些个.css是有副作用的，进行保留；
-
-
+### bin
+- `pnpm dev` 或者 `yarn start`
+- 启动脚本运行前会先自动新建一个命令行环境，然后把当前目录下的node_modules/.bin加入系统环境变量中，
+- 接着执行scripts配置节指定的脚本的内容，执行完成后再把node_modules/.bin从系统环境变量中删除。
+- 所以，当前目录下的node_modules/.bin子目录里面的所有脚本，都可以直接用脚本名调用，不必加上路径
