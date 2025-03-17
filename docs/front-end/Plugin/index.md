@@ -60,15 +60,16 @@ outline: deep
 - 动画
   - [lottie-ios](https://github.com/airbnb/lottie-ios)
 ### 功能
-- cdn
-  - [bootcdn](https://www.bootcdn.cn/)
-  - [jsdelivr](https://www.jsdelivr.com/)
-  - [unpkg](https://unpkg.com/)
-  - [githack](http://raw.githack.com/)
 - 工具函数
   - [lodash](https://lodash.com/docs/4.17.15)
   - [qs](https://github.com/ljharb/qs) Querystring
   - [ajv](https://ajv.js.org/guide/getting-started.html) 数据验证
+- es
+  - [core-js](https://github.com/zloirock/core-js)
+  - [core-js@3](https://github.com/zloirock/core-js/blob/master/docs/2019-03-19-core-js-3-babel-and-a-look-into-the-future.md) &nbsp;&nbsp;&nbsp;[core-js@next](https://github.com/zloirock/core-js/blob/master/docs/2023-02-14-so-whats-next.md)
+  - [cloudflare polyfill](https://cdnjs.cloudflare.com/polyfill/)
+- browser
+  - [browserslist](https://github.com/browserslist/browserslist) &nbsp;&nbsp;&nbsp;[browserslist playground](https://browsersl.ist/)
 - number
   - [bignumber](https://github.com/MikeMcl/bignumber.js/)
 - 指标
@@ -142,22 +143,20 @@ outline: deep
 - [immutable](https://immutable-js.com/) 不可变数据
 - [immerjs](https://immerjs.github.io/immer/zh-CN/)
 
-## Webpack plugin (Webpack 扩展)
-### loader
-- [vue-loader](https://vue-loader.vuejs.org/zh/)
-
-## Vite plugin (Vite 扩展)
+## 构建工具
+### Vite plugin (Vite 扩展)
 - [awesome-vite](https://github.com/vitejs/awesome-vite#templates)
 - [unplugin-vue-components](https://www.npmjs.com/package/unplugin-vue-components#Configuration) 按需加载
 - [unplugin-icons](https://www.npmjs.com/package/unplugin-icons#auto-importing#Migrate%20from%20vite-plugin-icons) 图标
 - [rollup-plugin-visualizer](https://www.npmjs.com/package/rollup-plugin-visualizer) build分析可视化
 - [vite-plugin-inspect](https://github.com/antfu-collective/vite-plugin-inspect) 检查Vite插件的中间状态-调试和创作插件
-
-
-## webpack
-  - [vue-loader](https://github.com/vuejs/vue-loader)
-  - [ts-loader](https://github.com/TypeStrong/ts-loader)
-
+- [vite-plugin-babel](https://github.com/owlsdepartment/vite-plugin-babel) 
+### rollup
+- [@rollup/plugin-strip](https://github.com/rollup/plugins/tree/master/packages/strip) 移除debugger、console.、assert.
+### Webpack plugin (Webpack 扩展)
+#### loader
+- [vue-loader](https://vue-loader.vuejs.org/zh/)
+- [ts-loader](https://github.com/TypeStrong/ts-loader)
 ## typescript
 ### jsdoc
 - [jsDoc](https://jsdoc.app/) &nbsp;&nbsp;&nbsp; [jsdoc 中文](https://www.jsdoc.com.cn/) 注释 + 类型
