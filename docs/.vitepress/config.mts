@@ -30,8 +30,9 @@ export default defineConfig({
       { text: '前端', link: '/front-end' },
       { text: '后端', link: '/back-end' },
       { text: '运维', link: '/ops' },
-      { text: '文档', link: '/tools/front-end' },
+      { text: '计算机', link: '/computer-science' },
       { text: '文章', link: '/article' },
+      { text: '文档', link: '/tools/blog' },
     ],
     sidebar: {
       '/article': [
@@ -54,6 +55,14 @@ export default defineConfig({
         {
           text: 'blog',
           link: '/tools/blog',
+        },
+        {
+          text: 'book',
+          link: '/tools/book',
+        },
+        {
+          text: '计算机',
+          link: '/tools/computer-science',
         },
         {
           text: 'UI',
@@ -260,6 +269,23 @@ export default defineConfig({
           items: [],
         },
       ],
+      '/computer-science':[
+        {
+          text: '汇编语言',
+          link: '/computer-science/Assembly/',
+          items: [],
+        },
+        {
+          text: 'c语言',
+          link: '/computer-science/C/',
+          items: [],
+        },
+        {
+          text: 'c++',
+          link: '/computer-science/C++/',
+          items: [],
+        },
+      ]
     },
     socialLinks: [{ icon: 'github', link: 'https://github.com/kkkkh' }],
   },
