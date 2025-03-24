@@ -1,7 +1,7 @@
 ---
 outline: deep
 ---
-## git
+# git
 ### git 常用命令
 #### git clone 
 ```bash
@@ -18,6 +18,8 @@ git branch -a
 git branch -v
 # 删除远程分支
 git push origin --delete <branch name>
+# 删除远程分支 多条
+git push origin --delete <branch name> <branch name> <branch name>
 # 删除本地
 git branch -d <branch name>
 # 强制删除没有合并的分支
@@ -32,9 +34,12 @@ git branch --contains 45e9fd72345
 #### git stash
 - 当前工作现场“储藏”起来
 ```bash
+# 修改存储
 git stash
 # 新增的文件也一起储藏
 git stash -u
+# 只存储一个文件
+git stash push <file name>
 # 查看 stash 了哪些存储
 git stash list
 # 显示做了哪些改动，默认 show 第一个存储
@@ -50,6 +55,8 @@ git stash drop
 ```bash
 # 修改提交 commit message
 git commit --amend
+# 提交取消检验
+git commit --no-verify
 ```
 #### git submodule
 - 初始化子模块
@@ -165,13 +172,16 @@ git config --global credential.helper store
 git config http.proxy http://127.0.0.1:7897
 git config --global --unset http.proxy
 ```
-#### git log/reflog
+#### git log
 ```bash
 git log
 git log --oneline
 git log --pretty=oneline  #简洁 log
 git log --graph --pretty=oneline --abbrev-commit # graph - 分支合并图
-git reflog #记录你的每一次命令，用来返回未来版本
+```
+#### git reflog
+```bash
+git reflog #记录你的每一次命令 commit
 ```
 #### git reset 回退版本
 ```bash
@@ -197,6 +207,10 @@ git clean -fd
 git checkout -- file
 # 切换新的分支，并且清空之前commit记录
 git checkout --orphan <branch>
+# 要接受所有当前更改（本地更改）
+git checkout --ours .
+# 要接受所有传入更改（远程更改）
+git checkout --theirs .
 ```
 #### git rm
 ```bash
