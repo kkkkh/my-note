@@ -153,22 +153,45 @@ Text Editor:
 ## 插件
 #### 通用
 - [Reload](https://marketplace.visualstudio.com/items?itemName=natqe.reload) 重新加载
+- [Chinese (Simplified) (简体中文) Language Pack for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-zh-hans)
+- [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
+- [Tabnine](https://marketplace.visualstudio.com/items?itemName=TabNine.tabnine-vscode)
+- 主题
+  - [Material Icon Theme](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme)
+  - [Atom One Dark Theme](https://marketplace.visualstudio.com/items?itemName=akamud.vscode-theme-onedark) 主题
+  - [vscode-icons](https://marketplace.visualstudio.com/items?itemName=vscode-icons-team.vscode-icons)
+#### 规范
+- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) .eslintrc
 - [ESLint Chinese Rules](https://marketplace.visualstudio.com/items?itemName=maggie.eslint-rules-zh-plugin) ESLint规则中文辅助提示插件，帮助更便捷的查询引用的规则，理解规则。
+- [Stylelint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint)
+- [EditorConfig for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig) .editorconfig
+- [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) .prettierrc
+- [JSDoc Generator](https://marketplace.visualstudio.com/items?itemName=crystal-spider.jsdoc-generator)
 - [Comment Translate](https://github.com/intellism/vscode-comment-translate/blob/HEAD/doc/README_ZH.md) 代码翻译
+- [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) 拼写错误
+- [A-super-translate](https://marketplace.visualstudio.com/items?itemName=xuedao.super-translate)
 #### html
-- [auto-close-tag](https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-close-tag) 
+- [auto-close-tag](https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-close-tag)
+- [Auto Rename Tag](https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-rename-tag)
+- [template string converter](https://marketplace.visualstudio.com/items?itemName=meganrogge.template-string-converter) `${}`
+- [parameter-hints](https://marketplace.visualstudio.com/items?itemName=DominicVonk.parameter-hints) 参数提示
+- [Path Intellisense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense) 路径提示
 #### css
 - [easy Less](https://developers.weixin.qq.com/community/develop/article/doc/000e427c49c218e6b9781bfdf5b013)
-- [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) tailwind.config.{js,cjs,mjs,ts,cts,mts} in your workspace
+- [Color Highlight](https://marketplace.visualstudio.com/items?itemName=naumovs.color-highlight)
+- [svg-preview](https://marketplace.visualstudio.com/items?itemName=SimonSiefke.svg-preview)
+- tailwind
+  - [Tailwind CSS Extension Pack](https://marketplace.visualstudio.com/items?itemName=andrewmcodes.tailwindcss-extension-pack)
+  - [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) tailwind.config.{js,cjs,mjs,ts,cts,mts} in your workspace
 #### react
-
 - [react hooks snippets](https://marketplace.visualstudio.com/items?itemName=AlDuncanson.react-hooks-snippets)
   - ush	-> useState
 #### vue
   - [vetur](https://vuejs.github.io/vetur/)
   - vue.volar ~~原 TypeScript Vue Plugin(Volar) 废弃~~ -> Vue-Official
-  - [Vue-Official](https://marketplace.visualstudio.com/items?itemName=vue.volar) 
-  - https://github.com/vuejs/language-tools
+  - [Vue-Official](https://marketplace.visualstudio.com/items?itemName=vue.volar) https://github.com/vuejs/language-tools
+  - [vue-component](https://marketplace.visualstudio.com/items?itemName=zhubincong.vue-component)
+  - [Vue 3 Snippets](https://marketplace.visualstudio.com/items?itemName=hollowtree.vue-snippets)
 #### snippet
 - [snippet-generator](https://snippet-generator.app/?description=&tabtrigger=&snippet=&mode=vscode)
 - [JavaScript (ES6) code snippets](https://marketplace.visualstudio.com/items?itemName=jmsv.JavaScriptSnippetsStandard)
@@ -178,9 +201,15 @@ Text Editor:
 - [Markdown Snippets](https://marketplace.visualstudio.com/items?itemName=robole.markdown-snippets)
 - [Snippets Ranger](https://marketplace.visualstudio.com/items?itemName=robole.snippets-ranger)
 - [jest-snippets](https://marketplace.visualstudio.com/items?itemName=andys8.jest-snippets)
+#### markdown
+- [Markdown Preview Enhanced](https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced)
 #### runner
 - [code-runner](https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner)
 - [jest-runner](https://marketplace.visualstudio.com/items?itemName=firsttris.vscode-jest-runner)
 - [vitest-runner](https://marketplace.visualstudio.com/items?itemName=kingwl.vscode-vitest-runner)
 #### c/c++
 - [C/C++ for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
+#### git
+- [Git Extension Pack](https://marketplace.visualstudio.com/items?itemName=donjayamanne.git-extension-pack)
+#### 参考
+- [分享 VSCode 必备精品插件](https://blog.csdn.net/Mirs_Zhu/article/details/141431948)
