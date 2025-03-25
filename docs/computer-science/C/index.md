@@ -141,6 +141,57 @@ gcc hello.c -o hello
 - 变量名
   - 只能包含英文的大小写字母，数字和下划线（_），其他一律禁止。
   - 必须以字母开头。
+- 命名习惯：
+  - 变量名都以小写字母开头
+  - 如果变量名有好几个单词组成，那么除了第一个单词的首字母小写之外，其他单词的首字母都大写。
+- 数据类型
+  ![数据类型](./img/1.webp)
+- 数字类型
+  |类型名	|最小值	|最大值|
+  |-------|-------|-------|
+  |signed char |-128 |127|
+  |int	|-32768| 32767|
+  |long	|-2147483648|	2147483647|
+  |float|	-1 x 10^37	|1 x 10^37
+  |double |-1 x 10^37|	1 x 10^37|
+- signed 和 unsigned 的区别
+  - signed 最开始有正号或者负号（正数或负数），如 7，-5，9.2，-23.8，等。
+  - unsigned 是无符号数，只能是正数或零，如 35，7461，61.789，等。
+  - unsigned相比 signed 类型的优势是可以储存两倍于 signed 类型的最大值：例如 signed char 最大值是 127，unsigned char 最大值是 255。
+- 通用
+  - char，int，long：C语言最初创建多种整数类型的目的是为了节约内存
+  - 对于整数，一般用 int
+  - 对于浮点数，一般用 double
+  ```c
+  int numberOfDogs = 7;
+  ```
+  - 常量
+  ```c
+  const int NUMBER_OF_DOGS = 7;
+  ```
+## 变量显示
+  | 格式 | 类型   |
+  | ---- | ------ |
+  | %d   | int    |
+  | %ld  | long   |
+  | %f   | float  |
+  | %f   | double |
+
+  - printf 负责输出
+
+    <<< ./hello.c#printf
+
+  - scanf 负责输入
+
+    <<< ./hello.c#scanf
+
+  - scanf 和 printf 函数还有一点差异：
+    - 对于 float 和 double 来说，printf 里面他们的替代符号都是 %f，
+    - 但是在 scanf 里面却不一样，float 是 %f，而 double 是 %lf 。
+## 运算
+
+<<< ./hello.c#operation
+
 ## 参考
 - [C语言探索之旅](https://www.jianshu.com/nb/4555196)
 - [C语言探索之旅 | 第一部分第一课：什么是编程？](https://www.jianshu.com/p/7f84ae8c7ef5)
@@ -148,3 +199,5 @@ gcc hello.c -o hello
 - [C语言探索之旅 | 第一部分第三课：你的第一个程序](https://www.jianshu.com/p/c73fecacd006)
 - [C语言探索之旅 | 第一部分第四课：变量的世界（一），内存那档事](https://www.jianshu.com/p/e2954324e76d)
 - [C语言探索之旅 | 第一部分第五课：变量的世界（二），变量声明](https://www.jianshu.com/p/8db33987cb49)
+- [C语言探索之旅 | 第一部分第六课：变量的世界（三），显示变量内容](https://www.jianshu.com/p/497355a6ba4d)
+- [C语言探索之旅 | 第一部分第七课：运算那点事](https://www.jianshu.com/p/7bc4493ebb4f)
