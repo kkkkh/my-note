@@ -147,11 +147,11 @@ gcc hello.c -o hello
 - 数据类型
   ![数据类型](./img/1.webp)
 - 数字类型
-  |类型名	|最小值	|最大值|
-  |-------|-------|-------|
-  |signed char |-128 |127|
-  |int	|-32768| 32767|
-  |long	|-2147483648|	2147483647|
+  | 类型名      | 最小值      | 最大值     |
+  |-------------|-------------|------------|
+  | signed char | -128        | 127        |
+  | int         | -32768      | 32767      |
+  | long        | -2147483648 | 2147483647 |
   |float|	-1 x 10^37	|1 x 10^37
   |double |-1 x 10^37|	1 x 10^37|
 - signed 和 unsigned 的区别
@@ -171,7 +171,7 @@ gcc hello.c -o hello
   ```
 ## 变量显示
   | 格式 | 类型   |
-  | ---- | ------ |
+  |------|--------|
   | %d   | int    |
   | %ld  | long   |
   | %f   | float  |
@@ -189,15 +189,127 @@ gcc hello.c -o hello
     - 对于 float 和 double 来说，printf 里面他们的替代符号都是 %f，
     - 但是在 scanf 里面却不一样，float 是 %f，而 double 是 %lf 。
 ## 运算
+- 基础运算
+- 变量运算
+- 缩写
 
-<<< ./hello.c#operation
+  <<< ./hello.c#operation
+
+- 数学库
+  - fabs 绝对值
+  - ceil 向上取整
+  - pow 数字乘方
+  - sqrt 平方根
+  - sin, cos, tan 这三个函数是计算正弦，余弦，正切的值。
+  - asin, acos, atan 这三个函数是计算反正弦，反余弦，反正切的值。
+  - exp 这个函数是特殊的乘方形式，返回以 e（自然对数的底数，近似等于2.7182）为底数的指数运算的值。
+  - log 这个函数返回以 e 为底的对数值（我们学数学时也写成 ln）。
+  - log10 这个函数返回以 10 为底的对数值。
+
+    <<< ./hello.c#math
+
+## 条件表达式
+
+| 符号 | 含义     |
+|------|--------|
+| ==   | 等于     |
+| >    | 大于     |
+| <    | 小于     |
+| >=   | 大于等于 |
+| <=   | 小于等于 |
+| !=   | 不等于   |
+
+- if else
+- switch
+- 三元表达式
+
+  <<< ./hello.c#condition
+
+## 循环
+- while 循环
+- do...while 循环
+- for 循环
+
+  <<< ./hello.c#loop
+
+## 函数
+
+- 函数类型：函数返回值的类型。
+- 函数名：从给变量命名的规则。
+- 函数的参数（对应输入）
+- 函数体：大括号规定了函数的起始和结束范围
+- 根据函数类型，函数可以分为两类：
+  - 返回一个值的函数。这样的函数，我们将其类型定为对应的值的类型（char，int，long，double，等）。
+  - 不返回任何值的函数。这样的函数，我们将其类型定为 void（void表示“空的，无效的”）。
+
+## 模块化
+
+- 函数原型：
+  - `double rectangleArea(double length, double width);`
+  - 把这一整行放置在 main 函数前面。
+  - 简写：`double rectangleArea(double, double);`
+- 文件类型
+  - .h 文件：header file，表示“头文件”，这些文件包含了函数的原型。
+  - .c 文件：source file，表示“源文件”，包含了函数本身（定义）。
+
+```c
+#include <stdlib.h>
+#include <stdio.h>
+#include "game.h"
+```
+- 区别
+  - <> 用于引入标准库的头文件。
+    - 对于 IDE，这些头文件一般位于 IDE 安装目录的 include 文件夹中；
+    - 在 Linux 操作系统下，则一般位于系统的 include 文件夹里。
+  - "" 用于引入自定义的头文件。这些头文件位于你自己的项目的目录中。
+- 标准库文件
+    - 头文件位置：D:\xxx\mingw64\include *.h
+    - 库文件或 Library 文件（编译之后的二进制码）：D:\Program Files\mingw64\lib
+      - 静态链接库：*.a 或者 *.lib（Visual C++）
+      -  动态链接库：.dll 结尾（windows）、.so 结尾（Linux）
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## 参考
 - [C语言探索之旅](https://www.jianshu.com/nb/4555196)
-- [C语言探索之旅 | 第一部分第一课：什么是编程？](https://www.jianshu.com/p/7f84ae8c7ef5)
-- [C语言探索之旅 | 第一部分第二课：工欲善其事，必先利其器](https://www.jianshu.com/p/60caadd22c88)
-- [C语言探索之旅 | 第一部分第三课：你的第一个程序](https://www.jianshu.com/p/c73fecacd006)
-- [C语言探索之旅 | 第一部分第四课：变量的世界（一），内存那档事](https://www.jianshu.com/p/e2954324e76d)
-- [C语言探索之旅 | 第一部分第五课：变量的世界（二），变量声明](https://www.jianshu.com/p/8db33987cb49)
-- [C语言探索之旅 | 第一部分第六课：变量的世界（三），显示变量内容](https://www.jianshu.com/p/497355a6ba4d)
-- [C语言探索之旅 | 第一部分第七课：运算那点事](https://www.jianshu.com/p/7bc4493ebb4f)
+- 第一部分
+  - [C语言探索之旅 | 第一部分第一课：什么是编程？](https://www.jianshu.com/p/7f84ae8c7ef5)
+  - [C语言探索之旅 | 第一部分第二课：工欲善其事，必先利其器](https://www.jianshu.com/p/60caadd22c88)
+  - [C语言探索之旅 | 第一部分第三课：你的第一个程序](https://www.jianshu.com/p/c73fecacd006)
+  - [C语言探索之旅 | 第一部分第四课：变量的世界（一），内存那档事](https://www.jianshu.com/p/e2954324e76d)
+  - [C语言探索之旅 | 第一部分第五课：变量的世界（二），变量声明](https://www.jianshu.com/p/8db33987cb49)
+  - [C语言探索之旅 | 第一部分第六课：变量的世界（三），显示变量内容](https://www.jianshu.com/p/497355a6ba4d)
+  - [C语言探索之旅 | 第一部分第七课：运算那点事](https://www.jianshu.com/p/7bc4493ebb4f)
+  - [C语言探索之旅 | 第一部分第八课：条件表达式](https://www.jianshu.com/p/49fdba563d53)
+  - [C语言探索之旅 | 第一部分练习题](https://www.jianshu.com/p/3cd80b95092a)
+- 第二部分
+  - [C语言探索之旅 | 第二部分第一课：模块化编程](https://www.jianshu.com/p/2070cfd368ca)
+  - [C语言探索之旅 | 第二部分第二课：进击的指针，C语言的王牌！](https://www.jianshu.com/p/e5e685b67501)
+  - [C语言探索之旅 | 第二部分第三课：数组](https://zhuanlan.zhihu.com/p/145294371)
+  - [C语言探索之旅 | 第二部分第四课：字符串](https://www.jianshu.com/p/2be7006765ec)
+  - [C语言探索之旅 | 第二部分第五课：预处理](https://www.jianshu.com/p/cb83bb7e9141)
+  - [C语言探索之旅 | 第二部分第六课：创建你自己的变量类型](https://www.jianshu.com/p/39b41aa5cca7)
+  - [C语言探索之旅 | 第二部分第七课：文件读写](https://www.jianshu.com/p/4adb95073745)
+  - [C语言探索之旅 | 第二部分第八课：动态分配](https://www.jianshu.com/p/bbce8f04faf1)
+  - [C语言探索之旅 | 第二部分第九课：实战"悬挂小人"游戏](https://www.jianshu.com/p/6cbf452666bd)
+  - [C语言探索之旅 | 第二部分第十课： 实战"悬挂小人"游戏答案](https://www.jianshu.com/p/b239b1774f4b)
+  - [C语言探索之旅 | 第二部分第十一课：练习题和习作](https://www.jianshu.com/p/30d4754ea2b7)
