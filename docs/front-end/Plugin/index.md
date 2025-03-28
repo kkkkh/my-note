@@ -91,9 +91,9 @@ outline: deep
   - [mockm](https://github.com/wll8/mockm)
   - [~~mockjs~~](https://github.com/nuysoft/Mock/wiki/Getting-Started) 停止维护
 - 安全(安全性)
-  - [DOMPurify](https://github.com/cure53/DOMPurify) HTML 清理(高)
-  - [xss](https://jsxss.com/zh/index.html) XSS 过滤(中)
-  - [escape-html](https://github.com/component/escape-html) HTML 转义(低)
+
+<!--@include: @/front-end/Http/Safe/index.md{32,34}-->
+
 - crypto
   - [jsencrypt](https://github.com/travist/jsencrypt) 加密
   - [crypto-js](https://github.com/brix/crypto-js) 数据摘要（停止维护：NodeJS 和现代浏览器都有原生 Crypto 模块）
