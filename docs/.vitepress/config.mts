@@ -241,8 +241,9 @@ export default defineConfig({
           link: '/front-end/Http/',
           items: [
             { text: 'ajax', link: '/front-end/Http/Ajax/' },
-            { text: '抓包', link: '/front-end/Http/PacketCapture/' },
+            { text: '缓存', link: '/front-end/Http/Cache/' },
             { text: '安全', link: '/front-end/Http/Safe/' },
+            { text: '抓包', link: '/front-end/Http/PacketCapture/' },
           ],
         },
         {
