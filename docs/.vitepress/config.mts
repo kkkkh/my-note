@@ -50,6 +50,13 @@ export default defineConfig({
             { text: '分片', link: '/article/file/sharding/index.md' },
           ],
         },
+        {
+          text: '面试',
+          link: '/article/interview/',
+          items: [
+            { text: 'js', link: '/article/interview/js/index.md' },
+          ],
+        },
       ],
       '/tools': [
         {
@@ -233,6 +240,7 @@ export default defineConfig({
           items: [
             { text: 'ajax', link: '/front-end/Http/Ajax/' },
             { text: '抓包', link: '/front-end/Http/PacketCapture/' },
+            { text: '安全', link: '/front-end/Http/Safe/' },
           ],
         },
         {
