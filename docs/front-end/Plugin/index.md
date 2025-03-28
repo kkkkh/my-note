@@ -26,21 +26,25 @@ outline: deep
   - [clipboard.js](https://clipboardjs.com/) 剪切
   - [vue-seamless-scroll](https://chenxuan0000.github.io/vue-seamless-scroll/guide/) 滚动
 - 高亮 & 代码编辑 & 解析器
-  - highlightjs
-    - [highlightjs](https://highlightjs.org/) 高亮
-    - [@highlightjs/vue-plugin](https://www.npmjs.com/package/@highlightjs/vue-plugin)
-    - [highlightjs-copy](https://www.npmjs.com/package/highlightjs-copy)
-    - [marked-highlight](https://github.com/markedjs/marked-highlight)
-  - [prismjs](https://prismjs.com/) 高亮
-  - [monaco-editor](https://github.com/microsoft/monaco-editor) 代码编辑
-  - [marked](https://marked.js.org/) markdown 解析器
-  - [markdown-it](https://github.com/markdown-it/markdown-it)
-  - json
-    - [JSON Editor](https://github.com/josdejong/jsoneditor) => [json-editor-vue3](https://github.com/guyue88/json-editor-vue3)
-    - [JSON Editor doc](https://jsoneditoronline.org/docs/)
-    - [JSON Editor online](https://jsoneditoronline.org/#right=local.mepaki)
-    - [jsonrepair](https://github.com/josdejong/jsonrepair)
-    - [json-editor/json-editor](https://github.com/json-editor/json-editor)
+  - 高亮
+    - highlightjs
+      - [highlightjs](https://highlightjs.org/) 高亮
+      - [@highlightjs/vue-plugin](https://www.npmjs.com/package/@highlightjs/vue-plugin)
+      - [highlightjs-copy](https://www.npmjs.com/package/highlightjs-copy)
+      - [marked-highlight](https://github.com/markedjs/marked-highlight)
+    - [prismjs](https://prismjs.com/) 高亮
+  - 代码编辑
+    - [monaco-editor](https://github.com/microsoft/monaco-editor) 代码编辑
+    - json
+      - [JSON Editor](https://github.com/josdejong/jsoneditor) => [json-editor-vue3](https://github.com/guyue88/json-editor-vue3)
+      - [JSON Editor doc](https://jsoneditoronline.org/docs/)
+      - [JSON Editor online](https://jsoneditoronline.org/#right=local.mepaki)
+      - [jsonrepair](https://github.com/josdejong/jsonrepair)
+      - [json-editor/json-editor](https://github.com/json-editor/json-editor)
+  - 解析器
+    - [marked](https://marked.js.org/) markdown 解析器
+    - [markdown-it](https://github.com/markdown-it/markdown-it)
+    - [Markdown-Tag](https://github.com/MarketingPipeline/Markdown-Tag)  Web Components `<md> #1 </md>`
 - icons
   - [iconify 文档](https://iconify.design/docs/) &nbsp;&nbsp;&nbsp;[Browse Icons](https://icon-sets.iconify.design/) &nbsp;&nbsp;&nbsp;[icones](https://icones.js.org/)(Icon Explorer with Instant searching, powered by Iconify)
   - [svg4everybody](https://www.npmjs.com/package/svg4everybody) svg兼容
@@ -83,7 +87,13 @@ outline: deep
   - [zpl-image-2](https://www.npmjs.com/package/zpl-image-2) 图像转换为 Z64 编码或 ACS 编码的 GRF 位图以与 ZPL 一起使用
   - [jszpl](https://www.npmjs.com/package/jszpl) 生成 ZPL
 - mock数据
-  - [fakerjs](https://fakerjs.dev/guide/) &nbsp;&nbsp;&nbsp;[mockm](https://github.com/wll8/mockm) &nbsp;&nbsp;&nbsp;[mockjs(停止维护)](https://github.com/nuysoft/Mock/wiki/Getting-Started)
+  - [fakerjs](https://fakerjs.dev/guide/)
+  - [mockm](https://github.com/wll8/mockm)
+  - [~~mockjs~~](https://github.com/nuysoft/Mock/wiki/Getting-Started) 停止维护
+- 安全(安全性)
+  - [DOMPurify](https://github.com/cure53/DOMPurify) HTML 清理(高)
+  - [xss](https://jsxss.com/zh/index.html) XSS 过滤(中)
+  - [escape-html](https://github.com/component/escape-html) HTML 转义(低)
 - crypto
   - [jsencrypt](https://github.com/travist/jsencrypt) 加密
   - [crypto-js](https://github.com/brix/crypto-js) 数据摘要（停止维护：NodeJS 和现代浏览器都有原生 Crypto 模块）
@@ -150,7 +160,7 @@ outline: deep
 - [unplugin-icons](https://www.npmjs.com/package/unplugin-icons#auto-importing#Migrate%20from%20vite-plugin-icons) 图标
 - [rollup-plugin-visualizer](https://www.npmjs.com/package/rollup-plugin-visualizer) build分析可视化
 - [vite-plugin-inspect](https://github.com/antfu-collective/vite-plugin-inspect) 检查Vite插件的中间状态-调试和创作插件
-- [vite-plugin-babel](https://github.com/owlsdepartment/vite-plugin-babel) 
+- [vite-plugin-babel](https://github.com/owlsdepartment/vite-plugin-babel)
 ### rollup
 - [@rollup/plugin-strip](https://github.com/rollup/plugins/tree/master/packages/strip) 移除debugger、console.、assert.
 ### Webpack plugin (Webpack 扩展)
