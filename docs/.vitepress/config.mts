@@ -55,6 +55,7 @@ export default defineConfig({
           link: '/article/interview/',
           items: [
             { text: 'js', link: '/article/interview/js/index.md' },
+            { text: 'css', link: '/article/interview/css/index.md' },
           ],
         },
       ],
