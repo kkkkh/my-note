@@ -119,6 +119,7 @@ export default defineConfig({
             { text: 'base', link: '/front-end/Css/base/' },
             { text: 'flex', link: '/front-end/Css/flex/' },
             { text: 'sass', link: '/front-end/Css/sass/' },
+            { text: 'tailwindcss', link: '/front-end/Css/tailwindcss/' },
           ],
         },
         {
