@@ -29,9 +29,9 @@
   const newStr = str.replaceAll('<', '&lt;').replaceAll('>', '&gt;')
   ```
 - 第三方工具
-
-<!--@include: @/front-end\Plugin\index.md{94,96}-->
-
+  - [DOMPurify](https://github.com/cure53/DOMPurify) HTML 清理(高)
+  - [xss](https://jsxss.com/zh/index.html) XSS 过滤(中)
+  - [escape-html](https://github.com/component/escape-html) HTML 转义(低)
 - 现代框架默认会屏蔽 XSS 攻击，除非自己手动开启
   - Vue `v-html`
   - React `dangerouslySetInnerHTML`
