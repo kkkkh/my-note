@@ -1,9 +1,9 @@
 import { defineConfig } from 'vitepress'
 import {fileURLToPath} from 'node:url'
-
+import { withMermaid } from "vitepress-plugin-mermaid";
 
 // https://vitepress.dev/reference/site-config
-export default defineConfig({
+export default withMermaid(defineConfig({
   title: 'My Note',
   description: 'A Blog site',
   // lang: 'zh',
@@ -21,6 +21,13 @@ export default defineConfig({
     // ['script', { src: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js' }]
   ],
   themeConfig: {
+    lastUpdated: {
+      text: 'Updated at',
+      formatOptions: {
+        dateStyle: 'full',
+        timeStyle: 'medium'
+      }
+    },
     // https://vitepress.dev/reference/default-theme-config
     search: {
       provider: 'local',
@@ -241,8 +248,10 @@ export default defineConfig({
           link: '/front-end/Http/',
           items: [
             { text: 'ajax', link: '/front-end/Http/Ajax/' },
+            { text: '状态码', link: '/front-end/Http/StatusCode/' },
             { text: '缓存', link: '/front-end/Http/Cache/' },
             { text: '安全', link: '/front-end/Http/Safe/' },
+            { text: 'Cdn', link: '/front-end/Http/Cdn/' },
             { text: '抓包', link: '/front-end/Http/PacketCapture/' },
           ],
         },
@@ -309,4 +318,4 @@ export default defineConfig({
       // md.use(require('markdown-it-emoji'))  // 示例：添加 emoji 支持
     }
   },
-})
+}))
