@@ -4,6 +4,7 @@ outline: deep
 # Vue Plugin
 ## component
 ### vxe-table
+#### 文档
 - 本地数据，简单筛查：https://vxetable.cn/v3.8/#/table/base/filter
 - 本地数据，复杂筛选：https://vxetable.cn/v3.8/#/table/advanced/manualFilter
   - 手动筛选：调用 setFilter 和 updateData 方法来处理复杂场景
@@ -14,13 +15,42 @@ outline: deep
 - 本地数据，分页：https://vxetable.cn/v3.8/#/table/advanced/page
 - 数据代理，分页：https://vxetable.cn/v3.8/#/table/grid/pageProxy
 
-### [Render-table](./render-table/index.md)
+- 常用方法/事件
+```js
+<vxe
+  @checkbox-change="checkboxChange"
+  @checkbox-all="checkboxChange"
+></vxe>
+// 设置选中
+setCheckboxRow(rows, checked)
+setAllCheckboxRow(checked)
+// 清除选中
+clearCheckboxRow()
+clearCheckboxReserve()
+// 获取
+getCheckboxRecords()
+getCheckboxReserveRecords()
+```
+
+- 保持勾选记录
+```js
+<vxe
+  :row-config="{
+    keyField: 'id',
+  }"
+  :checkbox-config="{ reserve: true }"
+></vxe>
+```
+#### [Render-table](./render-table/index.md)
 - 前端计算table => filter/sort/page
   - 外层触发计算
   - 内部筛选计算
   - 内部排序计算
-### Pack-table
 
+- 关于复选数据重复的问题：
+  - 数据通过查询，增量累加，不存在单独减少操作，此时不需要考虑复选数据更新；
+  - 数据执行操作成功，会对数据重置或删除，此时要更新复选的数据，设置为空；
+#### Pack-table
 ```html
 <PackRichTable
   ref="packRichTable"
