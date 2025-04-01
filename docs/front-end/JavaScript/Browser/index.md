@@ -81,3 +81,60 @@ outline: deep
   - 异步执行：使用 Web API（如 setTimeout、setInterval、requestAnimationFrame）和 Web Workers 来将一些不需要立即执行的任务移到主线程之外，以避免长时间阻塞主线程。
   - 减少 DOM 操作：每次对 DOM 的修改都会触发浏览器的重排（reflow）和重绘（repaint），过多的操作会影响性能。尽量批量处理 DOM 更新。
   - 懒加载：对于不必要立即加载的资源，使用懒加载技术，延迟加载资源来提升页面的响应速度。
+## 浏览器白屏
+### FCP
+- 首次内容绘制 (FCP, First Contentful Paint):（用户从看到白屏到看到页面上出现第一个元素的时间）
+  - 浏览器首次渲染任何文本、图像、非空白 Canvas 或 SVG 的时间点。
+  - 这是用户第一次在屏幕上看到内容的时间，是衡量白屏时间的重要指标。
+  - 首次有意义的绘制时间控制在 1.8 秒或更短的时间
+### LCP
+- 最大内容绘制 (LCP, Largest Contentful Paint):（相对于用户首次导航到网页的时间）
+  - 视口中最大的可见元素完成渲染的时间点。
+  - LCP 提供了页面主要内容加载速度的感知。
+  - 网站应尽量将 Largest Contentful Paint 控制在 2.5 秒或更短的时间内
+- 首次有效绘制 (FMP, First Meaningful Paint):（这些指标很复杂、难以解释，并且经常出错，无法确定网页的主要内容何时加载完毕。）
+  - 页面主要内容对用户可见并可交互的时间点。
+  - 这个指标比较主观，难以自动测量，但更贴近用户感知的“可用”时间。
+### TTFB
+- Time to First Byte
+- 浏览器接收到服务器响应的第一个字节的时间。
+- TTFB 受网络延迟和服务器响应速度的影响，是优化白屏时间的基础。
+- 大多数网站应力求 TTFB 不超过 0.8 秒
+- 请求阶段的总和
+  - 重定向时间
+  - Service Worker 启动时间（如果适用）
+  - DNS 查找
+  - 连接和 TLS 协商
+  - 请求，直到响应的第一个字节到达
+### CLS
+- Cumulative Layout Shift
+- CLS 用于衡量在网页的整个生命周期内发生的每一次意外布局偏移的布局偏移得分的最高累计分数。
+- 网站应尽力使 CLS 得分不高于 0.1。
+- 布局偏移得分 = 影响百分比 * 距离百分比
+### INP
+- Interaction to Next Paint
+- 通过观察用户访问网页期间发生的所有点击、点按和键盘互动的延迟时间，评估网页对用户互动的总体响应情况。
+- INP 低于或等于 200 毫秒表示网页响应速度良好。
+### 其他
+- DCL(DOM Content Loaded)：指标衡量的是浏览器解析 HTML 文档并构建 DOM (Document Object Model) 树所需的时间。
+- onDomReady/DOMContentLoaded：当 HTML 文档被完全加载和解析完成之后，DOMContentLoaded 事件就会被触发。
+- onLoad：当整个页面及所有依赖资源（例如图片、CSS 文件、JavaScript 文件）都完全加载完成之后，load 事件就会被触发。
+- 这些api对于性能优化，有时候并不符合用户预期，仅做了解
+### web-vitals
+  ```js
+  // web-vitals
+  import {onFCP,onLCP,onTTFB,onCLS} from 'web-vitals';
+  onFCP(console.log);
+  onLCP(console.log);
+  onTTFB(console.log);
+  onCLS(console.log);
+  ```
+- 参考：
+  - [以用户为中心的效果指标](https://web.dev/articles/user-centric-performance-metrics?hl=zh-cn)
+  - [FCP](https://web.dev/articles/fcp?hl=zh-cn)
+  - [LCP](https://web.dev/articles/lcp?hl=zh-cn)
+  - [TTFB](https://web.dev/articles/ttfb?hl=zh-cn)
+  - [CLS](https://web.dev/articles/cls?hl=zh-cn)
+  - [INP](https://web.dev/articles/inp?hl=zh-cn)
+  - [web-vitals](https://github.com/GoogleChrome/web-vitals)
+  - [CrUX（Chrome 用户体验报告）](https://developer.chrome.com/docs/crux?hl=zh-cn)
