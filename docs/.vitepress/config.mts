@@ -8,10 +8,12 @@ export default withMermaid(defineConfig({
   description: 'A Blog site',
   // lang: 'zh',
   base: '/my-note/',
+  srcDir: '.',
   vite: {
     resolve: {
       alias: [
         { find: '@', replacement: fileURLToPath(new URL('../../docs', import.meta.url))},
+        { find: '*', replacement: fileURLToPath(new URL('../../docs', import.meta.url))},
       ]
     },
   },
@@ -28,6 +30,10 @@ export default withMermaid(defineConfig({
         timeStyle: 'medium'
       }
     },
+    outline:{
+      level:'deep',
+      label: "目录"
+    },
     // https://vitepress.dev/reference/default-theme-config
     search: {
       provider: 'local',
@@ -42,31 +48,20 @@ export default withMermaid(defineConfig({
       { text: '文档', link: '/tools/blog' },
     ],
     sidebar: {
-      '/article': [
+      'article': [
         {
-          text: '算法',
-          link: '/article/algorithm/',
-          items: [
-            { text: 'js', link: '/article/algorithm/js/index.md' },
-          ],
-        },
-        {
-          text: '文件',
-          link: '/article/file/',
-          items: [
-            { text: '分片', link: '/article/file/sharding/index.md' },
-          ],
+          text: '前端',
+          link: '/article/front-end/',
         },
         {
           text: '面试',
           link: '/article/interview/',
           items: [
-            { text: 'js', link: '/article/interview/js/index.md' },
-            { text: 'css', link: '/article/interview/css/index.md' },
+            { text: 'font-end', link: '/article/interview/font-end/index.md' },
           ],
         },
       ],
-      '/tools': [
+      'tools': [
         {
           text: 'blog',
           link: '/tools/blog',
@@ -112,7 +107,7 @@ export default withMermaid(defineConfig({
           link: '/tools/business',
         },
       ],
-      '/front-end': [
+      'front-end': [
         {
           text: 'Html',
           link: '/front-end/Html/',
@@ -216,6 +211,7 @@ export default withMermaid(defineConfig({
                 { text: 'vscode插件', link: '/front-end/Engineering/plugin/vscode/' },
                 { text: '浏览器插件', link: '/front-end/Engineering/plugin/brower/' },
                 { text: 'markdown', link: '/front-end/Engineering/plugin/markdown/' },
+                { text: 'vitepress', link: '/front-end/Engineering/plugin/vitepress/' },
               ],
             },
             {
@@ -259,8 +255,28 @@ export default withMermaid(defineConfig({
           text: '设计模式',
           link: '/front-end/DesignPatterns/',
         },
+        {
+          text: '应用',
+          link: '/front-end/application/',
+          items: [
+            {
+              text: '文件',
+              link: '/front-end/application/file/',
+              items: [
+                { text: '分片', link: '/front-end/application/file/sharding/' },
+              ],
+            },
+            {
+              text: '算法',
+              link: '/front-end/application/algorithm/',
+              items: [
+                { text: 'js', link: '/front-end/application/algorithm/js/' },
+              ],
+            },
+          ]
+        },
       ],
-      '/back-end': [
+      'back-end': [
         {
           text: 'Lang',
           link: '/back-end/Lang/',
@@ -275,21 +291,24 @@ export default withMermaid(defineConfig({
                 ]},
                 { text: '脚本', link: '/back-end/Lang/NodeJs/Script/' },
                 { text: 'Module', items:
-                  [{ text: 'crypto', link: '/back-end/Lang/NodeJs/Module/Crypto/' },]
+                  [
+                    { text: 'crypto', link: '/back-end/Lang/NodeJs/Module/Crypto/' },
+                    { text: 'c++ addons', link: '/back-end/Lang/NodeJs/Module/c++/' },
+                  ]
                  },
               ]
             },
           ],
         },
       ],
-      '/ops': [
+      'ops': [
         {
           text: 'Command',
           link: '/ops/Command/',
           items: [],
         },
       ],
-      '/computer-science':[
+      'computer-science':[
         {
           text: '汇编语言',
           link: '/computer-science/Assembly/',
@@ -312,7 +331,13 @@ export default withMermaid(defineConfig({
   markdown: {
   // Markdown 配置选项 參考：https://github.com/vuejs/vitepress/blob/main/src/node/markdown/markdown.ts
   // lineNumbers: true,  // 如果希望代码块显示行号
+    toc: { level: [1, 2] },
     config: (md) => {
+      // debugger
+      // console.log(md)
+      // md.use((res)=>{
+      //   console.log(res)
+      // })
       // console.log( md.renderer.rules)
       // 自定义 Markdown-It 插件
       // md.use(require('markdown-it-emoji'))  // 示例：添加 emoji 支持
