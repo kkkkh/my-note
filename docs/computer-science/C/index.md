@@ -179,21 +179,24 @@ gcc hello.c -o hello
 
   - printf 负责输出
 
-    <<< ./hello.c#printf
+    <<< ./Sources/s1.c#printf
 
   - scanf 负责输入
 
-    <<< ./hello.c#scanf
+    <<< ./Sources/s1.c#scanf
 
   - scanf 和 printf 函数还有一点差异：
     - 对于 float 和 double 来说，printf 里面他们的替代符号都是 %f，
     - 但是在 scanf 里面却不一样，float 是 %f，而 double 是 %lf 。
+
+    <<< ./Sources/s1.c#printfAndScanf
+
 ## 运算
 - 基础运算
 - 变量运算
 - 缩写
 
-  <<< ./hello.c#operation
+  <<< ./Sources/s1.c#operation
 
 - 数学库
   - fabs 绝对值
@@ -206,7 +209,7 @@ gcc hello.c -o hello
   - log 这个函数返回以 e 为底的对数值（我们学数学时也写成 ln）。
   - log10 这个函数返回以 10 为底的对数值。
 
-    <<< ./hello.c#math
+    <<< ./Sources/s1.c#math
 
 ## 条件表达式
 
@@ -223,14 +226,14 @@ gcc hello.c -o hello
 - switch
 - 三元表达式
 
-  <<< ./hello.c#condition
+  <<< ./Sources/s1.c#condition
 
 ## 循环
 - while 循环
 - do...while 循环
 - for 循环
 
-  <<< ./hello.c#loop
+  <<< ./Sources/s1.c#loop
 
 ## 函数
 
@@ -242,11 +245,11 @@ gcc hello.c -o hello
   - 返回一个值的函数。这样的函数，我们将其类型定为对应的值的类型（char，int，long，double，等）。
   - 不返回任何值的函数。这样的函数，我们将其类型定为 void（void表示“空的，无效的”）。
 
-## 模块化
+## 2.1模块化
 
-- 函数原型：
+- 函数原型：（是给电脑的一个提示或指示）
   - `double rectangleArea(double length, double width);`
-  - 把这一整行放置在 main 函数前面。
+  - 把这一整行放置在 main 函数前面。就可以在main中调用rectangleArea函数（rectangleArea函数定义在任何位置）
   - 简写：`double rectangleArea(double, double);`
 - 文件类型
   - .h 文件：header file，表示“头文件”，这些文件包含了函数的原型。
@@ -264,26 +267,55 @@ gcc hello.c -o hello
   - "" 用于引入自定义的头文件。这些头文件位于你自己的项目的目录中。
 - 标准库文件
     - 头文件位置：D:\xxx\mingw64\include *.h
-    - 库文件或 Library 文件（编译之后的二进制码）：D:\Program Files\mingw64\lib
+    - 库文件或 Library 文件：.a文件（.c文件编译之后的二进制码）：D:\Program Files\mingw64\lib
       - 静态链接库：*.a 或者 *.lib（Visual C++）
-      -  动态链接库：.dll 结尾（windows）、.so 结尾（Linux）
+      - 动态链接库：.dll 结尾（windows）、.so 结尾（Linux）
 
+- 编译原理
+  - 预处理器：
+    - 编译之前做一些预备工作，执行预处理命令，以 # 开头，
+    - 例如`#include <stdio.h>`：预处理器在执行时会把上面这句指令替换为 stdio.h 文件的内容
+  - 编译：
+    - 把 .c 文件先转换成 .o 文件
+    - o 文件一般叫做目标文件（o 是 object 的首字母，表示“目标”），是临时的二进制文件，会被用于之后生成最终的可执行二进制文件。
+    - o 文件一般会在编译完成后被删除，也可以保留不删除，不需c文件重新生成o文件（缓存）
+  - 链接器（linker）：
+    - 链接器把所有 .o 文件链接起来，“制作成”一个“大块头”：最终的可执行文件
+    - 最终的可执行文件：在 Windows下是 .exe 文件；在 Linux 下有不少种形式
+    - 还需要负责链接标准库文件，把.o文件和标准库文件.a文件整合在一起
 
+  ![编译原理](./img/2.webp)
+- 变量和函数的作用范围
+  - 函数的私有变量（局部变量）
+    - 只在函数中可以访问
+  - 能被所有文件使用的全局变量（请避免使用）
+    - 可以被项目的所有文件访问
+  - 只能在一个文件里被访问的全局变量
+    ```C
+    static int result = 0;
+    ```
+  - 函数的 static（静态）变量
+    - 函数内部的变量如果加了 static，那么在函数结束后，这个变量也不会销毁，它的值会保持。
+    - 下一次我们再调用这个函数时，此变量会延用上一次的值。
+    ```C
+    int multipleTwo(int number)
+    {
+      static int result = 0;   // 静态变量 result 在函数第一次被调用时创建
+      result = 2 * number;
 
+      return result;
+    }   // 变量 result 在函数结束时不会被销毁
+    ```
 
+    <<< ./Sources/s2.1.c#static
 
-
-
-
-
-
-
-
-
-
-
-
-
+  - 一个文件中的局部函数（本地函数或静态函数）只能被本文件的函数所调用
+    ```C
+    static int multipleTwo(int number)
+    {
+        // 指令
+    }
+    ```
 
 
 
@@ -300,6 +332,7 @@ gcc hello.c -o hello
   - [C语言探索之旅 | 第一部分第六课：变量的世界（三），显示变量内容](https://www.jianshu.com/p/497355a6ba4d)
   - [C语言探索之旅 | 第一部分第七课：运算那点事](https://www.jianshu.com/p/7bc4493ebb4f)
   - [C语言探索之旅 | 第一部分第八课：条件表达式](https://www.jianshu.com/p/49fdba563d53)
+  - [C语言探索之旅 | 第一部分第九课：循环语句](https://www.jianshu.com/p/9193259c0724)
   - [C语言探索之旅 | 第一部分练习题](https://www.jianshu.com/p/3cd80b95092a)
 - 第二部分
   - [C语言探索之旅 | 第二部分第一课：模块化编程](https://www.jianshu.com/p/2070cfd368ca)
