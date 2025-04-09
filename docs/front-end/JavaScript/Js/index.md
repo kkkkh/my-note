@@ -3,11 +3,24 @@ outline: deep
 ---
 # Js
 [JavaScript 参考](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference)
-## 数据类型
+## 表达式与操作符
 ### 变量声明
-#### let
-let可以创建暂时性死区，以屏蔽变量提升带来的问题，帮助开发者轻松捕获错误。
-变量提升是指变量的声明会提升到所在作用域的顶部
+#### var / let / const &I
+- 暂时性死区（Temporal Dead Zone，TDZ）
+  - 使用 let 和 const 声明的变量，从代码块的开始到声明语句之间的区域。
+  - 在这个区域内，访问这些变量会抛出 ReferenceError 。
+- 变量提升：
+  - 是指变量的声明会提升到所在作用域的顶部。
+  - let a=1：`let a` 会被提升到当前作用域的顶部，不会初始化为undefined，此时访问啊变量，触发暂时性死区（VM401:1 Uncaught ReferenceError: b is not defined），`=1`赋值不会提升
+  - var a=1：`var a`变量声明会被提升到作用域顶部，会被初始化为 undefined，`=1`赋值不会提升
+
+| 特性           | var                                      | let                                             | const                                           |
+|--------------|------------------------------------------|-------------------------------------------------|-------------------------------------------------|
+| 作用域         | 函数作用域或全局作用域                   | 块级作用域                                      | 块级作用域                                      |
+| 提升（Hoisting） | 变量声明会被提升，会初始化，但赋值不会提升 | 变量声明会被提升，但不会初始化，存在 TDZ，赋值不会 | 变量声明会被提升，但不会初始化，存在 TDZ，赋值不会 |
+| 重复声明       | 允许在同一作用域内重复声明               | 不允许在同一作用域内重复声明                    | 不允许在同一作用域内重复声明                    |
+| 值是否可变     | 可变                                     | 可变                                            | 不可变                                          |
+
 ```js
 for (var i = 0; i < 10; i++) {
   setTimeout(() => {
@@ -21,6 +34,51 @@ for (let i = 0; i < 10; i++) {
   }, 300) //输出10次，依次为0、1、2、…、9
 }
 ```
+### 作用域 / 作用域链  &I
+- 作用域 Scope
+  - 指在程序中定义变量的区域，它决定了变量的可访问性和生命周期
+  - 简单来说，作用域就是一个变量可以被访问和使用的范围。
+- 作用域类型 :
+  - 全局作用域（Global Scope）： 在函数外部声明的变量拥有全局作用域。全局变量可以在代码的任何地方被访问
+  - 函数作用域（Function Scope）： 在函数内部声明的变量拥有函数作用域。函数变量只能在该函数内部被访问
+  - 块级作用域（Block Scope）： 使用 let 和 const 关键字声明的变量拥有块级作用域；块级变量只能在声明它们的代码块（通常是 if 语句、循环或一对花括号 {}）内部被访问
+- 作用域链（Scope Chain）
+  - 当在 JavaScript 中访问一个变量时，解释器会按照一定的顺序搜索该变量。这个搜索顺序就形成了作用域链 .
+  - 当前作用域： 首先，解释器会查找当前作用域中是否存在该变量。
+  - 外部作用域： 如果在当前作用域中找不到该变量，解释器会继续查找外部（父级）作用域。
+  - 逐级向上： 这个过程会一直持续到全局作用域。
+  - 未找到： 如果在全局作用域中仍然找不到该变量，且代码运行在非严格模式下，该变量会被隐式地声明为全局变量。如果在严格模式下，会抛出一个 ReferenceError 错误。
+- 销毁：
+  - 当函数执行完毕后，其执行上下文会从调用栈中弹出，函数作用域也会被销毁。
+  - 这意味着函数内部声明的变量将不再存在于内存中，变得不可访问。
+### 闭包  &I
+- 闭包：
+  - 闭包是指函数可以访问并记住其词法作用域（定义时所在的作用域），即使在其外部执行（myClosure调用）.
+  - 当一个函数形成闭包时，即使外部函数已经执行完毕，其作用域中的某些变量仍然可以被闭包函数访问。
+  - 这是因为闭包函数保持了对外部函数作用域的引用，防止垃圾回收器回收这些变量。
+  - 内存泄漏：如果闭包函数一直被引用，那么其引用的外部作用域中的变量将永远无法被回收，这可能导致内存泄漏。
+  ```js
+  // 在这个例子中，innerFunction 是一个闭包，它可以访问 outerFunction 作用域中的 outerVariable 变量。
+  // 即使 outerFunction 已经执行完毕，outerVariable 仍然存在于内存中，因为 myClosure（即 innerFunction）保持了对 outerFunction 作用域的引用。
+  function outerFunction() {
+    let outerVariable = '外部变量';
+
+    function innerFunction() {
+      console.log(outerVariable); // 访问外部函数的变量
+    }
+
+    return innerFunction; // 返回内部函数，形成闭包
+  }
+  const myClosure = outerFunction(); // 调用 outerFunction，返回 innerFunction
+  myClosure(); // 调用 innerFunction，仍然可以访问 outerVariable
+
+  myClosure = null; // 解除 myClosure 对 innerFunction 的引用
+  // 此时，垃圾回收器可以回收 innerFunction 和 outerFunction 作用域中的变量
+  ```
+- 闭包使用场景：
+  - 创建私有变量和方法
+  - 函数柯里化（Currying）
+  - 模块化
 ### 操作符
 https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators
 ```js
@@ -31,6 +89,7 @@ a.b = 0
 a.b ||= 3
 // a.b = 3
 ```
+## 数据类型
 ### Number
 #### 进制转化
 - 10进制转为16进制
@@ -631,19 +690,27 @@ console.log(res1);
 #### 特殊字符
 ```js
 /\d/  // \d 范围大 也包含中文全角0-9
+/\D/ // 匹配一个非数字字符。等价于 [^0-9]。
 /[0-9]/ // 0-9 范围小
 /\w/ // A-Za-z0-9_
+/\W/ //	匹配一个非单字字符 等价于 [^A-Za-z0-9_]。
 /[\u4e00-\u9fa5]/ //汉字
-/\r/ // 匹配一个回车符
-/\n/ // 换行符匹配;
-// 数量
-/\d?/ //0次 或 1次
-/\d*/ //0次 或 多次
-/\d+/ //1次 或 多次
+/\s/ // 匹配一个空白字符，包括空格、制表符、换页符和换行符 等价于 
+/[\f\n\r\t\v\u0020\u00a0\u1680\u180e\u2000-\u200a\u2028\u2029\u202f\u205f\u3000\ufeff]/ //与上同
+/\S/ // 匹配一个非空白字符
+/\f/ // 匹配一个换页符 (U+000C)
+/\r/ // 匹配一个回车符 (U+000D)
+/\n/ // 换行符匹配 (U+000A)
+/./ // （小数点）默认匹配除换行符之外的任何单个字符。
 // 在 Unix 和 Linux 系统（包括 macOS）中，换行符用 \n（LF，Line Feed）表示。
 // 在 Windows 系统中，换行符用 \r\n（CR+LF，Carriage Return + Line Feed）表示。
 // 早期的 Mac OS（例如，Mac OS 9）使用 \r（CR，Carriage Return）表示换行。
 // 以\n为主流
+// 数量
+/\d?/ // 0次 或 1次
+/\d*/ // 0次 或 多次
+/\d+/ // 1次 或 多次
+/{n}/ // n 是一个正整数，匹配了前面一个字符刚好出现了 n 次。 
 ```
 #### 匹配规则
 ```js
@@ -659,12 +726,13 @@ console.log(res1);
 // 捕获组
 /(x)/ // 捕获组会带来性能损失。如果不需要收回匹配的子字符串，请选择非捕获括号，下边的例子
 // \n 非捕获括号
-/apple(\,)orange\1/.exec("apple,orange,cherry,peach") // 其中 \1 引用了 之前使用 () 捕获的
+/apple(\,)orange\1/.exec("apple,orange,cherry,peach") // 其中 \1 引用了 之前使用第 n 个 () 捕获的 => 'apple, orange,'
 // (?<Name>x) 具名捕获组：匹配"x"并将其存储在返回的匹配项的 groups 属性中，
 /-(?<customName>\w)/ // 匹配“web-doc” 中的“d”
 'web-doc'.match(/-(?<customName>\w)/).groups //{customName: "d"}
 // (?:x) 非捕获组：匹配 “x”，但不记得匹配。不能从结果数组的元素中收回匹配的子字符串
 /(a)(?:b)(c)/.exec("abc") // ['abc', 'a', 'c', index: 0, input: 'abc', groups: undefined]
+/((x)yz)(abc)/.exec("xyzabc") // 嵌套捕获组，先由外到内，再由左到右 => ['xyzabc', 'xyz', 'x', 'abc', index: 0, input: 'xyzabc', groups: undefined]
 ```
 参考：[Groups and ranges](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_expressions/Groups_and_backreferences)
 #### RegExp
@@ -801,14 +869,14 @@ array[1];
 // ['test2', 'e', 'st2', '2', index: 5, input: 'test1test2', length: 4]
 ```
 #### 修饰符
-| 标志 | 描述 |
-|------|------|
-| g    | 全局搜索。 |
-| i    | 不区分大小写搜索。 |
-| m    | 多行搜索。 |
-| s    | 允许 . 匹配换行符。 |
-| u    | 使用 unicode 码的模式进行匹配。 |
-| y    | 执行“粘性 (sticky)”搜索，匹配从目标字符串的当前位置开始。 |
+| 标志 | 描述                                                                |
+|------|-------------------------------------------------------------------|
+| g    | 全局搜索。                                                           |
+| i    | 不区分大小写搜索。                                                   |
+| m    | 多行搜索。                                                           |
+| s    | 允许 . 匹配换行符。                                                  |
+| u    | 使用 unicode 码的模式进行匹配。                                      |
+| y    | 执行“粘性 (sticky)”搜索，匹配从目标字符串的当前位置开始。             |
 | d    | 表示正则表达式匹配的结果应该包含每个捕获组子字符串开始和结束的索引。 |
 
 ##### -y
@@ -854,22 +922,39 @@ regex2.test(".\nfoo"); // true - 索引 2 是行的开始
   console.log(res)
   ```
   ```js
-  //2
-  function queryCodeListTrim(strings) {
-    return strings
-      .split(/\r?\n+/)
-      .filter((val) => val !== '')
-      .map((item) => item.trim())
-  }
+  //2 字符串通过“换行”截取为 => 数据组
+  const strings= "111\n222"
+  const arr = strings.split(/\r?\n+/).filter((val) => val !== '').map((item) => item.trim())
   ```
   ```js
-  // 贪婪
-  var str = "bbaabbaa";
+  // 3 贪婪
+  var str = "bbbaaccaa";
   var reg1 = /.*aa/;
-  console.log(reg1.exec(str));
+  console.log(reg1.exec(str)); // bbbaaccaa
   // 增加?，非贪婪
   var reg2 = /.*?aa/;
-  console.log(reg2.exec(str));
+  console.log(reg2.exec(str)); // bbbaa 只找最前面
+  /**
+   * exec每次只查询一次, 
+   * g在上一次基础上继续往下查找
+   */
+  var reg3 = /.*?aa/g;
+  console.log(reg3.exec(str)); // bbbaa
+  console.log(reg3.exec(str)); // ccaa 只找最前面
+  ```
+  ```js
+  // 4
+  /**
+   * 获取标签、key:
+   * <el-input v-model="form.type"></el-input>
+   * input、type
+   */
+  const reg = /<([\w-]+)\n?\s*[\w"'=]*\n?\s*v-model=["']\w*[Ff]orm\.(\w+)/g
+  ```
+  ```js
+  // 路径中获取文件名
+  const path = "/*/**/01.text"
+  const res = path.match(/\/([^\/]+)$/)[1]
   ```
 - 常用正则
   ```js
@@ -888,46 +973,199 @@ regex2.test(".\nfoo"); // true - 索引 2 是行的开始
   - [learn-regex](https://github.com/ziishaned/learn-regex/blob/master/translations/README-cn.md)
   - [common-regex](https://github.com/cdoco/common-regex)
 ### Function
-- 判断是否是Function
-  - func && func(args)
-  - ES2020的新语法func?.(args)
-  - typeof func === 'function'
-#### bind
+#### 箭头函数 / 普通函数 &I
+- 普通函数： this 的值取决于函数被调用的方式，它可以是全局对象（在非严格模式下），也可以是调用该函数的对象，还可以通过 call、apply 或 bind 显式指定。
+- 箭头函数：
+  - 不绑定自己的 this。它会捕获其所在上下文的 this 值，并始终指向该值，且无法通过 call、apply 或 bind 改变
+  - 箭头函数中的 this 是词法作用域的，即在定义时就确定了，而不是在运行时确定。
+  - 不具备：arguments、new 、prototype
+  ```js
+  const person = {
+    name: '张三',
+    greet: function() {
+      console.log('普通函数中的 this:', this.name); // this 指向 person 对象
+      const innerFunction = function() {
+        console.log('普通函数中的 this:', this.name); // this 指向 window 对象（非严格模式）或 undefined（严格模式）
+      };
+      innerFunction();
+      const arrowFunction = () => {
+        console.log('箭头函数中的 this:', this.name); // this 指向 person 对象，与 greet 函数的 this 相同
+      };
+      arrowFunction();
+    }
+  };
+  person.greet();
+  ```
+#### throttle / debounce &I
+- 节流(throttle)
+  - 限制函数执行频率的技术
+  - 在固定的时间间隔内最多执行一次
+  - 无论事件触发的频率有多高，节流都会按照设定的时间间隔执行函数
+  ```js
+  function throttle(func, delay) {
+    // 常规思路实现
+    let lastCall = 0;
+    return function(...args) {
+      const now = new Date().getTime();
+      if (now - lastCall >= delay) {
+        func(...args);
+        lastCall = now;
+      }
+    };
+  }
+  ```
+  ```js
+  function throttle(func, delay, options = {}) {
+    let timeoutId;
+    let lastExecTime = 0;
+    let lastThis;
+    let lastArgs;
+
+    const { leading = true, trailing = true } = options;
+
+    function invokeFunc(time) {
+      timeoutId = null;
+      lastExecTime = time; // 每次func.apply执行一次，就更新lastExecTime 至关重要
+      func.apply(lastThis, lastArgs);
+    }
+
+    function throttled(...args) {
+      const now = Date.now();
+      if (!lastExecTime && leading === false) {
+        lastExecTime = now;
+      }
+      // 剩余时间
+      const remaining = delay - (now - lastExecTime);
+      lastThis = this;
+      lastArgs = args;
+      // 临界考虑三种情况
+      // 2、remaining = 0 达到临界点，即 now - lastExecTime = delay，会与定时器重合，有定时器，则取消定时器；再执行；
+      // 3、remaining < 0 超出临界点，即 now - lastExecTime > delay，则直接执行
+      // 特殊情况：remaining > delay 这个判断条件可以被视为一种防御性编程的措施，用于处理这些极端的、不常见的情况。
+      if (remaining <= 0 || remaining > delay) {
+        if (timeoutId) {
+          clearTimeout(timeoutId);
+          timeoutId = null;
+        }
+        lastExecTime = now; // 更新lastExecTime 至关重要
+        func.apply(lastThis, lastArgs);
+        // 1、还在节流时间内，即 now - lastExecTime < delay，并且没有定时器
+      } else if (!timeoutId && trailing) {
+        timeoutId = setTimeout(() => {
+          invokeFunc(Date.now());
+        }, remaining);
+      }
+    }
+
+    throttled.cancel = () => {
+      clearTimeout(timeoutId);
+      timeoutId = null;
+      lastExecTime = 0;
+    };
+
+    return throttled;
+  }
+  ```
+- 防抖（Debouncing）
+  - 防抖是一种延迟函数执行的技术。
+  - 它确保函数在一段时间内只执行一次，只有在停止触发事件后的一段时间后才执行 。
+  - 如果在延迟时间内再次触发事件，则重新计时。
+  ```js
+  // 常规思路实现
+  function debounce(func, delay) {
+    let timeoutId;
+    return function(...args) {
+          let that = this
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        func.call(that,...args);
+      }, delay);
+    };
+  }
+  ```
+  ```js
+  // underscorejs 实现
+  import restArguments from './restArguments.js';
+  import now from './now.js';
+  export default function debounce(func, wait, immediate) {
+    var timeout, previous, args, result, context;
+
+    var later = function() {
+      var passed = now() - previous; // 当前时间 - 上一次时间
+      // wait > passed 在一段时间内有触发，passed小于时间区间，再次创建新的setTimeout
+      if (wait > passed) {
+        timeout = setTimeout(later, wait - passed);
+      // 满足
+      } else {
+        timeout = null;
+        if (!immediate) result = func.apply(context, args);
+        if (!timeout) args = context = null;
+      }
+    };
+    var debounced = restArguments(function(_args) {
+      context = this;
+      args = _args;
+      previous = now(); // 这里是关键 每次执行会更新previous
+      if (!timeout) {
+        timeout = setTimeout(later, wait);
+        if (immediate) result = func.apply(context, args);
+      }
+      return result;
+    });
+
+    debounced.cancel = function() {
+      clearTimeout(timeout);
+      timeout = args = context = null;
+    };
+
+    return debounced;
+  }
+  ```
+- 参考：
+  - [underscorejs throttle](https://underscorejs.org/docs/modules/throttle.html)
+  - [underscorejs debounce](https://underscorejs.org/docs/modules/debounce.html)
+  - [loadsh throttle](https://github.com/lodash/lodash/blob/main/lodash.js#L10965)
+  - [loadsh debounce](https://github.com/lodash/lodash/blob/main/lodash.js#L10372)
+#### bind / call / apply
 - bind() 方法创建一个新函数，
 - 当调用该新函数时，它会调用原始函数并将其 this 关键字设置为给定的值，
 - 同时，还可以传入一系列指定的参数，这些参数会插入到调用新函数时传入的参数的前面。
-```js
-"use strict"; // 防止 `this` 被封装到到包装对象中
-function log(...args) {
-  console.log(this, ...args);
-}
-const boundLog = log.bind("this value", 1, 2);
-const boundLog2 = boundLog.bind("new this value", 3, 4);
-boundLog2(5, 6); // "this value", 1, 2, 3, 4, 5, 6
-```
-#### call
-```js
-function Product(name, price) {
-  this.name = name;
-  this.price = price;
-}
-function Food(name, price) {
-  Product.call(this, name, price);
-  this.category = 'food';
-}
-console.log(new Food('cheese', 5).name);
-// Expected output: "cheese"
-```
-#### apply
-```js
-const numbers = [5, 6, 2, 3, 7];
-const max = Math.max.apply(null, numbers);
-console.log(max);
-// Expected output: 7
-const min = Math.min.apply(null, numbers);
-console.log(min);
-// Expected output: 2
-```
+  ```js
+  "use strict"; // 防止 `this` 被封装到到包装对象中
+  function log(...args) {
+    console.log(this, ...args);
+  }
+  const boundLog = log.bind("this value", 1, 2);
+  const boundLog2 = boundLog.bind("new this value", 3, 4);
+  boundLog2(5, 6); // "this value", 1, 2, 3, 4, 5, 6
+  ```
+  ```js
+  // call
+  function Product(name, price) {
+    this.name = name;
+    this.price = price;
+  }
+  function Food(name, price) {
+    Product.call(this, name, price);
+    this.category = 'food';
+  }
+  console.log(new Food('cheese', 5).name);
+  // Expected output: "cheese"
+  ```
+  ```js
+  // apply
+  const numbers = [5, 6, 2, 3, 7];
+  const max = Math.max.apply(null, numbers);
+  console.log(max);
+  // Expected output: 7
+  const min = Math.min.apply(null, numbers);
+  console.log(min);
+  // Expected output: 2
+  ```
+#### func?.(args)
+- 判断是否是Function
+  - func && typeof func === 'function' && func(args)
+  - ES2020的新语法func?.(args)
 #### arguments.callee()
 - 调用当前执行的函数，匿名函数场景使用
 - es5严格模式废弃
@@ -1165,6 +1403,7 @@ function compareNumbers(a, b) {
   - [Math.random](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Math/random#%E7%A4%BA%E4%BE%8B)
 ### Error
 #### AggregateError
+AggregateError 代表了包装了多个错误对象的单个错误对象。当一个操作需要报告多个错误时，例如 Promise.any()，当传递给它的所有承诺都被拒绝时，就会抛出该错误。
 ```js
 Promise.any([Promise.reject(new Error("some error1")),Promise.reject(new Error("some error2"))]).catch((e) => {
   console.log(e instanceof AggregateError); // true
@@ -1182,6 +1421,22 @@ try {
   console.log(e.name); // "AggregateError"
   console.log(e.errors); // [ Error: "some error1", Error: "some error2"  ]
 }
+```
+#### ReferenceError
+ReferenceError（引用错误）对象代表当一个不存在（或尚未初始化）的变量被引用时发生的错误
+```js
+try {
+  let a = undefinedVariable;
+} catch (e) {
+  console.log(e instanceof ReferenceError); // true
+  console.log(e.message); // "undefinedVariable is not defined"
+  console.log(e.name); // "ReferenceError"
+  console.log(e.fileName); // "Scratchpad/1"
+  console.log(e.lineNumber); // 2
+  console.log(e.columnNumber); // 6
+  console.log(e.stack); // "@Scratchpad/2:2:7\n"
+}
+
 ```
 ### Map
 ```js
