@@ -2,5 +2,4 @@
 outline: deep
 ---
 # interview
-## js
-## css
+## front-end
