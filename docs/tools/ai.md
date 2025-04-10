@@ -1,0 +1,9 @@
+# AI
+## chat
+- [poe](https://poe.com/)
+- [devv](https://devv.ai/zh)
+- [chatgpt](https://chatgpt.com/)
+- [deepseek](https://chat.deepseek.com/)
+## code
+- [cursor](https://www.cursor.com/)
+- [tabnine](https://www.tabnine.com/)
