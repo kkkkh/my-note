@@ -69,6 +69,10 @@ export default withMermaid(defineConfig({
           link: '/tools/book',
         },
         {
+          text: 'ai',
+          link: '/tools/ai',
+        },
+        {
           text: '计算机',
           link: '/tools/computer-science',
         },
