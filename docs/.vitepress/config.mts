@@ -13,7 +13,6 @@ export default withMermaid(defineConfig({
     resolve: {
       alias: [
         { find: '@', replacement: fileURLToPath(new URL('../../docs', import.meta.url))},
-        { find: '*', replacement: fileURLToPath(new URL('../../docs', import.meta.url))},
       ]
     },
   },
@@ -40,12 +39,11 @@ export default withMermaid(defineConfig({
     },
     nav: [
       { text: '首页', link: '/' },
+      { text: '计算机', link: '/computer-science' },
       { text: '前端', link: '/front-end' },
       { text: '后端', link: '/back-end' },
-      { text: '运维', link: '/ops' },
-      { text: '计算机', link: '/computer-science' },
-      { text: '文章', link: '/article' },
       { text: '文档', link: '/tools/blog' },
+      { text: '文章', link: '/article' },
     ],
     sidebar: {
       'article': [
@@ -299,14 +297,17 @@ export default withMermaid(defineConfig({
               ]
             },
           ],
-        },
-      ],
-      'ops': [
-        {
-          text: 'Command',
-          link: '/ops/Command/',
-          items: [],
-        },
+        },{
+          text: 'Ops',
+          link: '/back-end/Ops/',
+          items:[
+            {
+              text: 'Command',
+              link: '/back-end/Ops/Command/',
+              items: [],
+            },
+          ],
+        }
       ],
       'computer-science':[
         {
@@ -324,6 +325,20 @@ export default withMermaid(defineConfig({
           link: '/computer-science/C++/',
           items: [],
         },
+        {
+          text: '操作系统',
+          link: '/computer-science/Os/',
+          items: [
+            {
+              text: 'windows',
+              link: '/computer-science/Os/windows/',
+            },
+            {
+              text: 'mac',
+              link: '/computer-science/Os/mac/',
+            }
+          ],
+        }
       ]
     },
     socialLinks: [{ icon: 'github', link: 'https://github.com/kkkkh' }],
