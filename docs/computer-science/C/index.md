@@ -2,7 +2,7 @@
 outline: deep
 ---
 # c 语言
-## 基础概念
+## 1.1 基础概念
 - 编译 & 编译器
   - 编译器：指的是把源代码转为电脑能理解的二进制码的工具。
   - 这个转换的过程，称为编译。
@@ -23,7 +23,8 @@ outline: deep
   - Code::Blocks ：免费，开源，跨平台的 IDE。（Code::Blocks 的开发环境搭建起来非常快，几乎不需要什么配置。）
   - VScode：跨平台
   - Xcode：mac
-## vscode 调试 C语言
+## 1.2 开发工具
+### vscode 调试 C语言
 - MinGW-W64 编译器安装
   - 之前安装方式，通过sourceforge，直接下载预编译版本exe，
   - 现在sourceforge只有MinGW-W64的源代码，无法下载安装包，
@@ -58,27 +59,27 @@ gcc hello.c -o hello
       "tasks": [
         {
           "type": "cppbuild",
-          "label": "C/C++: gcc.exe 生成活动文件",
-          "command": "E:\\MinGW\\bin\\gcc.exe",
+          "label": "C/C++: gcc build",
+          "command": "D:\\Program Files\\mingw64\\bin\\gcc.exe",
           "args": [
             "-fdiagnostics-color=always",
             "-g",
-            "${fileDirname}/*.c",
+            "${fileDirname}\\*.c" ,
+            "${fileDirname}\\Headers\\*.h",
+            "${fileDirname}\\Sources\\*.c",
             "-o",
             "${fileDirname}\\${fileBasenameNoExtension}.exe"
           ],
           "options": {
-            "cwd": "E:\\MinGW\\bin"
+            "cwd": "${workspaceFolder}\\docs\\computer-science\\C", //gcc 命令应该在你的项目源代码所在的目录下执行
           },
-          "problemMatcher": [
-            "$gcc"
-          ],
+          "problemMatcher": ["$gcc"],
           "group": {
             "kind": "build",
             "isDefault": true
           },
-          "detail": "调试器生成的任务。"
-        }
+          "detail": "调试器生成的任务"
+        },
       ],
       "version": "2.0.0"
     }
@@ -117,13 +118,13 @@ gcc hello.c -o hello
     ```
 - 參考：
   - [一篇带你用VS Code调试C代码](https://www.51cto.com/article/703699.html)
-## Code::Blocks
+### Code::Blocks
 - 程序类型
   - 窗口程序
   - 控制台程序
     - Windows 中它被称为 cmd 命令提示符（Windows 环境下的虚拟 DOS 窗口
     - macOS 操作系统中，我们也可以打开控制台的，只要运行 Terminal
-## 内存
+## 1.4 内存
 - 内存特点
   - 高速但是低容量的存储器
   - 大容量但是低速的存储器
@@ -137,7 +138,7 @@ gcc hello.c -o hello
   - CPU：1 GHz 对应每秒 10 亿次
   - 内存：基本上只和内存打交道
   - 寄存器和高速缓存：我们基本不关心，这是电脑的事（汇编语言（Assembly，简称 ASM），我们经常会用到寄存器）
-## 变量
+## 1.5 变量
 - 变量名
   - 只能包含英文的大小写字母，数字和下划线（_），其他一律禁止。
   - 必须以字母开头。
@@ -169,7 +170,7 @@ gcc hello.c -o hello
   ```c
   const int NUMBER_OF_DOGS = 7;
   ```
-## 变量显示
+## 1.6 变量显示
   | 格式 | 类型   |
   |------|--------|
   | %d   | int    |
@@ -191,7 +192,7 @@ gcc hello.c -o hello
 
     <<< ./Sources/s1.c#printfAndScanf
 
-## 运算
+## 1.7 运算
 - 基础运算
 - 变量运算
 - 缩写
@@ -211,7 +212,7 @@ gcc hello.c -o hello
 
     <<< ./Sources/s1.c#math
 
-## 条件表达式
+## 1.8 条件表达式
 
 | 符号 | 含义     |
 |------|--------|
@@ -228,14 +229,14 @@ gcc hello.c -o hello
 
   <<< ./Sources/s1.c#condition
 
-## 循环
+## 1.9 循环
 - while 循环
 - do...while 循环
 - for 循环
 
   <<< ./Sources/s1.c#loop
 
-## 函数
+## 1.11 函数
 
 - 函数类型：函数返回值的类型。
 - 函数名：从给变量命名的规则。
@@ -316,10 +317,73 @@ gcc hello.c -o hello
         // 指令
     }
     ```
+- 重构（项目目录结构）
+  - task.json 调整 支持 ./Headers/\*.h ./Sources/\*.c
+    ```json
+    // task.json args做调整
+    {
+      ...,
+      "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${fileDirname}\\*.c" ,
+                "${fileDirname}\\Headers\\*.h",
+                "${fileDirname}\\Sources\\*.c",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+              ],
+    }
+    ```
+- Makefile
+  - 定义
+    - Makefile 是一个文本文件，用于自动化构建（编译、链接等）项目。
+    - 它包含了一系列规则，定义了如何从源文件生成目标文件和最终的可执行文件。
+    - Makefile 主要用于 C/C++ 项目，但也可以用于其他类型的项目。
+  - 基本语法
+    ```Makefile
+    目标文件: 依赖文件
+        命令
+    ```
 
+  <<< ./Makefile
 
+  - task.json 配置 make
+  ```json
+  {
+    "tasks": [
+      {
+        "type": "cppbuild",
+        "label": "C/C++: make build",
+        "command": "D:\\Program Files\\mingw64\\bin\\mingw32-make.exe",
+        "args": [
+          "-f", // 指定 Makefile 的路径
+          "${workspaceFolder}\\docs\\computer-science\\C\\Makefile", // Makefile 的相对路径
+          "all"
+        ],
+        "options": {
+          "cwd": "${workspaceFolder}\\docs\\computer-science\\C"
+        },
+        "problemMatcher": ["$gcc"],
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "detail": "使用 make 构建"
+      }
+    ],
+    "version": "2.0.0"
+  }
+  ```
+  - 参考：
+    - [make 手册](https://www.gnu.org/software/make/manual/make.html)
+## 2.2 指针
+- C语言的函数参数默认是传值调用的（也叫值传递），就是说当我们传给函数的参数一个变量时，事实上传递的是这个变量的一份拷贝，并不是这个变量本身！
+- 为了显示变量的地址，我们需要使用符号组合 %p（p 是 pointer 的首字母，pointer 就是英语“指针”的意思）。
 
-
+- 指针大小
+  - 在 32 位系统下，不管什么样的指针类型，其大小都为 4 个 Byte（字节，等于 8 个二进制位，也就是 8 个比特位）。
+  - 在 64 位系统下，不管什么样的指针类型，其大小都为 8 个 Byte。
+- 指针的一个优势就是用来传递给函数，作为函数的参数，使得在函数里修改指针所指向的变量的值，就直接在内存上修改了
 
 ## 参考
 - [C语言探索之旅](https://www.jianshu.com/nb/4555196)
@@ -333,6 +397,8 @@ gcc hello.c -o hello
   - [C语言探索之旅 | 第一部分第七课：运算那点事](https://www.jianshu.com/p/7bc4493ebb4f)
   - [C语言探索之旅 | 第一部分第八课：条件表达式](https://www.jianshu.com/p/49fdba563d53)
   - [C语言探索之旅 | 第一部分第九课：循环语句](https://www.jianshu.com/p/9193259c0724)
+  - [C语言探索之旅 | 第一部分第十课：第一个C语言小游戏](https://www.jianshu.com/p/7d03f054c2d1)
+  - [C语言探索之旅 | 第一部分第十一课：函数](https://www.jianshu.com/p/148564646b7f)
   - [C语言探索之旅 | 第一部分练习题](https://www.jianshu.com/p/3cd80b95092a)
 - 第二部分
   - [C语言探索之旅 | 第二部分第一课：模块化编程](https://www.jianshu.com/p/2070cfd368ca)
