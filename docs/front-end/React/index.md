@@ -1,3 +1,6 @@
+---
+outline: deep
+---
 # React
 ## React 原理
 ### jsx
@@ -509,6 +512,8 @@ function MyComponent() {
   - 这个现象就被称作属性钻取（Props Drilling）。
   - 虽然显式的传递一目了然，但给开发过程还是带来了些许繁琐，我们看看该怎么解决这个问题。
   - context 来解决
+### 工程化
+npm run eject
 ## React实践
 ### babel 
 - [babel try it](https://babeljs.io/repl/#?browsers=defaults%2C%20not%20ie%2011%2C%20not%20ie_mob%2011&build=&builtIns=false&corejs=3.21&spec=false&loose=false&code_lz=GYVwdgxgLglg9mABACwKYBt1wBQEpEDeAUIogE6pQhlIA8AJjAG4B8AEhlogO5xnr0AhLQD0jVgG4iAXyJA&debug=false&forceAllTransforms=false&modules=false&shippedProposals=false&evaluate=false&fileSize=false&timeTravel=false&sourceType=module&lineWrap=true&presets=react&prettier=false&targets=&version=7.18.4&externalPlugins=&assumptions=%7B%7D) 
@@ -558,6 +563,17 @@ const ParentComponent = () => (
   <MyComponent prop1="文本" prop2={123} booleanProp={false}
     onClick={(evt) => {console.log('clicked')}} />
 );
+```
+### attr
+#### dangerouslySetInnerHTML &I
+- 将一段 HTML 字符串插入到 React 组件中
+- 本质：将提供的 HTML 字符串设置为对应 DOM 元素的 innerHTML 属性
+```jsx
+function MyComponent({ htmlContent }) {
+  return (
+    <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
+  );
+}
 ```
 ### 比较旧的一些教程
 - 阮一峰 React 入门实例教程 https://www.ruanyifeng.com/blog/2015/03/react.html
