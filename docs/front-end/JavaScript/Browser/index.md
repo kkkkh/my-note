@@ -81,7 +81,7 @@ outline: deep
   - 异步执行：使用 Web API（如 setTimeout、setInterval、requestAnimationFrame）和 Web Workers 来将一些不需要立即执行的任务移到主线程之外，以避免长时间阻塞主线程。
   - 减少 DOM 操作：每次对 DOM 的修改都会触发浏览器的重排（reflow）和重绘（repaint），过多的操作会影响性能。尽量批量处理 DOM 更新。
   - 懒加载：对于不必要立即加载的资源，使用懒加载技术，延迟加载资源来提升页面的响应速度。
-## 浏览器白屏
+## 浏览器白屏 &I
 ### FCP
 - 首次内容绘制 (FCP, First Contentful Paint):（用户从看到白屏到看到页面上出现第一个元素的时间）
   - 浏览器首次渲染任何文本、图像、非空白 Canvas 或 SVG 的时间点。
