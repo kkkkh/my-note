@@ -1,7 +1,7 @@
 ---
 outline: deep
 ---
-# Cdn
+# Cdn &I
 CDN全称叫做“Content Delivery Network”，中文叫内容分发网络。
 ## CNAME
 - 用户使用某个域名来访问静态资源时（这个域名在阿里CDN服务中叫做“加速域名”），
