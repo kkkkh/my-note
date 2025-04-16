@@ -158,8 +158,8 @@ export default withMermaid(defineConfig({
           text: 'React',
           link: '/front-end/React/',
           items: [
-            { text: 'react', link: '/front-end/React/' },
-            { text: 'preact', link: '/front-end/React/Preact/' }
+            { text: 'react', link: '/front-end/React/react/' },
+            { text: 'preact', link: '/front-end/React/preact/' }
           ],
         },
         {
@@ -273,6 +273,13 @@ export default withMermaid(defineConfig({
               link: '/front-end/application/algorithm/',
               items: [
                 { text: 'js', link: '/front-end/application/algorithm/js/' },
+              ],
+            },
+            {
+              text: '请求',
+              link: '/front-end/application/request/',
+              items: [
+                { text: '竞态', link: '/front-end/application/request/race/' },
               ],
             },
           ]
