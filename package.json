@@ -5,6 +5,7 @@
     "vitepress": "^1.6.3",
     "vitepress-plugin-mermaid": "^2.0.17"
   },
+  "type": "module",
   "scripts": {
     "dev": "vitepress dev docs",
     "docs:dev": "vitepress dev docs",
