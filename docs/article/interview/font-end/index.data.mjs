@@ -7,7 +7,6 @@ const md = markdownit()
 const getIVInfo = (data, node)=>{
   const regexp = /([^\s].+\s*)\&I/g
   const res = [...data.matchAll(regexp)];
-  // console.log(res)
   return res.map((item,index) => {
     const title = item[1]
     const sTitle = title?.replaceAll(/[#\s]/g,"")?.replaceAll(/\//g ,"-")
@@ -54,6 +53,7 @@ export default {
       configFilePath
     );
     const dir = loadedConfig?.config.themeConfig.sidebar["front-end"]
+    // console.log(JSON.stringify(dir, null, 2))
     const updatedTreeData = await processTreeData(dir);
     // console.log(JSON.stringify(updatedTreeData, null, 2));
     return updatedTreeData
