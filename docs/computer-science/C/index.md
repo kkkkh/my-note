@@ -158,7 +158,7 @@ gcc hello.c -o hello
 - signed 和 unsigned 的区别
   - signed 最开始有正号或者负号（正数或负数），如 7，-5，9.2，-23.8，等。
   - unsigned 是无符号数，只能是正数或零，如 35，7461，61.789，等。
-  - unsigned相比 signed 类型的优势是可以储存两倍于 signed 类型的最大值：例如 signed char 最大值是 127，unsigned char 最大值是 255。
+  - unsigned相比 signed 类型的优势是可以储存两倍于 signed 类型的最大值：例如 signed char 最大值是 127，unsigned char 最大值是 255（0-255）。
 - 通用
   - char，int，long：C语言最初创建多种整数类型的目的是为了节约内存
   - 对于整数，一般用 int
@@ -177,6 +177,8 @@ gcc hello.c -o hello
   | %ld  | long   |
   | %f   | float  |
   | %f   | double |
+  | %c   | char   |
+  | %s   | string |
 
   - printf 负责输出
 
@@ -385,6 +387,272 @@ gcc hello.c -o hello
   - 在 64 位系统下，不管什么样的指针类型，其大小都为 8 个 Byte。
 - 指针的一个优势就是用来传递给函数，作为函数的参数，使得在函数里修改指针所指向的变量的值，就直接在内存上修改了
 
+- 指针基础关键代码
+
+<<< ./Sources/s2.2.c#pointer
+
+<<< ./Sources/s2.2.c#pointerPassingValues
+
+## 2.3 数组
+数组是在内存中具有连续地址的一系列相同类型的变量的集合。
+- 数组创建
+- c 标准
+  - C89（1989 年制定）
+  - C99（1999 年制定）
+  - C11（2011 年制定）
+-  C99：可以有大小可变的数组
+   ```C
+   // 从版本 C99 开始，允许创建大小可变的数组，也就是元素的个数是一个变量：
+   int variable = 5;
+   int array[variable];
+   ```
+-  C89：不允许有大小可变的数组
+- 使用：动态分配（之后课程会讲）
+
+<<< ./Sources/s2.3.c#array
+
+## 2.4 字符串类型
+
+- 字符类型
+  - char 类型一般用来储存一个字符，注意，是 一个 字符。
+- 字符串：其实就是字符的数组
+- 字符串的两种声明方式
+
+  <<< ./Sources/s2.4.c#character1
+
+| 名称 | 内容 |
+| --- | --- |
+| 代码段 | 可执行代码、字符串常量 |
+| 数据段 | 已初始化全局变量、已初始化全局静态变量、局部静态变量、常量数据 |
+| BSS 段 | 未初始化全局变量，未初始化全局静态变量 |
+| 栈 | 局部变量、函数参数 |
+| 堆 | 动态内存分配 |
+
+- 一个可执行二进制程序（更确切的说，在 Linux 操作系统下为一个进程单元）在存储（没有调入到内存运行）时拥有 3 个部分，分别是代码段、数据段和 BSS 段
+  - (1) 代码段（code segment / text segment）：存放 CPU 执行的机器指令。通常代码段是可共享的，这使得需要频繁被执行的程序只需要在内存中拥有一份拷贝即可。代码段也通常是只读的，这样可以防止其他程序意外地修改其指令。另外，代码段还规划了局部数据所申请的内存空间信息。
+  - 代码段通常是指用来存放程序执行代码的一块内存区域。这部分区域的大小在程序运行前就已经确定，并且内存区域通常属于只读，某些架构也允许代码段为可写，即允许修改程序。在代码段中，也有可能包含一些只读的常数变量，例如字符串常量等。
+  - (2) 数据段（data segment）：或称全局初始化数据段/静态数据段(initialized data segment / data segment)。该段包含了在程序中明确被初始化的全局变量、静态变量(包括全局静态变量和局部静态变量)和常量数据。
+  - (3) 未初始化数据段：也称 BSS（Block Started by Symbol）。该段存入的是全局未初始化变量、静态未初始化变量。
+  而当程序被加载到内存单元时，则需要另外两个域：栈和堆。
+  - (4) 栈（stack）：存放函数的参数值、局部变量的值，以及在进行任务切换时存放当前任务的上下文内容。
+  - (5) 堆（heap）：用于动态内存分配（之后的课程马上会讲到），就是使用 malloc / free 系列函数来管理的内存空间。
+
+- 数组与指针
+  - 指针就是指针：指针变量在 32 位系统下，永远占 4 个 byte（字节）；在 64 位系统下，永远占 8 个 byte（字节）。其值为某一个内存的地址。指针可以指向任何地方，但不是任何地方你都能通过这个指针变量访问到。
+  - 数组就是数组：其大小与元素的类型和个数有关。定义数组时必须指定其元素的类型和个数。数组可以存任何类型的数据，但不能存函数。
+- 常用函数
+
+  <<< ./Sources/s2.4.c#character2
+
+## 2.5 预处理
+- include 包含文件
+- define 预处理常量
+  ```C
+  // 1、预处理器会把由 #define 定义的所有的名称替换成对应的值。
+  // 第一，因为预处理常量不用储存在内存里。
+  // 第二，预处理常量的替换会发生在所有引入 #define 语句的文件里。(它可以作用于所有函数，只要函数里有那个名称，都会替换为对应的数值。)(嵌入式开发)
+  // 通常来说，#define 语句放在 .h 头文件中，和函数原型那些家伙在一起。
+  #define LIFE_NUMBER 7
+  // 2、用于数组大小（维度）的 #define
+  #define MAX_DIMENSION 2000
+
+  int main(int argc, char *argv[])
+  {
+      char string1[MAX_DIMENSION], string2[MAX_DIMENSION];
+      // ...
+  }
+  // 3、在 #define 中的计算
+  #define WINDOW_WIDTH 800
+  #define WINDOW_HEIGHT 600
+  #define PIXEL_NUMBER (WINDOW_WIDTH * WINDOW_HEIGHT) //尽量多用括号括起来
+  // 4、系统预先定义好的预处理常量
+  /*
+    __LINE__ ：当前行号。
+    __FILE__ ：当前文件名。
+    __DATE__ ：编译时的日期。
+    __TIME__ ：编译时的时刻。
+  */
+  printf("错误在文件 %s 的第 %d 行\n", __FILE__, __LINE__);
+  printf("此文件在 %s %s 被编译\n", __DATE__, __TIME__);
+  // 5、不带数值的 #define
+  #define CONSTANT
+  // 6、#define 还可以用来替换… 一整个代码体（宏）
+  // 擅长图形界面编程的 wxWidgets 和 Qt，就大量使用了宏。
+  #include <stdio.h>
+  #define HELLO() printf("Hello\n");
+  #define PRESENT_YOURSELF() printf("您好, 我叫 Oscar\n"); \
+                             printf("我住在浙江杭州\n"); \
+                             printf("我喜欢游泳\n");
+  #define MATURE(age) if (age >= 18) \
+                      printf("你成年了\n");
+  int main(int argc, char *argv[])
+  {
+      HELLO()
+      PRESENT_YOURSELF()
+      MATURE(25)
+      return 0;
+  }
+  // 7、#if 条件编译
+  #define VALUE 10
+  #if VALUE > 20
+      printf("VALUE 大于 20\n");
+  #elif VALUE > 5
+      printf("VALUE 大于 5 且不大于 20\n");
+  #else
+      printf("VALUE 不大于 5\n");
+  #endif
+  // 8、#ifdef 条件编译
+  #define WINDOWS
+  #ifdef WINDOWS
+  /* 当 WINDOWS 已经被定义的时候要编译的代码 */
+  #endif
+  #ifdef LINUX
+  /* 当 LINUX 已经被定义的时候要编译的代码 */
+  #endif
+  #ifdef MAC
+  /* 当 MAC 已经被定义的时候要编译的代码 */
+  #endif
+  // 9、#ifndef 条件编译
+  #ifndef DEF_FILENAME  // 如果此预处理常量还未被定义，即是说这个文件未被包含过
+  #define DEF_FILENAME  // 定义此预处理常量，以避免重复包含
+  /* file.h 文件的内容 (其他的 #include，函数原型，#define，等...) */
+  #endif
+  ```
+- 其他预处理
+## 2.6 创建你自己的变量类型
+- C语言也可以模拟面向对象编程
+- “自定义的变量类型”，我们来看三种：struct，union 和 enum
+- struct 结构体
+  - 一系列变量的集合，但是这些变量可以是不同类型的
+  - typedef 是 C语言的一个关键字，是 type（表示“类型”）和 define（表示“定义”）的缩合，“类型定义”。
+
+  <<< ./Sources/s2.6.c#struct
+
+- union 联合
+
+  <<< ./Sources/s2.6.c#union
+
+- enum 枚举
+
+  <<< ./Sources/s2.6.c#enum
+
+- 对比
+  ```C
+  //示例一
+  #include <stdio.h>
+  typedef struct Person
+  {
+      char firstName[100]; // 名
+      char lastName[100];  // 姓
+      char address[1000];  // 地址
+      int age;  // 年龄
+      int boy;  // 性别，布尔值 : 1 = boy（表示“男孩”）, 0 = girl（表示“女孩”）
+  } Per;
+  Per user = {"", "", "", 0, 0};
+  scanf("%s", user.firstName);
+  Per players[2] = {
+      {"Ming", "Xiao", "", 0, 0},
+      {"Hong", "Da", "", 0, 0}
+  };
+  /*
+    lastName[100] 不允许全部替换一个字符串
+    players[1].lastName 表示数组的首地址，它是一个常量，不能被修改。
+    当您尝试 players[1].lastName = "xiaoming";
+    尝试将字符串字面量 "xiaoming" 的地址赋值给 players[1].lastName，这是不允许的。
+  */
+  // players[1].lastName = "xiaoming"; // 会报错 -->
+  strcpy(players[1].lastName, "xiaoming"); // 使用strcpy替换
+  printf("players[1].lastName= %s \n",players[1].lastName);
+  ```
+  ```C
+  //示例二
+  #include <stdio.h>
+  typedef struct Person
+  {
+      char firstName[100];
+      char *lastName;
+      char address[1000];
+      int age;
+      int boy;
+  } Per;
+  Per user = {"", "", "", 0, 0};
+  /*
+    user.lastName 是一个字符指针，而您没有为它分配内存空间
+    scanf("%s", user.lastName); 尝试将用户输入的数据写入到 user.lastName 指向的内存地址
+  */
+  // scanf("%s", user.firstName);// 会报错
+  user.lastName = (char*)malloc(100 * sizeof(char)); //先分配内存
+  scanf("%s", user.firstName);// 再存储
+  Per players[2] = {
+      {"Ming", "Xiao", "", 0, 0},
+      {"Hong", "Da", "", 0, 0}
+  };
+  players[1].lastName = "xiaoming";
+  printf("players[1].lastName= %s \n",players[1].lastName);
+  ```
+## 2.7 文件读写
+
+- openMode ：
+  - r ：只读。r 是 read（表示"读"）的首字母。这个模式下，我们只能读文件，而不能对文件写入。文件必须已经存在。
+  - w ：只写。w 是 write（表示"写"）的首字母。这个模式下，只能写入，不能读出文件的内容。如果文件不存在，将会被创建。
+  - a ：追加。a 是 append（表示"追加"）的首字母。这个模式下，从文件的末尾开始写入。如果文件不存在，将会被创建。
+  - r+ ：读和写。这个模式下，可以读和写文件，但文件也必须已经存在。
+  - w+ ：读和写。预先会删除文件内容。这个模式下，如果文件存在且内容不为空，则内容首先会被清空。如果文件不存在，将会被创建。
+  - a+ ：读写追加。这个模式下，读写文件都是从文件末尾开始。如果文件不存在，将会被创建。
+  - 如果你添加 b 后，会变成 rb，wb，ab，rb+，wb+，ab+ ），该文件就会以二进制模式打开。
+  - r，w 和 r+ 用得比较多
+- 读取
+  - 读取文件时，有一个“游标”（cursor），会跟随移动。
+- 换行与回车
+  - 每行后面加两个表示结束的字符。
+  - 一个叫做“回车”，告诉打字机把打印头定位在`左边界`；
+  - 另一个叫做“换行”，告诉打字机把纸`向下`移一行。
+  - 区别
+    - 在 Unix/Linux 系统里，每行结尾只有“<换行>”，即 "\n"；
+    - 在 Windows 系统里面，每行结尾是“<换行><回车>”，即 "\n\r"；
+    - 在 macOS 系统里，每行结尾是“<回车>”，即 "\r"。
+  - 处理
+    - Linux 中遇到换行符会进行“回车 + 换行”的操作，回车符反而只会作为控制字符显示，不发生回车的操作。
+    - 而 Windows 中要“回车符 + 换行符”才会实现“回车+换行"，缺少一个控制符或者顺序不对都不能正确的另起一行。
+
+## 2.8 动态分配
+- 动态分配
+  - 更偏手动的创建变量的方式，我们称为“动态分配”
+  - 在内存中“预置”一定空间大小，在编译时还不知道到底会用多少
+  - 使用这个技术，我们可以创建大小可变的数组
+
+- 内存大小
+ - 在 -128 至 127 之间的数（char 类型）：占用1字节
+ - int 类型：4个字节
+ - double 类型：8个字节
+
+- 操作
+  - 调用 malloc 函数来申请内存空间。
+  - 检测 malloc 函数的返回值，以得知操作系统是否成功为我们的程序分配了这块内存空间。
+  - 一旦使用完这块内存，不再需要时，必须用 free 函数来释放占用的内存，不然可能会造成内存泄漏。
+  - 
+一旦使用完这块内存，不再需要时，必须用 free 函数来释放占用的内存，不然可能会造成内存泄漏。
+
+- malloc 分配的内存是在堆上，一般的局部变量（自动分配的）大多是在栈上。(堆和栈的区别，还有内存的其他区域，如静态区等)
+```C
+void* malloc(size_t numOctetsToAllocate);
+/*
+numOctetsToAllocate，
+  就是需要申请的内存空间大小（用字节数表示）
+size_t（之前的课程有提到过）
+  其实和 int 是类似的，就是一个 define 宏定义，实际上很多时候就是 int。
+  可以将 sizeof(int) 置于 malloc 的括号中，表示要申请 int 类型的大小的空间。
+void* 返回一个指针，指向操作系统分配的内存的首地址malloc
+  函数并不知道你要创建的变量是什么类型的。
+  实际上，你只给它传递了一个参数： 在内存中你需要申请的字节数。
+  如果你申请 4 个字节，那么有可能是 int 类型，也有可能是 long 类型。
+  正因为 malloc 不知道自己应该返回什么变量类型（它也无所谓，只要分配了一块内存就可以了），所以它会返回 void* 这个类型。这是一个可以表示任意指针类型的指针
+*/
+```
+- 动态数组：动态分配最常被用来创建在运行时才知道大小的变量，例如动态数组
+
+>>> ./Sources/s2.8.c#dynamicArray
+
 ## 参考
 - [C语言探索之旅](https://www.jianshu.com/nb/4555196)
 - 第一部分
@@ -410,5 +678,5 @@ gcc hello.c -o hello
   - [C语言探索之旅 | 第二部分第七课：文件读写](https://www.jianshu.com/p/4adb95073745)
   - [C语言探索之旅 | 第二部分第八课：动态分配](https://www.jianshu.com/p/bbce8f04faf1)
   - [C语言探索之旅 | 第二部分第九课：实战"悬挂小人"游戏](https://www.jianshu.com/p/6cbf452666bd)
-  - [C语言探索之旅 | 第二部分第十课： 实战"悬挂小人"游戏答案](https://www.jianshu.com/p/b239b1774f4b)
+  - [C语言探索之旅 | 第二部分第十课：实战"悬挂小人"游戏答案](https://www.jianshu.com/p/b239b1774f4b)
   - [C语言探索之旅 | 第二部分第十一课：练习题和习作](https://www.jianshu.com/p/30d4754ea2b7)
