@@ -1,18 +1,18 @@
 import { defineConfig } from 'vitepress'
 import {fileURLToPath} from 'node:url'
 import { withMermaid } from "vitepress-plugin-mermaid";
-
 // https://vitepress.dev/reference/site-config
 export default withMermaid(defineConfig({
-  title: 'My Note',
-  description: 'A Blog site',
+  title: 'Odyssey Technology',
+  description: 'A long and adventurous journey, an exploration of the unknown world and a discovery of self, full of challenges and hardships, but never giving up the belief of returning.',
   // lang: 'zh',
   base: '/my-note/',
   srcDir: '.',
   vite: {
     resolve: {
       alias: [
-        { find: '@', replacement: fileURLToPath(new URL('../../docs', import.meta.url))},
+        { find: '@', replacement: fileURLToPath(new URL('../../docs', import.meta.url).href)},
+        { find: '~', replacement: fileURLToPath(new URL('../../utils', import.meta.url).href)},
       ]
     },
   },
@@ -32,6 +32,10 @@ export default withMermaid(defineConfig({
     outline:{
       level:'deep',
       label: "目录"
+    },
+    editLink: {
+      pattern: 'https://github.com/kkkkh/my-note/blob/main/docs/:path',
+      text: 'Edit this page on GitHub'
     },
     // https://vitepress.dev/reference/default-theme-config
     search: {
