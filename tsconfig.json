@@ -1,0 +1,13 @@
+// tsconfig.json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./docs/*"],
+      "/*": ["./docs/*"],
+
+    },
+    "allowImportingTsExtensions": true,
+    "noEmit": true
+  }
+}
