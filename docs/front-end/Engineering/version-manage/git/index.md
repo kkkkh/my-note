@@ -3,9 +3,9 @@ outline: deep
 ---
 # git
 ### git 常用命令
-#### git clone 
+#### git clone
 ```bash
-git clone xxxx 
+git clone xxxx
 git clone xxxx dic/\*/\*\*/
 ```
 #### git branch
@@ -50,6 +50,15 @@ git stash pop
 git stash apply stash@{0}
 # 删除 stash
 git stash drop 
+```
+#### git diff
+```bash
+# 查看文件差异
+git diff <file>
+# git add 之后，查看文件差异
+git diff --cached <file>
+git diff --staged <file>
+git diff HEAD
 ```
 #### git commit
 ```bash
@@ -137,7 +146,7 @@ squash 789ghi Commit message 3
 # 按照需要调整后保存即可。
 
 # rebase 会自动完成，git log 检查是否合并成功。
-git log 
+git log
 ```
 #### git remote
 ```bash
@@ -199,7 +208,7 @@ git reset 1094a ./file.txt #单个文件回退
 #### git clean
 ```bash
 # 删除新建的文件
-git clean -fd 
+git clean -fd
 ```
 #### git checkout
 ```bash
