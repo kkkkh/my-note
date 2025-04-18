@@ -214,6 +214,35 @@ export default {
 
 <<< @/back-end/Lang/NodeJs/Script/include/index.data.js#nodejs-scriprt-include
 
+## alias 路径别名
+- `/.vitepress/config.mts` 中配置alias只对前端部分的开发、打包有效
+  ```js
+  import { defineConfig } from 'vitepress'
+  import {fileURLToPath} from 'node:url'
+  // import { resolve } from 'node:path';
+  export default defineConfig({
+    vite: {
+      resolve: {
+        alias: [
+          // new URL('../../docs', import.meta.url) 使用import.meta.url了，所有路径是相对于当前这个文件的
+          { find: '@', replacement: fileURLToPath(new URL('../../docs', import.meta.url).href)},
+          { find: '~', replacement: fileURLToPath(new URL('../../', import.meta.url).href)},
+        ]
+        // 或者
+        // alias:{
+          // '@': resolve(__dirname, '../../docs'),
+          // '~': resolve(__dirname, '../../utils'),
+        // }
+      },
+    },
+  })
+  ```
+- vitepress dev docs 启动以后
+  - `*.data.js`是属于nodejs服务端，使用alias, 无效
+  - 在 package.json 中 "dev": "vitepress dev docs"，./docs目录下就是根目录
+  - 在 `*.data.js`中引用其他模块，可采用绝对路径，tsconfig.json paths配置 `"/*": ["./docs/*"]`配合绝对路径
+  - 在 `*.data.js`中 `import name from '/utils/**.mts'`，/utils就是docs根目录下文件夹
+
 ## vite press 增加标签
 - https://github.com/Charles7c/charles7c.github.io
 - https://github.com/clark-cui/vitepress-blog-zaun
