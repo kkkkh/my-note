@@ -1,7 +1,9 @@
-// #region pointer
 #include <stdio.h>
-#include "../Headers/s2.2.h"
 
+void triplePointer(int *pointerOnNumber);
+void transformMinutes(int *hours, int *minutes);
+
+// #region pointer
 int pointerMain(void)
 {
     int *pointer1, *pointer2, *pointer3;
@@ -21,7 +23,9 @@ int pointerMain(void)
 
   return 0;
 }
+// #endregion pointer
 
+// #region pointerPassingValues
 int pointer1Main()
 {
     int number = 5;
@@ -69,4 +73,11 @@ void transformMinutes(int *hours, int *minutes)
     *hours = *minutes / 60;    // 90 / 60 = 1
     *minutes = *minutes % 60;    // 90 % 60 = 30
 }
-// #endregion pointer
+
+int pMain(){
+    pointerMain();
+    pointer1Main();
+    pointer2Main();
+    pointerTimeMain();
+}
+// #endregion pointerPassingValues

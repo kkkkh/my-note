@@ -1,8 +1,28 @@
 #include <stdio.h>
 #include <math.h>
 
+static int test1(void){
+    // 基础
+    int number;
+    /*
+        printf 也是一个函数，定义在 stdio 库中
+        特殊字符：第一个字符是反斜杠（\），第二个字符是一个数字或者一个字母。
+        \n ：换行符 （作用类似按回车键）。
+    */
+    printf("input:\n"); //
+    scanf("%d", &number);
+    if((number > 1) && (number <= 100)) {
+        printf("Small\n");
+    } else if((number > 101) && (number <= 200)) {
+        printf("Middle\n");
+    } else {
+        printf("Large\n");
+    }
+
+}
 int s1Main(void)
 {
+    test1();
     // #region printf
     int numberOfDogs = 5;  // 一开始，你有5只狗
     printf("你有 %d 只狗\n", numberOfDogs);
