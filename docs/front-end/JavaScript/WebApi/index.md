@@ -1,69 +1,16 @@
 ---
 outline: deep
 ---
-## web API
-### Promise 1
-- [Promise v8 源码实现](https://chromium.googlesource.com/v8/v8/+/3.29.45/src/promise.js?autodive=0/)
-#### Promise.all
-- 报错处理
-```js
-const promise1 = Promise.resolve(1);
-const promise2 = 42;
-const promise3 = new Promise((resolve, reject) => {
-  throw new Error("3")
-});
-Promise.all([promise1, promise2, promise3]).then((values) => {
-  console.log(values);
-}).catch((error)=>{
-  console.log(error)
-});
-//  Error: 3
-```
-```js
-const promise1 = Promise.resolve(1);
-const promise2 = new Promise((resolve, reject) => {
-  throw new Error("2")
-});
-const promise3 = new Promise((resolve, reject) => {
-  throw new Error("3")
-});
-Promise.all([promise1, promise2, promise3]).then((values) => {
-  console.log(values);
-}).catch((error)=>{
-  console.log(error)
-});
-//  Error: 2
-```
-```js
-const promise1 = Promise.resolve(1);
-const promise2 = 42;
-const promise3 = new Promise((resolve, reject) => {
-  setTimeout(()=>{
-    // reject(3)
-    throw new Error("3")
-  },1000)
-});
-Promise.all([promise1, promise2, promise3]).then((values) => {
-  console.log(values);
-}).catch((error)=>{
-  console.log(error)
-});
-//  then 和 catch 都不会被触发
-// setTimeout中的Error无法被捕获到，可使用reject报错处理
-```
-#### 对比
-- Promise.all()
-  - 返回一个兑现值数组，有reject，则catch
-- Promise.allSettled()
-  - 所有输入的 Promise 完成，不管resolve还是reject
-- Promise.any()
-  - 返回第一个兑现的 Promise
-  - 没有 Promise 被兑现，使用 AggregateError 进行拒绝
-- Promise.race()
-  - 第一个异步任务完成时，不管resolve还是reject
+<script setup>
+import RequestAnimationFrame from './components/RequestAnimationFrame.vue'
+import MutationObserver from './components/MutationObserver.vue'
+import QueueMicrotask from './components/QueueMicrotask.vue'
+import Test from '@/components/Test.vue'
+</script>
 
-- 参考：[Promise.all](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise/all)
-### new URL(url, import.meta.url) 2
+# web API
+## 基础
+### new URL(url, import.meta.url)
 - 示例代码：
   ```js
   // 1
@@ -113,7 +60,80 @@ Promise.all([promise1, promise2, promise3]).then((values) => {
   const fileURL = new URL('./someFile.txt', import.meta.url)
   fs.readFile(fileURL, 'utf8').then(console.log)
   ```
-### TextEncoder / TextDecoder 3
+### requestAnimationFrame / cancelAnimationFrame() &I
+requestAnimationFrame(callback)
+- callback 该函数会在下一次重绘更新你的动画时被调用到
+- 这个回调函数只会传递一个参数：一个 DOMHighResTimeStamp 参数，用于表示上一帧渲染的结束时间（基于 time origin 的毫秒数）
+- 请求 ID 是一个 long 类型整数值，是在回调列表里的唯一标识符。window.cancelAnimationFrame() 取消该刷
+
+<<< ./components/RequestAnimationFrame.vue
+
+  <Test :is="RequestAnimationFrame" />
+
+### MutationObserver
+- MutationObserver 接口提供了监视对 DOM 树所做更改的能力
+
+<<< ./components/MutationObserver.vue
+
+<Test :is="MutationObserver" />
+
+### queueMicrotask
+- 当创建该微任务的函数执行之后，并且只有当 Javascript 调用栈为空，
+- 而控制权尚未返还给被用户代理用来驱动脚本执行环境的事件循环之前，该微任务才会被执行。
+
+<<< ./components/QueueMicrotask.vue
+
+<Test :is="QueueMicrotask" />
+
+- 参考
+  - [Microtask_guide](https://developer.mozilla.org/zh-CN/docs/Web/API/HTML_DOM_API/Microtask_guide)
+### localStorage / sessionStorage / cookie &I
+- localStorage
+  ```js
+  localStorage.setItem("myCat", "Tom");
+  let cat = localStorage.getItem("myCat");
+  localStorage.removeItem("myCat");
+  // 移除所有
+  localStorage.clear();
+  ```
+- [cookie](https://developer.mozilla.org/zh-CN/docs/Web/API/Document/cookie)
+  - Expires（截止日期）
+  - Max-Age（相对时间）（优先）
+  - Domain/Path Cookie 所属的域名和路径
+  - HttpOnly Cookie 只能通过浏览器 HTTP 协议传输，禁用 js document.cookie
+  - SameSite=Strict Cookie 不能随着跳转链接跨站发送
+  - SameSite=Lax 允许 GET/HEAD 等安全方法，但禁止 POST 跨站发送
+  - Secure 仅能用 HTTPS 协议加密传输， HTTP 协议会禁止发送
+  ```js
+  const allCookies = document.cookie;
+  document.cookie = "path=/mydir;domain=example.com";
+  ```
+- 区别：
+  - localStorage：
+    - 只保存在客户端，不会自动发送给服务器；
+    - 存储在 localStorage 的数据可以长期保留；
+    - 通常为5MB到10MB
+    - 同步操作
+  - sessionStorage：
+    - 当页面被关闭时，存储在 sessionStorage 的数据会被清除。
+  - cookie：
+    - 用户与服务端数据传输；当浏览器关闭时，会话Cookie会被删除。
+    - 持久Cookie：持久Cookie会保存在用户的硬盘上，直到过期时间到达或用户手动删除。
+    - 可以通过设置Expires或Max-Age属性来指定过期时间。
+    - 通常为4KB左右。
+- token为什么要保存在localStorge，为什么不用cookie
+  - 安全性问题：
+    - Cookie 容易受到跨站请求伪造（CSRF）攻击。（通过设置 SameSite 属性来缓解 CSRF 攻击）
+    - localStorage 最主要的风险是容易受到 XSS 攻击，HttpOnly Cookie 中可以防止客户端 JavaScript 访问 Token
+  - 性能：
+    - Cookie 会随着每次 HTTP 请求自动发送到服务器，这会增加请求的大小，降低性能。
+  - 存储：
+    - Cookie 的大小限制通常为 4KB，localStorage 提供的存储容量通常比 Cookie 大
+
+- 参考：
+  - [一个小框架：一个完整支持 unicode 的 cookie 读取/写入器](https://developer.mozilla.org/zh-CN/docs/Web/API/Document/cookie#%E4%B8%80%E4%B8%AA%E5%B0%8F%E6%A1%86%E6%9E%B6%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E6%94%AF%E6%8C%81_unicode_%E7%9A%84_cookie_%E8%AF%BB%E5%8F%96%E5%86%99%E5%85%A5%E5%99%A8) 通过定义一个和 Storage 对象部分一致的对象，简化cookie的操作
+  - [Cookies and security](https://humanwhocodes.com/blog/2009/05/12/cookies-and-security/)
+### TextEncoder / TextDecoder
 #### TextEncoder
 - 接受码位流作为输入，并提供 UTF-8 字节流作为输出
 - encode
@@ -191,7 +211,8 @@ Promise.all([promise1, promise2, promise3]).then((values) => {
   const bytes = new Uint8Array([207, 240, 232, 226, 229, 242, 44, 32, 236, 232, 240, 33]);
   console.log(win1251decoder.decode(bytes)); // Привет, мир!
   ```
-### window 4
+## 功能
+### [window](https://developer.mozilla.org/zh-CN/docs/Web/API/Window)
 #### window.open
 - [Window：open() 方法](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/open#parameters)
 #### window.getSelection
@@ -212,49 +233,153 @@ var range = selObj.getRangeAt(0);
 参考：
 - [Selection](https://developer.mozilla.org/zh-CN/docs/Web/API/Selection)
 - [Range](https://developer.mozilla.org/zh-CN/docs/Web/API/Range)
-### localStorage / sessionStorage / cookie &I
-- localStorage
-  ```js
-  localStorage.setItem("myCat", "Tom");
-  let cat = localStorage.getItem("myCat");
-  localStorage.removeItem("myCat");
-  // 移除所有
-  localStorage.clear();
-  ```
-- [cookie](https://developer.mozilla.org/zh-CN/docs/Web/API/Document/cookie)
-  - Expires（截止日期）
-  - Max-Age（相对时间）（优先）
-  - Domain/Path Cookie 所属的域名和路径
-  - HttpOnly Cookie 只能通过浏览器 HTTP 协议传输，禁用 js document.cookie
-  - SameSite=Strict Cookie 不能随着跳转链接跨站发送
-  - SameSite=Lax 允许 GET/HEAD 等安全方法，但禁止 POST 跨站发送
-  - Secure 仅能用 HTTPS 协议加密传输， HTTP 协议会禁止发送
-  ```js
-  const allCookies = document.cookie;
-  document.cookie = "path=/mydir;domain=example.com";
-  ```
-- 区别：
-  - localStorage：
-    - 只保存在客户端，不会自动发送给服务器；
-    - 存储在 localStorage 的数据可以长期保留；
-    - 通常为5MB到10MB
-    - 同步操作
-  - sessionStorage：
-    - 当页面被关闭时，存储在 sessionStorage 的数据会被清除。
-  - cookie：
-    - 用户与服务端数据传输；当浏览器关闭时，会话Cookie会被删除。
-    - 持久Cookie：持久Cookie会保存在用户的硬盘上，直到过期时间到达或用户手动删除。
-    - 可以通过设置Expires或Max-Age属性来指定过期时间。
-    - 通常为4KB左右。
-- token为什么要保存在localStorge，为什么不用cookie
-  - 安全性问题：
-    - Cookie 容易受到跨站请求伪造（CSRF）攻击。（通过设置 SameSite 属性来缓解 CSRF 攻击）
-    - localStorage 最主要的风险是容易受到 XSS 攻击，HttpOnly Cookie 中可以防止客户端 JavaScript 访问 Token
-  - 性能：
-    - Cookie 会随着每次 HTTP 请求自动发送到服务器，这会增加请求的大小，降低性能。
-  - 存储：
-    - Cookie 的大小限制通常为 4KB，localStorage 提供的存储容量通常比 Cookie 大
-
-- 参考：
-  - [一个小框架：一个完整支持 unicode 的 cookie 读取/写入器](https://developer.mozilla.org/zh-CN/docs/Web/API/Document/cookie#%E4%B8%80%E4%B8%AA%E5%B0%8F%E6%A1%86%E6%9E%B6%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E6%94%AF%E6%8C%81_unicode_%E7%9A%84_cookie_%E8%AF%BB%E5%8F%96%E5%86%99%E5%85%A5%E5%99%A8) 通过定义一个和 Storage 对象部分一致的对象，简化cookie的操作
-  - [Cookies and security](https://humanwhocodes.com/blog/2009/05/12/cookies-and-security/)
+### Console
+#### console.log
+```js
+// 可以使用 %c 为打印内容定义样式：
+console.log(
+  "This is %cMy stylish message",
+  "color: yellow; font-style: italic; background-color: blue;padding: 2px",
+);
+```
+- 参考
+  - [console](https://developer.mozilla.org/zh-CN/docs/Web/API/console)
+### 通信
+#### iframe
+```html
+<!-- index.html -->
+<iframe src="child.html" id="myIframe"></iframe>
+<script>
+// 监听
+window.addEventListener('message', (event) => {
+  if (event.origin !== 'https://your-iframe-origin.com') return; // 验证来源
+  console.log('收到来自 iframe 的消息:', event.data);
+});
+// 发送
+const iframe = document.getElementById('myIframe');
+iframe.contentWindow.postMessage('Hello from parent', 'https://your-iframe-origin.com');
+</script>
+```
+```js
+// iframe.html
+// 发送
+window.parent.postMessage('Hello from iframe', 'https://your-parent-origin.com');
+// 接受
+window.addEventListener('message', (event) => {
+  if (event.origin !== 'https://your-parent-origin.com') return; // 验证来源
+  console.log('收到父页面的消息:', event.data);
+});
+```
+#### web Worker 
+#### 专用 worker
+```js
+// index.html
+const myWorker = new Worker("worker.js");
+// first 代表 2 个 <input> 元素
+first.onchange = () => {
+  myWorker.postMessage([first.value, second.value]);
+  console.log("Message posted to worker");
+};
+myWorker.onmessage = (e) => {
+  result.textContent = e.data;
+  console.log("Message received from worker");
+  // 终止 worker
+  // myWorker.terminate();
+};
+// worker.js
+onmessage = (e) => {
+  // 接受消息
+  console.log("Message received from main script");
+  const workerResult = `Result: ${e.data[0] * e.data[1]}`;
+  console.log("Posting message back to main script");
+  // 发送消息
+  postMessage(workerResult);
+};
+```
+#### SharedWorker
+一个共享 worker 可以被多个脚本使用——即使这些脚本正在被不同的 window、iframe 或者 worker 访问
+```js
+// index1.html / index2.html
+const myWorker = new SharedWorker("worker.js");
+squareNumber.onchange = () => {
+  // 发送消息
+  myWorker.port.postMessage([squareNumber.value, squareNumber.value]);
+  console.log("Message posted to worker");
+};
+// 接受消息
+myWorker.port.onmessage = (e) => {
+  result2.textContent = e.data;
+  console.log("Message received from worker");
+};
+// woker.js
+onconnect = (e) => {
+  const port = e.ports[0];
+  port.onmessage = (e) => {
+    const workerResult = `Result: ${e.data[0] * e.data[1]}`;
+    port.postMessage(workerResult);
+  };
+};
+```
+参考：[Web_Workers_API](https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Workers_API/Using_web_workers)
+#### MessageChannel / MessagePort
+不同的脚本直接通信，通过两端都有端口的双向频道（或管道）相互传递消息。
+```js
+// index.html
+const input = document.getElementById("message-input");
+const output = document.getElementById("message-output");
+const button = document.querySelector("button");
+const iframe = document.querySelector("iframe");
+const channel = new MessageChannel();
+const port1 = channel.port1;
+// 等待 iframe 加载
+iframe.addEventListener("load", onLoad);
+function onLoad() {
+  // 监听按钮点击
+  button.addEventListener("click", onClick);
+  // 在 port1 监听消息
+  port1.onmessage = onMessage;
+  // 把 port2 传给 iframe
+  iframe.contentWindow.postMessage("init", "*", [channel.port2]);
+}
+// 当按钮点击时，在 port1 上发送一个消息
+function onClick(e) {
+  e.preventDefault();
+  // 发送消息
+  port1.postMessage(input.value);
+}
+// 处理 port1 收到的消息
+function onMessage(e) {
+  output.innerHTML = e.data;
+  input.value = "";
+}
+```
+```js
+// iframe
+const list = document.querySelector("ul");
+let port2;
+// 监听初始的端口传递消息
+window.addEventListener("message", initPort);
+// 设置传递过来的端口
+function initPort(e) {
+  port2 = e.ports[0];
+  port2.onmessage = onMessage;
+}
+// 处理 port2 收到的消息
+function onMessage(e) {
+  const listItem = document.createElement("li");
+  listItem.textContent = e.data;
+  list.appendChild(listItem);
+  // 发送消息
+  port2.postMessage(`IFrame 收到的消息：“${e.data}”`);
+}
+```
+## 其他设备
+- [WebXR API](https://developer.mozilla.org/zh-CN/docs/Web/API/WebXR_Device_API) VR/AR
+- [WebVR API](https://developer.mozilla.org/zh-CN/docs/Web/API/WebVR_API) VR
+- [WebGPU](https://developer.mozilla.org/zh-CN/docs/Web/API/WebGPU_API) GPU
+- [WebRTC](https://developer.mozilla.org/zh-CN/docs/Web/API/WebRTC_API) RTC
+- [Web Audio API](https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Audio_API) 音频上下文
+- [WebCodecs](https://developer.mozilla.org/zh-CN/docs/Web/API/WebCodecs_API) 视频、音频底层
+- [Web Speech API](https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Speech_API) 语音
+- [Web Bluetooth API](https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Bluetooth_API) 蓝牙
+- [WebUSB API](https://developer.mozilla.org/zh-CN/docs/Web/API/WebUSB_API) usb
