@@ -136,6 +136,99 @@ import AnimationDirection from './components/animation/animation-direction.vue'
   ```
 - 参考：
   - [position](https://developer.mozilla.org/zh-CN/docs/Learn_web_development/Core/CSS_layout/Positioning)
+### 选择器
+- base
+  - .class
+  - #id
+  - *
+- Pseudo-classes（伪类）
+  - not
+    - div:not(.test)
+    - div:not(p)
+  - first
+    - :fist-letter
+    - :fist-line
+    - :fist-child
+    - :fist-of-type
+  - last
+    - :last-child
+    - :last-of-type
+  - nth
+    - :nth-child(n)
+    - :nth-of-type(n)
+    - :nth-last-child(n)
+    - :nth-last-of-type(n)
+  - only
+    - :only-child
+    - :only-of-type
+  - a
+    - :link
+    - :visited
+    - :active
+    - :hover
+    - :target
+  - input（开发中使用较少）
+    - :focus
+    - :enabled
+    - :disabled
+    - :checked
+    - :in-range
+    - :out-of-range
+    - :read-only
+    - :read-write
+    - :optional
+    - :required
+    - :valid
+    - :invalid
+  - content
+    - :before
+    - :after
+    - :lang
+    - :empty
+    - ::selection
+    - :root
+- element
+  - ele 元素
+  - ele,ele 并集
+  - ele ele 子以及后代
+  - ele \> ele 子
+  - ele ~ ele 兄弟
+  - ele + ele 相邻之后的
+- attibute
+  -  `[attribute]`
+  -  `[attribute=value]`
+  -  `[attribute~=value]` 包含
+  -  `[attribute|=value]` 前缀 -
+  -  `[attribute^=value]` 开头
+  -  `[attribute$=value]` 结尾
+  -  `[attribute*=value]` 全部
+  -
+- 参考
+  - [css 选择器](https://www.runoob.com/cssref/css-selectors.html)
+### 伪类
+:where()
+```css
+/* Selects any paragraph inside a header, main
+   or footer element that is being hovered */
+:where(header, main, footer) p:hover {
+  color: red;
+  cursor: pointer;
+}
+/*
+  与以下的效果相同
+  与scss嵌套类似
+*/
+header p:hover,
+main p:hover,
+footer p:hover {
+  color: red;
+  cursor: pointer;
+}
+```
+- 对比
+  - :where() 和 :is() 的不同之处在于，
+  - :where() 的优先级总是为 0
+  - :is() 的优先级是由它的选择器列表中优先级最高的选择器决定的。
 ## 样式
 ### cursor
 ```css
