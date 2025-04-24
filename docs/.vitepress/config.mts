@@ -1,6 +1,9 @@
 import { defineConfig } from 'vitepress'
 import {fileURLToPath} from 'node:url'
 import { withMermaid } from "vitepress-plugin-mermaid";
+
+import htmlString from './vite-plugin-html-string.js';
+
 // https://vitepress.dev/reference/site-config
 export default withMermaid(defineConfig({
   title: 'Odyssey Technology',
@@ -15,8 +18,10 @@ export default withMermaid(defineConfig({
         { find: '~', replacement: fileURLToPath(new URL('../../utils', import.meta.url).href)},
       ]
     },
+    plugins: [htmlString()],
   },
   head: [
+    ['link', { rel: 'stylesheet', href: 'viewerjs/dist/viewer.css' }],
     // ['link', { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css' }],
     // ['link', { rel: 'stylesheet', href: 'https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css' }],
     // ['script', { src: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js' }]
@@ -233,6 +238,18 @@ export default withMermaid(defineConfig({
               text: '微前端',
               link: '/front-end/Engineering/micro-frontend/',
             },
+          ],
+        },
+        {
+          text: '可视化',
+          link: '/front-end/Visual/',
+          items: [
+            { text: '动画',
+              link: '/front-end/Visual/animation/',
+              items: [
+                { text: 'flip', link: '/front-end/Visual/animation/flip/' },
+              ],
+             },
           ],
         },
         {
