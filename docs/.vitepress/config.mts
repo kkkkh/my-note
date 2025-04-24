@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 import {fileURLToPath} from 'node:url'
 import { withMermaid } from "vitepress-plugin-mermaid";
 
-import htmlString from './vite-plugin-html-string.js';
+// import htmlString from './vite-plugin-html-string.js';
 
 // https://vitepress.dev/reference/site-config
 export default withMermaid(defineConfig({
@@ -18,7 +18,9 @@ export default withMermaid(defineConfig({
         { find: '~', replacement: fileURLToPath(new URL('../../utils', import.meta.url).href)},
       ]
     },
-    plugins: [htmlString()],
+    plugins: [
+      // htmlString(),
+    ],
   },
   head: [
     ['link', { rel: 'stylesheet', href: 'viewerjs/dist/viewer.css' }],
