@@ -4,6 +4,9 @@ outline: deep
 <script setup>
 import Test from '@/components/Test.vue'
 import Json from './components/Json.vue'
+import Promise from './components/Promise/index.vue'
+import ImgView from '@/components/ImgView.vue'
+
 </script>
 # Js
 [JavaScript 参考](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference)
@@ -1458,7 +1461,24 @@ console.log(set1.has(6)); // true
 ```
 ## 内置对象
 ### Promise &I
-- [Promise v8 源码实现](https://chromium.googlesource.com/v8/v8/+/3.29.45/src/promise.js?autodive=0/)
+#### Promise
+
+源码分析
+
+
+<img src="./components/Promise/promise.drawio.svg" alt="promise" v-viewer/>
+
+<!-- <ImgView :images="['./components/Promise/promise.drawio.svg']" /> -->
+
+<<< ./components/Promise/index.vue
+
+<Test :is="Promise" />
+
+
+
+- [Promise A+ 规范](https://promisesaplus.com/)
+- [Promise v8 源码实现](https://chromium.googlesource.com/v8/v8/+/3.29.45/src/promise.js?autodive=0/) 比较旧
+
 #### Promise.all
 - 报错处理
 ```js
@@ -1554,3 +1574,9 @@ const obj = JSON.parse(jsonString); // { name: "Alice", age: 25 }
 
 <Test :is="Json" />
 
+### 宏任务 &I
+- setTimeout/setInterval
+- I/O 操作 (例如文件读取、网络请求)
+- UI 渲染
+- 用户交互事件 (例如 click, scroll)
+- 网络请求
