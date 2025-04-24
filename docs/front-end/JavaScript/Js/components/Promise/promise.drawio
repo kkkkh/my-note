@@ -1,0 +1,220 @@
+<mxfile host="65bd71144e">
+    <diagram name="第 1 页" id="bofMT9fytsMjV8qamGPe">
+        <mxGraphModel dx="1588" dy="3779" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="500" pageHeight="3000" background="#ffffff" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="JJonGggyFrEtSe44EXoG-4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;spacing=2;spacingTop=0;align=left;strokeColor=#0066CC;" parent="1" source="JJonGggyFrEtSe44EXoG-1" target="JJonGggyFrEtSe44EXoG-3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-1" value="&lt;div style=&quot;color: rgb(171, 178, 191); background-color: rgb(40, 44, 52); font-family: Consolas, &amp;quot;Courier New&amp;quot;, monospace; white-space: pre; line-height: 100%;&quot;&gt;&lt;div&gt;&lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207)); color: rgb(198, 120, 221);&quot;&gt;new&lt;/span&gt;&lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207)); color: light-dark(rgb(171, 178, 191), rgb(79, 85, 96));&quot;&gt; &lt;/span&gt;&lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207)); color: rgb(97, 175, 239);&quot;&gt;MyPromise&lt;/span&gt;&lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207)); color: light-dark(rgb(171, 178, 191), rgb(79, 85, 96));&quot;&gt;((resolve, reject) &lt;/span&gt;&lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207)); color: rgb(198, 120, 221);&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207)); color: light-dark(rgb(171, 178, 191), rgb(79, 85, 96));&quot;&gt; {&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;color: light-dark(rgb(198, 120, 221), rgb(160, 93, 180)); background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207));&quot;&gt; &lt;/span&gt;&lt;span style=&quot;color: light-dark(rgb(198, 120, 221), rgb(160, 93, 180)); background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207));&quot;&gt; debugger&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207)); color: light-dark(rgb(171, 178, 191), rgb(79, 85, 96));&quot;&gt;&amp;nbsp; &lt;/span&gt;&lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207)); color: rgb(97, 175, 239);&quot;&gt;resolve&lt;/span&gt;&lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207)); color: light-dark(rgb(171, 178, 191), rgb(79, 85, 96));&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207)); color: rgb(209, 154, 102);&quot;&gt;1&lt;/span&gt;&lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207)); color: light-dark(rgb(171, 178, 191), rgb(79, 85, 96));&quot;&gt;)&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207)); color: light-dark(rgb(171, 178, 191), rgb(79, 85, 96));&quot;&gt;&amp;nbsp; })&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;fontSize=10;spacing=2;spacingTop=0;" parent="1" vertex="1">
+                    <mxGeometry x="-170" y="-2890" width="200" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-3" value="&lt;div style=&quot;color: rgb(171, 178, 191); background-color: rgb(40, 44, 52); font-family: Consolas, &amp;quot;Courier New&amp;quot;, monospace; line-height: 19px; white-space: pre;&quot;&gt;&lt;font style=&quot;line-height: 100%;&quot;&gt;&lt;span style=&quot;color: rgb(198, 120, 221);&quot;&gt;constructor(&lt;/span&gt;&lt;span style=&quot;color: rgb(97, 175, 239);&quot;&gt;executor&lt;/span&gt;&lt;span style=&quot;color: light-dark(rgb(198, 120, 221), rgb(160, 93, 180)); background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207));&quot;&gt;)&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=0;fontSize=10;spacing=2;spacingTop=0;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="90" y="-2880" width="120" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;align=left;strokeColor=#0066CC;" parent="1" source="JJonGggyFrEtSe44EXoG-5" target="JJonGggyFrEtSe44EXoG-7" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-5" value="&lt;div style=&quot;color: rgb(171, 178, 191); background-color: rgb(40, 44, 52); font-family: Consolas, &amp;quot;Courier New&amp;quot;, monospace; line-height: 19px; white-space: pre;&quot;&gt;&lt;span style=&quot;color: #61afef;&quot;&gt;executor&lt;/span&gt;(resolve, reject); &lt;/div&gt;" style="whiteSpace=wrap;html=1;fontSize=10;rounded=0;spacing=2;spacingTop=0;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="270" y="-2880" width="150" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;align=left;strokeColor=#0066CC;" parent="1" source="JJonGggyFrEtSe44EXoG-7" target="JJonGggyFrEtSe44EXoG-10" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="800" y="-2870" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="720" y="-2870"/>
+                            <mxPoint x="720" y="-2870"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-7" value="&lt;div style=&quot;color: rgb(171, 178, 191); font-family: Consolas, &amp;quot;Courier New&amp;quot;, monospace; line-height: 19px; white-space: pre;&quot;&gt;&lt;div&gt;&lt;span style=&quot;background-color: rgb(40, 44, 52); color: rgb(198, 120, 221);&quot;&gt;new&lt;/span&gt;&lt;span style=&quot;background-color: rgb(40, 44, 52);&quot;&gt; &lt;/span&gt;&lt;span style=&quot;background-color: rgb(40, 44, 52); color: rgb(97, 175, 239);&quot;&gt;MyPromise&lt;/span&gt;&lt;span style=&quot;background-color: rgb(40, 44, 52);&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;background-color: rgb(40, 44, 52); color: light-dark(rgb(171, 178, 191), rgb(79, 85, 96));&quot;&gt;(resolve, reject) &lt;/span&gt;&lt;span style=&quot;background-color: rgb(40, 44, 52); color: rgb(198, 120, 221);&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&quot;background-color: rgb(40, 44, 52); color: light-dark(rgb(171, 178, 191), rgb(79, 85, 96));&quot;&gt; {&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;background-color: rgb(40, 44, 52); line-height: 19px;&quot;&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &lt;span style=&quot;color: rgb(97, 175, 239);&quot;&gt;resolve&lt;/span&gt;(&lt;span style=&quot;color: rgb(209, 154, 102);&quot;&gt;1&lt;/span&gt;)&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: rgb(40, 44, 52);&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(171, 178, 191), rgb(79, 85, 96));&quot;&gt;&amp;nbsp; }&lt;/span&gt;)&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;fontSize=10;rounded=0;spacing=2;spacingTop=0;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="470" y="-2900" width="205" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;align=left;strokeColor=#0066CC;" parent="1" source="JJonGggyFrEtSe44EXoG-1" target="JJonGggyFrEtSe44EXoG-12" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-10" value="&lt;div style=&quot;color: rgb(171, 178, 191); font-family: Consolas, &amp;quot;Courier New&amp;quot;, monospace; line-height: 19px; white-space: pre;&quot;&gt;&lt;div style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207));&quot;&gt;&lt;span style=&quot;color: rgb(198, 120, 221);&quot;&gt;const&lt;/span&gt; &lt;span style=&quot;color: rgb(97, 175, 239);&quot;&gt;resolve&lt;/span&gt; &lt;span style=&quot;color: rgb(86, 182, 194);&quot;&gt;=&lt;/span&gt; (value) &lt;span style=&quot;color: rgb(198, 120, 221);&quot;&gt;=&amp;gt;&lt;/span&gt; {&lt;/div&gt;&lt;div style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207));&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;span style=&quot;color: rgb(198, 120, 221);&quot;&gt;if&lt;/span&gt; (&lt;span style=&quot;color: rgb(224, 108, 117);&quot;&gt;this&lt;/span&gt;.&lt;span style=&quot;color: rgb(224, 108, 117);&quot;&gt;state&lt;/span&gt; &lt;span style=&quot;color: rgb(86, 182, 194);&quot;&gt;===&lt;/span&gt; &lt;span style=&quot;color: rgb(152, 195, 121);&quot;&gt;&#39;pending&#39;&lt;/span&gt;) {&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207)); color: rgb(224, 108, 117);&quot;&gt;this&lt;/span&gt;.&lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207)); color: rgb(224, 108, 117);&quot;&gt;state&lt;/span&gt; &lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207)); color: rgb(86, 182, 194);&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color: rgb(152, 195, 121);&quot;&gt;&#39;&lt;span style=&quot;background-color: rgb(255, 255, 51);&quot;&gt;fulfilled&lt;/span&gt;&#39;&lt;/span&gt;; &lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207)); color: rgb(92, 99, 112); font-style: italic;&quot;&gt;// 状态变为 fulfilled&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207));&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;span style=&quot;color: rgb(224, 108, 117);&quot;&gt;this&lt;/span&gt;.&lt;span style=&quot;color: rgb(224, 108, 117);&quot;&gt;value&lt;/span&gt; &lt;span style=&quot;color: rgb(86, 182, 194);&quot;&gt;=&lt;/span&gt; value; &lt;span style=&quot;color: rgb(92, 99, 112); font-style: italic;&quot;&gt;// 存储成功结果&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207)); color: rgb(224, 108, 117);&quot;&gt;this&lt;/span&gt;.&lt;span style=&quot;color: rgb(224, 108, 117); background-color: rgb(0, 204, 204);&quot;&gt;onFulfilledCallbacks&lt;/span&gt;.&lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207)); color: rgb(97, 175, 239);&quot;&gt;forEach&lt;/span&gt;(fn &lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207)); color: rgb(198, 120, 221);&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207)); color: rgb(97, 175, 239);&quot;&gt;fn&lt;/span&gt;(value)); &lt;/div&gt;&lt;div style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207));&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; }&lt;/div&gt;&lt;div style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207));&quot;&gt;&amp;nbsp; &amp;nbsp; };&lt;/div&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;fontSize=10;align=left;rounded=0;spacing=2;spacingTop=0;" parent="1" vertex="1">
+                    <mxGeometry x="710" y="-2920" width="330" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;align=left;strokeColor=#0066CC;" parent="1" source="JJonGggyFrEtSe44EXoG-12" target="JJonGggyFrEtSe44EXoG-14" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-12" value="&lt;div style=&quot;color: rgb(171, 178, 191); font-family: Consolas, &amp;quot;Courier New&amp;quot;, monospace; line-height: 19px; white-space: pre;&quot;&gt;&lt;div&gt;.&lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207)); color: rgb(97, 175, 239);&quot;&gt;then&lt;/span&gt;(&lt;span style=&quot;background-color: rgb(102, 255, 102);&quot;&gt;res &lt;span style=&quot;color: rgb(198, 120, 221);&quot;&gt;=&amp;gt;&lt;/span&gt; {&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: rgb(102, 255, 102);&quot;&gt;&amp;nbsp; &amp;nbsp; &lt;span style=&quot;color: rgb(198, 120, 221);&quot;&gt;debugger&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: rgb(102, 255, 102);&quot;&gt;&amp;nbsp; &amp;nbsp; console.&lt;span style=&quot;color: rgb(97, 175, 239);&quot;&gt;log&lt;/span&gt;(res)&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: rgb(102, 255, 102);&quot;&gt;&amp;nbsp; }&lt;/span&gt;)&lt;/div&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;fontSize=10;align=left;rounded=0;spacing=2;spacingTop=0;" parent="1" vertex="1">
+                    <mxGeometry x="-130" y="-2800" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-14" value="&lt;div style=&quot;color: rgb(171, 178, 191); font-family: Consolas, &amp;quot;Courier New&amp;quot;, monospace; line-height: 19px; white-space: pre;&quot;&gt;&lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207));&quot;&gt;&lt;span style=&quot;color: rgb(97, 175, 239);&quot;&gt;then&lt;/span&gt;(&lt;/span&gt;&lt;span style=&quot;background-color: rgb(102, 255, 102);&quot;&gt;onFulfilled&lt;/span&gt;, onRejected) {...}&lt;/div&gt;" style="whiteSpace=wrap;html=1;fontSize=10;align=left;rounded=0;spacing=2;spacingTop=0;" parent="1" vertex="1">
+                    <mxGeometry x="30" y="-2785" width="200" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-40" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;align=left;fontSize=10;strokeColor=#994C00;" parent="1" source="JJonGggyFrEtSe44EXoG-16" target="JJonGggyFrEtSe44EXoG-39" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="-250" y="-2470"/>
+                            <mxPoint x="-250" y="-2470"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-64" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;align=left;fontSize=10;strokeColor=#994C00;" parent="1" source="JJonGggyFrEtSe44EXoG-16" target="JJonGggyFrEtSe44EXoG-22" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="-60" y="-2535"/>
+                            <mxPoint x="-60" y="-2535"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-16" value="&lt;div style=&quot;color: rgb(171, 178, 191); background-color: rgb(40, 44, 52); font-family: Consolas, &amp;quot;Courier New&amp;quot;, monospace; line-height: 19px; white-space: pre;&quot;&gt;&lt;font&gt;&lt;span style=&quot;color: rgb(198, 120, 221);&quot;&gt;const&lt;/span&gt; &lt;span style=&quot;color: rgb(209, 154, 102);&quot;&gt;promise2&lt;/span&gt; &lt;span style=&quot;color: rgb(86, 182, 194);&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color: rgb(198, 120, 221);&quot;&gt;new&lt;/span&gt; &lt;span style=&quot;color: rgb(97, 175, 239);&quot;&gt;MyPromise&lt;/span&gt;((resolve, reject) &lt;span style=&quot;color: rgb(198, 120, 221);&quot;&gt;=&amp;gt;&lt;/span&gt; {&lt;br&gt;...&lt;br&gt;}&lt;br&gt;&lt;/font&gt;&lt;div style=&quot;line-height: 19px;&quot;&gt;&lt;font&gt;&lt;span style=&quot;color: rgb(198, 120, 221);&quot;&gt;return&lt;/span&gt; promise2;&lt;/font&gt;&lt;/div&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;fontSize=10;align=left;rounded=0;spacing=2;spacingTop=0;" parent="1" vertex="1">
+                    <mxGeometry x="-420" y="-2572.5" width="290" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-20" value="" style="curved=1;endArrow=classic;html=1;rounded=0;fontColor=#FFFF99;strokeColor=#009900;fontSize=10;align=left;" parent="1" source="JJonGggyFrEtSe44EXoG-16" target="JJonGggyFrEtSe44EXoG-3" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="260" y="-2820" as="sourcePoint"/>
+                        <mxPoint x="310" y="-2870" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="-430" y="-2800"/>
+                            <mxPoint x="-120" y="-3020"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-27" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;align=left;strokeColor=#994C00;" parent="1" source="JJonGggyFrEtSe44EXoG-22" target="JJonGggyFrEtSe44EXoG-26" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-22" value="&lt;div style=&quot;color: rgb(171, 178, 191); font-family: Consolas, &amp;quot;Courier New&amp;quot;, monospace; white-space: pre; line-height: 100%;&quot;&gt;&lt;div&gt;&lt;font&gt;&lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207)); color: rgb(198, 120, 221);&quot;&gt;if&lt;/span&gt; (&lt;span style=&quot;background-color: rgb(255, 255, 51);&quot;&gt;&lt;span style=&quot;color: rgb(224, 108, 117);&quot;&gt;this&lt;/span&gt;.&lt;span style=&quot;color: rgb(224, 108, 117);&quot;&gt;state&lt;/span&gt; &lt;span style=&quot;color: rgb(86, 182, 194);&quot;&gt;===&lt;/span&gt; &lt;span style=&quot;color: rgb(152, 195, 121);&quot;&gt;&#39;fulfilled&#39;&lt;/span&gt;&lt;/span&gt;) {&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207));&quot;&gt;&lt;font&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;span style=&quot;color: rgb(92, 99, 112); font-style: italic;&quot;&gt;// 异步执行 onFulfilled&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207));&quot;&gt;&lt;font&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;span style=&quot;color: rgb(97, 175, 239);&quot;&gt;setTimeout&lt;/span&gt;(() &lt;span style=&quot;color: rgb(198, 120, 221);&quot;&gt;=&amp;gt;&lt;/span&gt; {&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207));&quot;&gt;&lt;font&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;span style=&quot;color: rgb(198, 120, 221);&quot;&gt;try&lt;/span&gt; {&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207)); color: rgb(198, 120, 221);&quot;&gt;const&lt;/span&gt; &lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207)); color: rgb(209, 154, 102);&quot;&gt;x&lt;/span&gt; &lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207)); color: rgb(86, 182, 194);&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color: rgb(97, 175, 239); background-color: rgb(102, 255, 102);&quot;&gt;onFulfilled&lt;/span&gt;(&lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207)); color: rgb(224, 108, 117);&quot;&gt;this&lt;/span&gt;.&lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207)); color: rgb(224, 108, 117);&quot;&gt;value&lt;/span&gt;);&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207));&quot;&gt;&lt;font&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;span style=&quot;color: rgb(97, 175, 239);&quot;&gt;resolvePromise&lt;/span&gt;(promise2, x, resolve, reject); &lt;span style=&quot;color: rgb(92, 99, 112); font-style: italic;&quot;&gt;// 处理 onFulfilled 的返回值&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207));&quot;&gt;&lt;font&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; } &lt;span style=&quot;color: rgb(198, 120, 221);&quot;&gt;catch&lt;/span&gt; (e) {&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207));&quot;&gt;&lt;font&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;span style=&quot;color: rgb(97, 175, 239);&quot;&gt;reject&lt;/span&gt;(e);&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207));&quot;&gt;&lt;font&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; }&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207));&quot;&gt;&lt;font&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; }, &lt;span style=&quot;color: rgb(209, 154, 102);&quot;&gt;0&lt;/span&gt;);&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207));&quot;&gt;&lt;font&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; }&lt;/font&gt;&lt;/div&gt;&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;fontSize=10;align=left;rounded=0;spacing=2;spacingTop=0;" parent="1" vertex="1">
+                    <mxGeometry x="-20" y="-2620" width="470" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-31" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;align=left;strokeColor=#994C00;" parent="1" source="JJonGggyFrEtSe44EXoG-26" target="JJonGggyFrEtSe44EXoG-30" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="870" y="-2550"/>
+                            <mxPoint x="870" y="-2550"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-26" value="&lt;div style=&quot;color: rgb(171, 178, 191); background-color: rgb(40, 44, 52); font-family: Consolas, &amp;quot;Courier New&amp;quot;, monospace; line-height: 19px; white-space: pre;&quot;&gt;&lt;span style=&quot;color: rgb(198, 120, 221);&quot;&gt;function&lt;/span&gt; &lt;span style=&quot;color: rgb(97, 175, 239);&quot;&gt;resolvePromise&lt;/span&gt;(promise2, x, resolve, reject) {&lt;br&gt;&lt;span style=&quot;color: rgb(97, 175, 239);&quot;&gt;resolve&lt;/span&gt;(x);&lt;br&gt;}&lt;/div&gt;" style="whiteSpace=wrap;html=1;fontSize=10;align=left;rounded=0;spacing=2;spacingTop=0;" parent="1" vertex="1">
+                    <mxGeometry x="520" y="-2580" width="310" height="67.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="0eD-hdDfKguD2yckoLq2-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#994C00;" parent="1" source="JJonGggyFrEtSe44EXoG-30" target="JJonGggyFrEtSe44EXoG-10" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="910" y="-2680"/>
+                            <mxPoint x="910" y="-2680"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-30" value="&lt;div style=&quot;color: rgb(171, 178, 191); background-color: rgb(40, 44, 52); font-family: Consolas, &amp;quot;Courier New&amp;quot;, monospace; line-height: 19px; white-space: pre;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;span style=&quot;color: #61afef;&quot;&gt;resolve&lt;/span&gt;(x);&lt;/div&gt;" style="whiteSpace=wrap;html=1;fontSize=10;align=left;rounded=0;spacing=2;spacingTop=0;" parent="1" vertex="1">
+                    <mxGeometry x="880" y="-2560" width="110" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-42" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;align=left;fontSize=10;strokeColor=#994C00;" parent="1" source="JJonGggyFrEtSe44EXoG-39" target="JJonGggyFrEtSe44EXoG-41" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="-250" y="-2150"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-39" value="&lt;div style=&quot;color: rgb(171, 178, 191); background-color: rgb(40, 44, 52); font-family: Consolas, &amp;quot;Courier New&amp;quot;, monospace; line-height: 19px; white-space: pre;&quot;&gt;&lt;div&gt;.&lt;span style=&quot;color: #61afef;&quot;&gt;catch&lt;/span&gt;(err &lt;span style=&quot;color: #c678dd;&quot;&gt;=&amp;gt;&lt;/span&gt; {&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &lt;span style=&quot;color: #c678dd;&quot;&gt;debugger&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; console.&lt;span style=&quot;color: #61afef;&quot;&gt;log&lt;/span&gt;(err)&lt;/div&gt;&lt;div&gt;&amp;nbsp; })&lt;/div&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;fontSize=10;align=left;rounded=0;spacing=2;spacingTop=0;" parent="1" vertex="1">
+                    <mxGeometry x="-350" y="-2410" width="197.5" height="95" as="geometry"/>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-41" value="&lt;div style=&quot;color: rgb(171, 178, 191); background-color: rgb(40, 44, 52); font-family: Consolas, &amp;quot;Courier New&amp;quot;, monospace; line-height: 19px; white-space: pre;&quot;&gt;&lt;div&gt;&amp;nbsp; &lt;span style=&quot;color: rgb(97, 175, 239);&quot;&gt;catch&lt;/span&gt;(onRejected) {&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &lt;span style=&quot;color: rgb(198, 120, 221);&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color: rgb(224, 108, 117);&quot;&gt;this&lt;/span&gt;.&lt;span style=&quot;color: rgb(97, 175, 239);&quot;&gt;then&lt;/span&gt;(&lt;span style=&quot;color: rgb(209, 154, 102);&quot;&gt;null&lt;/span&gt;, onRejected);&lt;/div&gt;&lt;div&gt;&amp;nbsp; }&lt;/div&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;fontSize=10;align=left;rounded=0;spacing=2;spacingTop=0;" parent="1" vertex="1">
+                    <mxGeometry x="-140" y="-2180" width="220" height="67.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-43" value="this 是 promise2" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;fontColor=#000000;fillColor=#ffffc0;strokeColor=#ff0000;align=left;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="-120" y="-2050" width="140" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-44" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;exitX=0.75;exitY=0;exitDx=0;exitDy=0;align=left;fontSize=10;entryX=0.472;entryY=0.957;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="JJonGggyFrEtSe44EXoG-43" target="JJonGggyFrEtSe44EXoG-41" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="12.879999999999995" y="-2253.9825" as="targetPoint"/>
+                        <mxPoint x="61" y="-2210" as="sourcePoint"/>
+                        <Array as="points">
+                            <mxPoint x="-36" y="-2050"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-46" value="异步执行" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;fontColor=#000000;fillColor=#ffffc0;strokeColor=#ff0000;align=left;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="196.25" y="-2650" width="57.5" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-47" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;align=left;fontSize=10;" parent="1" source="JJonGggyFrEtSe44EXoG-46" target="JJonGggyFrEtSe44EXoG-22" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="150" y="-2550" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-49" value="" style="curved=1;endArrow=classic;html=1;rounded=0;strokeColor=#CC00CC;align=left;fontSize=10;" parent="1" source="JJonGggyFrEtSe44EXoG-41" target="JJonGggyFrEtSe44EXoG-16" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="-160" y="-2100" as="sourcePoint"/>
+                        <mxPoint x="-110" y="-2150" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="-250" y="-2030"/>
+                            <mxPoint x="-450" y="-2310"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-52" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.484;entryY=0.063;entryDx=0;entryDy=0;entryPerimeter=0;align=left;fontSize=10;strokeColor=#994C00;" parent="1" source="JJonGggyFrEtSe44EXoG-14" target="JJonGggyFrEtSe44EXoG-16" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="-190" y="-2670" as="sourcePoint"/>
+                        <mxPoint x="60" y="-2670" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-53" value="生成第2个promise" style="edgeLabel;resizable=0;html=1;;align=left;verticalAlign=middle;fontSize=10;fontColor=#994C00;" parent="JJonGggyFrEtSe44EXoG-52" connectable="0" vertex="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="-27" y="-12" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-58" value="第3个promise" style="rounded=0;whiteSpace=wrap;html=1;align=left;fontSize=10;fontColor=#CC00CC;strokeColor=#CC00CC;" parent="1" vertex="1">
+                    <mxGeometry x="-410" y="-2160" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-80" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;strokeColor=#CC00CC;fontSize=10;" parent="1" target="JJonGggyFrEtSe44EXoG-10" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1383.13" y="-2892.469696969697" as="targetPoint"/>
+                        <mxPoint x="465" y="-2242.5" as="sourcePoint"/>
+                        <Array as="points">
+                            <mxPoint x="465" y="-2333"/>
+                            <mxPoint x="1000" y="-2333"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-66" value="&lt;div style=&quot;color: rgb(171, 178, 191); font-family: Consolas, &amp;quot;Courier New&amp;quot;, monospace; white-space: pre; line-height: 100%;&quot;&gt;&lt;div style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207));&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;span style=&quot;color: rgb(198, 120, 221);&quot;&gt;if&lt;/span&gt; (&lt;span style=&quot;color: rgb(224, 108, 117);&quot;&gt;this&lt;/span&gt;.&lt;span style=&quot;color: rgb(224, 108, 117);&quot;&gt;state&lt;/span&gt; &lt;span style=&quot;color: rgb(86, 182, 194);&quot;&gt;===&lt;/span&gt; &lt;span style=&quot;color: rgb(152, 195, 121);&quot;&gt;&#39;pending&#39;&lt;/span&gt;) {&lt;/div&gt;&lt;div style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207));&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;span style=&quot;color: rgb(92, 99, 112); font-style: italic;&quot;&gt;// 如果状态为 pending，则将回调函数添加到队列中&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207)); color: rgb(224, 108, 117);&quot;&gt;this&lt;/span&gt;.&lt;span style=&quot;color: rgb(224, 108, 117); background-color: rgb(0, 204, 204);&quot;&gt;onFulfilledCallbacks&lt;/span&gt;.&lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207)); color: rgb(97, 175, 239);&quot;&gt;push&lt;/span&gt;(() &lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207)); color: rgb(198, 120, 221);&quot;&gt;=&amp;gt;&lt;/span&gt; {&lt;/div&gt;&lt;div style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207));&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;span style=&quot;color: rgb(97, 175, 239);&quot;&gt;setTimeout&lt;/span&gt;(() &lt;span style=&quot;color: rgb(198, 120, 221);&quot;&gt;=&amp;gt;&lt;/span&gt; {&lt;/div&gt;&lt;div style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207));&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;span style=&quot;color: rgb(198, 120, 221);&quot;&gt;try&lt;/span&gt; {&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207)); color: rgb(198, 120, 221);&quot;&gt;const&lt;/span&gt; &lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207)); color: rgb(209, 154, 102);&quot;&gt;x&lt;/span&gt; &lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207)); color: rgb(86, 182, 194);&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color: rgb(97, 175, 239); background-color: rgb(51, 255, 51);&quot;&gt;onFulfilled&lt;/span&gt;(&lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207)); color: rgb(224, 108, 117);&quot;&gt;this&lt;/span&gt;.&lt;span style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207)); color: rgb(224, 108, 117);&quot;&gt;value&lt;/span&gt;);&lt;/div&gt;&lt;div style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207));&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;span style=&quot;color: rgb(97, 175, 239);&quot;&gt;resolvePromise&lt;/span&gt;(promise2, x, resolve, reject); &lt;span style=&quot;color: rgb(92, 99, 112); font-style: italic;&quot;&gt;// 处理 onFulfilled 的返回值&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207));&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; } &lt;span style=&quot;color: rgb(198, 120, 221);&quot;&gt;catch&lt;/span&gt; (e) {&lt;/div&gt;&lt;div style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207));&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;span style=&quot;color: rgb(97, 175, 239);&quot;&gt;reject&lt;/span&gt;(e);&lt;/div&gt;&lt;div style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207));&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; }&lt;/div&gt;&lt;div style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207));&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; }, &lt;span style=&quot;color: rgb(209, 154, 102);&quot;&gt;0&lt;/span&gt;);&lt;/div&gt;&lt;div style=&quot;background-color: light-dark(rgb(40, 44, 52), rgb(196, 200, 207));&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; });&lt;br&gt;      ...&lt;br&gt;}&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="-15" y="-2370" width="480" height="170" as="geometry"/>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-73" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;align=left;fontSize=10;strokeColor=#CC00CC;" parent="1" source="JJonGggyFrEtSe44EXoG-16" target="JJonGggyFrEtSe44EXoG-66" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="-120" y="-2445" as="sourcePoint"/>
+                        <mxPoint x="-10" y="-2535" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="-140" y="-2440"/>
+                            <mxPoint x="-65" y="-2440"/>
+                            <mxPoint x="-65" y="-2280"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-76" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.389;entryY=1.083;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=10;" parent="1" source="JJonGggyFrEtSe44EXoG-5" target="JJonGggyFrEtSe44EXoG-5" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-79" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=10;align=left;strokeColor=#0066CC;" parent="1" source="JJonGggyFrEtSe44EXoG-3" target="JJonGggyFrEtSe44EXoG-5" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="170" y="-2900" as="sourcePoint"/>
+                        <mxPoint x="310" y="-2900" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-81" value="" style="endArrow=none;dashed=1;html=1;rounded=0;strokeColor=#994C00;fontSize=10;" parent="1" source="JJonGggyFrEtSe44EXoG-66" target="JJonGggyFrEtSe44EXoG-26" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="520" y="-2300" as="sourcePoint"/>
+                        <mxPoint x="570" y="-2350" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="490" y="-2260"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-85" value="异步执行" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;fontColor=#000000;fillColor=#ffffc0;strokeColor=#ff0000;align=left;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="150" y="-2410" width="60" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="JJonGggyFrEtSe44EXoG-86" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;align=left;fontSize=10;" parent="1" source="JJonGggyFrEtSe44EXoG-85" target="JJonGggyFrEtSe44EXoG-66" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="585.05" y="-2165" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="170" y="-2400"/>
+                            <mxPoint x="190" y="-2400"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
