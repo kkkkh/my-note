@@ -23,7 +23,7 @@ const textarea2 = document.getElementById("ta-example-two");
 textarea1.addEventListener("mouseup", onMouseUp, false);
 textarea2.addEventListener("mouseup", onMouseUp, false);
 ```
-### event
+### Event
 #### 事件捕获（capture）、事件冒泡（propagation）
 - 父子关系：div1 -> div2 -> div3
 - 事件捕获：由外向内，div1,div2,div3
@@ -127,7 +127,7 @@ input.dispatchEvent(myEvent); // 触发
 // bubbles 只读属性表明事件是否会沿 DOM 树向上冒泡。
 activeElement.dispatchEvent(new Event('input', { bubbles: true }))
 ```
-### navigator
+### Navigator
 #### navigator.clipboard
 - writeText() 写入特定字符串到操作系统的剪切板，返回一个promise
   ```js
@@ -237,135 +237,6 @@ try {
   }
 } finally {
   clearTimeout(timeoutId);
-}
-```
-### 通信
-#### iframe
-```html
-<!-- index.html -->
-<iframe src="child.html" id="myIframe"></iframe>
-<script>
-// 监听
-window.addEventListener('message', (event) => {
-  if (event.origin !== 'https://your-iframe-origin.com') return; // 验证来源
-  console.log('收到来自 iframe 的消息:', event.data);
-});
-// 发送
-const iframe = document.getElementById('myIframe');
-iframe.contentWindow.postMessage('Hello from parent', 'https://your-iframe-origin.com');
-</script>
-```
-```js
-// iframe.html
-// 发送
-window.parent.postMessage('Hello from iframe', 'https://your-parent-origin.com');
-// 接受
-window.addEventListener('message', (event) => {
-  if (event.origin !== 'https://your-parent-origin.com') return; // 验证来源
-  console.log('收到父页面的消息:', event.data);
-});
-```
-#### web Worker 
-#### 专用 worker
-```js
-// index.html
-const myWorker = new Worker("worker.js");
-// first 代表 2 个 <input> 元素
-first.onchange = () => {
-  myWorker.postMessage([first.value, second.value]);
-  console.log("Message posted to worker");
-};
-myWorker.onmessage = (e) => {
-  result.textContent = e.data;
-  console.log("Message received from worker");
-  // 终止 worker
-  // myWorker.terminate();
-};
-// worker.js
-onmessage = (e) => {
-  // 接受消息
-  console.log("Message received from main script");
-  const workerResult = `Result: ${e.data[0] * e.data[1]}`;
-  console.log("Posting message back to main script");
-  // 发送消息
-  postMessage(workerResult);
-};
-```
-#### SharedWorker
-一个共享 worker 可以被多个脚本使用——即使这些脚本正在被不同的 window、iframe 或者 worker 访问
-```js
-// index1.html / index2.html
-const myWorker = new SharedWorker("worker.js");
-squareNumber.onchange = () => {
-  // 发送消息
-  myWorker.port.postMessage([squareNumber.value, squareNumber.value]);
-  console.log("Message posted to worker");
-};
-// 接受消息
-myWorker.port.onmessage = (e) => {
-  result2.textContent = e.data;
-  console.log("Message received from worker");
-};
-// woker.js
-onconnect = (e) => {
-  const port = e.ports[0];
-  port.onmessage = (e) => {
-    const workerResult = `Result: ${e.data[0] * e.data[1]}`;
-    port.postMessage(workerResult);
-  };
-};
-```
-参考：[Web_Workers_API](https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Workers_API/Using_web_workers)
-#### MessageChannel / MessagePort
-不同的脚本直接通信，通过两端都有端口的双向频道（或管道）相互传递消息。
-```js
-// index.html
-const input = document.getElementById("message-input");
-const output = document.getElementById("message-output");
-const button = document.querySelector("button");
-const iframe = document.querySelector("iframe");
-const channel = new MessageChannel();
-const port1 = channel.port1;
-// 等待 iframe 加载
-iframe.addEventListener("load", onLoad);
-function onLoad() {
-  // 监听按钮点击
-  button.addEventListener("click", onClick);
-  // 在 port1 监听消息
-  port1.onmessage = onMessage;
-  // 把 port2 传给 iframe
-  iframe.contentWindow.postMessage("init", "*", [channel.port2]);
-}
-// 当按钮点击时，在 port1 上发送一个消息
-function onClick(e) {
-  e.preventDefault();
-  // 发送消息
-  port1.postMessage(input.value);
-}
-// 处理 port1 收到的消息
-function onMessage(e) {
-  output.innerHTML = e.data;
-  input.value = "";
-}
-```
-```js
-// iframe
-const list = document.querySelector("ul");
-let port2;
-// 监听初始的端口传递消息
-window.addEventListener("message", initPort);
-// 设置传递过来的端口
-function initPort(e) {
-  port2 = e.ports[0];
-  port2.onmessage = onMessage;
-}
-// 处理 port2 收到的消息
-function onMessage(e) {
-  const listItem = document.createElement("li");
-  listItem.textContent = e.data;
-  list.appendChild(listItem);
-  // 发送消息
-  port2.postMessage(`IFrame 收到的消息：“${e.data}”`);
 }
 ```
 ### Base64
@@ -520,23 +391,6 @@ console.log(`?x=${encodeURIComponent("我和你")}`);
       return str.replace(/[^a-zA-Z0-9\-_.!~*'()]/g, replacer);
   }
   ```
-### JSON
-#### 序列化和反序列化
-- 序列化（Serialization）：
-  - 将对象或数据结构（如 JavaScript 对象、数组）转换为 JSON 格式的字符串。
-  - 这是为了使数据可以被传输（如通过网络）或存储（如写入文件）。
-- 反序列化（Deserialization）：
-  - 将 JSON 格式的字符串解析回 JavaScript 对象或数据结构。
-  - 这是为了在应用程序中使用数据。
-- 使用场景：
-  - 网络通信、数据存储、配置文件、跨语言数据交换
-#### JSON api
-```js
-const obj = { name: "Alice", age: 25 };
-const jsonString = JSON.stringify(obj); // '{"name":"Alice","age":25}'
-const jsonString = '{"name":"Alice","age":25}';
-const obj = JSON.parse(jsonString); // { name: "Alice", age: 25 }
-```
 ### Element
 #### Element
 - Element.tagName 等同于 Element.nodeName
