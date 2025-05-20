@@ -13,7 +13,7 @@ import { ref } from 'vue';
 import { data } from './index.data.mjs'
 import { withBase } from 'vitepress'
 import markdownit from 'markdown-it'
-console.log(JSON.stringify(data,null,2))
+// console.log(JSON.stringify(data,null,2))
 const md = markdownit()
 const markdownContent = ref('');
 
