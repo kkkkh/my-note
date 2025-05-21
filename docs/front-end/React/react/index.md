@@ -369,7 +369,7 @@ const memoized = useMemo(() => createByHeavyComputing(a, b), [a, b]);
 - 没有包裹的子组件，父组件渲染，子组件也会渲染
 - 使用 React.memo 包裹后子组件，props 相同不重新渲染
 
-<<< @/submodule/play/packages/react/src/base/meno/reactMeno.jsx
+<<< @/submodule/play/packages/react/src/base/meno/ReactMeno.jsx
 
 #### useCallback
 - 只要第二个参数依赖值数组的依赖项不改变，它就会保证一直返回同一个回调函数（引用），而不是新建一个函数
