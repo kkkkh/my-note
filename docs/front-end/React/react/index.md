@@ -292,7 +292,7 @@ function App() {
 #### useRef
 - 需要在 React 组件中使用可变值该怎么办？答案是，我们可以使用 useRef 这个 Hook
 
-<<< @/submodule/play/packages/react/src/base/ref/index.jsx
+<<< @/submodule/play/packages/react/src/base/ref/Index.jsx
 
 - 组件重新渲染本身不会影响 current 属性的值；
 - 反过来，变更 current 属性值也不会触发组件的重新渲染。
