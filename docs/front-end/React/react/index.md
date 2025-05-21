@@ -20,11 +20,11 @@ outline: deep
   ```
 - jsx => JavaScript XML
   - React 元素有三种基本类型
-    - React 封装的 DOM 元素，如 <div></div>、 <img /> ，这部分元素会最终被渲染为真实的 DOM；
-    - React 组件渲染的元素，如<KanbanCard /> ，这部分元素会调用对应组件的渲染方法；
-    - React Fragment 元素，<React.Fragment></React.Fragment> 或者简写成 <></>，这一元素没有业务意义，也不会产生额外的 DOM，主要用来将多个子元素分组。
+    - React 封装的 DOM 元素，如 `<div></div>`、 `<img />` ，这部分元素会最终被渲染为真实的 DOM；
+    - React 组件渲染的元素，如`<KanbanCard />` ，这部分元素会调用对应组件的渲染方法；
+    - React Fragment 元素，`<React.Fragment></React.Fragment>` 或者简写成 `<></>`，这一元素没有业务意义，也不会产生额外的 DOM，主要用来将多个子元素分组。
   - 属性统一：React 封装的 DOM 元素将浏览器 DOM 整体做了一次面向 React 的标准化
-    - React JSX 中就统一为 readOnly={true} 或 readOnly={false}
+    - React JSX 中就统一为 `readOnly={true}` 或 `readOnly={false}`
     - className="kanban-card" ，更多是因为 HTML 标签里的class 是 JS 里的保留字，需要避开
   - 子元素的类型包括：
     - 字符串，最终会被渲染成 HTML 标签里的字符串；
@@ -33,6 +33,9 @@ outline: deep
     - 以上各种类型组成的数组。
   - props
     - props 表达式的特殊用法：属性展开， 利用 JS ... 语法把 props 这个对象中的所有属性都传给 KanbanCard 组件。
+
+    <<< @/subtree/play/packages/react/src/base/props/Index.jsx{47}
+
   - 注释
     - JSX 里加注释，会发现 HTML 注释 根本没法通过编译，这时需要改用 \{/* */\}
   - 变迁
@@ -89,6 +92,7 @@ outline: deep
   - 灵感
     - 他的灵感是es4里面的e4x，但原本的e4x因为涉及到语法和语义的定义，实现过于复杂所以被弃用。
     - 业界最贴近ES4规范的实现是Adobe Flash中的ActionScript 3语言，随着Flash技术的覆灭，ECMA毅然抛弃了ES4，转而发布了ES5
+- [babel try it](https://babeljs.io/repl/#?browsers=defaults%2C%20not%20ie%2011%2C%20not%20ie_mob%2011&build=&builtIns=false&corejs=3.21&spec=false&loose=false&code_lz=GYVwdgxgLglg9mABACwKYBt1wBQEpEDeAUIogE6pQhlIA8AJjAG4B8AEhlogO5xnr0AhLQD0jVgG4iAXyJA&debug=false&forceAllTransforms=false&modules=false&shippedProposals=false&evaluate=false&fileSize=false&timeTravel=false&sourceType=module&lineWrap=true&presets=react&prettier=false&targets=&version=7.18.4&externalPlugins=&assumptions=%7B%7D)
 ### Component
 - 拆分
     - 拆分时需要你理解业务和交互，
@@ -133,10 +137,10 @@ outline: deep
 - diffing 算法
     - 从根元素开始，React 将递归对比两棵树的根元素和子元素；
     - 对比不同类型的元素，如对比 HTML 元素和 React 组件元素，React 会直接清理旧的元素和它的子树，然后建立新的树；
-    - 对比同为 HTML 元素，但 Tag 不同的元素，如从 \<a\> 变成 \<div\> ，React 会直接清理旧的元素和子树，然后建立新的树；
-    - 对比同为 React 组件元素，但组件类或组件函数不同的元素，如从 KanbanNewCard 变成 KanbanCard ，React 会卸载旧的元素和子树，然后挂载新的元素树；
-    - 对比 Tag 相同的 HTML 元素，如  <input type="text" value="old" /> 和 <input type="text" value="new" /> ，React 将会保留该元素，并记录有改变的属性，在这个例子里就是 value 的值从 "old" 变成了 "new" ；
-    - 对比组件类或组件函数相同的组件元素，如 <KanbanCard title="老卡片" /> 和 <KanbanCard title="新卡片" /> ，React 会保留组件实例，更新 props，并触发组件的生命周期方法或者 Hooks。
+    - 对比同为 HTML 元素，但 Tag 不同的元素，如从 `<a>` 变成 `<div>` ，React 会直接清理旧的元素和子树，然后建立新的树；
+    - 对比同为 React 组件元素，但组件类或组件函数不同的元素，如从 `KanbanNewCard` 变成 `KanbanCard` ，React 会卸载旧的元素和子树，然后挂载新的元素树；
+    - 对比 Tag 相同的 HTML 元素，如  `<input type="text" value="old" />` 和 `<input type="text" value="new" />` ，React 将会保留该元素，并记录有改变的属性，在这个例子里就是 value 的值从 "old" 变成了 "new" ；
+    - 对比组件类或组件函数相同的组件元素，如 `<KanbanCard title="老卡片" />` 和 `<KanbanCard title="新卡片" />` ，React 会保留组件实例，更新 props，并触发组件的生命周期方法或者 Hooks。
     - 如果子元素形成一个列表，那么 React 会按顺序尝试匹配新旧两个列表的元素。`key`
 - 触发
     - props 从组件外面传进来，
@@ -236,7 +240,7 @@ class LegacyKanbanCard extends React.Component {
   - 3、当需要在大中型 React 项目中处理复杂 state 时，学习掌握 useReducer ；
   - 4、当需要封装组件，对外提供命令式接口时，学习掌握 useRef 加 useImperativeHandle；
   - 5、当页面上用户操作直接相关的紧急更新（Urgent Updates，如输入文字、点击、拖拽等），受到异步渲染拖累而产生卡顿，需要优化时，学习掌握 useDeferredValue 和 useTransition
-#### useState
+#### useState &I
 - 批处理
   - React 18 加入的自动批处理多个 state 更新的功能
   ```js
@@ -263,7 +267,7 @@ class LegacyKanbanCard extends React.Component {
     return [...prevState, aNewTodoItem];
   });
   ```
-#### useReducer 
+#### useReducer
 - useReducer 适用于抽象封装复杂逻辑
 ```js
 function reducer(state, action) {
@@ -287,21 +291,20 @@ function App() {
   - 而从 React 18 版本起，无论是在事件处理函数、异步回调，还是 setTimeout 里的多个 state 更新，默认都会被自动批处理，只触发一次重新渲染。
 #### useRef
 - 需要在 React 组件中使用可变值该怎么办？答案是，我们可以使用 useRef 这个 Hook
-```js
-const Component = () => {
-  const myRef = useRef(null);
-  const value = myRef.current;
-  myRef.current = newValue;
-  return (<div></div>);
-};
-```
+
+<<< @/subtree/play/packages/react/src/base/ref/index.jsx
+
 - 组件重新渲染本身不会影响 current 属性的值；
 - 反过来，变更 current 属性值也不会触发组件的重新渲染。
 - HTML 元素的 ref 属性。这个属性是 React 特有的，不会传递给真实 DOM。
 - 当 ref 属性的值是一个可变 ref 对象时，组件在挂载阶段，会在 HTML 元素对应的真实 DOM 元素创建后，将它赋值给可变 ref 对象的 current 属性，即 inputElem.current；
-- 在组件卸载，真实 DOM 销毁之前，也会把 current 属性设置为 null。
+- 在组件卸载，真实 DOM 销毁之前，也会把 current 属性设置为 null
 
-#### useEffect
+#### forwardRef
+
+<<< @/subtree/play/packages/react/src/base/forwardRef/Index.jsx
+
+#### useEffect &I
 ```js
 useEffect(func, [])
 ```
@@ -310,39 +313,64 @@ useEffect(func, [])
   - Hook 规则只在最顶层使用 Hook。不要在循环，条件或嵌套函数中调用 Hook。
   - 只在 React 函数中调用 Hook。不要在普通的 JavaScript 函数中调用 Hook。
   - 因为本质是链表。在各种判断中写 Hook 会导致节点错乱。
+    - React Hooks 的实现依赖于一个链表结构 。
+    - 每次组件渲染时，React 按照 Hooks 的声明顺序将它们链接起来。
+    - 如果在条件语句中调用 Hooks，可能导致每次渲染时 Hooks 的调用顺序不一致，从而破坏链表的结构，导致状态错乱和不可预测的行为 。
   - useRef 中值变化是不会触发重新渲染。useState 中则是会触发渲染。
-#### useEffect 2
-  - 副作用：
-    - 当调用函数时，除了返回可能的函数值之外，还对主调用函数产生附加的影响。
-    - 例如修改全局变量，修改参数，向主调方的终端、管道输出字符或改变外部存储信息等。
-    - 副作用就是让一个函数不再是纯函数的各类操作
-  - 用法1：在提交阶段才会被调用的，这时副作用回调函数可以访问到组件的真实 DOM。
+#### useEffect 2 &I
+- 副作用：
+  - 当调用函数时，除了返回可能的函数值之外，还对主调用函数产生附加的影响。
+  - 例如修改全局变量，修改参数，向主调方的终端、管道输出字符或改变外部存储信息等。
+  - 副作用就是让一个函数不再是纯函数的各类操作
+- 用法1：在提交阶段才会被调用的，这时副作用回调函数可以访问到组件的真实 DOM。
   ```js
   useEffect(() => {/* 省略 */}); 
   ```
-  - 用法2（最常用的）：副作用的条件执行。在上面用法的基础上，传入一个依赖值数组（Dependencies）作为第二个参数：
+- 用法2（最常用的）：副作用的条件执行。在上面用法的基础上，传入一个依赖值数组（Dependencies）作为第二个参数：
   ```js
   useEffect(() => {/* 省略 */}, [var1, var2]);
   ```
-   - 下次渲染时会把依赖值数组里的值依次与前一次记录下来的值做浅对比（Shallow Compare）
-   - 依赖值数组里可以加入 props、state、context 值
-    - 空数组[]也是一个有效的依赖值数组，由于在组件生命周期中依赖值不会有任何变化，所以副作用回调函数只会在组件挂载时执行一次，之后不论组件更新多少次，副作用都不会再执行
-  - 用法3：副作用回调函数的返回值也是一个函数，这个返回的函数叫做清除函数
+ - 下次渲染时会把依赖值数组里的值依次与前一次记录下来的值做浅对比（Shallow Compare）
+ - 依赖值数组里可以加入 props、state、context 值
+  - 空数组[]也是一个有效的依赖值数组，由于在组件生命周期中依赖值不会有任何变化，所以副作用回调函数只会在组件挂载时执行一次，之后不论组件更新多少次，副作用都不会再执行
+- 用法3：副作用回调函数的返回值也是一个函数，这个返回的函数叫做清除函数
   ```js
   useEffect(() => {/* 省略 */; return () => {/* 省略 */};}, [status]);
   ```
-    - 组件在下一次提交阶段执行同一个副作用回调函数之前，或者是组件即将被卸载之前，会调用这个清除函数。
-    - 如果依赖值数组是一个空数组，那么清除函数只会在卸载组件时执行。
-#### useLayoutEffect
-  - 它的副作用执行时机一般早于前者，是在真实 DOM 变更之后同步执行的，更接近类组件的componentDidMount 、componentWillUnmount 。
-  - 为保证性能，应尽量使用 useEffect 以避免阻塞。
+  - 组件在下一次提交阶段执行同一个副作用回调函数之前，或者是组件即将被卸载之前，会调用这个清除函数。
+  - 如果依赖值数组是一个空数组，那么清除函数只会在卸载组件时执行。
 
-#### useMemo
+<<< @/subtree/play/packages/react/src/base/effect/Index.jsx
+
+```js
+// 打印结果
+useEffect
+useEffect1 0
+useEffect2 0
+useEffect2 return
+useEffect
+useEffect1 1
+useEffect2 1
+```
+
+#### useLayoutEffect
+- 它的副作用执行时机一般早于前者，是在真实 DOM 变更之后同步执行的，更接近类组件的componentDidMount 、componentWillUnmount 。
+- 为保证性能，应尽量使用 useEffect 以避免阻塞。
+#### useMemo &I
 ```js
 const memoized = useMemo(() => createByHeavyComputing(a, b), [a, b]);
 ```
+
+<<< @/subtree/play/packages/react/src/base/meno/UseMeno.jsx
+
 - 是将执行成本较高的计算结果存入缓存，通过减少重复计算来提升组件性能。
-- useMemo的回调是在渲染过程中执行，而useEffect的回调会在提交阶段执行
+- useMemo的回调是在渲染过程中执行(组件执行中)，而useEffect的回调会在提交阶段执行（dom更新，再异步调取）
+#### react.memo
+- 没有包裹的子组件，父组件渲染，子组件也会渲染
+- 使用 React.memo 包裹后子组件，props 相同不重新渲染
+
+<<< @/subtree/play/packages/react/src/base/meno/reactMeno.jsx
+
 #### useCallback
 - 只要第二个参数依赖值数组的依赖项不改变，它就会保证一直返回同一个回调函数（引用），而不是新建一个函数
 - 当依赖项改变时， useCallback 才会更新回调函数及其闭包。
@@ -352,15 +380,14 @@ const memoizedFunc = useCallback(() => {/*省略*/}, [a, b]);
 - useCallback 是 useMemo 的一个马甲，相当于：
 ```js
 const memoizedFunc = useMemo(() => () => {/*省略*/}, [a, b]);
+```
 - 使用useCallback
   - 纯组件的特性：当组件的 props 和 state 没有变化时，将跳过这次渲染。
   - 而你在函数组件内频繁声明的事件处理函数，比如 handleSubmit ，在每次渲染时都会创建一个新函数。
   - 如果把这个函数随着 props 传递给作为子组件的纯组件，则会导致纯组件的优化无效，因为每次父组件重新渲染都会带着子组件一起重新渲染。
   - 这时就轮到useCallback 出马了，使用妥当的话，子组件不会盲目跟随父组件一起重新渲染，这样的话，反复渲染子组件的成本就节省下来了。
-```
-
 #### hooks 使用
-- 第一，只能在 React 的函数组件中调用 Hooks。 
+- 第一，只能在 React 的函数组件中调用 Hooks。
   - 目的是保证 Hooks 能“勾”到 React 的虚拟 DOM 中去
 - 第二，只能在组件函数的最顶层调用 Hooks。
   - 都要保证每个 Hook 的执行顺序，这样 React 才能识别每个 Hook，保持它们的状态
@@ -418,7 +445,6 @@ const memoizedFunc = useMemo(() => () => {/*省略*/}, [a, b]);
   - 注意注意的是，在组件里监听原生 DOM 事件，属于典型的副作用，所以请务必在 useEffect 中监听，并在清除函数中及时取消监听。
 2、很多第三方框架，尤其是与 React 异构的框架，在运行时会生成额外的 DOM 节点
 ### 组件表与里
-
 #### 数据流
 React 的数据流主要包含了三种数据：属性 props、状态 state 和上下文 context
 - Props
@@ -427,37 +453,9 @@ React 的数据流主要包含了三种数据：属性 props、状态 state 和�
   - 尤其注意，当新旧值都是对象、数组、函数时，判断依据是它们的值引用是否不同。
 #### Context
 - 用于组件跨越多个组件层次结构，向后代组件传递和共享“全局”数据。
-```js
-// 1
-const MyContext = React.createContext('没路用的初始值');
-// 2
-function MyComponent() {
-  const [state1, setState1] = useState('文本');
-  const handleClick = () => {
-    setState1('更新文本');
-  };
-  return (
-    <MyContext.Provider value={state1}>
-      <ul>
-        <MyChildComponent />
-        <li><button onClick={handleClick}>更新state</button></li>
-      </ul>
-    </MyContext.Provider>
-  );
-}
-// 3
-function MyChildComponent() {
-  return (
-    <MyGrandchildComponent />
-  );
-}
-function MyGrandchildComponent() {
-  const value = useContext(MyContext);
-  return (
-    <li>{value}</li>
-  );
-}
-```
+
+<<< @/subtree/play/packages/react/src/base/context/UseContext.jsx
+
 - MyContext.Provider 是可以嵌套使用的。
 - MyGrandchildComponent 组件会去到组件树，从它的祖先节点中找到离它最近的 MyContext.Provider 即 MyComponent ，读取后者的 value 值；
 - 当 MyComponent 的 state1 ，也就是 MyContext.Provider 的 value 值发生更改时，会通知到它后代组件中所有消费者组件重新渲染。
@@ -498,10 +496,9 @@ function MyComponent() {
 重构
 - 重构而重构，除非我们很清楚重构的目标范围、预期收益、成本和存在的风险。
 补充：
-- redux 
+- redux
   - [react-redux的发展史](https://blog.isquaredsoftware.com/2018/11/react-redux-history-implementation/)
   - [redux源码解读](https://juejin.cn/post/6844904191228411911)
-
 #### 状态提升
 - 状态提升
   - 这时我们就认为，这四个 state 是 App 标题栏和 KanbanBoard 的共享应用状态，
@@ -514,56 +511,6 @@ function MyComponent() {
   - context 来解决
 ### 工程化
 npm run eject
-## React实践
-### babel 
-- [babel try it](https://babeljs.io/repl/#?browsers=defaults%2C%20not%20ie%2011%2C%20not%20ie_mob%2011&build=&builtIns=false&corejs=3.21&spec=false&loose=false&code_lz=GYVwdgxgLglg9mABACwKYBt1wBQEpEDeAUIogE6pQhlIA8AJjAG4B8AEhlogO5xnr0AhLQD0jVgG4iAXyJA&debug=false&forceAllTransforms=false&modules=false&shippedProposals=false&evaluate=false&fileSize=false&timeTravel=false&sourceType=module&lineWrap=true&presets=react&prettier=false&targets=&version=7.18.4&externalPlugins=&assumptions=%7B%7D) 
-
-### React 常用代码
-```jsx
-function App() {
-  const todoList = [
-    { title: '开发任务-1', status: '22-05-22 18:15' },
-  ];
-  const KanbanCard = ({ title, status }) => {
-    return (
-      <li className="kanban-card">
-        <div className="card-title">{title}</div>
-        <div className="card-status">{status}</div>
-      </li>
-    );
-  };
-  return (
-    <div className="App">
-      <main className="kanban-board">
-        <section className="kanban-column column-todo">
-          <h2>待处理</h2>
-          <ul>
-            {/* props 传递 */}
-            { todoList.map(props => <KanbanCard {...props} />) }
-          </ul>
-        </section>
-      </main>
-    </div>
-  );
-}
-export default App;
-```
-```jsx
-// title传递
-<KanbanColumn className="column-todo" title={
-  <>
-    待处理<button onClick={handleAdd}
-      disabled={showAdd}>&#8853; 添加新卡片</button>
-  </>
-}>
-```
-```jsx
-// props 传值
-const ParentComponent = () => (
-  <MyComponent prop1="文本" prop2={123} booleanProp={false}
-    onClick={(evt) => {console.log('clicked')}} />
-);
-```
 ### attr
 #### dangerouslySetInnerHTML &I
 - 将一段 HTML 字符串插入到 React 组件中
@@ -575,7 +522,214 @@ function MyComponent({ htmlContent }) {
   );
 }
 ```
-### 比较旧的一些教程
+### fiber &I
+- fiber 产生
+  - React 组件会渲染出一棵元素树……每次有 props、state 等数据变动时，组件会渲染出新的元素树，React 框架会与之前的树做 Diffing 对比，将元素的变动最终体现在浏览器页面的 DOM 中。这一过程就称为协调（Reconciliation）。
+  - 在 React 的早期版本，协调是一个同步过程，这意味着当虚拟 DOM 足够复杂，或者元素渲染时产生的各种计算足够重，协调过程本身就可能超过 16ms，严重的会导致页面卡顿。
+  - 而从 React v16 开始，协调从之前的同步改成了异步过程，这主要得益于新的 Fiber 协调引擎。
+- 工作
+  - 在协调过程中存在着各种动作，如调用生命周期方法或 Hooks，这在 Fiber 协调引擎中被称作是工作（Work）。
+  - Fiber 中最基本的模型是 FiberNode，用于描述一个组件需要做的或者已完成的工作，每个组件可能对应一个或多个 FiberNode。（每个 FiberNode 的数据都来自于元素树中的一个元素）
+- 过程
+  - 渲染
+    - 当第一次渲染，React 元素树被创建出来后，Fiber 协调引擎会从 HostRoot 这个特殊的元素开始，遍历元素树，创建对应的 FiberNode 。
+    - FiberNode 与 FiberNode 之间，并没有按照传统的 parent-children 方式建立树形结构。
+      - 而是在父节点和它的第一个子节点间，利用child 和 return 属性建立了双向链表。
+      - 节点与它的平级节点间，利用 sibling 属性建立了单向链表，同时平级节点的 return 属性，也都被设置成和单向链表起点的节点 return 一样的值引用
+      <img src="./img/fiber.webp" v-viewer>
+      - 这样做的好处是，可以在协调引擎进行工作的过程中，避免递归遍历 Fiber 树，而仅仅用两层循环来完成深度优先遍历，这个用于遍历 Fiber 树的循环被称作 workLoop。
+      ```js
+      let workInProgress;
+      function workLoop() {
+        while (workInProgress && !shouldYield()) {
+          const child = workWork(workInProgress);
+          if (child) {
+            workInProgress = child;
+            continue;
+          }
+          let completedWork = workInProgress;
+          do {
+            if (completedWork.sibling) {
+              workInProgress = completedWork.sibling;
+              break;
+            }
+            completedWork = completedWork.return;
+          } while (completedWork);
+        }
+      }
+      ```
+      - 更狠的一点是，这个循环随时可以跑，随时可以停。这意味着 workLoop 既可以同步跑，也可以异步跑，当 workLoop 发现进行中的 Fiber 工作耗时过长时，可以根据一个 shouldYield() 标记决定是否暂停工作，释放计算资源给更紧急的任务，等完成后再恢复工作。
+    - 当组件内更新 state 或有 context 更新时，React 会进入渲染阶段（Render Phase）。
+      - 这一阶段是异步的，Fiber 协调引擎会启动workLoop ，从 Fiber 树的根部开始遍历，快速跳过已处理的节点；
+      - 对有变化的节点，引擎会为 Current（当前）节点克隆一个 WorkInProgress（进行中）节点，将这两个 FiberNode 的 alternate 属性分别指向对方，并把更新都记录在WorkInProgress 节点上
+    - 函数组件的 Hooks 也是在渲染阶段执行的。除了useContext ，Hooks 在挂载后，都会形成一个由 Hook.next 属性连接的单向链表，而这个链表会挂在 FiberNode.memoizedState 属性上。
+    - 在此基础上，useEffect 这样会产生副作用的 Hooks，会额外创建与 Hook 对象一一对应的 Effect 对象，赋值给 Hook.memoizedState 属性。此外，也会在 FiberNode.updateQueue 属性上，维护一个由 Effect.next 属性连接的单向链表，并把这个 Effect 对象加入到链表末尾。
+  - 提交
+    - 当 Fiber 树所有节点都完成工作后，WorkInProgress 节点会被改称为 FinishedWork（已完成）节点，WorkInProgress 树也会被改称为 FinishedWork树。
+    - 这时 React 会进入提交阶段（Commit Phase），这一阶段主要是同步执行的。
+      - 变更前（Before Mutation）子阶段。
+        - 这个子阶段会调用类组件的 getSnapshotBeforeUpdate 方法。
+      - 变更（Mutation）子阶段。这个子阶段会更新真实 DOM 树。
+        - 递归提交与删除相关的副作用，包括移除 ref、移除真实 DOM、执行类组件的 componentWillUnmount 。
+        - 递归提交添加、重新排序真实 DOM 等副作用。
+        - 依次执行 FiberNode 上 useLayoutEffect 的清除函数。
+        - 引擎用 FinishedWork 树替换 Current 树，供下次渲染阶段使用。
+      - 布局（Layout）子阶段。
+        - 这个子阶段真实 DOM 树已经完成了变更，会调用 useLayoutEffect 的副作用回调函数，和类组件的 componentDidMount 方法。
+    - 在提交阶段中，引擎还会多次异步或同步调用 flushPassiveEffects() 。
+      - 这个函数会先后两轮按深度优先遍历 Fiber 树上每个节点：
+      - 第一轮：如果节点的 updateQueue 链表中有待执行的、由 useEffect 定义的副作用，则顺序执行它们的清除函数；
+      - 第二轮：如果节点的 updateQueue 链表中有待执行的、由 useEffect 定义的副作用，则顺序执行它们的副作用回调函数，并保存清除函数，供下一轮提交阶段执行。
+    - 协调引擎的 Diffing 算法在哪里？其实从渲染到提交阶段，到处都在利用 memoizedProps 和 memoizedState 与新的 props、state 做比较，以减少不必要的工作，进而提高性能。
+- 其他
+  - 任务优先级和饥饿问题的处理（packages/scheduler，即任务优先级和调度相关的内容）
+  - [React 工作流程](https://pomb.us/build-your-own-react/)
+  - [v18.2.0 react-reconciler 源码](https://github.com/facebook/react/tree/v18.2.0/packages/react-reconciler)
+## React19
+### Action 和 表单相关API
+#### useTransition
+React 18 加入的 transition，可以用来定义非关键的 state 更新。
+自动批处理多个 state 更新操作，如果其中某个 state 更新导致的渲染代价较大，则会拖累其他的 state 更新，具体来说，可能会导致录入文字变“卡”。
+把代价大的 state 更新标记为非关键的 transition
+在 transition 执行过程中，调度器每 5 毫秒都会把控制权交还给主进程，检查是否有其他更重要的工作单元，如果有就暂停 transition，这样就可以进一步避免阻塞 UI。
+```js
+startTransition(() => {/* 省略 */});
+//              -----------------
+//                      ^
+//                      |
+//                 scope回调函数包含的 state 更新会被标记为 transition；
+//                 React 18 要求上面的回调函数整体是同步的，如果异步不会被标记
+
+
+const [isPending, startTransition] = useTransition();
+//     ---------  ---------------
+//         ^                  ^
+//         |                  |
+// 是否存在待执行的transition  与startTransition API相同的函数
+```
+#### action
+React 19 新版本，transition 可以是异步函数
+- 提升组件性能
+- 解决竞态问题
+- 维护其待定（pending）状态
+伴随着 transition 的进化，React 19 将用于触发 transition 的函数，无论是异步还是同步，统称为 action（动作）。
+在 React 19 中，一个 action 可以有多种调用方法，
+- 一种是作为参数传给startTransition ，
+- 另一种是传给标签的 action 属性。后者就是我们接下来会介绍的表单 action。
+#### formAction
+
+<<< @/subtree/play/packages/react/src/react19/action/FormAction.jsx
+
+#### useFormStatus
+表单 action 会作为 transition 执行
+useFormStatus 可以返回最近的表单提交的状态信息
+
+<<< @/subtree/play/packages/react/src/react19/action/UseFormStatus.jsx
+
+#### useActionState
+```js
+const [state, formAction, pending] = useActionState(action, initState);
+//     -----  ----------  -------                   ------  ---------
+//       ^        ^            ^                      ^         ^
+//       |        |            |                      |         |
+// state变量  用于form的action  待定状态            action函数  state初始值
+```
+
+<<< @/subtree/play/packages/react/src/react19/action/UseActionState.jsx
+
+#### useOptimistic
+乐观更新，就是在用户操作表单后的第一时间更新 UI，在 transition 结束后再将最终的 state 同步到 UI
+```js
+const [optimisticState, addOptimistic] = useOptimistic(state, updater);
+//     ---------------  -------------                  -----  -------
+//           ^                ^                          ^       ^
+//           |                |                          |       |
+//      乐观state       触发乐观更新的函数              原始state    ｜
+//                                                    乐观state更新函数
+```
+<<< @/subtree/play/packages/react/src/react19/action/UseOptimistic.jsx
+### use 以及其他API
+#### Suspense 等待
+自定义组件的懒加载：主要用途是配合React.lazy() API 实现自定义组件的懒加载
+
+<<< @/subtree/play/packages/react/src/react19/use/Suspense.jsx
+
+#### use
+- 与hook对比
+  - 与 Hook 相同的是，它必须被用在 React 组件函数或者自定义 Hook 中；
+  - 与 Hook 不同的是，它可以用在条件分支或循环中。
+- 它的参数 resource 即资源
+  - Promise
+  - context
+- use(Promise)
+
+  <<< @/subtree/play/packages/react/src/react19/use/Use-Promise.jsx
+
+- use(Context)
+
+  <<< @/subtree/play/packages/react/src/react19/use/Use-Context.jsx
+
+#### ref
+从 React 19 开始，ref可以像其他 props 一样，直接在函数组件参数里定义，无需再调用forwardRef。
+
+<<< @/subtree/play/packages/react/src/react19/ref/Index.jsx
+
+#### 新支持的 HTML 标签
+用`<title>`、`<link>`、`<meta>`定义文档元数据
+用 `<style>` 和 `<link>` 编写和加载样式表
+用 `<script>` 加载和执行 JS 脚本
+
+<<< @/subtree/play/packages/react/src/main.tsx
+
+### SSR、Next.js与服务器组件
+#### SSR
+服务器端渲染（Server-Side Rendering，后文简称 SSR）
+```jsx
+// 直接将组件渲染出来的完整 HTML 直接返回给用户浏览器
+import { renderToString } from 'react-dom/server';
+const html = renderToString(<App />);
+// 但这样的 HTML 页面暂时不具有动态交互性，诸如 onClick 等逻辑在服务器端渲染时会被忽略
+```
+等到 HTML 在浏览器端加载后，浏览器会继续加载 React 项目构建产物中的 *.js 等文件，待加载完成
+会调用 ReactDOM 客户端 API 的 hydrateRoot 方法，在浏览器端重建虚拟 DOM 树，并把 onClick 等逻辑关联到对应的 DOM 元素上去，
+这样一来 React 应用就被还原成了“完全体”，而这个还原过程被称为“水合”（hydrate）。
+```jsx
+import { hydrateRoot } from 'react-dom/client';
+hydrateRoot(document.getElementById('root'), <App />);
+```
+- CSR、SSR 与 SSG
+  - 客户端渲染（Client-Side Rendering，简称 CSR）
+  - 服务器端渲染（Server-Side Rendering，简称 SSR）
+  - 静态站点生成（Static Site Generation，简称 SSG）
+  ![CSR、SSR 与 SSG](./img/image.png)
+
+## react 源码
+### react 源码学习
+#### 整体
+- [React 18 源码解析：从入门到精通](https://juejin.cn/post/7504578226007900186)
+#### Scheduler
+- Scheduler的“感知”流程（AI）
+  - React通过在每个小更新单元完成后调用shouldYield，询问是否有更高优先级任务。
+  - 用户输入事件是通过React事件系统捕获的，并加入高优先级任务队列。
+- 当执行到下一个中断点shouldYield，调度器就能感知新加入的高优先级用户输入任务，从而停止当前任务调度，转而执行用户输入处理。
+### react 源码调试
+- 1、`react 18 / vite / 引入源码 / flow-remove-types`
+  - [React 18 debugger 源码分析配置](https://www.skillgroup.cn/framework/react/scanalysis/react-debugger.html)
+- 2、`react 18 / create-react-app / yarn build / yarn link` 不能调试源码
+  - [react源码调试](https://juejin.cn/post/7168821587251036167#heading-1)
+- 3、`react 18 / create-react-app / npm run eject / webpack / alias` 可以调试源码
+  - [react源码调试](https://juejin.cn/post/7168821587251036167#heading-8)
+  - [React17源码解析(开篇) —— 搭建 react 源码调试环境](https://juejin.cn/post/7014775797596553230)
+- 4、开箱即用（同上，不需要配置）
+  - [react-sourceCodeDebug](https://github.com/luxi-record/react-sourceCodeDebug)
+- 5、`react 19|18 create-react-app / npm run eject / pnpm i / webpack alias` （思路同3）
+  - [react源码调试](https://juejin.cn/post/7424458358466035750)
+  - [react-debug](https://github.com/220529/react-debug)
+- 6、`react18 | sourcemap | yarn build | pnpm link ` （我使用了此方法，但是一直报错没有成功）
+  - [React 源码调试技巧](https://www.twotwoba.site/blog/frame/react-source-debug)
+- 参考：
+  - react中文官网调试（此站点不再更新）[开发工作流程](https://zh-hans.legacy.reactjs.org/docs/how-to-contribute.html#development-workflow) 
+## 比较旧的一些教程
 - 阮一峰 React 入门实例教程 https://www.ruanyifeng.com/blog/2015/03/react.html
 - React Router http://react-guide.github.io/react-router-cn/docs/Introduction.html
 - 分享 50 个完整的 React Native 项目 https://www.jianshu.com/p/470606826b12

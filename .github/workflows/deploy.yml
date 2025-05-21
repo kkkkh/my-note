@@ -47,9 +47,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install
         # run: npm ci # 或 pnpm install / yarn install / bun install
+      - name: subtree
+        run: git subtree add --prefix=docs/subtree/play https://github.com/kkkkh/play.git main --squash
       - name: Build with VitePress
         run: pnpm docs:build
         # run: npm run docs:build # 或 pnpm docs:build / yarn docs:build / bun run docs:build
+      - name: 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
