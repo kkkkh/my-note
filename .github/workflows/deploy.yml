@@ -54,7 +54,10 @@ jobs:
       - name: submodule
         run: git submodule update --init
       - name: ls
-        run: ls -lh /home/runner/work/my-note/my-note/docs/
+        run: |
+          ls -lh /home/runner/work/my-note/my-note/docs/submodule
+          ls -lh /home/runner/work/my-note/my-note/docs/submodule/play
+          ls -lh /home/runner/work/my-note/my-note/docs/submodule/play/packages/react
       - name: Build with VitePress
         run: pnpm docs:build
         # run: npm run docs:build # 或 pnpm docs:build / yarn docs:build / bun run docs:build
