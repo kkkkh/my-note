@@ -34,7 +34,7 @@ outline: deep
   - props
     - props 表达式的特殊用法：属性展开， 利用 JS ... 语法把 props 这个对象中的所有属性都传给 KanbanCard 组件。
 
-    <<< @/subtree/play/packages/react/src/base/props/Index.jsx{47}
+    <<< @/submodule/play/packages/react/src/base/props/Index.jsx{47}
 
   - 注释
     - JSX 里加注释，会发现 HTML 注释 根本没法通过编译，这时需要改用 \{/* */\}
@@ -292,7 +292,7 @@ function App() {
 #### useRef
 - 需要在 React 组件中使用可变值该怎么办？答案是，我们可以使用 useRef 这个 Hook
 
-<<< @/subtree/play/packages/react/src/base/ref/index.jsx
+<<< @/submodule/play/packages/react/src/base/ref/index.jsx
 
 - 组件重新渲染本身不会影响 current 属性的值；
 - 反过来，变更 current 属性值也不会触发组件的重新渲染。
@@ -302,7 +302,7 @@ function App() {
 
 #### forwardRef
 
-<<< @/subtree/play/packages/react/src/base/forwardRef/Index.jsx
+<<< @/submodule/play/packages/react/src/base/forwardRef/Index.jsx
 
 #### useEffect &I
 ```js
@@ -340,7 +340,7 @@ useEffect(func, [])
   - 组件在下一次提交阶段执行同一个副作用回调函数之前，或者是组件即将被卸载之前，会调用这个清除函数。
   - 如果依赖值数组是一个空数组，那么清除函数只会在卸载组件时执行。
 
-<<< @/subtree/play/packages/react/src/base/effect/Index.jsx
+<<< @/submodule/play/packages/react/src/base/effect/Index.jsx
 
 ```js
 // 打印结果
@@ -361,7 +361,7 @@ useEffect2 1
 const memoized = useMemo(() => createByHeavyComputing(a, b), [a, b]);
 ```
 
-<<< @/subtree/play/packages/react/src/base/meno/UseMeno.jsx
+<<< @/submodule/play/packages/react/src/base/meno/UseMeno.jsx
 
 - 是将执行成本较高的计算结果存入缓存，通过减少重复计算来提升组件性能。
 - useMemo的回调是在渲染过程中执行(组件执行中)，而useEffect的回调会在提交阶段执行（dom更新，再异步调取）
@@ -369,7 +369,7 @@ const memoized = useMemo(() => createByHeavyComputing(a, b), [a, b]);
 - 没有包裹的子组件，父组件渲染，子组件也会渲染
 - 使用 React.memo 包裹后子组件，props 相同不重新渲染
 
-<<< @/subtree/play/packages/react/src/base/meno/reactMeno.jsx
+<<< @/submodule/play/packages/react/src/base/meno/reactMeno.jsx
 
 #### useCallback
 - 只要第二个参数依赖值数组的依赖项不改变，它就会保证一直返回同一个回调函数（引用），而不是新建一个函数
@@ -454,7 +454,7 @@ React 的数据流主要包含了三种数据：属性 props、状态 state 和�
 #### Context
 - 用于组件跨越多个组件层次结构，向后代组件传递和共享“全局”数据。
 
-<<< @/subtree/play/packages/react/src/base/context/UseContext.jsx
+<<< @/submodule/play/packages/react/src/base/context/UseContext.jsx
 
 - MyContext.Provider 是可以嵌套使用的。
 - MyGrandchildComponent 组件会去到组件树，从它的祖先节点中找到离它最近的 MyContext.Provider 即 MyComponent ，读取后者的 value 值；
@@ -618,13 +618,13 @@ React 19 新版本，transition 可以是异步函数
 - 另一种是传给标签的 action 属性。后者就是我们接下来会介绍的表单 action。
 #### formAction
 
-<<< @/subtree/play/packages/react/src/react19/action/FormAction.jsx
+<<< @/submodule/play/packages/react/src/react19/action/FormAction.jsx
 
 #### useFormStatus
 表单 action 会作为 transition 执行
 useFormStatus 可以返回最近的表单提交的状态信息
 
-<<< @/subtree/play/packages/react/src/react19/action/UseFormStatus.jsx
+<<< @/submodule/play/packages/react/src/react19/action/UseFormStatus.jsx
 
 #### useActionState
 ```js
@@ -635,7 +635,7 @@ const [state, formAction, pending] = useActionState(action, initState);
 // state变量  用于form的action  待定状态            action函数  state初始值
 ```
 
-<<< @/subtree/play/packages/react/src/react19/action/UseActionState.jsx
+<<< @/submodule/play/packages/react/src/react19/action/UseActionState.jsx
 
 #### useOptimistic
 乐观更新，就是在用户操作表单后的第一时间更新 UI，在 transition 结束后再将最终的 state 同步到 UI
@@ -647,12 +647,12 @@ const [optimisticState, addOptimistic] = useOptimistic(state, updater);
 //      乐观state       触发乐观更新的函数              原始state    ｜
 //                                                    乐观state更新函数
 ```
-<<< @/subtree/play/packages/react/src/react19/action/UseOptimistic.jsx
+<<< @/submodule/play/packages/react/src/react19/action/UseOptimistic.jsx
 ### use 以及其他API
 #### Suspense 等待
 自定义组件的懒加载：主要用途是配合React.lazy() API 实现自定义组件的懒加载
 
-<<< @/subtree/play/packages/react/src/react19/use/Suspense.jsx
+<<< @/submodule/play/packages/react/src/react19/use/Suspense.jsx
 
 #### use
 - 与hook对比
@@ -663,23 +663,23 @@ const [optimisticState, addOptimistic] = useOptimistic(state, updater);
   - context
 - use(Promise)
 
-  <<< @/subtree/play/packages/react/src/react19/use/Use-Promise.jsx
+  <<< @/submodule/play/packages/react/src/react19/use/Use-Promise.jsx
 
 - use(Context)
 
-  <<< @/subtree/play/packages/react/src/react19/use/Use-Context.jsx
+  <<< @/submodule/play/packages/react/src/react19/use/Use-Context.jsx
 
 #### ref
 从 React 19 开始，ref可以像其他 props 一样，直接在函数组件参数里定义，无需再调用forwardRef。
 
-<<< @/subtree/play/packages/react/src/react19/ref/Index.jsx
+<<< @/submodule/play/packages/react/src/react19/ref/Index.jsx
 
 #### 新支持的 HTML 标签
 用`<title>`、`<link>`、`<meta>`定义文档元数据
 用 `<style>` 和 `<link>` 编写和加载样式表
 用 `<script>` 加载和执行 JS 脚本
 
-<<< @/subtree/play/packages/react/src/main.tsx
+<<< @/submodule/play/packages/react/src/main.tsx
 
 ### SSR、Next.js与服务器组件
 #### SSR

@@ -15,9 +15,9 @@ export default withMermaid(defineConfig({
     resolve: {
       alias: [
         // 对 <<< @/**/** 代码片段引入没有影响
-        // { find: /^@play\//, replacement: fileURLToPath(new URL('../../docs/subtree/play/packages/', import.meta.url))},
+        // { find: /^@play\//, replacement: fileURLToPath(new URL('../../docs/submodule/play/packages/', import.meta.url))},
         { find: /^@\//, replacement: fileURLToPath(new URL('../../docs/', import.meta.url))},
-        // { find: '~', replacement: fileURLToPath(new URL('../../docs/subtree/play/packages', import.meta.url).href)},
+        // { find: '~', replacement: fileURLToPath(new URL('../../docs/submodule/play/packages', import.meta.url).href)},
       ]
     },
     plugins: [

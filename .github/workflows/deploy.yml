@@ -51,8 +51,8 @@ jobs:
         run: |
           git config --global user.email "13693256971@163.com"
           git config --global user.name "kkkkh"
-      - name: subtree
-        run: git subtree add --prefix=docs/subtree/play https://github.com/kkkkh/play.git main --squash
+      - name: submodule
+        run: git submodule update --init
       - name: Build with VitePress
         run: pnpm docs:build
         # run: npm run docs:build # 或 pnpm docs:build / yarn docs:build / bun run docs:build

@@ -4,7 +4,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./docs/*"],
-      // "@play/*": ["./docs/subtree/play/packages/*"],
+      // "@play/*": ["./docs/submodule/play/packages/*"],
       "/*": ["./docs/*"],
 
     },
