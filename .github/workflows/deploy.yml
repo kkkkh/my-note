@@ -54,9 +54,24 @@ jobs:
           git config --global user.name "kkkkh"
       - name: submodule
         run: git submodule update --init
-      - name: ls
+      - name: ls1
         run:
-          ls -lh /home/runner/work/my-note/my-note/docs/submodule/play/packages/react/src/base/ref/index.jsx
+          ls -lh /home/runner/work/my-note/my-note/docs/submodule/play/
+      - name: ls2
+        run:
+          ls -lh /home/runner/work/my-note/my-note/docs/submodule/play/packages/
+      - name: ls3
+        run:
+          ls -lh /home/runner/work/my-note/my-note/docs/submodule/play/packages/react/
+      - name: ls4
+        run:
+          ls -lh /home/runner/work/my-note/my-note/docs/submodule/play/packages/react/src/
+      - name: ls5
+        run:
+          ls -lh /home/runner/work/my-note/my-note/docs/submodule/play/packages/react/src/base/
+      - name: ls6
+        run:
+          ls -lh /home/runner/work/my-note/my-note/docs/submodule/play/packages/react/src/base/ref/
       - name: Build with VitePress
         run: pnpm docs:build
         # run: npm run docs:build # 或 pnpm docs:build / yarn docs:build / bun run docs:build
