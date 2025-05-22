@@ -6,7 +6,10 @@ outline: deep
 #### git clone
 ```bash
 git clone xxxx
-git clone xxxx dic/\*/\*\*/
+# 克隆指定分支
+git clone -b <branch> <repository>
+# 克隆指定目录
+git clone https://github.com/user/repo.git <myfolder>
 ```
 #### git branch
 ```bash
@@ -49,7 +52,7 @@ git stash pop
 # 恢复stash内容并不删除
 git stash apply stash@{0}
 # 删除 stash
-git stash drop 
+git stash drop
 ```
 #### git diff
 ```bash
@@ -67,12 +70,26 @@ git commit --amend
 # 提交取消检验
 git commit --no-verify
 ```
+#### git subtree
+会将其他库的代码合并到当前库中
+```bash
+# 添加子模块
+# --prefix=dist 指定添加的子项目代码放到主仓库的哪个子目录下。
+# --squash 表示本次拉取会将远程仓库的所有提交历史合并压缩成一个新的提交，然后加入到主仓库。
+# 如果你不加 --squash，则会完整保留子仓库的所有历史提交。
+git subtree add --prefix=dist https://github.com/chaconinc/DbConnector master --squash
+# 更新子模块
+git subtree pull --prefix=dist https://github.com/chaconinc/DbConnector master --squash
+# 推送子模块
+git subtree push --prefix=dist https://github.com/chaconinc/DbConnector master
+```
 #### git submodule
 - 初始化子模块
 ```bash
-# 安装 (安装包以后，yarn 重新安装)
+# 添加子模块
 git submodule add https://github.com/chaconinc/DbConnector
-git submodule add <url> externals/ej-business-modules
+# 添加子模块到指定目录
+git submodule add http://github.com/username/repo.git libs/somelib
 # 初始化并更新
 git submodule update --progress --init
 (git submodule init + git submodule update)
@@ -272,9 +289,10 @@ git push origin :refs/tags/v0.9 # 删除远程标签
 #### git check-ignore
 ```bash
 git check-ignore
-git check-ignore -v App.class #找出来到底哪个规则写错
+git check-ignore -v App.  #找出来到底哪个规则写错
 ```
-#### .ignore
+### 配置文件
+#### .gitignore
 ```bash
 # 排除所有.开头的隐藏文件:
 .*
@@ -283,6 +301,35 @@ git check-ignore -v App.class #找出来到底哪个规则写错
 # 不排除.gitignore和App.class:
 !.gitignore
 !App.class
+```
+#### .gitkeep
+- 目录为空时，增加.gitkeep文件，git不会忽略该目录，可以正常提交
+- 如果目录下有其他文件，则一起提交
+- 如果想要只提交目录，不提交目录里边的文件，则需要给目录中增加.gitignore文件
+- 最外层.gitignore中增加
+```bash
+# 忽略该目录下所有文件
+*
+# 但不忽略 .gitignore 文件自身
+!.gitignore
+```
+```bash
+# 忽略该目录下所有文件
+docs/*
+# 但不忽略 .gitignore 文件自身
+!docs/.gitignore
+```
+
+| 方案 | 能保留空目录 | 是否忽略该目录下新文件 | 适用场景 |
+| --- | --- | --- | --- |
+| .gitkeep | 是 | 否 | 只想保留目录，手动控制文件提交 |
+| .gitignore (配置 * 忽略) | 是 | 是 | 保留目录同时自动忽略所有新文件 |
+#### .gitmodules
+```bash
+[submodule "libs/somelib"]
+  path = libs/somelib
+  url = http://github.com/username/repo.git
+  branch = master
 ```
 #### .git/config
 ```bash
