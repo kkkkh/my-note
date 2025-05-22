@@ -707,11 +707,20 @@ hydrateRoot(document.getElementById('root'), <App />);
 ### react 源码学习
 #### 整体
 - [React 18 源码解析：从入门到精通](https://juejin.cn/post/7504578226007900186)
+- [图解React](https://7km.top/main/macro-structure) [github](https://github.com/7kms/react-illustration-series)
+- [React 基础与进阶](https://juejin.cn/column/7142674773930147853) 合集
 #### Scheduler
 - Scheduler的“感知”流程（AI）
   - React通过在每个小更新单元完成后调用shouldYield，询问是否有更高优先级任务。
   - 用户输入事件是通过React事件系统捕获的，并加入高优先级任务队列。
 - 当执行到下一个中断点shouldYield，调度器就能感知新加入的高优先级用户输入任务，从而停止当前任务调度，转而执行用户输入处理。
+- [React Scheduler 为什么使用 MessageChannel 实现](https://juejin.cn/post/6953804914715803678)
+- [面试官问我 react scheduler 调度机制原理? 我却支支吾吾答不上来...😭😭](https://juejin.cn/post/7331135154209308687)
+- [React 框架 | 深入剖析 Scheduler 原理](https://juejin.cn/post/7049659144344698893)
+- [React 之从 requestIdleCallback 到时间切片](https://juejin.cn/post/7167335700424196127)
+- [React 之 Scheduler 源码解读（上）](https://juejin.cn/post/7171000978278187038)
+- [React 之 Scheduler 源码解读（下）](https://juejin.cn/post/7171000978278187038)
+- [【React Scheduler源码第三篇】React Scheduler原理及手写源码](https://juejin.cn/post/7140642609806082061)
 ### react 源码调试
 - 1、`react 18 / vite / 引入源码 / flow-remove-types`
   - [React 18 debugger 源码分析配置](https://www.skillgroup.cn/framework/react/scanalysis/react-debugger.html)
@@ -725,6 +734,8 @@ hydrateRoot(document.getElementById('root'), <App />);
 - 5、`react 19|18 create-react-app / npm run eject / pnpm i / webpack alias` （思路同3）
   - [react源码调试](https://juejin.cn/post/7424458358466035750)
   - [react-debug](https://github.com/220529/react-debug)
+- `react 19 / vite / alias / flow-remove-types`
+  - [Vite 搭建 React19.x 源码调试环境](https://juejin.cn/post/7502274198870671400)
 - 6、`react18 | sourcemap | yarn build | pnpm link ` （我使用了此方法，但是一直报错没有成功）
   - [React 源码调试技巧](https://www.twotwoba.site/blog/frame/react-source-debug)
 - 参考：

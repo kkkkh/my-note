@@ -16,12 +16,16 @@ outline: deep
 - [神奇海螺试验场](https://lab.magiconch.com/)
 - [小林coding](https://xiaolincoding.com/)
 - [egoist](https://egoist.dev/) eva.js
-- [若川](https://juejin.cn/user/1415826704971918/posts) 源码解读
 - [技术胖](https://www.jspang.com/)
-- [antfu](https://antfu.me/) 比较牛逼的前端
-- [human who codes](https://humanwhocodes.com/blog/)
 - [云谦的博客](https://sorrycc.com)
-
+- [antfu](https://antfu.me/) 比较牛逼的前端
+- [大史不说话](https://github.com/dashnowords/blogs/) [博客园](https://www.cnblogs.com/dashnowords/p/10127926.html)
+- 系列 & 集合
+  - [若川](https://juejin.cn/user/1415826704971918/posts) 源码解读
+  - [冴羽](https://juejin.cn/user/712139234359182/posts)
+- 外文
+  - [human who codes](https://humanwhocodes.com/blog/)
+  - [exploringjs](https://exploringjs.com/)
 ## 社区
 - [v2ex](https://www.v2ex.com/)
 - [stonybrook](https://www.cs.stonybrook.edu/) stonybrook university Department of Computer Science 石溪大学科学部

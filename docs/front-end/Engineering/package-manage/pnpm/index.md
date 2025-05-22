@@ -54,6 +54,21 @@ rm pnpm-lock.yaml
 pnpm store prune  # 或者 rm -rf $(pnpm store path)
 pnpm install
 ```
+### pnpm list / global
+```bash
+# 列出所有安装的全局包
+pnpm list -g
+# 只显示一级全局包，不显示依赖
+pnpm list -g --depth=0
+# 以 JSON 格式输出
+pnpm list -g --json
+# 输出可解析的包目录格式
+pnpm list -g --parseable -g
+# 查明某个包为什么出现在全局环境
+pnpm why <name> -g
+# 查看全局 store 路径
+pnpm root -g # C:\Users\username\AppData\Local\pnpm\global\5\node_modules
+```
 ### pnpm remove
 Aliases: rm, uninstall, un
 ```bash
@@ -81,7 +96,7 @@ pnpm link --dir ../foo
 ```bash
 cd ~/projects/foo
 pnpm install # install dependencies of foo
-pnpm link --global # link foo globally
+pnpm link --global # link foo globally 会把当前目录（也就是你执行命令目录的包）链接到全局 store
 cd ~/projects/my-project
 pnpm link --global foo # link foo to my-project
 ```
@@ -100,7 +115,7 @@ pnpm uninstall --global <package>
 # 更新所有依赖项，遵守 package.json 中指定的范围
 pnpm up
 # 将所有依赖项更新到最新版本
-pnpm up --latest 
+pnpm up --latest
 # v2 的最新版本
 pnpm up foo@2
 ```
