@@ -14,7 +14,7 @@ export default withMermaid(defineConfig({
   vite: {
     resolve: {
       alias: [
-        // 对 <<< @/**/** 代码片段引入没有影响
+                // 对 <<< @/**/** 代码片段引入没有影响
         // { find: /^@play\//, replacement: fileURLToPath(new URL('../../docs/submodule/play/packages/', import.meta.url))},
         { find: /^@\//, replacement: fileURLToPath(new URL('../../docs/', import.meta.url))},
         // { find: '~', replacement: fileURLToPath(new URL('../../docs/submodule/play/packages', import.meta.url).href)},
@@ -52,9 +52,15 @@ export default withMermaid(defineConfig({
     },
     nav: [
       { text: '首页', link: '/' },
-      { text: '计算机', link: '/computer-science' },
-      { text: '前端', link: '/front-end' },
-      { text: '后端', link: '/back-end' },
+      { text: '技术',
+        items: [
+          { text: '计算机', link: '/computer-science' },
+          { text: '前端', link: '/front-end' },
+          { text: '后端', link: '/back-end' },
+          { text: 'web3', link: '/web3' },
+          { text: 'AI', link: '/ai' },
+        ]
+      },
       { text: '文档', link: '/tools/blog' },
       { text: '文章', link: '/article' },
     ],
@@ -102,10 +108,6 @@ export default withMermaid(defineConfig({
           link: '/tools/back-end',
         },
         {
-          text: '测试',
-          link: '/tools/test',
-        },
-        {
           text: 'Ops',
           link: '/tools/ops',
         },
@@ -136,8 +138,11 @@ export default withMermaid(defineConfig({
           items: [
             { text: 'base', link: '/front-end/Css/base/' },
             { text: 'flex', link: '/front-end/Css/flex/' },
+            { text: 'css-modules', link: '/front-end/Css/css-modules/' },
+            { text: 'styled-components', link: '/front-end/Css/styled-components/' },
             { text: 'sass', link: '/front-end/Css/sass/' },
             { text: 'tailwindcss', link: '/front-end/Css/tailwindcss/' },
+
           ],
         },
         {
@@ -172,7 +177,10 @@ export default withMermaid(defineConfig({
           link: '/front-end/React/',
           items: [
             { text: 'react', link: '/front-end/React/react/' },
-            { text: 'preact', link: '/front-end/React/preact/' }
+            { text: 'react-router', link: '/front-end/React/react-router/' },
+            { text: 'react-play', link: '/front-end/React/react/play/' },
+            { text: 'preact', link: '/front-end/React/preact/' },
+            { text: 'next', link: '/front-end/React/next/' },
           ],
         },
         {
@@ -196,7 +204,6 @@ export default withMermaid(defineConfig({
               link: '/front-end/Engineering/build-tools/',
               items: [
                 { text: 'vite', link: '/front-end/Engineering/build-tools/vite/' },
-                { text: 'vite app', link: '/front-end/Engineering/build-tools/vite/app.md' },
                 { text: 'esbuild', link: '/front-end/Engineering/build-tools/esbuild/' },
               ],
             },
@@ -205,12 +212,10 @@ export default withMermaid(defineConfig({
               link: '/front-end/Engineering/package-manage/',
               items: [
                 { text: 'npm', link: '/front-end/Engineering/package-manage/npm/' },
-                { text: 'pnpm', link: '/front-end/Engineering/package-manage/pnpm/' }
+                { text: 'pnpm', link: '/front-end/Engineering/package-manage/pnpm/' },
+                { text: 'yarn', link: '/front-end/Engineering/package-manage/yarn/' },
+                { text: 'package.json', link: '/front-end/Engineering/package-manage/package.json/' },
               ],
-            },
-            {
-              text: 'node管理',
-              link: '/front-end/Engineering/node-manage/',
             },
             {
               text: '代码规范',
@@ -375,11 +380,25 @@ export default withMermaid(defineConfig({
             }
           ],
         }
-      ]
+      ],
+      'web3': [
+        {
+          text: 'ton',
+          link: '/web3/ton/',
+        },
+      ],
+      'ai': [
+        {
+          text: 'code',
+          link: '/ai/code/',
+          items: [],
+        },
+      ],
     },
     socialLinks: [{ icon: 'github', link: 'https://github.com/kkkkh' }],
   },
   markdown: {
+  // theme: 'synthwave-84',
   // Markdown 配置选项 參考：https://github.com/vuejs/vitepress/blob/main/src/node/markdown/markdown.ts
   // lineNumbers: true,  // 如果希望代码块显示行号
     toc: { level: [1, 2] },
