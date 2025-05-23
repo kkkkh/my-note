@@ -132,7 +132,8 @@ export default withMermaid(defineConfig({
           text: 'Html',
           link: '/front-end/Html/',
           items: [
-            { text: 'html', link: '/front-end/Html/' },
+            { text: 'html', link: '/front-end/Html/html/' },
+            { text: 'xml', link: '/front-end/Html/xml/' },
           ],
         },
         {
@@ -207,6 +208,8 @@ export default withMermaid(defineConfig({
               items: [
                 { text: 'vite', link: '/front-end/Engineering/build-tools/vite/' },
                 { text: 'esbuild', link: '/front-end/Engineering/build-tools/esbuild/' },
+                { text: 'rollup', link: '/front-end/Engineering/build-tools/rollup/' },
+                { text: 'webpack', link: '/front-end/Engineering/build-tools/webpack/' },
               ],
             },
             {
@@ -224,6 +227,9 @@ export default withMermaid(defineConfig({
               link: '/front-end/Engineering/code-standard/',
               items: [
                 { text: 'eslint', link: '/front-end/Engineering/code-standard/eslint/' },
+                { text: 'prettier', link: '/front-end/Engineering/code-standard/prettier/' },
+                { text: 'stylelint', link: '/front-end/Engineering/code-standard/stylelint/' },
+                { text: 'typescript-eslint', link: '/front-end/Engineering/code-standard/typescript-eslint/' },
               ],
             },
             {
@@ -233,7 +239,6 @@ export default withMermaid(defineConfig({
                 { text: 'vscode插件', link: '/front-end/Engineering/plugin/vscode/' },
                 { text: '浏览器插件', link: '/front-end/Engineering/plugin/brower/' },
                 { text: 'markdown', link: '/front-end/Engineering/plugin/markdown/' },
-                { text: 'vitepress', link: '/front-end/Engineering/plugin/vitepress/' },
               ],
             },
             {
@@ -241,8 +246,14 @@ export default withMermaid(defineConfig({
               link: '/front-end/Engineering/version-manage/',
               items: [
                 { text: 'git', link: '/front-end/Engineering/version-manage/git/' },
-                { text: 'github', link: '/front-end/Engineering/version-manage/github/' },
-                // { text: 'svn', link: '/front-end/Engineering/version-manage/svn' },
+                { text: 'svn', link: '/front-end/Engineering/version-manage/svn' },
+              ],
+            },
+            {
+              text:'ssg',
+              link: '/front-end/Engineering/ssg/',
+              items: [
+                { text: 'vitepress', link: '/front-end/Engineering/ssg/vitepress/' },
               ],
             },
             {
@@ -269,8 +280,7 @@ export default withMermaid(defineConfig({
           items: [
             { text: '小程序', link: '/front-end/OtherEnd/小程序/' },
             { text: 'Electron', link: '/front-end/OtherEnd/Electron/' },
-            // { text: '终端', link: '/front-end/OtherEnd/terminal/' },
-
+            { text: 'terminal', link: '/front-end/OtherEnd/terminal/' },
           ],
         },
         {
@@ -348,6 +358,13 @@ export default withMermaid(defineConfig({
               text: 'Command',
               link: '/back-end/Ops/Command/',
               items: [],
+            },
+            {
+              text: 'CI-CD',
+              link: '/back-end/Ops/CI/CD/',
+              items: [
+                { text: 'github', link: '/back-end/Ops/CI-CD/github/' },
+              ],
             },
           ],
         }
