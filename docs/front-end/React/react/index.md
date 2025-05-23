@@ -722,24 +722,20 @@ hydrateRoot(document.getElementById('root'), <App />);
 - [React 之 Scheduler 源码解读（下）](https://juejin.cn/post/7171000978278187038)
 - [【React Scheduler源码第三篇】React Scheduler原理及手写源码](https://juejin.cn/post/7140642609806082061)
 ### react 源码调试
-- 1、`react 18 / vite / 引入源码 / flow-remove-types`
-  - [React 18 debugger 源码分析配置](https://www.skillgroup.cn/framework/react/scanalysis/react-debugger.html)
-- 2、`react 18 / create-react-app / yarn build / yarn link` 不能调试源码
-  - [react源码调试](https://juejin.cn/post/7168821587251036167#heading-1)
-- 3、`react 18 / create-react-app / npm run eject / webpack / alias` 可以调试源码
-  - [react源码调试](https://juejin.cn/post/7168821587251036167#heading-8)
-  - [React17源码解析(开篇) —— 搭建 react 源码调试环境](https://juejin.cn/post/7014775797596553230)
-- 4、开箱即用（同上，不需要配置）
-  - [react-sourceCodeDebug](https://github.com/luxi-record/react-sourceCodeDebug)
-- 5、`react 19|18 create-react-app / npm run eject / pnpm i / webpack alias` （思路同3）
-  - [react源码调试](https://juejin.cn/post/7424458358466035750)
-  - [react-debug](https://github.com/220529/react-debug)
-- `react 19 / vite / alias / flow-remove-types`
-  - [Vite 搭建 React19.x 源码调试环境](https://juejin.cn/post/7502274198870671400)
-- 6、`react18 | sourcemap | yarn build | pnpm link ` （我使用了此方法，但是一直报错没有成功）
-  - [React 源码调试技巧](https://www.twotwoba.site/blog/frame/react-source-debug)
+- 1、flow-remove-types
+  - `react 18 / vite / 引入源码 / flow-remove-types`  [React 18 debugger 源码分析配置](https://www.skillgroup.cn/framework/react/scanalysis/react-debugger.html)
+  - `react 19 / vite / alias / flow-remove-types` [Vite 搭建 React19.x 源码调试环境](https://juejin.cn/post/7502274198870671400)
+- 2、yarn build  | yarn link
+  - `react 18 / create-react-app / yarn build / yarn link` [react源码调试](https://juejin.cn/post/7168821587251036167#heading-1) 不能调试源码
+  - `react18 / vite / sourcemap / yarn build / pnpm link ` [React 源码调试技巧](https://www.twotwoba.site/blog/frame/react-source-debug) 在3的基础上，调试源码（使用了此方法，但是一直报错没有成功）
+- 3、npm run eject | webpack  alias
+  - `react 18 / create-react-app / npm run eject / webpack  alias` [react源码调试](https://juejin.cn/post/7168821587251036167#heading-8) [React17源码解析(开篇) —— 搭建 react 源码调试环境](https://juejin.cn/post/7014775797596553230) 可以调试源码
+  - [react-sourceCodeDebug](https://github.com/luxi-record/react-sourceCodeDebug) 开箱即用（同上，不需要配置）
+  - `react 19|18 / create-react-app / npm run eject / pnpm i / webpack alias` [react源码调试](https://juejin.cn/post/7424458358466035750) [react-debug（直接调试）](https://github.com/220529/react-debug)
 - 参考：
-  - react中文官网调试（此站点不再更新）[开发工作流程](https://zh-hans.legacy.reactjs.org/docs/how-to-contribute.html#development-workflow) 
+  - 官网调试（此站点不再更新）
+    - [中文](https://zh-hans.legacy.reactjs.org/docs/how-to-contribute.html#development-workflow)
+    - [英文](https://legacy.reactjs.org/docs/how-to-contribute.html#development-workflow)
 ## 比较旧的一些教程
 - 阮一峰 React 入门实例教程 https://www.ruanyifeng.com/blog/2015/03/react.html
 - React Router http://react-guide.github.io/react-router-cn/docs/Introduction.html

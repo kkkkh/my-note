@@ -1,7 +1,8 @@
 ---
 outline: deep
 ---
-## github
+# github
+## github 操作
 ### github docs
 - vitepress中github配置
   - .github/workflows 目录中创建一个名为 deploy.yml 的文件
@@ -34,3 +35,6 @@ fetch 请求获取github公开markdown数据
 
 ### GitHub双重验证（2FA）
 - [GitHub双重验证（2FA）免手机号验证方案](https://juejin.cn/post/7293786856063434761)
+
+## 开源
+- [Contributor Covenant](https://www.contributor-covenant.org/) 开源行为准则

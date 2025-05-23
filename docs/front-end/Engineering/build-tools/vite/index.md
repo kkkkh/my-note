@@ -364,7 +364,34 @@ export default {
 }
 ```
 ### link 本地包配置
+```js
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react()],
+  base: './',
+  optimizeDeps: {
+    include: ['react-s'] // 链接的包不会被预构建。使用此选项可强制预构建链接的包。
+  },
+  resolve: {
+    // 启用此选项会使 Vite 通过原始文件路径（即不跟随符号链接的路径）而不是真正的文件路径（即跟随符号链接后的路径）确定文件身份
+    preserveSymlinks: true, 
+  },
+  // build: {
+  //   rollupOptions: {
+  //     external: ['react-s'],
+  //     output: {
+  //       globals: {
+  //         react: 'React',
+  //         'react-dom': 'ReactDOM'
+  //       }
+  //     }
+  //   }
+  // }
+})
 
+```
 ## 命令
 ### 清除缓存
 ```bash
