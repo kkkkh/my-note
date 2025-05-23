@@ -182,24 +182,24 @@ gcc hello.c -o hello
 
   - printf 负责输出
 
-    <<< ./Sources/s1.c#printf
+    <<< @/submodule/c-play/Sources/s1.c#printf
 
   - scanf 负责输入
 
-    <<< ./Sources/s1.c#scanf
+    <<< @/submodule/c-play/Sources/s1.c#scanf
 
   - scanf 和 printf 函数还有一点差异：
     - 对于 float 和 double 来说，printf 里面他们的替代符号都是 %f，
     - 但是在 scanf 里面却不一样，float 是 %f，而 double 是 %lf 。
 
-    <<< ./Sources/s1.c#printfAndScanf
+    <<< @/submodule/c-play/Sources/s1.c#printfAndScanf
 
 ## 1.7 运算
 - 基础运算
 - 变量运算
 - 缩写
 
-  <<< ./Sources/s1.c#operation
+  <<< @/submodule/c-play/Sources/s1.c#operation
 
 - 数学库
   - fabs 绝对值
@@ -212,7 +212,7 @@ gcc hello.c -o hello
   - log 这个函数返回以 e 为底的对数值（我们学数学时也写成 ln）。
   - log10 这个函数返回以 10 为底的对数值。
 
-    <<< ./Sources/s1.c#math
+    <<< @/submodule/c-play/Sources/s1.c#math
 
 ## 1.8 条件表达式
 
@@ -229,14 +229,14 @@ gcc hello.c -o hello
 - switch
 - 三元表达式
 
-  <<< ./Sources/s1.c#condition
+  <<< @/submodule/c-play/Sources/s1.c#condition
 
 ## 1.9 循环
 - while 循环
 - do...while 循环
 - for 循环
 
-  <<< ./Sources/s1.c#loop
+  <<< @/submodule/c-play/Sources/s1.c#loop
 
 ## 1.11 函数
 
@@ -310,7 +310,7 @@ gcc hello.c -o hello
     }   // 变量 result 在函数结束时不会被销毁
     ```
 
-    <<< ./Sources/s2.1.c#static
+    <<< @/submodule/c-play/Sources/s2.1.c#static
 
   - 一个文件中的局部函数（本地函数或静态函数）只能被本文件的函数所调用
     ```C
@@ -347,7 +347,7 @@ gcc hello.c -o hello
         命令
     ```
 
-  <<< ./Makefile
+  <<< @/submodule/c-play/Makefile
 
   - task.json 配置 make
   ```json
@@ -389,9 +389,9 @@ gcc hello.c -o hello
 
 - 指针基础关键代码
 
-<<< ./Sources/s2.2.c#pointer
+<<< @/submodule/c-play/Sources/s2.2.c#pointer
 
-<<< ./Sources/s2.2.c#pointerPassingValues
+<<< @/submodule/c-play/Sources/s2.2.c#pointerPassingValues
 
 ## 2.3 数组
 数组是在内存中具有连续地址的一系列相同类型的变量的集合。
@@ -409,7 +409,7 @@ gcc hello.c -o hello
 -  C89：不允许有大小可变的数组
 - 使用：动态分配（之后课程会讲）
 
-<<< ./Sources/s2.3.c#array
+<<< @/submodule/c-play/Sources/s2.3.c#array
 
 ## 2.4 字符串类型
 
@@ -418,7 +418,7 @@ gcc hello.c -o hello
 - 字符串：其实就是字符的数组
 - 字符串的两种声明方式
 
-  <<< ./Sources/s2.4.c#character1
+  <<< @/submodule/c-play/Sources/s2.4.c#character1
 
 | 名称 | 内容 |
 | --- | --- |
@@ -442,7 +442,7 @@ gcc hello.c -o hello
   - 数组就是数组：其大小与元素的类型和个数有关。定义数组时必须指定其元素的类型和个数。数组可以存任何类型的数据，但不能存函数。
 - 常用函数
 
-  <<< ./Sources/s2.4.c#character2
+  <<< @/submodule/c-play/Sources/s2.4.c#character2
 
 ## 2.5 预处理
 - include 包含文件
@@ -526,15 +526,15 @@ gcc hello.c -o hello
   - 一系列变量的集合，但是这些变量可以是不同类型的
   - typedef 是 C语言的一个关键字，是 type（表示“类型”）和 define（表示“定义”）的缩合，“类型定义”。
 
-  <<< ./Sources/s2.6.c#struct
+  <<< @/submodule/c-play/Sources/s2.6.c#struct
 
 - union 联合
 
-  <<< ./Sources/s2.6.c#union
+  <<< @/submodule/c-play/Sources/s2.6.c#union
 
 - enum 枚举
 
-  <<< ./Sources/s2.6.c#enum
+  <<< @/submodule/c-play/Sources/s2.6.c#enum
 
 - 对比
   ```C
