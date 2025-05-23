@@ -217,7 +217,8 @@ export default {
 
 ### alias 路径别名
 - alias
-  - `/.vitepress/config.mts` 中配置alias只对前端部分的开发、打包有效
+  - ~~`/.vitepress/config.mts` 中配置alias只对前端部分的开发、打包有效~~
+  - `/.vitepress/config.mts` 中配置alias只对前端vue组件import有效,对于代码片段<<< @/**/ */，无效,@/是vitepress自带的，配置不能生效
     ```js
     import { defineConfig } from 'vitepress'
     import {fileURLToPath} from 'node:url'
