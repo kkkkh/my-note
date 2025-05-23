@@ -1,5 +1,75 @@
 ## Command
-### base 命令
+### base
+#### start
+```bash
+whoami #用户名
+hostname #主机名称
+history #用于列出之前使用过的所有命令
+Ctrl + R #用于查找使用过的命令
+Ctrl + L #清除
+Ctrl + D #退出
+pwd #显示当前目录的路径
+uname -a #### 查看linux版本
+# windows sudo
+runas
+```
+#### ls
+```bash
+ls -a #显式所有
+ls -l #详细列表 total //千字节
+ls -lh #文件大小适合阅读的显示展示
+ls -lt #最近一次修改时间排序
+```
+#### cd
+```bash
+cd ~
+cd #回到家目录
+```
+#### du
+```bash
+du #统计目录大小
+du -h #文件大小适合阅读的形式展示
+du -ha #显示文件和目录的大小
+du -sh #当前目录总大小
+```
+#### 权限 chmod
+```bash
+ls -l a.txt
+-rw-r--r--
+-          rw-     r--     r--
+# 第一部分 第二部分 第三部分 第四部分
+# 文件属性 所有者 群组用户 其他用户
+```
+第一部分：
+- 第一个短横表示这是一个普通文件
+- d：英语 directory 的缩写，表示“目录”。就是说这是一个目录；
+- l：英语 link 的缩写，表示“链接”。就是说这是一个链接；
+
+其他部分：
+- r：英语 read 的缩写，表示“读”。就是说可以读这个文件；
+- w：英语 write 的缩写，表示“写”。就是说可以写这个文件，也就是可以修改；
+- x：英语 execute 的缩写，表示“执行，运行”。就是说可以运行这个文件。
+
+权限数： r 4 w 2 x 1
+```txt
+权限 数字 计算
+—    0 = 0 + 0 + 0
+r–    4 = 4 + 0 + 0
+-w-   2 = 0 + 2 + 0
+--x   1 = 0 + 0 + 1
+rw-   6 = 4 + 2 + 0
+-wx   3 = 0 + 2 + 1
+r-x   5 = 4 + 0 + 1
+rwx   7 = 4 + 2 + 1
+```
+```bash
+chmod 640 renamed_file #修改文件权限
+chmod -R 700 /home/oscar #修改目录下所有文件权限
+#  640 分别表示：
+# 文件的所有者有读和写的权限；
+# 文件所在群组的其他用户具有读的权限；
+# 除此之外的其他用户没有任何权限。
+```
 #### read
 ```bash
 #!/bin/bash
@@ -7,14 +77,12 @@ read name
 echo "Hello $name !"
 # -> Oscar
 # Hello Oscar
-
 read firstname lastname
 echo "Hello $firstname $lastname !"
 # -> a b
 # Hello a b
 # -> a b c d e
 # Hello a b c d e #$lastname 接住b c d e
-
 # 显示提示信息
 read -p 'Please enter your name : ' name 
 echo "Hello $name !"
@@ -27,64 +95,6 @@ echo -e "/nHello $name !"
 # 隐藏输入内容
 read -p 'Please enter your password : ' -s password
 ```
-#### vim
-- 三种模式：交互模式、插入模式、命令模式
-##### 交互模式
-- 0 移动到行首
-- $ 移动到行末
-##### 命令模式
-- x 删除字符
-- dd 删除行
-- dw 删除单词
-- d0 删除光标处到行首的所有字符
-- d$ 删除光标处到行末的所有字符
-- yy 复制
-- p 粘贴 
-  - 7p 粘贴 7 次
-- r 替换一个字符
-- R 一次性替换多个字符
-- u 撤销
-  - 4u 撤销四次修改
-- control + r 取消撤销
-- 跳转
-    - 7G 跳转到第 7 行
-    - 7 shift + g 同上
-    - 7gg 同上
-    - G/shift + g 跳转最后一行
-    - gg 跳转到第一行
-- / 查找 (从光标处向下)
-    - n 查找下一个
-    - N 查找上一个
-- ? 查找（从光标处向上）
-##### 插入模式
-- :w 保存
-- :w myFile
-  - `"myFile" [New] 5L, 152C written`
-  - "myFile"：刚才用 w 命令来保存的文件名。表示“我的文件”
-  - [New]：new 是英语“新的”的意思，表示这个文件是新创建的
-  - 5L：L 是 line 的首字母，是英语“行”的意思，因此 5L 表示文件中有 5 行
-  - 152C：C 是 character 的首字母，是英语“字符”的意思，因此 152C 表示文件中有 152 个字符
-  - written：英语“已经写入”的意思
-- :q 退出
-- :q! 作用是“强制退出，不保存修改”
-- :wq 保存再退出
-- :x 同上
-- 替换
-  - : s/旧字符串/新字符串 <font size=1>替换**光标**所在行的第一个匹配的旧字符串为新字符串</font>
-  - : s/旧字符串/新字符串/g <font size=1>替换光标所在行的所有匹配的旧字符串为新字符串</font>
-  - :#,# s/旧字符串/新字符串/g <font size=1>替换文件中第 # 行到第 # 行的所有匹配的旧字符串为新字符串</font>
-  - :%s/旧字符串/新字符串/g <font size=1>替换所有匹配的旧字符串为新字符串</font>
-- :r file.txt 合并file文件
-- 分屏-略
-##### vimrc配置
-- cp /etc/vim/vimrc ~/.vimrc
-- syntax on 语法高亮
-- set background=dark 背景颜色
-- set number 显示行号
-- showcmd 显示当前命令
-- ignorecase 查找是忽略大小写
-- set mouse=a 支持鼠标
-
 #### corntab
 ```bash
 # 创建
@@ -125,14 +135,7 @@ rename 's/Imag/logo/' *
 - rename -n 'y/A-Z/a-z/' W*
   - y 表示更改大小写
   - W* 带 W 字母前缀的文件
-#### scp
-```bash
-scp -r localfile.txt username@192.168.0.1:/home/username/
-```
-#### 查看linux版本
-```bash
-uname -a
-```
+
 #### 查看端口
 ```bash
 netstat -tanlp
@@ -140,7 +143,7 @@ netstat -apn | grep 80 # 查看 80 端口
 ```
 #### tail 查看文件内容
 ```bash
-tail -f -s 5 -n 100 ./logs 
+tail -f -s 5 -n 100 ./logs
 ```
 - -n, --lines=[+]NUM (文件的尾 100 行)
   - output the last NUM lines, instead of the last 10 or use -n +NUM to output starting with line NUM
@@ -165,10 +168,13 @@ find / -type d -name "dist" ! -path "*@*" -print -exec rm -rf {} +
 ```bash
 cp */**/*.pdf ./ # 一次性复制
 ```
+#### scp
+```bash
+scp -r localfile.txt username@192.168.0.1:/home/username/
+```
 #### runas
 ```bash
-# windows sudo
-runas
+
 ```
 #### yum（centos）
 ```bash
