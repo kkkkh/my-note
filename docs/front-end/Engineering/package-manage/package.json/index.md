@@ -145,8 +145,8 @@ npm install abbrev -w a #给工作区a安装abbrev依赖
 npm run test --workspace=a #特定工作区的上下文中运行给定命令 相当于 cd packages/a && npm run test
 npm run test --workspace=packages
 ```
-<<< ../npm/play/packages/a/index.js
-<<< ../npm/play/index.js#workspaces
+<<< @/submodule/play/packages/npm/packages/a/index.js
+<<< @/submodule/play/packages/npm/index.js#workspaces
 ### imports
 仅适用于软件包本身内部导入指定符的私有映射
 “导入”字段中的条目必须始终以＃开始，以确保它们与外部软件包指定符的歧义。
@@ -166,7 +166,7 @@ npm run test --workspace=packages
   }
 }
 ```
-<<< ../npm/play/index.js#imports{1,10}
+<<< @/submodule/play/packages/npm/index.js#imports{1,10}
 
 ### exports
 "exports" 提供了 "main" 的现代替代方案
@@ -324,7 +324,7 @@ import internalZ from '#internal/z.js';
 - 运行 pnpm patch-commit ./node_modules/.pnpm_patches/express@4.18.1
 - 并且生成一个 patches/express@4.18.1.patch 文件
 
-<<< ../pnpm/play/patches/express.patch{diff}
+<<< @/submodule/play/packages/pnpm/patches/express.patch{diff}
 
 - package.json 中增加 patchedDependencies 配置
 ```json
@@ -339,7 +339,7 @@ import internalZ from '#internal/z.js';
 ```
 - pnpm-workspace.yaml中 增加 patchedDependencies
 
-<<< ../pnpm/play/pnpm-workspace.yaml{yaml}
+<<< @/submodule/play/packages/pnpm/pnpm-workspace.yaml{yaml}
 ### publishConfig
 发布配置
 PNPM 对 publishConfig 进行了扩展[1](https://pnpm.io/package_json#publishconfig)
