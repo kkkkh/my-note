@@ -61,7 +61,10 @@ export default withMermaid(defineConfig({
           { text: 'AI', link: '/ai' },
         ]
       },
-      { text: '文档', link: '/tools/blog' },
+      { text: '文档', items:[
+        { text: 'tool', link: '/tools/blog' },
+        { text: 'play', link: 'https://kkkkh.github.io/play/' },
+      ] },
       { text: '文章', link: '/article' },
     ],
     sidebar: {
@@ -178,7 +181,6 @@ export default withMermaid(defineConfig({
           items: [
             { text: 'react', link: '/front-end/React/react/' },
             { text: 'react-router', link: '/front-end/React/react-router/' },
-            { text: 'react-play', link: '/front-end/React/react/play/' },
             { text: 'preact', link: '/front-end/React/preact/' },
             { text: 'next', link: '/front-end/React/next/' },
           ],
