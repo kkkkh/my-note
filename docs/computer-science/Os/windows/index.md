@@ -27,5 +27,21 @@ if ($fileStream) {
     Write-Error "Failed to create file test1.txt"
 }
 ```
+### 权限
+#### icacls
+- Windows 自带的命令行工具
+- 用于显示或修改指定文件或目录的访问控制列表 (ACL)
+```bash
+icacls test.txt
+# test.txt NT AUTHORITY\SYSTEM:(I)(F)
+#          BUILTIN\Administrators:(I)(F)
+#          USER:(I)(M)
+
+# Successfully processed 1 files; Failed processing 0 files
+```
+#### 开发者模式
+windows -> 设置 -> 开发者选项 -> 开发者模式 (获取到管理员权限，创建软连接等)
+<img src="./developer.png" v-viewer>
+
 ## tools
 - [chocolatey](https://chocolatey.org/) Windows 包管理，类似Linux 上的 apt 或 yum
