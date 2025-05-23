@@ -12,10 +12,6 @@ outline: deep
 ### yarn
 ### pnpm
 
-## node magnage
-### nvm
-### fnm
-
 ## code-standard
 ### eslint
 
@@ -26,7 +22,5 @@ outline: deep
 
 ## version manage
 ### git
-### git hooks
-### github
 ### svn
 
