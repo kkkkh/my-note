@@ -22,7 +22,7 @@ outline: deep
 @include: @/front-end/DesignPatterns/md/14、适配器模式.md
 */
 import { data as posts } from './index.data.mts'
-console.log(posts)
+// console.log(posts)
 import Content from '@/components/Content.vue'
 </script>
 <Content :posts="posts" />
