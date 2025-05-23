@@ -2,6 +2,8 @@
 outline: deep
 ---
 ## 软件安装
+- 浏览器
+  - [brave](https://brave.com/zh/)
 - windows
   - [windows10](https://www.microsoft.com/zh-cn/software-download/windows10)
   - [雷电安卓模拟器](https://www.ldmnq.com)

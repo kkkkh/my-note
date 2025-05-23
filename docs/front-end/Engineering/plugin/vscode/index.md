@@ -3,11 +3,6 @@ outline: deep
 ---
 # Vscode
 ## 设置
-### Settings
-Text Editor:
-- Minimap:Enabled
-- Scrollbar:Vertical [visible]
-- Scrollbar:Vertical Scrollbar Szie [12]
 ### settings.json
 打开：ctrl + shift + p ，输入 Preferences: Open User Settings (JSON)
 ```json
@@ -17,7 +12,9 @@ Text Editor:
  	"editor.scrollbar.verticalScrollbarSize": 12, // 右侧滚动条宽度
 	"terminal.integrated.env.windows": { // vscode 终端设置环境变量
 		"Path": "${env:Path};D:\\Program Files\\mingw64\\bin"
-	}
+	},
+	"terminal.integrated.defaultProfile.windows": "Git Bash", // 设置vscode 终端默认
+	"editor.tabCompletion": "on" // or onlySnippets 输入代码片段，按tab
 }
 ```
 ### 快捷操作
@@ -25,8 +22,7 @@ Text Editor:
   - 所有折叠：Ctrl + k & Ctrl + 0
   - 所有展开：Ctrl + k & Ctrl + j
   - 单行注释：Ctrl + /
-  - 多行注释：Shift + Alt + a
-
+  - 多行注释：Shift + Alt + A
 - code 打开 VSCode
   ```bash
   # 配置
@@ -44,7 +40,7 @@ Text Editor:
   - ⌃⇧R/ctrl+shift+R 或右键打开重构菜单，选择“移动到新文件”/“转换为命名函数”/“将命名导出项转换为默认导出项”
 - 代码冲突（接受所有当前更改）
   - 打开命令面板：按下 Ctrl + Shift + P
-  - 输入 "Merge"。
+  - 输入 "Merge"
   - 选择 "接受所有当前更改"（Accept All Current Changes）。
 ### 调试
 - launch.json(启动配置文件)：配置调试器，用于启动和控制调试会话
@@ -69,6 +65,8 @@ Text Editor:
   ]
 }
 ```
+参考：
+- [Debug code with Visual Studio Code](https://code.visualstudio.com/docs/debugtest/debugging)
 ### 片段 snippets
 #### html
 - 1、ctrl + shift + p
@@ -146,15 +144,20 @@ Text Editor:
 			"```$1",
 			"```"
 		],
-		"description": "Log output to console"
+		"description": "markdown code"
 	}
 }
 ```
 ## 插件
+#### 开发插件
+1、markdown：text => markdown table
+2、markdown：绝对路径 => 可配置
+https://code.visualstudio.com/api/get-started/your-first-extension
 #### 通用
 - [Reload](https://marketplace.visualstudio.com/items?itemName=natqe.reload) 重新加载
 - [Chinese (Simplified) (简体中文) Language Pack for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-zh-hans)
 - [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
+- [Five Server](https://marketplace.visualstudio.com/items?itemName=yandeu.five-server) 可以对当前目录启动服务
 - [Tabnine](https://marketplace.visualstudio.com/items?itemName=TabNine.tabnine-vscode)
 - 主题
   - [Material Icon Theme](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme)
@@ -176,6 +179,16 @@ Text Editor:
 - [template string converter](https://marketplace.visualstudio.com/items?itemName=meganrogge.template-string-converter) `${}`
 - [parameter-hints](https://marketplace.visualstudio.com/items?itemName=DominicVonk.parameter-hints) 参数提示
 - [Path Intellisense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense) 路径提示
+- [path-autocomplete](https://marketplace.visualstudio.com/items?itemName=ionutvmi.path-autocomplete) 路径处理
+  ```json
+  {
+  	// 重置markdown 链接路径
+  	"path-autocomplete.triggerOutsideStrings":true,
+    "path-autocomplete.pathMappings": {
+        "/": "${folder}/docs/",
+    },
+  }
+  ```
 #### css
 - [easy Less](https://developers.weixin.qq.com/community/develop/article/doc/000e427c49c218e6b9781bfdf5b013)
 - [Color Highlight](https://marketplace.visualstudio.com/items?itemName=naumovs.color-highlight)
@@ -186,6 +199,7 @@ Text Editor:
 #### react
 - [react hooks snippets](https://marketplace.visualstudio.com/items?itemName=AlDuncanson.react-hooks-snippets)
   - ush	-> useState
+- [appworks](https://marketplace.visualstudio.com/items?itemName=iceworks-team.appworks&ssr=false#overview)
 #### vue
   - [vetur](https://vuejs.github.io/vetur/)
   - vue.volar ~~原 TypeScript Vue Plugin(Volar) 废弃~~ -> Vue-Official
@@ -202,8 +216,13 @@ Text Editor:
 - [Snippets Ranger](https://marketplace.visualstudio.com/items?itemName=robole.snippets-ranger)
 - [jest-snippets](https://marketplace.visualstudio.com/items?itemName=andys8.jest-snippets)
 #### markdown
+- [markdown-all-in-one](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one)
+  - "markdown.extension.completion.root":"${workspaceFolder}/docs" 没有生效
+  - 参考：[issues](https://github.com/yzhang-gh/vscode-markdown/issues/548) [代码](https://github.com/yzhang-gh/vscode-markdown/blob/master/src/completion.ts#L387)
 - [Markdown Preview Enhanced](https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced)
-#### runner
+- [Markdown table prettifier](https://marketplace.visualstudio.com/items?itemName=darkriszty.markdown-table-prettify) 格式化md table
+- [excel-to-markdown-table](https://marketplace.visualstudio.com/items?itemName=csholmq.excel-to-markdown-table&ssr=false#review-details) 自动生成md table（Shift+Alt+V）
+#### runne
 - [code-runner](https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner)
 - [jest-runner](https://marketplace.visualstudio.com/items?itemName=firsttris.vscode-jest-runner)
 - [vitest-runner](https://marketplace.visualstudio.com/items?itemName=kingwl.vscode-vitest-runner)

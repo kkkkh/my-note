@@ -53,3 +53,5 @@ formData = new FormData(myForm);
 - [MIME](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/MIME_types)
 - [MIME 所有类型](https://www.iana.org/assignments/media-types/media-types.xhtml)
 - [MIME 常用类型](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/MIME_types/Common_types)
+#### CSP
+- [CSP](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP)

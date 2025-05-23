@@ -210,6 +210,14 @@ unlink 删除
   // 
   return fs.promises.unlink(dirPath)
 ```
+#### link / symlink
+- link 创建硬链接
+- symlink 创建软链接
+
+<<< ./link/index.js{10,35,41}
+
+<img src="./link/link.png" v-viewer>
+
 ### path
 #### path.isAbsolute()
 确定 path 是否为绝对路径

@@ -6,4 +6,5 @@
 - [deepseek](https://chat.deepseek.com/)
 ## code
 - [cursor](https://www.cursor.com/)
+- [windsurf](https://windsurf.com/editor)
 - [tabnine](https://www.tabnine.com/)

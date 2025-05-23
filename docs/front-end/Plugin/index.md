@@ -5,9 +5,6 @@ outline: deep
 
 ## Lib
 ### ui
-- book
-  - [storybook](https://storybook.js.org/docs)
-  - [histoire](https://histoire.dev/guide/getting-started.html)
 - 表格
   - [xlsx](https://docs.sheetjs.com/docs/getting-started/examples/export#live-demo) excel
   - [~~Luckysheet~~](https://dream-num.github.io/LuckysheetDocs/zh/guide/) (停止维护) => [univer](https://github.com/dream-num/univer/blob/dev/README-zh.md)
@@ -33,6 +30,7 @@ outline: deep
       - [highlightjs-copy](https://www.npmjs.com/package/highlightjs-copy)
       - [marked-highlight](https://github.com/markedjs/marked-highlight)
     - [prismjs](https://prismjs.com/) 高亮
+    - [shiki](https://shiki.tmrs.site/guide/)
   - 代码编辑
     - [monaco-editor](https://github.com/microsoft/monaco-editor) 代码编辑
     - json
@@ -63,9 +61,16 @@ outline: deep
     - [postcss-nesting](https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-nesting)
 - 动画
   - [lottie-ios](https://github.com/airbnb/lottie-ios)
+- UI库
+  - [uiverse](https://uiverse.io/)
+  - [daisyui](https://daisyui.com/docs/install/)
+  - [flowbite-vue](https://flowbite-vue.com/pages/getting-started)
+  - [buefy](https://buefy.org/documentation/start)
+  - [quasar](https://quasar.dev/start/quick-start)
 ### 功能
 - 工具函数
-  - [lodash](https://lodash.com/docs/4.17.15)
+  - [lodash](https://lodash.com)  &nbsp;&nbsp;&nbsp;[lodash中文](https://www.lodashjs.com/)
+  - [underscorejs](https://underscorejs.org/)
   - [qs](https://github.com/ljharb/qs) Querystring
   - [ajv](https://ajv.js.org/guide/getting-started.html) 数据验证
 - es
@@ -76,12 +81,13 @@ outline: deep
   - [browserslist](https://github.com/browserslist/browserslist) &nbsp;&nbsp;&nbsp;[browserslist playground](https://browsersl.ist/)
 - number
   - [bignumber](https://github.com/MikeMcl/bignumber.js/)
-- 指标
+- 性能
   - [web-vitals](https://www.npmjs.com/package/web-vitals) 测量真实用户的所有Web Vitals指标
 - date
   - [date-fns](https://date-fns.org/docs/Getting-Started) 日期操作
   - [datejs](https://day.js.org/docs/en/installation/installation)
   - [fecha](https://github.com/taylorhakes/fecha)
+  - [momentjs](https://momentjs.com/) [momentjs 中文](https://momentjs.cn/)
 - zpl
   - [zpl-image](https://www.npmjs.com/package/zpl-image)
   - [zpl-image-2](https://www.npmjs.com/package/zpl-image-2) 图像转换为 Z64 编码或 ACS 编码的 GRF 位图以与 ZPL 一起使用
@@ -110,6 +116,8 @@ outline: deep
 - 模板库
   - [argon-dashboard](https://www.creative-tim.com/product/argon-dashboard)
 ### 基建
+- shell
+  - [shelljs](https://github.com/shelljs/shelljs)
 - env
   - [cross-env](https://github.com/kentcdodds/cross-env) 解决跨平台环境变量问题
   - [dotenv](https://dotenvx.com/docs/) 管理本地的 .env 配置文件
@@ -126,16 +134,25 @@ outline: deep
     - [lint-staged](https://www.npmjs.com/package/lint-staged#configuration)
     - [release-it](https://github.com/release-it/release-it)
     - [release-it/conventional-changelog](https://github.com/release-it/conventional-changelog) 版本提交日志
+- node
+  - [node-gyp](https://github.com/nodejs/node-gyp)
+  - [fnm](https://github.com/Schniz/fnm)
+  - [nvm](https://github.com/nvm-sh/nvm)
 ## Vue plugin (Vue 扩展)
 ### cli
 - [~~Vue CLI~~](https://cli.vuejs.org/)(停止维护) => [create-vue](https://github.com/vuejs/create-vue)
 ### component
+- [awesome-vue](https://github.com/vuejs/awesome-vue)
 - [DMap(谛听)](https://juejin.cn/post/6844903593284206605) ([vue-bigdata-table](https://github.com/lison16/vue-bigdata-table))
 - [Vxe Table](https://vxetable.cn/#/start/install)
   - [v4.7+(vue 3.x)](https://vxetable.cn/v4/#/start/install)
   - [v3.0~3.8(vue 2.6)](https://vxetable.cn/v3.8/#/table/start/install)
 - [vue-images](https://github.com/littlewin-wang/vue-images)
 - [vue-drag-select](https://github.com/ZhiJieZhang1/vue-drag-select)
+- 图片查看
+  - [vue-it-bigger](https://github.com/haiafara/vue-it-bigger) vue2
+  - [v-viewer](https://github.com/mirari/v-viewer) vue3 & vue2 base on viewerjs
+  - [viewerjs](https://github.com/fengyuanchen/viewerjs)
 ### api
 - [VueRequest](https://cn.attojs.org/guide/introduction.html#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9-vuerequest)
   - [useRequest](https://cn.attojs.org/api/#%E5%85%AC%E5%85%B1-api)
@@ -148,11 +165,18 @@ outline: deep
 - [vuepress-theme-hope](https://github.com/vuepress-theme-hope/vuepress-theme-hope?tab=readme-ov-file)
 - [vuepress-theme-antdocs](https://github.com/zpfz/vuepress-theme-antdocs)
 - [vuepress-theme-reco](https://github.com/vuepress-reco/vuepress-theme-reco)
-
+- [tailwind-nextjs-starter-blog](https://github.com/timlrx/tailwind-nextjs-starter-blog)
 ## React plugin (React 扩展)
-- [immutable](https://immutable-js.com/) 不可变数据
-- [immerjs](https://immerjs.github.io/immer/zh-CN/)
-
+- 数据
+  - [immutable](https://immutable-js.com/) 不可变数据
+  - [immerjs](https://immerjs.github.io/immer/zh-CN/)
+- 表单
+  - [formik](https://formik.org/docs/overview)
+  - [react-hook-form](https://react-hook-form.com/get-started#Quickstart)
+- 动画
+  - [react-spring](https://react-spring.dev/docs/getting-started)
+- 测试
+  - [ladle](https://github.com/tajo/ladle) React 更注重简单、快捷
 ## 构建工具
 ### Vite plugin (Vite 扩展)
 - [awesome-vite](https://github.com/vitejs/awesome-vite#templates)
@@ -161,6 +185,8 @@ outline: deep
 - [rollup-plugin-visualizer](https://www.npmjs.com/package/rollup-plugin-visualizer) build分析可视化
 - [vite-plugin-inspect](https://github.com/antfu-collective/vite-plugin-inspect) 检查Vite插件的中间状态-调试和创作插件
 - [vite-plugin-babel](https://github.com/owlsdepartment/vite-plugin-babel)
+- [vitepress-plugin-mermaid](https://www.npmjs.com/package/vitepress-plugin-mermaid) Mermaid 语法扩展
+- [@vitejs/plugin-legacy](https://www.npmjs.com/package/@vitejs/plugin-legacy) 为 Vite 项目添加对旧版浏览器的支持
 ### rollup
 - [@rollup/plugin-strip](https://github.com/rollup/plugins/tree/master/packages/strip) 移除debugger、console.、assert.
 ### Webpack plugin (Webpack 扩展)
@@ -194,9 +220,10 @@ outline: deep
   - [getspringy](http://getspringy.com/) 图形布局
 
 ## 其他端
-- uniapp
-  - [ucharts](https://www.ucharts.cn/v2/#/guide/index)
-
+### uniapp
+- [ucharts](https://www.ucharts.cn/v2/#/guide/index)
+### electron
+<!--@include:@/front-end/OtherEnd/Electron/lib.md-->
 ## 极客时间(代码地址)
 - 现代 React Web 开发实战
   - [oh-my-kanban](https://gitee.com/evisong/geektime-column-oh-my-kanban)

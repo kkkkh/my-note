@@ -2,6 +2,9 @@
 outline: deep
 ---
 ## UI
+- 平台
+  - [优设](https://hao.uisdc.com/)
+  - [Behance](https://www.behance.net/)
 - UI图
   - [figma](https://www.figma.com/) 在线UI设计平台
   - [蓝湖](https://lanhuapp.com/)
@@ -19,7 +22,11 @@ outline: deep
 - Unicode 表情符号
   - [emojipedia](https://emojipedia.org/)
   - [symbl](https://symbl.cc/)
-- 平台
-  - [Behance](https://www.behance.net/)
 - 字体
   - [100font](https://www.100font.com/)
+  - [dafont](https://www.dafont.com/)
+- gif图
+  - [gifntext](https://www.gifntext.com/)
+- 图标
+  - [iconfont](https://www.iconfont.cn/)
+  - [iconfinder](https://www.iconfinder.com/)

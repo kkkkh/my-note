@@ -1,8 +1,11 @@
 ---
 outline: deep
 ---
-# JS
-## js
-## dom
-## bom
-## browser
+# JavaScript
+## Js
+## Dom
+## Bom
+## WebApi
+## Browser
+## WebAssembly
+## ES6

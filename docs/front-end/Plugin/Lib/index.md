@@ -12,6 +12,35 @@ const wb = XLSX.utils.book_new()
 XLSX.utils.book_append_sheet(wb, ws, 'Sheet1')
 XLSX.writeFile(wb, `${Date.now()}.xlsx`, { compression: true })
 ```
+- 带表头
+```js
+import XLSX from 'xlsx';
+// 示例数据，字段顺序不固定
+const data = [
+  { age: 2, name: 1, gender: '男' },
+  { name: 3, gender: '女', age: 4 }
+];
+// 中文表头映射
+const headerMap = {
+  name: '名称',
+  age: '年龄',
+  gender: '性别'
+};
+// 明确指定导出列的字段顺序
+const headerFields = Object.keys(headerMap);
+// 使用 header 参数固定字段顺序生成 worksheet
+const worksheet = XLSX.utils.json_to_sheet(data, { header: headerFields });
+// 覆盖默认表头（第一行）为中文表头
+headerFields.forEach((field, index) => {
+  const cellRef = XLSX.utils.encode_cell({ c: index, r: 0 });
+  worksheet[cellRef].v = headerMap[field];
+});
+// 创建 workbook 并添加 worksheet
+const workbook = XLSX.utils.book_new();
+XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+// 导出 Excel 文件
+XLSX.writeFile(workbook, '导出带固定表头顺序的示例.xlsx');
+```
 - blob 生成 csv
 ```js
 function exportToExcel(data) {
@@ -161,70 +190,38 @@ const encryptValue = JSencrypt.encrypt(hashValue);
 console.log(encryptValue);
 ```
 ---
-## git hooks
-### husky
-- [husky](https://typicode.github.io/husky/) 触发git hooks
+
+## core-js
+```js
+import "@babel/polyfill"; // 废弃
+```
+```js
+import "core-js/stable";
+import "regenerator-runtime/runtime";
+```
+```js
+// core-js：会直接修改全局对象
+import 'core-js/actual/promise';
+import 'core-js/actual/set';
+import 'core-js/actual/iterator';
+import 'core-js/actual/array/from';
+import 'core-js/actual/array/flat-map';
+import 'core-js/actual/structured-clone';
+// core-js-pure：不会直接修改全局对象。
+// 相反，它会将 polyfill 作为独立的函数或对象导出，你需要显式地调用它们。
+import Promise from 'core-js-pure/actual/promise';
+import Set from 'core-js-pure/actual/set';
+import Iterator from 'core-js-pure/actual/iterator';
+import from from 'core-js-pure/actual/array/from';
+import flatMap from 'core-js-pure/actual/array/flat-map';
+import structuredClone from 'core-js-pure/actual/structured-clone';
+```
+## fnm
 ```bash
-pnpm add --save-dev husky
-npx husky init
-```
-```bash
-# .husky/pre-commit
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-npm run lint-staged
-```
-### lint-staged
-- [lint-staged](https://www.npmjs.com/package/lint-staged#configuration) 针对暂存的 git 文件运行 linter
-```json
-{
-  "scripts": {
-    "lint-staged": "lint-staged",
-  },
-  "lint-staged":{
-    "*": "prettier --write",
-    "*.ts": "eslint --fix",
-    "*.{js,jsx}":"eslint"
-  }
-}
-```
-### release-it
-- [release-it](https://github.com/release-it/release-it)
-- [release-it/conventional-changelog](https://github.com/release-it/conventional-changelog) 版本提交日志
-```bash
-npx release-it
-# 执行之后，相当于
-# package.json  "version": "" + 1
-# 提交了一条记录 chore: release v1（commitMessage）
-# 并且打tag（tagName）
-# CHANGELOG.md 中增加一条记录
-```
-```json
-// .release-it.json
-{
-  "git": {
-    "commitMessage": "chore: release v${version}",
-    "tagName": "v${version}"
-  },
-  "plugins": {
-    "@release-it/conventional-changelog": {
-      "infile": "CHANGELOG.md",
-      "preset": {
-        "name": "conventionalcommits",
-        "types": [
-          {"type": "feat", "section": "Features"},
-          {"type": "fix", "section": "Bug Fixes"},
-          {"type": "chore", "hidden": true},
-          {"type": "docs", "hidden": true},
-          {"type": "style", "hidden": true},
-          {"type": "refactor", "hidden": true},
-          {"type": "perf", "hidden": true},
-          {"type": "test", "hidden": true}
-        ]
-      },
-      "ignoreRecommendedBump": true,
-      "strictSemVer": true
-    }
-  }
-}
+# 安装
+brew install fnm
+# .bashrc 或 .zshrc
+eval "$(fnm env --use-on-cd)"
+# node lts（Long Term Support 长期支持）
+fnm install --lts
 ```

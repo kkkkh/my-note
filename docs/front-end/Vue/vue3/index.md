@@ -103,8 +103,6 @@ const compRef = useTemplateRef<FooType | BarType>('comp')
 ```
 - 参考：
   - [TS 与组合式 API](https://cn.vuejs.org/guide/typescript/composition-api.html)
-
-
 ## `<script setup>`
 ### defineModel
 - 第一个参数：如果第一个参数是一个字符串字面量，它将被用作 prop 名称；
@@ -240,6 +238,12 @@ import ComA from './components/comA.vue'
 ```
 - 参考
   - [script-setup](https://cn.vuejs.org/api/sfc-script-setup.html)
+## signal
+更细颗粒度的响应式
+示例代码：
+
+<<< ./signal/index.js
+
 ## css
 ### scoped
 - 当 style 标签带有 scoped attribute 的时候，它的 CSS 只会影响当前组件的元素

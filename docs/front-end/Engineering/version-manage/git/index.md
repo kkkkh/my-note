@@ -3,6 +3,7 @@ outline: deep
 ---
 # git
 ### git 常用命令
+参考: [git book](https://git-scm.com/book/zh/v2)
 #### git clone
 ```bash
 git clone xxxx
