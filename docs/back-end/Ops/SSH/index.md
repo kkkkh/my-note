@@ -89,9 +89,10 @@ ssh-add -K ~/.ssh/id_rsa_github #就找到了
 launchd 是 macOS 的系统级服务管理框架，可以用来配置 SSH agent 在开机时自动启动。
 ```bash
 touch ~/Library/LaunchAgents/com.openssh.ssh-agent.plist # 内容为下边xml
+vim ~/Library/LaunchAgents/com.openssh.ssh-agent.plist
 mkdir -p /tmp/ssh-username
 launchctl load ~/Library/LaunchAgents/com.openssh.ssh-agent.plist
-export SSH_AUTH_SOCK=/tmp/ssh-zhanghaotian/agent.sock #在 ~/.bash_profile 或 ~/.zshrc 中添加
+export SSH_AUTH_SOCK=/tmp/ssh-username/agent.sock #在 ~/.bash_profile 或 ~/.zshrc 中添加
 source ~/.bash_profile
 source ~/.zshrc
 ```
