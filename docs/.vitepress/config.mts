@@ -301,27 +301,27 @@ export default withMermaid(defineConfig({
         },
         {
           text: '应用',
-          link: '/front-end/application/',
+          link: '/front-end/Application/',
           items: [
             {
               text: '文件',
-              link: '/front-end/application/file/',
+              link: '/front-end/Application/file/',
               items: [
-                { text: '分片', link: '/front-end/application/file/sharding/' },
+                { text: '分片', link: '/front-end/Application/file/sharding/' },
               ],
             },
             {
               text: '算法',
-              link: '/front-end/application/algorithm/',
+              link: '/front-end/Application/algorithm/',
               items: [
-                { text: 'js', link: '/front-end/application/algorithm/js/' },
+                { text: 'js', link: '/front-end/Application/algorithm/js/' },
               ],
             },
             {
               text: '请求',
-              link: '/front-end/application/request/',
+              link: '/front-end/Application/request/',
               items: [
-                { text: '竞态', link: '/front-end/application/request/race/' },
+                { text: '竞态', link: '/front-end/Application/request/race/' },
               ],
             },
           ]
