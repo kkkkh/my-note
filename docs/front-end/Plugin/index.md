@@ -194,6 +194,7 @@ outline: deep
 - [vue-loader](https://vue-loader.vuejs.org/zh/)
 - [ts-loader](https://github.com/TypeStrong/ts-loader)
 ## typescript
+- [type-challenges](https://github.com/type-challenges/type-challenges/blob/main/README.zh-CN.md)
 ### jsdoc
 - [jsDoc](https://jsdoc.app/) &nbsp;&nbsp;&nbsp; [jsdoc 中文](https://www.jsdoc.com.cn/) 注释 + 类型
 ### tsdoc

@@ -22,6 +22,7 @@ outline: deep
   - [snipaste](https://www.snipaste.com/download.html)
   - [Lightshot](https://app.prntscr.com/zh-cn/help.html)
   - [Umi-OCR](https://github.com/hiroi-sora/Umi-OCR?tab=readme-ov-file)
+  - [pearocr](https://pearocr.com/#/)
 - 文件
   - [Everything](https://www.voidtools.com/zh-cn/) windows检索系统的文件
   - [ilovepdf](https://www.ilovepdf.com/) pdf

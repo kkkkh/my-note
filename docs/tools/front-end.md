@@ -139,8 +139,9 @@ outline: deep
 #### 静态站点
 - [vitepress](https://vitepress.dev/zh/guide/getting-started)
 - [Astro](https://docs.astro.build/zh-cn/concepts/why-astro/)
-- [hexo](https://hexo.io/zh-cn/)
 - [vuepress](https://vuepress.vuejs.org/zh/guide/introduction.html) &nbsp;[marketplace vuepress](https://marketplace.vuejs.press/zh/plugins/)
+- [hexo](https://hexo.io/zh-cn/)
+- [blogger](https://www.blogger.com/about/?bpli=1)
 ### 可视化
 #### canvas
 - [echarts](https://echarts.apache.org/handbook/zh/get-started/)
