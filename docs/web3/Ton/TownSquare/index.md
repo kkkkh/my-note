@@ -9,3 +9,12 @@
 
 https://github.com/pingcap/ossinsight
 https://ossinsight.io/analyze/TownSquareXYZ/TelegramUI-vue#overview
+
+
+## tg auth
+
+参考
+https://juejin.cn/post/7072557507595485221
+https://core.telegram.org/widgets/login
+https://telegram.org/blog/login
+https://www.npmjs.com/package/@tonconnect/ui

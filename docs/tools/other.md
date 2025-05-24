@@ -1,0 +1,45 @@
+---
+outline: deep
+---
+# 其他工具
+- 代码
+  - [Upsource](https://www.jetbrains.com/) &nbsp;[jetbrains space](https://www.jetbrains.com/space/)代码审查
+- 图片
+  - [tinypng](https://tinypng.com/) 压缩图片
+  - [compresspng](https://compresspng.com/zh/) 压缩图片
+  - [gopng](https://alloyteam.github.io/gopng/) sprite图
+  - [ugly-avatar](https://txstc55.github.io/ugly-avatar/) 丑化头像 [github](https://github.com/txstc55/ugly-avatar?tab=readme-ov-file)
+- 绘图
+  - [draw.io](https://www.drawio.com/) draw.io绘图（[diagrams](https://app.diagrams.net/?src=about)）
+  - [mermaid](https://mermaid.js.org/intro/) 图表
+  - [lottiefiles](https://lottiefiles.com/) lotties动画
+- 文档
+  - [trello](https://trello.com/) 看板/任务
+  - [语雀](https://www.yuque.com/)
+  - [Markdown](https://markdown.com.cn/) &nbsp;[markdownguide](https://www.markdownguide.org/getting-started/) &nbsp;[excel-to-markdown](https://tableconvert.com/excel-to-markdown)
+  - [石墨文档](https://shimo.im)
+- 截图
+  - [snipaste](https://www.snipaste.com/download.html)
+  - [Lightshot](https://app.prntscr.com/zh-cn/help.html)
+  - [Umi-OCR](https://github.com/hiroi-sora/Umi-OCR?tab=readme-ov-file)
+- 文件
+  - [Everything](https://www.voidtools.com/zh-cn/) windows检索系统的文件
+  - [ilovepdf](https://www.ilovepdf.com/) pdf
+  - [Clover](http://cn.ejie.me/) 为Windows增加类似浏览器的多标签页功能
+  - [Beyond Compare](https://www.beyondcomparepro.com/) 文件对比工具
+  - [cobalt](https://cobalt.tools/) 下载
+  - [geek](https://geekuninstaller.com/download) 卸载
+- 工业软件
+  - [电路板](https://lceda.cn/)
+  - [CAD](https://www.onshape.com/en/)
+- 硬件
+  - [ifixit](https://www.ifixit.com/) 维修
+- vpn
+  - [openvpn](https://openvpn.net/download-open-vpn/)
+  - [一元机场](https://xn--4gq62f52gdss.com/#/login) 需翻
+  - [一元机场](https://xn--4gq62f52gdss.ink/#/login)
+  - [丛雨云](https://cn.congyu.org/)
+  - [FER](https://adlkn.top/home)
+- 其他
+  - [hourse](https://www.cq315house.com/)
+  - [gf](https://github.com/gfriends/gfriends)

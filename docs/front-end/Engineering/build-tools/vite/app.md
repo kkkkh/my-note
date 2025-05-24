@@ -1,3 +1,6 @@
+---
+outline: deep
+---
 # vite app
 ## 1、bugs
 

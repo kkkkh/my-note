@@ -1,8 +1,17 @@
 ---
 outline: deep
 ---
-## git
+# git
 ### git 常用命令
+参考: [git book](https://git-scm.com/book/zh/v2)
+#### git clone
+```bash
+git clone xxxx
+# 克隆指定分支
+git clone -b <branch> <repository>
+# 克隆指定目录
+git clone https://github.com/user/repo.git <myfolder>
+```
 #### git branch
 ```bash
 # 拉去远程分支 <基于一个commit>
@@ -13,6 +22,8 @@ git branch -a
 git branch -v
 # 删除远程分支
 git push origin --delete <branch name>
+# 删除远程分支 多条
+git push origin --delete <branch name> <branch name> <branch name>
 # 删除本地
 git branch -d <branch name>
 # 强制删除没有合并的分支
@@ -21,13 +32,18 @@ git branch -D <branch name>
 git branch -a --contains <commit id>
 # 建立本地分支和远程分支的关联
 git branch --set-upstream-to=origin/dev dev
+# 查看哪些分支包含 commit 45e9fd72345
+git branch --contains 45e9fd72345
 ```
 #### git stash
 - 当前工作现场“储藏”起来
 ```bash
+# 修改存储
 git stash
 # 新增的文件也一起储藏
 git stash -u
+# 只存储一个文件
+git stash push <file name>
 # 查看 stash 了哪些存储
 git stash list
 # 显示做了哪些改动，默认 show 第一个存储
@@ -37,19 +53,44 @@ git stash pop
 # 恢复stash内容并不删除
 git stash apply stash@{0}
 # 删除 stash
-git stash drop 
+git stash drop
+```
+#### git diff
+```bash
+# 查看文件差异
+git diff <file>
+# git add 之后，查看文件差异
+git diff --cached <file>
+git diff --staged <file>
+git diff HEAD
 ```
 #### git commit
 ```bash
 # 修改提交 commit message
 git commit --amend
+# 提交取消检验
+git commit --no-verify
+```
+#### git subtree
+会将其他库的代码合并到当前库中
+```bash
+# 添加子模块
+# --prefix=dist 指定添加的子项目代码放到主仓库的哪个子目录下。
+# --squash 表示本次拉取会将远程仓库的所有提交历史合并压缩成一个新的提交，然后加入到主仓库。
+# 如果你不加 --squash，则会完整保留子仓库的所有历史提交。
+git subtree add --prefix=dist https://github.com/chaconinc/DbConnector master --squash
+# 更新子模块
+git subtree pull --prefix=dist https://github.com/chaconinc/DbConnector master --squash
+# 推送子模块
+git subtree push --prefix=dist https://github.com/chaconinc/DbConnector master
 ```
 #### git submodule
 - 初始化子模块
 ```bash
-# 安装 (安装包以后，yarn 重新安装)
+# 添加子模块
 git submodule add https://github.com/chaconinc/DbConnector
-git submodule add <url> externals/ej-business-modules
+# 添加子模块到指定目录
+git submodule add http://github.com/username/repo.git libs/somelib
 # 初始化并更新
 git submodule update --progress --init
 (git submodule init + git submodule update)
@@ -85,9 +126,10 @@ git push --recurse-submodules=check
 git push --recurse-submodules=on-demand
 ```
 #### git rebase
+- git rebase
 ```bash
 ## 目前在dev分支
-git rebase -i #合并本地commit
+git branch # dev
 # master
 git checkout master
 git pull
@@ -102,6 +144,27 @@ git push #提交 冲突，解决冲突
 git checkout dev
 git rebase master # 变基
 git push
+```
+- git rebase -i 合并本地commit
+```bash
+git log --oneline
+# 开始合并操作
+git rebase -i HEAD~n
+git rebase -i HEAD~3
+# 出现以下信息
+pick 123abc Commit message 1
+pick 456def Commit message 2
+pick 789ghi Commit message 3
+# 将需要合并的提交修改为 squash 或 s
+pick 123abc Commit message 1
+squash 456def Commit message 2
+squash 789ghi Commit message 3
+
+# 合并提交信息
+# 按照需要调整后保存即可。
+
+# rebase 会自动完成，git log 检查是否合并成功。
+git log
 ```
 #### git remote
 ```bash
@@ -136,12 +199,16 @@ git config --global credential.helper store
 git config http.proxy http://127.0.0.1:7897
 git config --global --unset http.proxy
 ```
-#### git log/reflog
+#### git log
 ```bash
 git log
+git log --oneline
 git log --pretty=oneline  #简洁 log
 git log --graph --pretty=oneline --abbrev-commit # graph - 分支合并图
-git reflog #记录你的每一次命令，用来返回未来版本
+```
+#### git reflog
+```bash
+git reflog #记录你的每一次命令 commit
 ```
 #### git reset 回退版本
 ```bash
@@ -159,7 +226,7 @@ git reset 1094a ./file.txt #单个文件回退
 #### git clean
 ```bash
 # 删除新建的文件
-git clean -fd 
+git clean -fd
 ```
 #### git checkout
 ```bash
@@ -167,6 +234,10 @@ git clean -fd
 git checkout -- file
 # 切换新的分支，并且清空之前commit记录
 git checkout --orphan <branch>
+# 要接受所有当前更改（本地更改）
+git checkout --ours .
+# 要接受所有传入更改（远程更改）
+git checkout --theirs .
 ```
 #### git rm
 ```bash
@@ -219,9 +290,10 @@ git push origin :refs/tags/v0.9 # 删除远程标签
 #### git check-ignore
 ```bash
 git check-ignore
-git check-ignore -v App.class #找出来到底哪个规则写错
+git check-ignore -v App.  #找出来到底哪个规则写错
 ```
-#### .ignore
+### 配置文件
+#### .gitignore
 ```bash
 # 排除所有.开头的隐藏文件:
 .*
@@ -230,6 +302,35 @@ git check-ignore -v App.class #找出来到底哪个规则写错
 # 不排除.gitignore和App.class:
 !.gitignore
 !App.class
+```
+#### .gitkeep
+- 目录为空时，增加.gitkeep文件，git不会忽略该目录，可以正常提交
+- 如果目录下有其他文件，则一起提交
+- 如果想要只提交目录，不提交目录里边的文件，则需要给目录中增加.gitignore文件
+- 最外层.gitignore中增加
+```bash
+# 忽略该目录下所有文件
+*
+# 但不忽略 .gitignore 文件自身
+!.gitignore
+```
+```bash
+# 忽略该目录下所有文件
+docs/*
+# 但不忽略 .gitignore 文件自身
+!docs/.gitignore
+```
+
+| 方案 | 能保留空目录 | 是否忽略该目录下新文件 | 适用场景 |
+| --- | --- | --- | --- |
+| .gitkeep | 是 | 否 | 只想保留目录，手动控制文件提交 |
+| .gitignore (配置 * 忽略) | 是 | 是 | 保留目录同时自动忽略所有新文件 |
+#### .gitmodules
+```bash
+[submodule "libs/somelib"]
+  path = libs/somelib
+  url = http://github.com/username/repo.git
+  branch = master
 ```
 #### .git/config
 ```bash
@@ -246,7 +347,6 @@ git check-ignore -v App.class #找出来到底哪个规则写错
 #### 优点
 - Git 比其他版本控制系统设计得优秀，因为 Git 跟踪并管理的是修改，而非文件。
 ### git 总结
-
 #### git rebase 后代码不见了, 找回消失的commit
 - 使用git log看不到
 - 使用`git reflog`
@@ -298,3 +398,14 @@ Critical dependency: the request of a dependency is an expression
   - 在submodule中的引用，要使用这个别名`import {get} from 'name/src/main'`
   - 因为这样对于主项目来说，也可以通过这个路径找到的，
   - 如果只按照submodule自己的路径设置，按照自己的tsconfig.json和vite.config.js理解，就不一致会报错
+#### git clone ssh失败
+- git clone git@github.com:xxxx/xxxx.git 失败
+- git clone https://github.com/xxxx/xxxx.git 成功
+- git@github.com 使用SSH协议，有些网络限制SSH的端口（默认是22），导致SSH无法连接，但HTTPS通常不会被限制。
+参考：（进参考，与ssh无关）
+- https://github.com/vernesong/OpenClash/issues/2074
+- https://github.com/vernesong/OpenClash/issues/1960
+#### gitlab merge
+- gitlab 修改bug分支线上合并到uat分支（受保护分支，无法本地合并提交）
+- 如果线上产生了冲突，解决完冲突以后，会有一个大坑，uat会反向合并到修改bug的分支
+- 参考：https://segmentfault.com/a/1190000041546988

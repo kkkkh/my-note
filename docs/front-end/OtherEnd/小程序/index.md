@@ -1,3 +1,6 @@
+---
+outline: deep
+---
 #### 旧的参考文档：
 - https://www.cnblogs.com/cokolxvd/p/11535134.html
 - https://www.jianshu.com/p/87fd129b9fda

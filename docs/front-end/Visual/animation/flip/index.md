@@ -1,0 +1,19 @@
+# Flip
+- Flip [发布简介](https://aerotwist.com/blog/flip-your-animations/)
+  - 思路
+    - First（首帧）：首先，记录动画开始前每个元素的初始状态，一般是位置和尺寸信息。这些信息将作为动画的起点。
+    - Last（末帧）：然后，通过改变元素的样式或布局，将元素动画到最终状态。这里不会应用任何动画效果，只是直接改变元素的样式或布局。
+    - Invert（反转）：在 Last 步骤之后，计算出首帧和末帧之间的差异，并将其应用到元素上。这些差异可以通过 CSS 或 JavaScript 计算得出，用于反转动画。
+    - Play（播放）：最后，通过添加过渡效果或动画来播放反转后的差异，使元素平滑地过渡到最终状态。
+  - 优势
+    - 使用 FLIP 技术的好处在于，它能够利用浏览器的硬件加速功能，提高动画性能。
+    - 具体来说，FLIP 技术通过将动画效果委托给浏览器的合成线程来执行，从而避免了主线程的负担，提高了动画的帧率和流畅度。
+    - [代码参考](https://aerotwist.com/blog/flip-your-animations/#got-code%3F)
+- Flip 使用
+  - [FLIP Plugin at GSAP](https://gsap.com/docs/v3/Plugins/Flip/)
+  - 案例参考
+    - [flex 布局](https://codepen.io/GreenSock/pen/zYqLjre)
+    - [图片显示](https://codepen.io/GreenSock/pen/JjXqMZK)
+- gsap
+  - [gsap](https://gsap.com/)
+  - [gsap React](https://gsap.com/resources/React)

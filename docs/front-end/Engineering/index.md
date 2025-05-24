@@ -12,15 +12,15 @@ outline: deep
 ### yarn
 ### pnpm
 
-## node magnage
-### nvm
-### fnm
-- [fnm github](https://github.com/Schniz/fnm)
+## code-standard
+### eslint
 
 ## plugin
 ### vscode
 ### brower
+### markdown
 
 ## version manage
 ### git
 ### svn
+

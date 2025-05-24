@@ -1,6 +1,10 @@
-# vue Plugin
+---
+outline: deep
+---
+# Vue Plugin
 ## component
 ### vxe-table
+#### 文档
 - 本地数据，简单筛查：https://vxetable.cn/v3.8/#/table/base/filter
 - 本地数据，复杂筛选：https://vxetable.cn/v3.8/#/table/advanced/manualFilter
   - 手动筛选：调用 setFilter 和 updateData 方法来处理复杂场景
@@ -11,6 +15,82 @@
 - 本地数据，分页：https://vxetable.cn/v3.8/#/table/advanced/page
 - 数据代理，分页：https://vxetable.cn/v3.8/#/table/grid/pageProxy
 
+- 常用方法/事件
+```js
+<vxe
+  @checkbox-change="checkboxChange"
+  @checkbox-all="checkboxChange"
+></vxe>
+// 设置选中
+setCheckboxRow(rows, checked)
+setAllCheckboxRow(checked)
+// 清除选中
+clearCheckboxRow()
+clearCheckboxReserve()
+// 获取
+getCheckboxRecords()
+getCheckboxReserveRecords()
+```
+
+- 保持勾选记录
+```js
+<vxe
+  :row-config="{
+    keyField: 'id',
+  }"
+  :checkbox-config="{ reserve: true }"
+></vxe>
+```
+#### [Render-table](./render-table/index.md)
+- 前端计算table => filter/sort/page
+  - 外层触发计算
+  - 内部筛选计算
+  - 内部排序计算
+
+- 关于复选数据重复的问题：
+  - 数据通过查询，增量累加，不存在单独减少操作，此时不需要考虑复选数据更新；
+  - 数据执行操作成功，会对数据重置或删除，此时要更新复选的数据，设置为空；
+#### Pack-table
+```html
+<PackRichTable
+  ref="packRichTable"
+  :filters="filters"
+  :immediate="false"
+  is-query-vo
+  :load="load"
+  :query-form="form"
+  :table-id="tableId"
+  @checkbox-change="selectChangeEvent"
+>
+  <template #headerLeftStart></template>
+  <template #operate="{ row }"></template>
+</PackRichTable>
+```
+```js{1-3,5-6,9-10,14-16,20}
+import { TableIdMap } from '@/const/index'
+import { tablePack } from '@/mixins/table-pack'
+import PackRichTable from '@/views/common/PackRichTable.vue'
+export default {
+  components: { PackRichTable },
+  mixins: [tablePack],
+  data(){
+    return {
+      load: queryPageV2,
+      filters: {},
+    }
+  },
+  computed:{
+    tableId() {
+      return TableIdMap.xx.xx
+    },
+  },
+  methods:{
+    async handleExport() {
+      const params = this.$refs.packRichTable.mergeParams()
+    },
+  }
+}
+```
 ## api
 ### vue-request
 - useRequest
@@ -100,15 +180,42 @@ const store = useLocalStorage(
 )
 </script>
 ```
+### eventBus
+- EventBus 支持 vue2（创建一个Vue实例充当eventBus）
+- 适用：父组件想要调用很深层级子组件的api
+```js
+import Vue from 'vue'
+Vue.prototype.$EventBus = new Vue()
+```
+```js
+// 在子组件
+this.$EventBus.$on('eventName1', (val) => {
+  
+})
+this.$EventBus.$on('eventName2', (callback) => {
+  // 调取函数,并传入
+  callback(vals)
+})
+```
+```js
+// 父组件
+methods:{
+  getSome1(){
+    this.$EventBus.$emit('eventName1', val)
+  },
+  getSome2(){
+    return new Promise((resolve) => {
+      // 传入函数
+      this.$EventBus.$emit('eventName2', (vals) => {
+        // 接到返回值
+        // 利用promise resolve 返回
+        resolve(vals)
+      })
+    })
+  }
+}
+```
 ### mitt
 - mitt 支持 vue3 (事件总线)
-- EventBus 支持 vue2（创建一个Vue实例充当eventBus）
 - [参考](https://juejin.cn/post/6973106775755063333)
 
-# my Lib
-
-## [Render-table](./render-table/index.md)
-### 前端计算table => filter/sort/page
-- 外层触发计算
-- 内部筛选计算
-- 内部排序计算

@@ -1,0 +1,14 @@
+// tsconfig.json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./docs/*"],
+      // "@play/*": ["./docs/submodule/play/packages/*"],
+      "/*": ["./docs/*"],
+
+    },
+    "allowImportingTsExtensions": true,
+    "noEmit": true
+  }
+}

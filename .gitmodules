@@ -1,0 +1,7 @@
+[submodule "docs/submodule/play"]
+	path = docs/submodule/play
+	url = https://github.com/kkkkh/play.git
+	branch = main
+[submodule "docs/submodule/c-play"]
+	path = docs/submodule/c-play
+	url = https://github.com/kkkkh/C-play.git

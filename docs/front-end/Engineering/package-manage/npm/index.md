@@ -1,5 +1,13 @@
+---
+outline: deep
+---
 # npm
 ## npm command
+### npm config
+```bash
+npm config registry https://registry.npmmirror.com
+```
+### npm tag
 ```bash
 npm dist-tag ls vue
 # alpha: 3.5.0-alpha.5
@@ -14,33 +22,14 @@ npm install typescript@latest
 npm publish # 自动打上latest的tag
 npm publish --tags beta # 打的就是 beta 的 tag
 ```
-## package.json
-- 版本
-1.0.0 主版本号.次版本号.补丁版本号
-~1.0.4 更新 1.0.x
-^1.0.4 更新 1.x.x
-```json
-{
-  "devDependencies":{
-    "vue": "^3.5.12",
-  }
-}
-```
-- 同时安装不同版本
+### npm link
 ```bash
-npm install vue2@npm:vue@^2.6.14
-npm install vue3@npm:vue@^3.2.37
+# 包的目录
+npm link
+#  引入包的目录
+npm link backageName
 ```
+### npm uninstall
 ```bash
-pnpm add @antv/x6-v2@npm:@antv/x6@^2.18.1 -D
-# 别名 @antv/x6-v2
-# 连接 @npm
-# 找对应包 @antv/x6@^2.18.1
-```
-```json
-{
-  "devDependencies":{
-    "@antv/x6-v2": "npm:@antv/x6@^2.18.1",
-  }
-}
+npm uninstall <packageName>
 ```
