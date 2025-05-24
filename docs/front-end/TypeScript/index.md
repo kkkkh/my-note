@@ -234,7 +234,50 @@ let point: Point = {
   y: 1,
 };
 ```
+### 元祖
+- 1、限制长度
+- 2、对每一个成员限定类型
+- 3、主要用于函数参数类型
 
+### 同名策略
+- 重载 overload
+- 覆盖 class override
+- 合并
+  - 两个同名接口合并
+  - 同名类、接口合并
+
+### 枚举
+- 枚举类型是联合类型、不是object，在JavaScript中是一个对象
+```ts
+enum X {
+  a,
+  b = Number(2),
+  c = "c"
+}
+const enum Y {
+  a,
+  c = "c"
+}
+type T1  = keyof typeof X 
+//  ^?
+// type T1 = "c" | "a" | "b"
+type T2  = keyof typeof Y
+//  ^? 
+// type T1 = "c" | "a"
+type V1 = `${X}` 
+//  ^? 
+// type V1 = string 读取不出来
+type V2 = `${Y}`
+//  ^? type 
+// V2 = "c" | "0" 可以读取到
+```
+```ts
+const Up = 111
+enum T {
+    Up // 0
+}
+console.log(T)
+```
 ### 泛型
 ```ts
 interface activity {
