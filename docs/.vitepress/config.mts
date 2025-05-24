@@ -360,6 +360,11 @@ export default withMermaid(defineConfig({
               items: [],
             },
             {
+              text: 'SSH',
+              link: '/back-end/Ops/SSH/',
+              items: [],
+            },
+            {
               text: 'CI-CD',
               link: '/back-end/Ops/CI/CD/',
               items: [
