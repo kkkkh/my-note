@@ -63,7 +63,71 @@ systemctl restart sshd
 - 注意：执行路径（/usr/bin/ssh-add 、home/）
 ```bash
 # 临时添加
-ssh-add ~/.ssh/rsa
+ssh-add ~/.ssh/id_rsa
 eval `ssh-agent`
 ssh-add -l
+```
+
+### mac os 每次开机hou，git push 都没有权限
+提示：
+Load key "/Users/usename/.ssh/id_rsa": Permission denied
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+解决思路1：Keychain Access
+```bash
+# ~/.ssh/config 要配置 
+AddKeysToAgent yes
+# Keychain Access（钥匙串访问）访问权限问题: Keychain Access中没有搜索到id_rsa
+ssh-add -K ~/.ssh/id_rsa_github #就找到了
+```
+
+解决思路2：使用 launchd 配置 SSH Agent 自动启动
+launchd 是 macOS 的系统级服务管理框架，可以用来配置 SSH agent 在开机时自动启动。
+```bash
+touch ~/Library/LaunchAgents/com.openssh.ssh-agent.plist # 内容为下边xml
+mkdir -p /tmp/ssh-username
+launchctl load ~/Library/LaunchAgents/com.openssh.ssh-agent.plist
+export SSH_AUTH_SOCK=/tmp/ssh-zhanghaotian/agent.sock #在 ~/.bash_profile 或 ~/.zshrc 中添加
+source ~/.bash_profile
+source ~/.zshrc
+```
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.openssh.ssh-agent</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/bin/ssh-agent</string>
+        <string>-l</string>
+    </array>
+    <key>Sockets</key>
+    <dict>
+        <key>SSH_AUTH_SOCK</key>
+        <dict>
+            <key>Path</key>
+            <string>/tmp/ssh-username/agent.sock</string>
+            <key>SockFamily</key>
+            <string>Unix</string>
+            <key>SockProtocol</key>
+            <string>Stream</string>
+        </dict>
+    </dict>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>SSH_AUTH_SOCK</key>
+        <string>/tmp/ssh-username/agent.sock</string>
+    </dict>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+</dict>
+</plist>
 ```
