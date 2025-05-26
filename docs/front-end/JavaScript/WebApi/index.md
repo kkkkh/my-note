@@ -2,10 +2,11 @@
 outline: deep
 ---
 <script setup>
-import RequestAnimationFrame from './components/RequestAnimationFrame.vue'
-import MutationObserver from './components/MutationObserver.vue'
-import QueueMicrotask from './components/QueueMicrotask.vue'
+// import RequestAnimationFrame from './components/RequestAnimationFrame.vue'
+// import MutationObserver from './components/MutationObserver.vue'
+// import QueueMicrotask from './components/QueueMicrotask.vue'
 import Test from '@/components/Test.vue'
+const modules = import.meta.glob('./components/*.vue', { eager: true, import: 'default' })
 </script>
 
 # web API
@@ -68,14 +69,14 @@ requestAnimationFrame(callback)
 
 <<< ./components/RequestAnimationFrame.vue
 
-  <Test :is="RequestAnimationFrame" />
+  <Test :is="modules['./components/RequestAnimationFrame.vue']" />
 
 ### MutationObserver
 - MutationObserver 接口提供了监视对 DOM 树所做更改的能力
 
 <<< ./components/MutationObserver.vue
 
-<Test :is="MutationObserver" />
+<Test :is="modules['./components/MutationObserver.vue']" />
 
 ### queueMicrotask
 - 当创建该微任务的函数执行之后，并且只有当 Javascript 调用栈为空，
@@ -83,10 +84,17 @@ requestAnimationFrame(callback)
 
 <<< ./components/QueueMicrotask.vue
 
-<Test :is="QueueMicrotask" />
+<Test :is="modules['./components/QueueMicrotask.vue']" />
 
 - 参考
   - [Microtask_guide](https://developer.mozilla.org/zh-CN/docs/Web/API/HTML_DOM_API/Microtask_guide)
+
+### IntersectionObserver &I
+
+<<< ./components/IntersectionObserver.vue
+
+<component :is="modules['./components/IntersectionObserver.vue']" />
+
 ### localStorage / sessionStorage / cookie &I
 - localStorage
   ```js
