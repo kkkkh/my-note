@@ -27,7 +27,7 @@ outline: deep
       'eslint-plugin-react'
     ],
     rules: {
-      'eslint-plugin-react/jsx-boolean-value': 2
+      'react/jsx-boolean-value': 2
     }
   }
   ```
@@ -48,9 +48,9 @@ yarn create @eslint/config
 # or
 pnpm create @eslint/config@latest
 ```
-- 对文件进行检查校验
 ```bash
-npx eslint ./src/**/*.{js,jsx}
+eslint ./src/**/*.{js,jsx} #对文件进行检查校验
+eslint . --no-cache # 清除缓存
 ```
 ```json
 {
@@ -204,5 +204,39 @@ module.exports = {
     "import/no-unresolved": [2, { caseSensitive: true }] // 严格 区分大小写
   },
 }
-
 ```
+### eslint 自定义插件
+
+自定义插件eslint-plugin-lodash.js
+
+<<< @/submodule/play/packages/eslint/plugin-eslint9/eslint-plugin-lodash.js
+
+自定义插件的 eslint.config.js
+
+<<< @/submodule/play/packages/eslint/plugin-eslint9/eslint.config.js
+
+eslint-plugin-no-global-lodash 插件[实现参考](https://github.com/adalbertoteixeira/eslint-plugin-no-global-lodash/blob/master/lib/rules/no-global-lodash.js)
+
+<<< ./js/no-global-lodash.js
+
+參考：
+- [generator-eslint](https://www.npmjs.com/package/generator-eslint)
+- [eslint-plugin-no-global-lodash](https://www.npmjs.com/package/eslint-plugin-no-global-lodash)
+- [eslint-plugin-lodash](https://www.npmjs.com/package/eslint-plugin-lodash)
+
+
+根据 ESLint 的作用域分析规则，常见的作用域创建节点包括：
+| 节点类型                  | 说明                                   |
+|--------------------------|----------------------------------------|
+| Program                  | 整个脚本或模块的顶层作用域             |
+| FunctionDeclaration      | 函数声明，创建函数作用域               |
+| FunctionExpression       | 函数字面量，创建函数作用域             |
+| ArrowFunctionExpression  | 箭头函数，创建函数作用域               |
+| ClassDeclaration         | 类声明，创建类的块级作用域             |
+| ClassExpression          | 类表达式，同上                         |
+| CatchClause              | try-catch 的 catch 子句，创建作用域     |
+| BlockStatement           | ES6 及之后的块级作用域（let/const 所在块）|
+| SwitchStatement          | switch 语句，创建块级作用域            |
+| ForStatement             | for 循环语句，创建块级作用域           |
+| ForInStatement           | for..in 循环，创建块级作用域           |
+| ForOfStatement           | for..of 循环，创建块级作用域           |

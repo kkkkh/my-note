@@ -138,6 +138,8 @@ outline: deep
   - [node-gyp](https://github.com/nodejs/node-gyp)
   - [fnm](https://github.com/Schniz/fnm)
   - [nvm](https://github.com/nvm-sh/nvm)
+- eslint
+  - [generator-eslint](https://www.npmjs.com/package/generator-eslint)
 ## Vue plugin (Vue 扩展)
 ### cli
 - [~~Vue CLI~~](https://cli.vuejs.org/)(停止维护) => [create-vue](https://github.com/vuejs/create-vue)
@@ -153,6 +155,8 @@ outline: deep
   - [vue-it-bigger](https://github.com/haiafara/vue-it-bigger) vue2
   - [v-viewer](https://github.com/mirari/v-viewer) vue3 & vue2 base on viewerjs
   - [viewerjs](https://github.com/fengyuanchen/viewerjs)
+- ui图标
+  - [vue-data-ui](https://vue-data-ui.graphieros.com/)
 ### api
 - [VueRequest](https://cn.attojs.org/guide/introduction.html#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9-vuerequest)
   - [useRequest](https://cn.attojs.org/api/#%E5%85%AC%E5%85%B1-api)
