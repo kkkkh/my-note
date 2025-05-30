@@ -31,7 +31,7 @@ export default defineConfig([
       globals: {
         // languageOptions.globals 是告诉 ESLint 语言解析层面有哪些全局变量，比如 window、process 等，
         // 重点是影响规则和解析器逻辑，避免对全局变量报未定义错误
-        myGlobalVar: "readonly" 
+        myGlobalVar: "readonly"
       }
     }
   },
