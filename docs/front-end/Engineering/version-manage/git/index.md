@@ -198,6 +198,8 @@ git config --global credential.helper store
 # 设置代理
 git config http.proxy http://127.0.0.1:7897
 git config --global --unset http.proxy
+
+git config core.ignoreCase
 ```
 #### git log
 ```bash
@@ -409,3 +411,8 @@ Critical dependency: the request of a dependency is an expression
 - gitlab 修改bug分支线上合并到uat分支（受保护分支，无法本地合并提交）
 - 如果线上产生了冲突，解决完冲突以后，会有一个大坑，uat会反向合并到修改bug的分支
 - 参考：https://segmentfault.com/a/1190000041546988
+#### git 文件名大小写
+```bash
+git rm --cached -r foldername
+git add Foldername
+```
