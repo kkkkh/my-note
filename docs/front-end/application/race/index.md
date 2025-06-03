@@ -1,6 +1,7 @@
 ---
 outline: deep
 title: 竞态问题
+date: 2025-05-01
 ---
 # race竞态问题 &I
 - 处理思路：

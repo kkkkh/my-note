@@ -65,20 +65,24 @@ export default withMermaid(defineConfig({
         { text: 'tool', link: '/tools/blog' },
         { text: 'play', link: 'https://kkkkh.github.io/play/' },
       ] },
-      { text: '文章', link: '/article' },
+      { text: '文章', link: '/article/' },
     ],
     sidebar: {
       'article': [
         {
-          text: '前端',
-          link: '/article/front-end/',
+          text: '技术',
+          link: '/article/tech/',
         },
         {
           text: '面试',
           link: '/article/interview/',
           items: [
-            { text: 'font-end', link: '/article/interview/font-end/index.md' },
-          ],
+            { text: '前端', link: '/article/interview/font-end/' },
+          ]
+        },
+        {
+          text: '感想',
+          link: '/article/thoughts/',
         },
       ],
       'tools': [
@@ -303,27 +307,10 @@ export default withMermaid(defineConfig({
           text: '应用',
           link: '/front-end/Application/',
           items: [
-            {
-              text: '文件',
-              link: '/front-end/Application/file/',
-              items: [
-                { text: '分片', link: '/front-end/Application/file/sharding/' },
-              ],
-            },
-            {
-              text: '算法',
-              link: '/front-end/Application/algorithm/',
-              items: [
-                { text: 'js', link: '/front-end/Application/algorithm/js/' },
-              ],
-            },
-            {
-              text: '请求',
-              link: '/front-end/Application/request/',
-              items: [
-                { text: '竞态', link: '/front-end/Application/request/race/' },
-              ],
-            },
+            { text: '常用算法', link: '/front-end/Application/algorithm/'},
+            { text: '分片', link: '/front-end/Application/sharding/' },
+            { text: '竞态', link: '/front-end/Application/race/' },
+            { text: '任务队列', link: '/front-end/Application/taskQueue/' },
           ]
         },
       ],

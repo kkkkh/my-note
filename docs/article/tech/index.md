@@ -1,7 +1,7 @@
 ---
 outline: deep
 ---
-# front-end
+# 技术文章
 <script setup>
 import { data as posts } from './index.data.mts'
 
