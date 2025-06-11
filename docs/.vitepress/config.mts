@@ -304,6 +304,10 @@ export default withMermaid(defineConfig({
           link: '/front-end/DesignPatterns/',
         },
         {
+          text: '算法',
+          link: '/front-end/Algorithm/',
+        },
+        {
           text: '应用',
           link: '/front-end/Application/',
           items: [

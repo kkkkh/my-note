@@ -14,3 +14,6 @@ irm https://raw.githubusercontent.com/yuaotian/go-cursor-help/refs/heads/master/
 ### cursor vip
 - 参考
   - [cursor vip](https://cursor.jeter.eu.org/)
+### cursor-free-vip
+- 参考
+  - [cursor-free-vip](https://github.com/yeongpin/cursor-free-vip)

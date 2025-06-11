@@ -173,7 +173,11 @@ git remote -v
 # 添加远程仓库 （orgin 远程库名称）
 git remote add origin git@22:monitoring.git
 # 删除远程库（解除了本地和远程的绑定关系）
-git remote rm origin dev
+git remote rm origin
+# 重命名远程库
+git remote rename oldname newname
+# 修改远程库地址
+git remote set-url origin <newRepo>
 ```
 #### git config
 ```bash
