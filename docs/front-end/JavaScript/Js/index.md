@@ -1603,6 +1603,21 @@ const obj = JSON.parse(jsonString); // { name: "Alice", age: 25 }
 
 <Test :is="Json" />
 
+```js
+// 可以在stringify层处理
+var res  =JSON.parse(
+  JSON.stringify(
+    {a:1,b:{a:2,c:{a:3}}},
+    (key,value)=>{if(key === 'a'){return 4}else{return value}})
+  )
+// {"a":4,"b":{"a":4,"c":{"a":4}}}
+// 也可以在parse层处理
+var res  =JSON.parse(
+  JSON.stringify({a:1,b:{a:2,c:{a:3}}})
+  ,(key,value)=>{if(key === 'a'){return 5}else{return value}})
+// {"a":5,"b":{"a":5,"c":{"a":5}}}
+```
+
 ### 宏任务 &I
 - setTimeout/setInterval
 - I/O 操作 (例如文件读取、网络请求)

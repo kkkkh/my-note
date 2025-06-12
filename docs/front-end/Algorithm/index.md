@@ -493,7 +493,7 @@
   - 正则表达式，性能较差
   - 操作字符串，性能较好
 
-<<< ./ts/15-thousands-format.
+<<< ./ts/15-thousands-format.ts
 
 ### 切换字母大小写
 - 题目
@@ -506,6 +506,6 @@
   - 正则表达式性能较差
   - ASCII 码性能较好
 
-<<< ./ts/16-switch-case.ts
+<<< ./ts/16-switch-letter-case.ts
 
 
