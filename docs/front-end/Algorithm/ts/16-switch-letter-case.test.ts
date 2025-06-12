@@ -2,7 +2,7 @@
  * @description 切换字母大小写 test
  */
 
-import { switchLetterCase1, switchLetterCase2 } from './15-switch-letter-case'
+import { switchLetterCase1, switchLetterCase2 } from './16-switch-letter-case'
 
 describe('切换字母大小写', () => {
     it('正常', () => {

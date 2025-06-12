@@ -80,7 +80,8 @@ outline: deep
 - browser
   - [browserslist](https://github.com/browserslist/browserslist) &nbsp;&nbsp;&nbsp;[browserslist playground](https://browsersl.ist/)
 - number
-  - [bignumber](https://github.com/MikeMcl/bignumber.js/)
+  - [bignumber](https://github.com/MikeMcl/bignumber.js/) &nbsp;&nbsp;&nbsp;[bignumber 文档](https://mikemcl.github.io/bignumber.js/)
+  - [mathjs](https://github.com/josdejong/mathjs) &nbsp;&nbsp;&nbsp;[mathjs 文档](https://mathjs.org/docs/getting_started.html)
 - 性能
   - [web-vitals](https://www.npmjs.com/package/web-vitals) 测量真实用户的所有Web Vitals指标
 - date

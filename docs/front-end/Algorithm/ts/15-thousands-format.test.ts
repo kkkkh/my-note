@@ -2,7 +2,7 @@
  * @description 数字千分位格式化
  */
 
-import { format1, format2 } from './14-thousands-format'
+import { format1, format2 } from './15-thousands-format'
 
 describe('数组千分位格式化', () => {
     it('正常', () => {

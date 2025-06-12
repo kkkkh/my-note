@@ -34,11 +34,11 @@ export function format2(n: number): string {
     let res = ''
     const s = n.toString()
     const length = s.length
-
     for (let i = length - 1; i >= 0; i--) {
-        const j = length - i
+        // 关键点：从后往前添加
+        const j = length - i // j是动态的，length - i，实际上是倒着数第几个
         if (j % 3 === 0) {
-            if (i === 0) {
+            if (i === 0) { // 到达头部
                 res = s[i] + res
             } else {
                 res = ',' + s[i] + res
