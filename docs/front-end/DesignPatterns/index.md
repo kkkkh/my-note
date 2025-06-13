@@ -27,6 +27,14 @@ import Content from '@/components/Content.vue'
 </script>
 <Content :posts="posts" />
 
+## 常用设计模式
+- 观察者模式
+  - Subject 和 Observer 直接绑定，中间无媒介
+  - 如 `addEventListener` 绑定事件
+- 发布订阅模式
+  - Publisher 和 Observer 相互不认识，中间有媒介
+  - 如 `eventBus` 自定义事件
+
 ## 架构设计模式
 ### mvc
 - 组成部分
@@ -101,13 +109,12 @@ import Content from '@/components/Content.vue'
 
 ### mvvm  &I
 - 组成部分
-  - Model（模型）
-    - 与 MVC 中相同，负责数据和业务逻辑。
-  - View（视图）
+  - Model（模型）Vue template
+    - 与 MVC 中 Model 相同，负责数据和业务逻辑。
+  - View（视图）Vue data
     - 负责 UI 展示，与用户交互。
-  - ViewModel（视图模型）
+  - ViewModel（视图模型）即 Vue 其他核心功能，负责 View 和 Model 通讯
     - 是 View 和 Model 之间的桥梁。View 通过数据绑定直接与 ViewModel 交互，ViewModel 负责处理来自 View 的命令、转换 Model 的数据供 View 使用。
-
 - 工作流程
   - View 和 ViewModel 通过双向数据绑定相连。
   - 用户操作 View，数据自动同步到 ViewModel。

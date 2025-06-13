@@ -152,6 +152,7 @@ outline: deep
   - [v3.0~3.8(vue 2.6)](https://vxetable.cn/v3.8/#/table/start/install)
 - [vue-images](https://github.com/littlewin-wang/vue-images)
 - [vue-drag-select](https://github.com/ZhiJieZhang1/vue-drag-select)
+- [vue-demi](https://www.npmjs.com/package/vue-demi)
 - 图片查看
   - [vue-it-bigger](https://github.com/haiafara/vue-it-bigger) vue2
   - [v-viewer](https://github.com/mirari/v-viewer) vue3 & vue2 base on viewerjs
