@@ -2,7 +2,7 @@
 outline: deep
 ---
 <script setup>
-import PropsIndex from '@play/vue/src/components/props/Index.vue'
+import PropsIndex from '@play/vue/src/components/Props/Index.vue'
 </script>
 
 # vue2
@@ -138,23 +138,23 @@ Vue.component('base-input', {
 - vitepress 不支持vue2组件的展示
 <!-- <PropsIndexVue2 /> -->
 
-  <<< @/submodule/play/packages/vue2/src/components/props/Index.vue
+  <<< @/submodule/play/packages/vue2/src/components/Props/Index.vue
 
 - 直接修改props，响应式更新父组件
 
-  <<< @/submodule/play/packages/vue2/src/components/props/Child.vue
+  <<< @/submodule/play/packages/vue2/src/components/Props/Child.vue
 
 - watch 监听 props 变化，更新localForm，输入更新，调用emit update 更新父组件
 
-  <<< @/submodule/play/packages/vue2/src/components/props/Child2.vue
+  <<< @/submodule/play/packages/vue2/src/components/Props/Child2.vue
 
 - computed formValue get中接受 props form，set中捕捉不到，watch formValue变化，调用emit update 更新父组件
 
-  <<< @/submodule/play/packages/vue2/src/components/props/Child3.vue
+  <<< @/submodule/play/packages/vue2/src/components/Props/Child3.vue
 
 - computed 单个form的属性，set可以捕捉到
 
-  <<< @/submodule/play/packages/vue2/src/components/props/Child4.vue
+  <<< @/submodule/play/packages/vue2/src/components/Props/Child4.vue
 
 #### vue3
 
@@ -162,9 +162,9 @@ Vue.component('base-input', {
 
   <PropsIndex />
 
-  <<< @/submodule/play/packages/vue/src/components/props/Index.vue
+  <<< @/submodule/play/packages/vue/src/components/Props/Index.vue
 
-  <<< @/submodule/play/packages/vue/src/components/props/Child.vue
+  <<< @/submodule/play/packages/vue/src/components/Props/Child.vue
 
 ## 模板
 
