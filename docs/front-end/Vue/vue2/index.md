@@ -403,7 +403,7 @@ name: "demo"<br>value: "hello!"<br>expression: "message"<br>argument: "foo"<br>m
   - 删除 data 属性，需要用 `Vue.delete`
   - 修改数组某一元素，不能 `arr[index] = value` ，要使用 `arr.splice` API 方式
 - Vue 不能检测以下数组的变动：
-  - 当你利用索引直接设置一个数组项时，例如：vm.items[indexOfItem] = newValue
+  - 当你利用索引直接设置一个数组项时，例如：`vm.items[indexOfItem] = newValue`
   - 当你修改数组的长度时，例如：vm.items.length = newLength
   ```js
   var vm = new Vue({
@@ -429,7 +429,12 @@ name: "demo"<br>value: "hello!"<br>expression: "message"<br>argument: "foo"<br>m
   - 路由切换时，页面会 scroll 到顶部。例如，在一个新闻列表页下滑到一定位置，点击进入详情页，在返回列表页，此时会 scroll 到顶部，并重新渲染列表页。所有的 SPA 都会有这个问题，并不仅仅是 Vue 。
   - 在列表页缓存数据和 `scrollTop`
   - 返回列表页时（用 Vue-router [导航守卫](https://router.vuejs.org/zh/guide/advanced/navigation-guards.html)，判断 `from`），使用缓存数据渲染页面，然后 `scrollTo(scrollTop)`
-
+### 虚拟dom &I
+- 虚拟 DOM 是一个存在于内存中的 JavaScript 对象，它是真实 DOM 的抽象
+- 最终需要更新真实 DOM，当真实 DOM 发生变化时，浏览器仍然需要进行重排和重绘
+- 虚拟dom优势
+  - 减少直接 DOM 操作：新旧虚拟 DOM 树的差异，通过 diff 算法计算出需要更新的部分，然后更新真实 DOM
+  - 批量更新：虚拟 DOM 允许将多次 DOM 修改合并为一次更新
 ## vue-router
 ### 模式
 - 模式

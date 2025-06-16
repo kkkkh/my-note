@@ -14,8 +14,7 @@ export default withMermaid(defineConfig({
   vite: {
     resolve: {
       alias: [
-                // 对 <<< @/**/** 代码片段引入没有影响
-        // { find: /^@play\//, replacement: fileURLToPath(new URL('../../docs/submodule/play/packages/', import.meta.url))},
+        // 对 <<< @/**/** 代码片段引入没有影响
         { find: /^@\//, replacement: fileURLToPath(new URL('../../docs/', import.meta.url))},
         { find: /^@play\//, replacement: fileURLToPath(new URL('../../docs/submodule/play/packages/', import.meta.url))},
         // { find: '~', replacement: fileURLToPath(new URL('../../docs/submodule/play/packages', import.meta.url).href)},
@@ -151,7 +150,6 @@ export default withMermaid(defineConfig({
             { text: 'styled-components', link: '/front-end/Css/styled-components/' },
             { text: 'sass', link: '/front-end/Css/sass/' },
             { text: 'tailwindcss', link: '/front-end/Css/tailwindcss/' },
-
           ],
         },
         {

@@ -218,6 +218,27 @@ unlink 删除
 
 <img src="./link/link.png" v-viewer>
 
+### util
+#### util.promisify
+一个基于回调的函数转换为一个返回 Promise 的函数
+```js
+const util = require('util');
+function asyncMethod(x, callback) {
+  setTimeout(() => {
+    const result = x * 2;
+    callback(null, result); // 第一个参数通常是 error
+  }, 500);
+}
+const promiseMethod = util.promisify(asyncMethod);
+
+promiseMethod(5)
+.then(result => {
+  console.log(result); // 输出: 10 (大约 500ms 后)
+})
+.catch(err => {
+  console.error(err);
+});
+```
 ### path
 #### path.isAbsolute()
 确定 path 是否为绝对路径

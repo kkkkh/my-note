@@ -16,6 +16,7 @@ outline: deep
 - 日历
   - [vue-calendar](https://github.com/jinzhe/vue-calendar) => 更完善 [vue-calendar-h5](https://github.com/2277419213/vue-calendar-h5)
   - [vcalendar](https://vcalendar.io/)
+  - [fullcalendar](https://fullcalendar.io/docs/getting-started)
 - 交互
   - [popper.js v2](https://popper.js.org/docs/v2/) &nbsp;&nbsp;&nbsp;[floating-ui](https://floating-ui.com/docs/getting-started) [Tippy.js](https://atomiks.github.io/tippyjs/) 创建“浮动”元素
   - [sortablejs](https://github.com/SortableJS/Sortable) &nbsp;&nbsp;&nbsp;[sortablejs demo](https://sortablejs.github.io/Sortable/) 拖拽

@@ -1503,11 +1503,20 @@ console.log(set1.has(6)); // true
 
 <Test :is="Promise" />
 
-
-
 - [Promise A+ 规范](https://promisesaplus.com/)
 - [Promise v8 源码实现](https://chromium.googlesource.com/v8/v8/+/3.29.45/src/promise.js?autodive=0/) 比较旧
-
+#### Promise.resolve() / Promise.reject()
+```js
+// 返回一个Promsie对象
+function syncMethod(x) {
+  return x * 2;
+}
+const promiseMethod = (x) => Promise.resolve(syncMethod(x));
+promiseMethod(5)
+  .then(result => {
+    console.log(result); // 输出: 10
+  });
+```
 #### Promise.all
 - 报错处理
 ```js
@@ -1617,14 +1626,6 @@ var res  =JSON.parse(
   ,(key,value)=>{if(key === 'a'){return 5}else{return value}})
 // {"a":5,"b":{"a":5,"c":{"a":5}}}
 ```
-
-### 宏任务 &I
-- setTimeout/setInterval
-- I/O 操作 (例如文件读取、网络请求)
-- UI 渲染
-- 用户交互事件 (例如 click, scroll)
-- 网络请求
-
 ### Intl
 Intl 是 ECMAScript 国际化 API 的命名空间对象，提供了一系列用于多语言、多地区环境下的格式化和比较功能。
 

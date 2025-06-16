@@ -141,6 +141,13 @@ requestAnimationFrame(callback)
 - 参考：
   - [一个小框架：一个完整支持 unicode 的 cookie 读取/写入器](https://developer.mozilla.org/zh-CN/docs/Web/API/Document/cookie#%E4%B8%80%E4%B8%AA%E5%B0%8F%E6%A1%86%E6%9E%B6%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E6%94%AF%E6%8C%81_unicode_%E7%9A%84_cookie_%E8%AF%BB%E5%8F%96%E5%86%99%E5%85%A5%E5%99%A8) 通过定义一个和 Storage 对象部分一致的对象，简化cookie的操作
   - [Cookies and security](https://humanwhocodes.com/blog/2009/05/12/cookies-and-security/)
+### Fetch
+- 特点
+  - 返回 Promise
+  - 支持流式处理
+  - 等
+- 参考：[Fetch_API](https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch)
+
 ### TextEncoder / TextDecoder
 #### TextEncoder
 - 接受码位流作为输入，并提供 UTF-8 字节流作为输出
