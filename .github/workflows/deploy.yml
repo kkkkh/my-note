@@ -54,6 +54,8 @@ jobs:
           git config --global user.name "kkkkh"
       - name: submodule
         run: git submodule update --init
+      - name: ls
+        run: ls -la
       - name: Build with VitePress
         run: pnpm docs:build
         # run: npm run docs:build # 或 pnpm docs:build / yarn docs:build / bun run docs:build
