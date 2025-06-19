@@ -257,6 +257,19 @@ console.log(
   "color: yellow; font-style: italic; background-color: blue;padding: 2px",
 );
 ```
+#### console.group 分组
+```js
+console.log("This is the outer level");
+console.group();
+console.log("Level 2");
+console.group();
+console.log("Level 3");
+console.warn("More of level 3");
+console.groupEnd();
+console.log("Back to level 2");
+console.groupEnd();
+console.debug("Back to the outer level");
+```
 - 参考
   - [console](https://developer.mozilla.org/zh-CN/docs/Web/API/console)
 ### 通信

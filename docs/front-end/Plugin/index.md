@@ -7,6 +7,7 @@ outline: deep
 ### ui
 - 表格
   - [xlsx](https://docs.sheetjs.com/docs/getting-started/examples/export#live-demo) excel
+  - [SheetJS](https://github.com/SheetJS/sheetjs) excel
   - [~~Luckysheet~~](https://dream-num.github.io/LuckysheetDocs/zh/guide/) (停止维护) => [univer](https://github.com/dream-num/univer/blob/dev/README-zh.md)
 - 富文本
   - [slatejs](https://docs.slatejs.org/) 富文本
@@ -68,6 +69,9 @@ outline: deep
   - [flowbite-vue](https://flowbite-vue.com/pages/getting-started)
   - [buefy](https://buefy.org/documentation/start)
   - [quasar](https://quasar.dev/start/quick-start)
+- 国际化
+  - [i18next-parser](https://github.com/i18next/i18next-parser)
+  - [i18next-scanner](https://github.com/i18next/i18next-scanner)
 ### 功能
 - 工具函数
   - [lodash](https://lodash.com)  &nbsp;&nbsp;&nbsp;[lodash中文](https://www.lodashjs.com/)
@@ -107,6 +111,7 @@ outline: deep
   - [crypto-js](https://github.com/brix/crypto-js) 数据摘要（停止维护：NodeJS 和现代浏览器都有原生 Crypto 模块）
   - [SparkMD5](https://github.com/satazor/js-spark-md5) md5 实现
   - [hash-wasm](https://github.com/Daninet/hash-wasm) hash function library
+  - [crc](https://github.com/alexgorbatchev/crc) crc32
 - http
   - [axios](https://axios-http.com/zh/docs/intro)
   - cookie
@@ -118,17 +123,21 @@ outline: deep
 - 模板库
   - [argon-dashboard](https://www.creative-tim.com/product/argon-dashboard)
 ### 基建
-- shell
-  - [shelljs](https://github.com/shelljs/shelljs)
 - env
   - [cross-env](https://github.com/kentcdodds/cross-env) 解决跨平台环境变量问题
   - [dotenv](https://dotenvx.com/docs/) 管理本地的 .env 配置文件
+  - [dotenv-expand](https://github.com/motdotla/dotenv-expand) 扩展环境变量
 - Terminal 终端
+  - [inquirer](https://github.com/SBoudrias/Inquirer.js) 在终端中创建交互式提示
   - [enquirer](https://github.com/termapps/enquirer) 在终端中创建交互式提示
   - [node-draftlog](https://github.com/ivanseidel/node-draftlog) 动态加载日志
   - [ora](https://github.com/sindresorhus/ora) 终端旋转器
+  - [cli-spinners](https://github.com/sindresorhus/cli-spinners) 终端旋转器类型
+  - [listr2](https://listr2.kilic.dev/) 终端列表
   - [vue-termui](https://vue-termui.dev/guide/introduction.html) 更强大终端应用程序，构建交互式提示，可以部署到网页并使其在终端中运行的应用程序 vue
   - [ink](https://github.com/vadimdemedes/ink/#israwmodesupported) react
+  - [commander](https://github.com/tj/commander.js/blob/HEAD/Readme_zh-CN.md) 命令行工具
+  - [shelljs](https://github.com/shelljs/shelljs)
 - git
   - [degit](https://github.com/Rich-Harris/degit)
   - git hooks
@@ -142,6 +151,14 @@ outline: deep
   - [nvm](https://github.com/nvm-sh/nvm)
 - eslint
   - [generator-eslint](https://www.npmjs.com/package/generator-eslint)
+- config
+  - [lilconfig](https://github.com/antonk52/lilconfig)
+  - [cosmiconfig](https://github.com/cosmiconfig/cosmiconfig)
+- 换行符
+  - [eol](https://github.com/ryanve/eol)
+- glup
+  - [vinyl-fs](https://github.com/gulpjs/vinyl-fs)
+  - [vinyl](https://github.com/gulpjs/vinyl)
 ## Vue plugin (Vue 扩展)
 ### cli
 - [~~Vue CLI~~](https://cli.vuejs.org/)(停止维护) => [create-vue](https://github.com/vuejs/create-vue)
@@ -154,6 +171,7 @@ outline: deep
 - [vue-images](https://github.com/littlewin-wang/vue-images)
 - [vue-drag-select](https://github.com/ZhiJieZhang1/vue-drag-select)
 - [vue-demi](https://www.npmjs.com/package/vue-demi)
+- [@vue/compiler-sfc](https://www.npmjs.com/package/@vue/compiler-sfc) 解析单文件组件
 - 图片查看
   - [vue-it-bigger](https://github.com/haiafara/vue-it-bigger) vue2
   - [v-viewer](https://github.com/mirari/v-viewer) vue3 & vue2 base on viewerjs

@@ -588,43 +588,43 @@ function MyComponent({ htmlContent }) {
 ## React19
 ### Action 和 表单相关API
 #### useTransition
-React 18 加入的 transition，可以用来定义非关键的 state 更新。
-自动批处理多个 state 更新操作，如果其中某个 state 更新导致的渲染代价较大，则会拖累其他的 state 更新，具体来说，可能会导致录入文字变“卡”。
-把代价大的 state 更新标记为非关键的 transition
-在 transition 执行过程中，调度器每 5 毫秒都会把控制权交还给主进程，检查是否有其他更重要的工作单元，如果有就暂停 transition，这样就可以进一步避免阻塞 UI。
-```js
-startTransition(() => {/* 省略 */});
-//              -----------------
-//                      ^
-//                      |
-//                 scope回调函数包含的 state 更新会被标记为 transition；
-//                 React 18 要求上面的回调函数整体是同步的，如果异步不会被标记
+- React 18 加入的 transition，可以用来定义非关键的 state 更新。
+- 自动批处理多个 state 更新操作，如果其中某个 state 更新导致的渲染代价较大，则会拖累其他的 state 更新，具体来说，可能会导致录入文字变“卡”。
+- 把代价大的 state 更新标记为非关键的 transition
+- 在 transition 执行过程中，调度器每 5 毫秒都会把控制权交还给主进程，检查是否有其他更重要的工作单元，如果有就暂停 transition，这样就可以进一步避免阻塞 UI。
+  ```js
+  startTransition(() => {/* 省略 */});
+  //              -----------------
+  //                      ^
+  //                      |
+  //                 scope回调函数包含的 state 更新会被标记为 transition；
+  //                 React 18 要求上面的回调函数整体是同步的，如果异步不会被标记
 
 
-const [isPending, startTransition] = useTransition();
-//     ---------  ---------------
-//         ^                  ^
-//         |                  |
-// 是否存在待执行的transition  与startTransition API相同的函数
-```
+  const [isPending, startTransition] = useTransition();
+  //     ---------  ---------------
+  //         ^                  ^
+  //         |                  |
+  // 是否存在待执行的transition  与startTransition API相同的函数
+  ```
 #### action
-React 19 新版本，transition 可以是异步函数
-- 提升组件性能
-- 解决竞态问题
-- 维护其待定（pending）状态
-伴随着 transition 的进化，React 19 将用于触发 transition 的函数，无论是异步还是同步，统称为 action（动作）。
-在 React 19 中，一个 action 可以有多种调用方法，
-- 一种是作为参数传给startTransition ，
-- 另一种是传给标签的 action 属性。后者就是我们接下来会介绍的表单 action。
+- React 19 新版本，transition 可以是异步函数
+  - 提升组件性能
+  - 解决竞态问题
+  - 维护其待定（pending）状态
+- 伴随着 transition 的进化，React 19 将用于触发 transition 的函数，无论是异步还是同步，统称为 action（动作）。
+- 在 React 19 中，一个 action 可以有多种调用方法，
+  - 一种是作为参数传给startTransition ，
+  - 另一种是传给标签的 action 属性。后者就是我们接下来会介绍的表单 action。
 #### formAction
 
 <<< @/submodule/play/packages/react/src/react19/action/FormAction.jsx
 
 #### useFormStatus
-表单 action 会作为 transition 执行
-useFormStatus 可以返回最近的表单提交的状态信息
+- 表单 action 会作为 transition 执行
+- useFormStatus 可以返回最近的表单提交的状态信息
 
-<<< @/submodule/play/packages/react/src/react19/action/UseFormStatus.jsx
+  <<< @/submodule/play/packages/react/src/react19/action/UseFormStatus.jsx
 
 #### useActionState
 ```js
