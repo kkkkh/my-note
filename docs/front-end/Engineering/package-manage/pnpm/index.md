@@ -33,6 +33,14 @@ outline: deep
     - 2. 硬连接不能跨文件系统：不能让C盘的文件在D盘有另外一个名字
     - 3. 硬连接是指向 inode（相同内容）：inode 其实就是操作系统给文件的“身份证”，里面有文件的各种信息（权限、修改时间、数据位置等），硬连接就是创建了一个新的“文件名”指向和原文件一样的 inode。
   - 参考：[nodejs 创建硬链接和软链接](/back-end/Lang/NodeJs/Base/index.md#link-symlink)
+### pnpm store
+pnpm 安装的包真实存储位置是一个`全局的内容寻址存储库`
+实际地址在，例如：`D:\.pnpm-store\store\v3`
+包的实际文件是根据内容哈希进行存储的
+```bash
+pnpm store path # 查看当前的 store 位置
+pnpm config set store-dir <path> #自定义 store 位置
+```
 ## pnpm command [官方连接](https://pnpm.io/cli/add)
 ### pnpm install
 ``` bash
@@ -51,7 +59,7 @@ pnpm install --shamefully-hoist
 # 恢复到执行 pnpm install --shamefully-hoist 之前的状态
 rm -rf node_modules
 rm pnpm-lock.yaml
-pnpm store prune  # 或者 rm -rf $(pnpm store path)
+pnpm store prune  # 或者 rm -rf $(pnpm store path) 会删除未被任何项目引用的包
 pnpm install
 ```
 ### pnpm remove
@@ -100,7 +108,7 @@ pnpm uninstall --global <package>
 # 更新所有依赖项，遵守 package.json 中指定的范围
 pnpm up
 # 将所有依赖项更新到最新版本
-pnpm up --latest 
+pnpm up --latest
 # v2 的最新版本
 pnpm up foo@2
 ```
@@ -110,6 +118,13 @@ pnpm up foo@2
 pnpm --filter "@babel/core" test # 只执行@babel/core包的test
 pnpm --filter "@babel/*" test
 pnpm --filter "*core" test
+```
+给子包安装依赖
+```bash
+# 给子包foo安装lodash
+pnpm add lodash -D --filter foo
+# 当你添加依赖是 workspace 里已有的包时，可以使用 workspace 协议：
+pnpm add foo@workspace:* --filter bar
 ```
 ### pnpm patch / pnpm patch-commit / pnpm patch-remove
 给软件包添加补丁

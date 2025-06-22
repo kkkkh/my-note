@@ -4,6 +4,7 @@ outline: deep
 # 其他工具
 - 代码
   - [Upsource](https://www.jetbrains.com/) &nbsp;[jetbrains space](https://www.jetbrains.com/space/)代码审查
+  - [graphite](https://graphite.dev/) 代码审查
 - 图片
   - [tinypng](https://tinypng.com/) 压缩图片
   - [compresspng](https://compresspng.com/zh/) 压缩图片
@@ -13,6 +14,7 @@ outline: deep
   - [draw.io](https://www.drawio.com/) draw.io绘图（[diagrams](https://app.diagrams.net/?src=about)）
   - [mermaid](https://mermaid.js.org/intro/) 图表
   - [lottiefiles](https://lottiefiles.com/) lotties动画
+  - [raphael AI](https://raphael.app/zh) AI 生成图像
 - 文档
   - [trello](https://trello.com/) 看板/任务
   - [语雀](https://www.yuque.com/)

@@ -88,6 +88,9 @@ for (let i = 0; i < 10; i++) {
   - 模块化
 ### 操作符
 https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators
+
+#### 逻辑或赋值
+||=
 ```js
 var  a= {b:1}
 a.b ||= 3
@@ -96,9 +99,18 @@ a.b = 0
 a.b ||= 3
 // a.b = 3
 ```
+#### 小数精度问题
+- 问题：为何 `0.1 + 0.2 !== 0.3`
+- 分析：
+  - 计算机用二进制存储数据。
+  - 整数用二进制没有误差，如 `9` 表示为 `1001` 。<br>
+  - 而有的小数无法用二进制表示，如 `0.2` 用二进制表示就是 `1.10011001100...`
+  - 所以，累加小数时会出现误差。
+  - 这不仅仅是 JS ，所有的计算机语言都这样。
 ## 数据类型
 ### Number
 #### 进制转化
+小窍门：16进制是一个字符串，10进制是一个数字
 - 10进制转为16进制
 ```js
 var num = 65535
@@ -109,7 +121,7 @@ console.log(str) //'ffff'
 ```js
 // parseInt()转为10进制，第2参数按照什么进制转10进制
 var num = parseInt('0xffff',16)
-var num = parseInt('ffff',16) 
+var num = parseInt('ffff',16)
 console.log(num) // 65535
 // or
 Number('0xffff') // 65535
@@ -118,6 +130,7 @@ Number(0xffff) // 65535
 var str = (0xffff).toString(10);
 console.log(str); //65535
 ```
+小窍门：2进制也是一个字符串
 - 2进制 与 10进制转化
 ```js
 var num = 65535
@@ -226,6 +239,13 @@ const rounded = 5n / 2n;
   - 由于在 Number 与 BigInt 之间进行转换会损失精度，
   - 因而建议仅在值可能大于 2^53 时使用 BigInt 类型，
   - 并且不在两种类型之间进行相互转换。
+### toLocaleString &I
+toLocaleString(locales, options) 方法返回这个数字特定于语言环境的表示字符串
+```js
+const number = 3500;
+console.log(number.toLocaleString()); // "3,500"，如果区域设置为美国英语
+```
+参考：[toLocaleString](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString)
 ### String
 #### fromCodePoint() / fromCharCode()
 - String.fromCodePoint(num1)
@@ -1177,6 +1197,15 @@ regex2.test(".\nfoo"); // true - 索引 2 是行的开始
 - 调用当前执行的函数，匿名函数场景使用
 - es5严格模式废弃
 ### Array
+#### push pop shift unshift
+- unshift() 加到开头，返回长度
+- push() 加到末尾，返回长度
+
+- shift() 头部删除，并返回该元素的值。
+- pop() 末尾删除，并返回该元素的值。
+
+- 队列：先进先出（push到末尾，shift从头部删除，但是不推荐使用shift）
+- 栈：先进后出 （push到末尾，pop从末尾删除）
 #### at()
 ```js
 // 数组及数组元素
@@ -1474,11 +1503,20 @@ console.log(set1.has(6)); // true
 
 <Test :is="Promise" />
 
-
-
 - [Promise A+ 规范](https://promisesaplus.com/)
 - [Promise v8 源码实现](https://chromium.googlesource.com/v8/v8/+/3.29.45/src/promise.js?autodive=0/) 比较旧
-
+#### Promise.resolve() / Promise.reject()
+```js
+// 返回一个Promsie对象
+function syncMethod(x) {
+  return x * 2;
+}
+const promiseMethod = (x) => Promise.resolve(syncMethod(x));
+promiseMethod(5)
+  .then(result => {
+    console.log(result); // 输出: 10
+  });
+```
 #### Promise.all
 - 报错处理
 ```js
@@ -1555,7 +1593,7 @@ const jsonString = JSON.stringify(obj); // '{"name":"Alice","age":25}'
 const jsonString = '{"name":"Alice","age":25}';
 const obj = JSON.parse(jsonString); // { name: "Alice", age: 25 }
 ```
-#### JSON.stringify /
+#### JSON.stringify / JSON.parse
 - `JSON.stringify(value[, replacer [, space]])`
   - replacer 参数可以是一个函数或者一个数组。作为函数，它有两个参数，键（key）和值（value），它们都会被序列化。( 不能用 replacer 方法，从数组中移除值（values），如若返回 undefined 或者一个函数，将会被 null 取代。)
   - space 参数用来控制结果字符串里面的间距
@@ -1574,9 +1612,61 @@ const obj = JSON.parse(jsonString); // { name: "Alice", age: 25 }
 
 <Test :is="Json" />
 
-### 宏任务 &I
-- setTimeout/setInterval
-- I/O 操作 (例如文件读取、网络请求)
-- UI 渲染
-- 用户交互事件 (例如 click, scroll)
-- 网络请求
+```js
+// 可以在stringify层处理
+var res  =JSON.parse(
+  JSON.stringify(
+    {a:1,b:{a:2,c:{a:3}}},
+    (key,value)=>{if(key === 'a'){return 4}else{return value}})
+  )
+// {"a":4,"b":{"a":4,"c":{"a":4}}}
+// 也可以在parse层处理
+var res  =JSON.parse(
+  JSON.stringify({a:1,b:{a:2,c:{a:3}}})
+  ,(key,value)=>{if(key === 'a'){return 5}else{return value}})
+// {"a":5,"b":{"a":5,"c":{"a":5}}}
+```
+### Intl
+Intl 是 ECMAScript 国际化 API 的命名空间对象，提供了一系列用于多语言、多地区环境下的格式化和比较功能。
+
+#### Intl.NumberFormat &I
+用于数字格式化（包括货币、百分比等），根据语言环境自动添加千分位分隔符、小数点格式、货币符号等。
+```js
+const num = 1234567890;
+const formatter = new Intl.NumberFormat('en-US');
+const formatted = formatter.format(num);
+console.log(formatted); // 输出：1,234,567,890
+```
+Intl.DateTimeFormat
+用于日期和时间格式化，支持多种语言和地区的显示格式，比如年月日顺序、12小时制/24小时制等。
+
+Intl.Collator
+用于字符串排序和比较，考虑不同语言的字母顺序、重音符号等细节。
+
+Intl.RelativeTimeFormat
+用于相对时间描述，比如“2天前”、“1小时后”等。
+
+Intl.PluralRules
+用于根据数字确定复数规则，比如“1 apple”，“2 apples”中单复数的区分；针对不同语言规则不同。
+
+Intl.ListFormat
+用于格式化列表，比如英语中"A, B, and C"，中文中“A、B和C”。
+
+Intl.Locale
+表示语言环境标签（locale），用于描述语言、脚本、区域等信息。
+
+```js
+// 数字格式化
+const numFmt = new Intl.NumberFormat('zh-CN', { style: 'currency', currency: 'CNY' });
+console.log(numFmt.format(1234567.89)); // 输出：￥1,234,567.89
+// 日期格式化
+const dateFmt = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+console.log(dateFmt.format(new Date())); // e.g. February 28, 2024
+// 字符串排序
+const collator = new Intl.Collator('fr-FR');
+const items = ['éclair', 'eclair', 'École'];
+console.log(items.sort(collator.compare)); // 符合法语排序顺序
+// 相对时间
+const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
+console.log(rtf.format(-1, 'day')); // "yesterday"
+```

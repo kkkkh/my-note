@@ -136,6 +136,52 @@ import AnimationDirection from './components/animation/animation-direction.vue'
   ```
 - 参考：
   - [position](https://developer.mozilla.org/zh-CN/docs/Learn_web_development/Core/CSS_layout/Positioning)
+
+## 属性
+### cursor
+```css
+/* 关键字值 */
+cursor: pointer;
+cursor: help;
+cursor: wait;
+cursor: crosshair;
+cursor: not-allowed;
+cursor: zoom-in;
+cursor: grab;
+cursor: auto;
+/* 使用 URL，并提供一个关键字值作为备用 */
+cursor: url(hand.cur), pointer;
+/* URL 和 xy 的坐标偏移值，最后提供一个关键字值作为备用 */
+cursor:
+  url(cursor1.png) 4 12,
+  auto;
+cursor:
+  url(cursor2.png) 2 2,
+  pointer;
+/* 全局属性 */
+cursor: inherit;
+cursor: initial;
+cursor: unset;
+```
+### rem / em / rpx &I
+- rpx
+  - rpx（responsive pixel）是小程序特有的单位，它将所有屏幕的宽度都抽象为 750rpx。
+  - 在 750rpx 宽度的屏幕上，1rpx = 1px。
+  - 小程序会根据实际屏幕宽度，自动将 rpx 单位转换为对应的像素值，从而实现自适应。
+- rem
+  - rem 是 "root em" 的缩写，它相对于 HTML 根元素（`<html>`）的字体大小 。
+  - 这意味着，无论元素嵌套多深，1rem 始终等于根元素的字体大小。
+- em
+  - em 是一个相对长度单位，它相对于当前元素的字体大小 。
+  - 如果当前元素没有设置字体大小，则 em 单位会继承父元素的字体大小。
+- vw
+  - vw（viewport width）是相对于视口宽度的百分比单位。1vw 等于视口宽度的 1%
+- vh
+  - vh（viewport height）是相对于视口高度的百分比单位。1vh 等于视口高度的 1% 。
+- px
+  - px（pixel）是 CSS 中最基本的长度单位，代表屏幕上的一个物理像素点。
+参考：
+- [cursor](https://developer.mozilla.org/zh-CN/docs/Web/CSS/cursor)
 ### 选择器
 - base
   - .class
@@ -229,51 +275,12 @@ footer p:hover {
   - :where() 和 :is() 的不同之处在于，
   - :where() 的优先级总是为 0
   - :is() 的优先级是由它的选择器列表中优先级最高的选择器决定的。
-## 样式
-### cursor
+### will-change
+- 提示浏览器即将发生的变换，让浏览器提前做好优化准备
+- 使用不当会导致性能问题
 ```css
-/* 关键字值 */
-cursor: pointer;
-cursor: help;
-cursor: wait;
-cursor: crosshair;
-cursor: not-allowed;
-cursor: zoom-in;
-cursor: grab;
-cursor: auto;
-/* 使用 URL，并提供一个关键字值作为备用 */
-cursor: url(hand.cur), pointer;
-/* URL 和 xy 的坐标偏移值，最后提供一个关键字值作为备用 */
-cursor:
-  url(cursor1.png) 4 12,
-  auto;
-cursor:
-  url(cursor2.png) 2 2,
-  pointer;
-/* 全局属性 */
-cursor: inherit;
-cursor: initial;
-cursor: unset;
+will-change: transform;
 ```
-### rem / em / rpx &I
-- rpx
-  - rpx（responsive pixel）是小程序特有的单位，它将所有屏幕的宽度都抽象为 750rpx。
-  - 在 750rpx 宽度的屏幕上，1rpx = 1px。
-  - 小程序会根据实际屏幕宽度，自动将 rpx 单位转换为对应的像素值，从而实现自适应。
-- rem
-  - rem 是 "root em" 的缩写，它相对于 HTML 根元素（`<html>`）的字体大小 。
-  - 这意味着，无论元素嵌套多深，1rem 始终等于根元素的字体大小。
-- em
-  - em 是一个相对长度单位，它相对于当前元素的字体大小 。
-  - 如果当前元素没有设置字体大小，则 em 单位会继承父元素的字体大小。
-- vw
-  - vw（viewport width）是相对于视口宽度的百分比单位。1vw 等于视口宽度的 1%
-- vh
-  - vh（viewport height）是相对于视口高度的百分比单位。1vh 等于视口高度的 1% 。
-- px
-  - px（pixel）是 CSS 中最基本的长度单位，代表屏幕上的一个物理像素点。
-参考：
-- [cursor](https://developer.mozilla.org/zh-CN/docs/Web/CSS/cursor)
 ## 动画
 ### animation &I
 ```css

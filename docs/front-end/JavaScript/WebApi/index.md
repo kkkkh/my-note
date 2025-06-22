@@ -2,10 +2,11 @@
 outline: deep
 ---
 <script setup>
-import RequestAnimationFrame from './components/RequestAnimationFrame.vue'
-import MutationObserver from './components/MutationObserver.vue'
-import QueueMicrotask from './components/QueueMicrotask.vue'
+// import RequestAnimationFrame from './components/RequestAnimationFrame.vue'
+// import MutationObserver from './components/MutationObserver.vue'
+// import QueueMicrotask from './components/QueueMicrotask.vue'
 import Test from '@/components/Test.vue'
+const modules = import.meta.glob('./components/*.vue', { eager: true, import: 'default' })
 </script>
 
 # web API
@@ -68,14 +69,14 @@ requestAnimationFrame(callback)
 
 <<< ./components/RequestAnimationFrame.vue
 
-  <Test :is="RequestAnimationFrame" />
+  <Test :is="modules['./components/RequestAnimationFrame.vue']" />
 
 ### MutationObserver
 - MutationObserver 接口提供了监视对 DOM 树所做更改的能力
 
 <<< ./components/MutationObserver.vue
 
-<Test :is="MutationObserver" />
+<Test :is="modules['./components/MutationObserver.vue']" />
 
 ### queueMicrotask
 - 当创建该微任务的函数执行之后，并且只有当 Javascript 调用栈为空，
@@ -83,10 +84,17 @@ requestAnimationFrame(callback)
 
 <<< ./components/QueueMicrotask.vue
 
-<Test :is="QueueMicrotask" />
+<Test :is="modules['./components/QueueMicrotask.vue']" />
 
 - 参考
   - [Microtask_guide](https://developer.mozilla.org/zh-CN/docs/Web/API/HTML_DOM_API/Microtask_guide)
+
+### IntersectionObserver &I
+
+<<< ./components/IntersectionObserver.vue
+
+<component :is="modules['./components/IntersectionObserver.vue']" />
+
 ### localStorage / sessionStorage / cookie &I
 - localStorage
   ```js
@@ -133,6 +141,13 @@ requestAnimationFrame(callback)
 - 参考：
   - [一个小框架：一个完整支持 unicode 的 cookie 读取/写入器](https://developer.mozilla.org/zh-CN/docs/Web/API/Document/cookie#%E4%B8%80%E4%B8%AA%E5%B0%8F%E6%A1%86%E6%9E%B6%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E6%94%AF%E6%8C%81_unicode_%E7%9A%84_cookie_%E8%AF%BB%E5%8F%96%E5%86%99%E5%85%A5%E5%99%A8) 通过定义一个和 Storage 对象部分一致的对象，简化cookie的操作
   - [Cookies and security](https://humanwhocodes.com/blog/2009/05/12/cookies-and-security/)
+### Fetch
+- 特点
+  - 返回 Promise
+  - 支持流式处理
+  - 等
+- 参考：[Fetch_API](https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch)
+
 ### TextEncoder / TextDecoder
 #### TextEncoder
 - 接受码位流作为输入，并提供 UTF-8 字节流作为输出
@@ -241,6 +256,19 @@ console.log(
   "This is %cMy stylish message",
   "color: yellow; font-style: italic; background-color: blue;padding: 2px",
 );
+```
+#### console.group 分组
+```js
+console.log("This is the outer level");
+console.group();
+console.log("Level 2");
+console.group();
+console.log("Level 3");
+console.warn("More of level 3");
+console.groupEnd();
+console.log("Back to level 2");
+console.groupEnd();
+console.debug("Back to the outer level");
 ```
 - 参考
   - [console](https://developer.mozilla.org/zh-CN/docs/Web/API/console)

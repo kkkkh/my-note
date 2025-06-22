@@ -1,6 +1,10 @@
 ---
 outline: deep
 ---
+<script setup>
+import PropsIndex from '@play/vue/src/components/Props/Index.vue'
+</script>
+
 # vue2
 ## 应用
 ### v-model和.sync
@@ -129,7 +133,41 @@ Vue.component('base-input', {
 ```vue
 <base-input v-on:keyup.native="onKeyup" v-on:click.native="onKeyup"></base-input>
 ```
+### props
+#### vue2
+- vitepress 不支持vue2组件的展示
+<!-- <PropsIndexVue2 /> -->
+
+  <<< @/submodule/play/packages/vue2/src/components/Props/Index.vue
+
+- 直接修改props，响应式更新父组件
+
+  <<< @/submodule/play/packages/vue2/src/components/Props/Child.vue
+
+- watch 监听 props 变化，更新localForm，输入更新，调用emit update 更新父组件
+
+  <<< @/submodule/play/packages/vue2/src/components/Props/Child2.vue
+
+- computed formValue get中接受 props form，set中捕捉不到，watch formValue变化，调用emit update 更新父组件
+
+  <<< @/submodule/play/packages/vue2/src/components/Props/Child3.vue
+
+- computed 单个form的属性，set可以捕捉到
+
+  <<< @/submodule/play/packages/vue2/src/components/Props/Child4.vue
+
+#### vue3
+
+- 代码展示
+
+  <PropsIndex />
+
+  <<< @/submodule/play/packages/vue/src/components/Props/Index.vue
+
+  <<< @/submodule/play/packages/vue/src/components/Props/Child.vue
+
 ## 模板
+
 ### watch
 ```js
 var vm = new Vue({
@@ -332,6 +370,71 @@ name: "demo"<br>value: "hello!"<br>expression: "message"<br>argument: "foo"<br>m
   - MutationObserver： 如果浏览器支持 MutationObserver，则使用 MutationObserver。MutationObserver 可以在 DOM 发生变化时异步执行回调函数。
   - setTimeout： 如果以上都不支持，则使用 setTimeout(callback, 0)。
   - 这些策略的共同目标是：将回调函数放入事件循环的下一个 "tick" 中执行，确保在 DOM 更新完成后执行。
+### 优化 &I
+- v-if 和 v-show
+  - `v-if` 组件销毁/重建
+  - `v-show` 组件隐藏（切换 CSS `display`）
+  - 一般情况下使用 `v-if` 即可，普通组件的销毁、渲染不会造成性能问题
+  - 如果组件创建时需要大量计算，或者大量渲染（如复杂的编辑器、表单、地图等），可以考虑 `v-show`
+- v-for 使用 key
+  - `key` 可以优化内部的 diff 算法。注意，遍历数组时 `key` 不要使用 `index` 。
+- computed 缓存
+  - `computed` 可以缓存计算结果，`data` 不变则缓存不失效。
+- keep-alive
+  - `<keep-alive>` 可以缓存子组件，只创建一次。通过 `activated` 和 `deactivated` 生命周期监听是否显示状态。
+  - 局部频繁切换的组件，如 tabs
+  - 不可乱用 `<keep-alive>` ，缓存太多会占用大量内存，而且出问题不好 debug
+- 异步组件
+  - 对于体积大的组件（如编辑器、表单、地图等）可以使用异步组件
+  - 拆包，需要时异步加载，不需要时不加载
+  - 减少 main 包的体积，页面首次加载更快
+  - vue3 使用 `defineAsyncComponent` 加载异步组件
+- 路由懒加载
+  - 对于一些补偿访问的路由，或者组件提交比较大的路由，可以使用路由懒加载。
+- SSR
+  - SSR 让网页访问速度更快，对 SEO 友好。
+  - 但 SSR 使用和调试成本高，不可乱用。例如，一个低代码项目（在线制作 H5 网页），toB 部分不可用 SSR ， toC 部分适合用 SSR 。
+- 其他问题：
+- 全局事件、自定义事件要在组件销毁时解除绑定
+  - 内存泄漏风险
+  - 全局事件（如 `window.resize`）不解除，则会继续监听，而且组件再次创建时会重复绑定
+- Vue2.x 中，无法监听 data 属性的新增和删除，以及数组的部分修改 —— Vue3 不会有这个问题
+  - 新增 data 属性，需要用 `Vue.set`
+  - 删除 data 属性，需要用 `Vue.delete`
+  - 修改数组某一元素，不能 `arr[index] = value` ，要使用 `arr.splice` API 方式
+- Vue 不能检测以下数组的变动：
+  - 当你利用索引直接设置一个数组项时，例如：`vm.items[indexOfItem] = newValue`
+  - 当你修改数组的长度时，例如：vm.items.length = newLength
+  ```js
+  var vm = new Vue({
+    data: {
+      items: ['a', 'b', 'c']
+    }
+  })
+  vm.items[1] = 'x' // 不是响应性的
+  vm.items.length = 2 // 不是响应性的
+  ```
+  - 两种方式都可以实现和 `vm.items[indexOfItem] = newValue` 相同的效果
+  ```js
+  // Vue.set
+  Vue.set(vm.items, indexOfItem, newValue)
+  // Array.prototype.splice
+  vm.items.splice(indexOfItem, 1, newValue)
+  ```
+  - 解决第二类问题，你可以使用 splice：
+  ```js
+  vm.items.splice(newLength)
+  ```
+- scroll
+  - 路由切换时，页面会 scroll 到顶部。例如，在一个新闻列表页下滑到一定位置，点击进入详情页，在返回列表页，此时会 scroll 到顶部，并重新渲染列表页。所有的 SPA 都会有这个问题，并不仅仅是 Vue 。
+  - 在列表页缓存数据和 `scrollTop`
+  - 返回列表页时（用 Vue-router [导航守卫](https://router.vuejs.org/zh/guide/advanced/navigation-guards.html)，判断 `from`），使用缓存数据渲染页面，然后 `scrollTo(scrollTop)`
+### 虚拟dom &I
+- 虚拟 DOM 是一个存在于内存中的 JavaScript 对象，它是真实 DOM 的抽象
+- 最终需要更新真实 DOM，当真实 DOM 发生变化时，浏览器仍然需要进行重排和重绘
+- 虚拟dom优势
+  - 减少直接 DOM 操作：新旧虚拟 DOM 树的差异，通过 diff 算法计算出需要更新的部分，然后更新真实 DOM
+  - 批量更新：虚拟 DOM 允许将多次 DOM 修改合并为一次更新
 ## vue-router
 ### 模式
 - 模式
