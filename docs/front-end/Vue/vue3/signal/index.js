@@ -41,9 +41,9 @@ effect(() => {
 
 // 改变 count，会触发对应依赖 effect 执行
 // doubleCount updated: 0
-count.value = 1  
+count.value = 1
 // 输出：doubleCount updated: 2
 // 输出：doubleCount updated: 2
-count.value = 2  
+count.value = 2
 // 输出：doubleCount updated: 4
 // 输出：doubleCount updated: 4

@@ -98,6 +98,11 @@ outline: deep
   - [zpl-image](https://www.npmjs.com/package/zpl-image)
   - [zpl-image-2](https://www.npmjs.com/package/zpl-image-2) 图像转换为 Z64 编码或 ACS 编码的 GRF 位图以与 ZPL 一起使用
   - [jszpl](https://www.npmjs.com/package/jszpl) 生成 ZPL
+- 软键盘
+  - [ffi-napi](https://www.npmjs.com/package/ffi-napi)
+    - 使用纯JavaScript加载和调用动态库。
+    - 它可用于在不编写任何C ++代码的情况下创建与本机库的绑定
+  - [ref-napi](https://www.npmjs.com/package/ref-napi)
 - mock数据
   - [fakerjs](https://fakerjs.dev/guide/)
   - [mockm](https://github.com/wll8/mockm)
@@ -149,6 +154,9 @@ outline: deep
   - [node-gyp](https://github.com/nodejs/node-gyp)
   - [fnm](https://github.com/Schniz/fnm)
   - [nvm](https://github.com/nvm-sh/nvm)
+  - [ts-node](https://github.com/TypeStrong/ts-node) &nbsp;&nbsp;&nbsp;[ts-node 文档](https://typestrong.org/ts-node/docs/)
+  - [nodemon](https://github.com/remy/nodemon#nodemon)
+  - [ts-node-dev](https://github.com/wclr/ts-node-dev)
 - eslint
   - [generator-eslint](https://www.npmjs.com/package/generator-eslint)
 - config

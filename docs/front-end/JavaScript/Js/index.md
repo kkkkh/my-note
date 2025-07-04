@@ -2,11 +2,11 @@
 outline: deep
 ---
 <script setup>
-import Test from '@/components/Test.vue'
-import Json from './components/Json.vue'
-import Promise from './components/Promise/index.vue'
 import ImgView from '@/components/ImgView.vue'
-
+import Test from '@/components/Test.vue'
+import Json from './components/JSON/index.vue'
+import Promise from './components/Promise/index.vue'
+import Generator from './components/Generator/index.vue'
 </script>
 # Js
 [JavaScript 参考](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference)
@@ -1608,7 +1608,7 @@ const obj = JSON.parse(jsonString); // { name: "Alice", age: 25 }
   - NaN 和 Infinity 格式的数值及 null 都会被当做 null。
   - 其他类型的对象，包括 Map/Set/WeakMap/WeakSet，仅会序列化可枚举的属性。
 
-<<< ./components/Json.vue
+<<< ./components/JSON/index.vue
 
 <Test :is="Json" />
 
@@ -1670,3 +1670,11 @@ console.log(items.sort(collator.compare)); // 符合法语排序顺序
 const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
 console.log(rtf.format(-1, 'day')); // "yesterday"
 ```
+### Generator
+
+<<< ./components/Generator/index.vue
+
+<Test :is="Generator" />
+
+- 参考：
+  - [Generator](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Generator)
