@@ -1,0 +1,25 @@
+- build工具
+  - [electron-builder](https://www.electron.build/)
+  - [electron forge](https://www.electronforge.io/)
+  - [electron-vite](https://cn.electron-vite.org/guide/)
+- 辅助工具
+  - [vite-electron-builder](https://github.com/cawa-93/vite-electron-builder?tab=readme-ov-file) Vite + Electron-Builder 样板库
+  - ~~[webpack-electron](https://webpack.electron.build/)~~ 建议使用vite
+  - [Electron API演示工具](https://github.com/electron/electron-api-demos/releases) Electron API演示工具
+  - [electron fiddle](https://github.com/electron/fiddle/releases) 试验工具
+  - [@tomjs/electron-devtools-installer](https://www.npmjs.com/package/@tomjs/electron-devtools-installer)（[中文](https://github.com/tomjs/electron-devtools-installer/blob/HEAD/README.zh_CN.md) ）为 Electron 安装 Chrome 扩展
+  - [vite-plugin-electron](https://www.npmjs.com/package/vite-plugin-electron) vite支持electron插件
+  - [electron-log](https://www.npmjs.com/package/electron-log) electron 打印日志
+- 功能
+  - [winax](https://www.npmjs.com/package/winax) Windows C++ Node.JS 插件，实现 COM IDispatch 对象包装器，模拟 cscript.exe 上的 ActiveXObject
+  - [config](https://www.npmjs.com/package/conf) -> [electron-store](https://www.npmjs.com/package/electron-store) 主进程进行数据持久化存储
+  - [serialport](https://serialport.io/docs/api-serialport) 窜口模块
+    - [NodeBot](https://nodebots.io/) &nbsp;[NodeBot github](https://github.com/nodebots)
+    - [johnny-five](https://johnny-five.io/)
+  - [@woovi/node-printer](https://www.npmjs.com/package/@woovi/node-printer) zpl打印
+  - [compare-versions](https://www.npmjs.com/package/compare-versions) 版本比较
+  - [systeminformation](https://github.com/sebhildebrandt/systeminformation) [doc](https://systeminformation.io/gettingstarted.html)
+- 其他框架
+  - [NW.js](https://nwjs.io/) &nbsp;[中文](https://nwjs-cn.readthedocs.io/zh-cn/latest/Base/Getting%20Started/index.html) 通过修改源码合并了 Node.js 和 Chromium 的事件循环机制；
+  - [Tauri](https://v2.tauri.app/start/) Tauri使用Rust作为底层，通过Web技术（HTML、CSS和JavaScript）构建用户界面。它与Chromium和Node.js没有直接依赖关系，因此可以更轻量级和高效。
+  - 参考：[NW.js和Electron优缺点综合对比](https://blog.csdn.net/LIangell/article/details/122055029)

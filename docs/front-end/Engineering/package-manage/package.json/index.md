@@ -124,6 +124,18 @@
     }
   }
   ```
+### scripts
+- && 串行执行
+- & 并行执行
+- 如果启动一个nodejs http服务，串行会阻塞，第二个命令不执行
+```json
+{
+  "scripts": {
+    "dev": "npm run dev1 && npm run dev2", // 串行执行
+    "prod": "npm run prod1 & npm run prod2" // 并行执行
+  }
+}
+```
 ### bin
 - `pnpm dev` 或者 `yarn start`
 - 启动脚本运行前会先自动新建一个命令行环境，然后把当前目录下的node_modules/.bin加入系统环境变量中，

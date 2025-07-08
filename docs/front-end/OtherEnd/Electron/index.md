@@ -41,7 +41,7 @@ const createWindow = () => {
   // console.log("import.meta.resolve('./preload.js')",import.meta.resolve('./preload.js'))//3
   // 2等同3
   // console.log("fileURLToPath(new URL('./preload.js',import.meta.url).href)",fileURLToPath(new URL('./preload.js',import.meta.url).href))//4
-  // console.log("import.meta.resolve('./preload.js')",fileURLToPath(import.meta.resolve('./preload.js')))//5
+  // console.log("fileURLToPath(import.meta.resolve('./preload.js'))",fileURLToPath(import.meta.resolve('./preload.js')))//5
   // 4等同5
   win.loadFile('index.html')
 }
@@ -65,7 +65,7 @@ contextBridge.exposeInMainWorld('versions', {
   node: () => process.versions.node,
   chrome: () => process.versions.chrome,
   electron: () => process.versions.electron,
-  ping: () => ipcRenderer.invoke('ping')
+  ping: () => ipcRenderer.invoke('ping') // 第一个参数是消息管道的名称
   // 除函数之外，我们也可以暴露变量
 })
 ```
@@ -129,6 +129,30 @@ func()
   // 主进程
   import {ipcMain} from 'electron'
   ipcMain.on(channel, listener)
+  ```
+  ```js
+  // 渲染进程
+  let returnValue = ipcRenderer.sendSync('msg_render2main', {  name: 'param1' },{ name: 'param2' });
+  console.log(returnValue) // 123
+  // 主进程
+  ipcMain.on('msg_render2main', (event, param1, param2) => {
+    console.log("param1",param1)
+    console.log("param2",param2)
+    // event.reply('msg_main2render', param1, param2)
+    event.returnValue = "123"
+  })
+  ```
+  ```js
+  // 双向转发
+  // 渲染进程
+  ipcRenderer.send('msg_render2main', {  name: 'param1' },{ name: 'param2' });
+  ipcRenderer.on('msg_main2render', (param1,param2)=>{});
+  // 主进程
+  ipcMain.on('msg_render2main', (event, param1, param2) => {
+    event.sender.send('msg_main2render', param1, param2)
+    // 同上
+    event.reply('msg_main2render', param1, param2)
+  })
   ```
 - postMessage / on
   ```js
@@ -313,11 +337,46 @@ if(lock){
       - 利用 will-attach-webview 事件可帮助防范潜在风险。
       - 参考：[WebView性能、体验分析与优化](https://tech.meituan.com/2017/06/09/webviewperf.html)
     - skipTaskbar 是否在任务栏中显示窗口。默认为 false
+    - nodeIntegration 浏览器端集成nodejs
   - frame 指定 false 以创建无框架窗口
-- 实例 
+- 实例
   - win <= `const win = new BrowserWindow()`
   - win.webContent 渲染以及控制 web 页面
+#### wind.loadURL
+loadURL 就是加载一个URL(http:// or file://)
+```js
+let path = require('path')
+let URL = require('url')
+let url = ''
+if (process.env.NODE_ENV !== 'production') {
+  // dev
+  // http://localhost
+  url = 'http://localhost:' + process.env.ELECTRON_WEBPACK_WDS_PORT
+} else {
+  // pro
+  // file://d:\**\**\index.html
+  url = URL.format({
+    pathname: path.join(__dirname, 'index.html'),
+    protocol: 'file',
+  })
+}
+win.loadURL(url)
+```
+```js
+function getHtmlUri(htmlFileName = 'index.html'): string {
+  if (import.meta.env.DEV) {
+    // dev
+    // http://localhost:8080 or http://127.0.0.1:8080
+    return `${import.meta.env.VITE_DEV_SERVER_URL}/${htmlFileName}`
+  }
+  // pro
+  // eg: file:///D:/**/**/dist/index.html
+  return import.meta.resolve(`../../dist/${htmlFileName}`)
+}
+```
 #### win.webContent
+- win.webContents.openDevTools()
+  - 打开调试工具
 - win.webContents.setZoomFactor
   - 设置窗口缩放比
 - win.webContent.setWindowOpenHandler
@@ -454,19 +513,14 @@ crashReporter.start({
   ```
 #### window.open
 从渲染进程打开窗口 window.open(url[, frameName][, features])
-### 开发Lib
-  - build工具
-    - [electron-builder](https://www.electron.build/)
-    - [electron forge](https://www.electronforge.io/)
-  - [@tomjs/electron-devtools-installer](https://www.npmjs.com/package/@tomjs/electron-devtools-installer)（[中文](https://github.com/tomjs/electron-devtools-installer/blob/HEAD/README.zh_CN.md) ）为 Electron 安装 Chrome 扩展
-  - [vite-plugin-electron](https://www.npmjs.com/package/vite-plugin-electron) vite支持electron
-  - [electron-log](https://www.npmjs.com/package/electron-log) electron 打印日志
-  - [winax](https://www.npmjs.com/package/winax) Windows C++ Node.JS 插件，实现 COM IDispatch 对象包装器，模拟 cscript.exe 上的 ActiveXObject
-  - [config](https://www.npmjs.com/package/conf) -> [electron-store](https://www.npmjs.com/package/electron-store) 主进程进行数据持久化存储
-  - [serialport](https://serialport.io/docs/api-serialport) 窜口模块
-    - [NodeBot](https://nodebots.io/) &nbsp;[NodeBot github](https://github.com/nodebots)
-    - [johnny-five](https://johnny-five.io/)
+### 构建
 #### electron-builder
+```bash
+pnpm run build # vue-tsc --noEmit && vite build
+npm run bundle #electron-builder build -c electron-builder.config.js
+```
+- electron-updater 更新应用程序
+参考：[Auto Update](https://www.electron.build/auto-update)
 #### electron forge
 - 使用
   - 脚手架初始化一个项目 vite + ts [初始化](https://www.electronforge.io/templates/vite-+-typescript)
@@ -503,6 +557,8 @@ crashReporter.start({
   - [详解 Electron 打包](https://juejin.cn/post/7250085815430430781) Electron Builder、Electron Forge对比
   - [详解 Electron 中的 asar 文件](https://juejin.cn/post/7213171235577036860) [@electron/asar](https://github.com/electron/asar)
   - [前端工程化之强大的glob语法](https://juejin.cn/post/6876363718578405384)
+### Lib
+<!-- @include:./lib.md -->
 #### config / electron-store
 - electron-store 相对于 localStorage 的优势
 - localStorage 仅在浏览器进程中工作。
@@ -562,6 +618,7 @@ crashReporter.start({
       - HKEY_CLASSES_ROOT\CLSID：包含注册的所有 COM 类标识符（CLSID）信息。
       - HKEY_CLASSES_ROOT\<ProgID>：包含与 ProgID 相关的详细信息。
       - 使用 Ctrl + F 搜索特定的 ProgID，例如 Excel.Application，或者直接搜索软件相关的名称，注册表会返回匹配项。
+      <img src="./registry.png" alt="registry" v-viewer />
     - 2、OLE/COM Object Viewer。
 #### serialport 窜口
 ```js
@@ -590,15 +647,8 @@ port.on('data', (data) => {})
 // 断开连接 - 监听事件
 port?.on('close', ()=>{ port = null })
 ```
-### electron-updater 更新应用程序
-参考：[Auto Update](https://www.electron.build/auto-update)
-### 其他框架
-- [NW.js](https://nwjs.io/) &nbsp;[中文](https://nwjs-cn.readthedocs.io/zh-cn/latest/Base/Getting%20Started/index.html)
-- [Tauri](https://v2.tauri.app/start/)
-- NW.js 通过修改源码合并了 Node.js 和 Chromium 的事件循环机制；
-- Electron 则是通过各操作系统的，打通了 Node.js 和 Chromium 的事件循环机制（新版本的 Electron 是通过一个独立的线程完成这项工作的）。
-- Tauri使用Rust作为底层，通过Web技术（HTML、CSS和JavaScript）构建用户界面。它与Chromium和Node.js没有直接依赖关系，因此可以更轻量级和高效。
-- 参考：[NW.js和Electron优缺点综合对比](https://blog.csdn.net/LIangell/article/details/122055029)
+
+
 ### 功能实现思路
 #### 启动窗口
 - 是否单例锁
@@ -649,3 +699,24 @@ port?.on('close', ()=>{ port = null })
 - 5、发起刷新token请求 
   - tokenRefreshTask(tokenData.accessToken, tokenData.refreshToken)
   - 成功：返回token✅
+## ~~废弃~~
+### ~~remote~~
+开启了nodeIntegration，从渲染进程调主进程
+```js
+let { remote } = require('electron')
+document.querySelector('#openDevToolsBtn').addEventListener('click', function () {
+  remote.getCurrentWindow().webContents.openDevTools()
+})
+```
+~~remote 模块在 Electron 12 废弃~~，并将在 Electron 14 被移除. 由@electronic/remote 模块替代。
+
+```js
+// 在 Electron 12 废除:
+const { BrowserWindow } = require('electron').remote
+// 替换为：
+const { BrowserWindow } = require('@electron/remote')
+// 在主进程中：
+require('@electron/remote/main').initialize()
+```
+### ~~弃用：ipcRenderer.sendTo()~~
+ipcRenderer.sendTo() 已被弃用。 可以通过在渲染器之间设置一个 MessageChannel 来替换它。

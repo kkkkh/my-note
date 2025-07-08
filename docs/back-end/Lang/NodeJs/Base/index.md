@@ -197,11 +197,12 @@ try {
 }
 ```
 #### rmdir rm unlink
-rmdir 删除目录
-rm 删除文件和目录
-unlink 删除
-- 如果路径引用符号链接，则删除该链接不会影响该链接引用的文件或目录。
-- 如果该路径引用的文件路径不是符号链接，则该文件将被删除。
+- rmdir 删除目录
+- rm 删除文件、空目录或非空目录
+- unlink 删除
+  - 如果路径引用符号链接，则删除该链接不会影响该链接引用的文件或目录。
+  - 如果该路径引用的文件路径不是符号链接，则该文件将被删除。
+  - 如果路径指向一个目录，unlink 将会失败并抛出一个错误。
 ```js
   const stats = fs.lstatSync(dirPath)
   if (stats.isDirectory()) {
@@ -256,6 +257,19 @@ path.isAbsolute('C:\\foo\\..'); // true
 path.isAbsolute('bar\\baz');    // false
 path.isAbsolute('bar/baz');     // false
 path.isAbsolute('.');           // false
+```
+#### commomjs获取文件路径 `path.resolve(__dirname, './**/*/')`
+```js
+const path = require('path');
+// 获取当前文件所在的目录
+const currentDir = __dirname;
+// 获取当前文件的完整路径
+const currentFile = __filename;
+// 构建相对路径
+const relativePath = path.resolve(__dirname, './fs/1/2');
+console.log('Current directory:', currentDir);
+console.log('Current file:', currentFile);
+console.log('Relative path:', relativePath);
 ```
 ### zlib
 ```js

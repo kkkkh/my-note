@@ -127,6 +127,10 @@ input.dispatchEvent(myEvent); // 触发
 // bubbles 只读属性表明事件是否会沿 DOM 树向上冒泡。
 activeElement.dispatchEvent(new Event('input', { bubbles: true }))
 ```
+#### mouseleave
+mouseleave 和 mouseout 是相似的，但是两者的不同在于
+- mouseleave 不会冒泡：当指针离开元素及其所有后代时，会触发 mouseleave
+- mouseout 会冒泡：而当指针离开元素或离开元素的后代（即使指针仍在元素内）时，会触发 mouseout
 ### Navigator
 #### navigator.clipboard
 - writeText() 写入特定字符串到操作系统的剪切板，返回一个promise
