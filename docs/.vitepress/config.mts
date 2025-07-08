@@ -311,7 +311,12 @@ export default withMermaid(defineConfig({
           link: '/front-end/Application/',
           items: [
             { text: '常用算法', link: '/front-end/Application/algorithm/'},
-            { text: '分片', link: '/front-end/Application/sharding/' },
+            { text: '分片',
+              items: [
+                { text: '分片上传', link: '/front-end/Application/sharding/upload'  },
+                { text: '分片下载', link: '/front-end/Application/sharding/download'  },
+              ]
+            },
             { text: '竞态', link: '/front-end/Application/race/' },
             { text: '任务队列', link: '/front-end/Application/taskQueue/' },
           ]

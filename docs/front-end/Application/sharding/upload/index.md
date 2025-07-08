@@ -85,4 +85,5 @@ document.getElementById('file').addEventListener('change', function () {
 - [SparkMD5](https://github.com/satazor/js-spark-md5)
 - [大文件分片上传](https://www.brandhuang.com/article/1736061378620)
 - [超详细的大文件分片上传⏫实战与优化⚡(前端部分)](https://juejin.cn/post/7353106546827624463?searchId=20250208112448BC0C65E591ACA66E6702) 增加了worker hash计算
+- https://devv.ai/zh/search/erb5t1uqj1fk
 
