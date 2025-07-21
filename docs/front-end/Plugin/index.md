@@ -23,7 +23,9 @@ outline: deep
   - [sortablejs](https://github.com/SortableJS/Sortable) &nbsp;&nbsp;&nbsp;[sortablejs demo](https://sortablejs.github.io/Sortable/) 拖拽
   - [panzoom](https://github.com/anvaka/panzoom) 缩放平移
   - [clipboard.js](https://clipboardjs.com/) 剪切
-  - [vue-seamless-scroll](https://chenxuan0000.github.io/vue-seamless-scroll/guide/) 滚动
+  - [seamless](https://github.com/chenxuan0000/seamless-scroll) 滚动
+  - [vue-seamless-scroll](https://chenxuan0000.github.io/vue-seamless-scroll/guide/) vue2滚动
+  - [vue3-seamless-scroll](https://www.npmjs.com/package/vue3-seamless-scroll) vue3滚动
 - 高亮 & 代码编辑 & 解析器
   - 高亮
     - highlightjs
@@ -48,6 +50,7 @@ outline: deep
 - icons
   - [iconify 文档](https://iconify.design/docs/) &nbsp;&nbsp;&nbsp;[Browse Icons](https://icon-sets.iconify.design/) &nbsp;&nbsp;&nbsp;[icones](https://icones.js.org/)(Icon Explorer with Instant searching, powered by Iconify)
   - [svg4everybody](https://www.npmjs.com/package/svg4everybody) svg兼容
+  - [xicons](https://xicons.org/#/zh-CN)
 - pdf
   - [html2pdf](https://github.com/eKoopmans/html2pdf.js)
   - [html2canvas](https://html2canvas.hertzen.com/)

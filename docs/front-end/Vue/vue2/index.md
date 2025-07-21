@@ -297,9 +297,54 @@ Vue.directive('focus', {
 一个指令定义对象可以提供如下几个钩子函数 (均为可选)：
 - bind：只调用一次，指令第一次绑定到元素时调用。在这里可以进行一次性的初始化设置。
 - inserted：被绑定元素插入父节点时调用 (仅保证父节点存在，但不一定已被插入文档中)。
-- update：所在组件的 VNode 更新时调用，但是可能发生在其子 VNode 更新之前。指令的值可能发生了改变，也可能没有。但是你可以通过比较更新前后的值来忽略不必要的模板更新 (详细的钩子函数参数见下)。
+- update：
+  - 所在组件的 VNode 更新时调用，但是可能发生在其子 VNode 更新之前。
+  - 指令的值可能发生了改变，也可能没有。
+  - 但是你可以通过比较更新前后的值来忽略不必要的模板更新 (详细的钩子函数参数见下)。
 - componentUpdated：指令所在组件的 VNode 及其子 VNode 全部更新后调用。
 - unbind：只调用一次，指令与元素解绑时调用。
+
+```js
+Vue.directive('table-scroll', {
+  bind: (el, binding) => {
+    // 只调用一次，指令第一次绑定到元素时调用
+    console.log('bind', el, binding)
+  },
+  inserted(el, binding) {
+    // 被绑定元素插入父节点时调用
+    // 指令的值可能发生了改变，也可能没有
+    console.log('inserted', el, binding)
+    el.__vScrollUp__ = {
+      start: () => {
+        console.log('start')
+      },
+      stop: () => {
+        console.log('stop')
+      },
+      setActive: (active) => {
+        console.log('setActive', active)
+      },
+    }
+  },
+  update(el, binding) {
+    if (!el.__vScrollUp__) return
+
+    if (binding.value !== binding.oldValue) {
+      el.__vScrollUp__.setActive(binding.value)
+    }
+  },
+  componentUpdated(el, binding) {
+    // 指令所在组件的 VNode 及其子 VNode 全部更新后调用
+  },
+  unbind(el, binding) {
+    if (el.__vScrollUp__) {
+      el.__vScrollUp__.stop()
+      delete el.__vScrollUp__
+    }
+    // 解绑时调用
+  }
+})
+```
 
 #### 钩子函数参数
 指令钩子函数会被传入以下参数：

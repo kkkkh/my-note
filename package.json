@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@highlightjs/vue-plugin": "^2.1.0",
+    "echarts": "^5.6.0",
     "highlight.js": "^11.11.1",
     "highlightjs-copy": "^1.0.6",
     "markdown-it": "^14.1.0",

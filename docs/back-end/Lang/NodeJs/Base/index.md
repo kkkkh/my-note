@@ -304,69 +304,22 @@ export function unzipFile(
   })
 }
 ```
-## 示例
-```ts
-/**
- * 读取文件内容
- *
- * @param filePath 目标文件路径
- * @returns
- */
-export function readFileAsync(filePath: string): Promise<string> {
-  if (!fs.existsSync(filePath)) {
-    throw new Error('File not found')
-  }
+### buffer
+- 浏览器和 Node.js 都支持 ArrayBuffer 和 Uint8Array，但它们在实现上有所不同。
+- ArrayBuffer 的本质： 浏览器的 ArrayBuffer 的确就是一块连续的内存空间，它本身不提供任何读写数据的方法。
+- Uint8Array 的作用： Uint8Array 作为视图，提供了操作 ArrayBuffer 这块内存的方式，让你能够以 8 位无符号整数的形式来读取和写入数据。
+- Node.js 的 Buffer： Node.js 的 Buffer 最早出现，也是用于操作内存的，它在 Uint8Array 出现之前就已经存在，并提供了一些额外的便利方法。
+- Uint8Array 的标准化： Uint8Array 出现之后，成为了 JavaScript 中处理二进制数据的更标准的方式，并且被浏览器和 Node.js 同时支持。
 
-  return fs.promises.readFile(filePath, { encoding: 'utf8' })
-}
+### stream 流
+- 流
+  - 流的本质: 流的本质是将数据分成多个小块进行传输和处理。
+  - 无论是否知道数据的总长度，都可以使用流。
+  - Content-Length 的作用: Content-Length 只是告诉客户端数据的总长度，方便客户端计算下载进度等。
+    - 发送本地磁盘上的静态文件。
+    - 发送从数据库中读取的完整数据。
+  - Transfer-Encoding: chunked 的作用: Transfer-Encoding: chunked 是一种特殊的流式传输方式，用于服务器无法预先知道数据总长度的情况。
+    - 动态生成的内容（例如，实时日志、服务器推送）。
+    - 从多个来源组合数据。
+    - 需要进行复杂处理才能确定数据总长度的情况。
 
-/**
- * 写入文件
- *
- * @param content 文件内容
- * @param outputFilePath 文件写入路径
- */
-export function writeFileAsync(content: string | Buffer, outputFilePath: string): Promise<void> {
-  return fs.promises.writeFile(outputFilePath, content)
-}
-
-/**
- * 删除目录下的文件
- *
- * @param dirPath
- * @returns
- */
-export async function removeFileOrDir(dirPath: string): Promise<void> {
-  if (!fs.existsSync(dirPath)) {
-    return void 0
-  }
-
-  const stats = fs.lstatSync(dirPath)
-
-  if (stats.isDirectory()) {
-    return fs.promises.rm(dirPath, { recursive: true })
-  }
-
-  return fs.promises.unlink(dirPath)
-}
-
-/**
- * 创建目录
- *
- * @param folderPath 目录路径
- */
-export async function createDirectory(folderPath: string): Promise<void> {
-  if (fs.existsSync(folderPath)) {
-    const stats = fs.lstatSync(folderPath)
-
-    if (stats.isDirectory()) {
-      return
-    }
-
-    throw new Error('Path exists but is not a directory')
-  }
-
-  // 创建文件夹
-  await fs.promises.mkdir(folderPath, { recursive: true })
-}
-```

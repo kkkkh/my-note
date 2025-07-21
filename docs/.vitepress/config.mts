@@ -275,6 +275,13 @@ export default withMermaid(defineConfig({
                 { text: 'flip', link: '/front-end/Visual/animation/flip/' },
               ],
              },
+             {
+              text: '框架',
+              link: '/front-end/Visual/frame/',
+              items: [
+                { text: 'echarts', link: '/front-end/Visual/frame/echarts/' },
+              ],
+             },
           ],
         },
         {

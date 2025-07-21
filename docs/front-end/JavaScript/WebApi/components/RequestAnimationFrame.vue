@@ -8,7 +8,7 @@ onMounted(() => {
   test()
 })
 let num  = 0
-const test = () => {
+const test1 = () => {
   // 多次调用会多次执行 step 回调
   const element = document.getElementById("requestAnimationFrame");
   element.style.transform = `translateX(0px)`;
@@ -45,6 +45,25 @@ const test = () => {
   // const myReq = window.requestAnimationFrame(step);
   // 取消操作使用的是最后一个 requestId
   // cancelAnimationFrame(myReq);
+}
+
+const test2 = () => {
+  let count = 0
+  const start = undefined
+  const step = (timestamp)=>{
+    if(start === undefined) start = timestamp
+    if(timestamp - start < 1000){ // 每隔一秒执行一次 效果代码
+      console.log(count++)
+    }
+    window.requestAnimationFrame(step);
+  }
+  window.requestAnimationFrame(step);
+  
+}
+
+const test = () => {
+  test1()
+  test2()
 }
 defineExpose({
   test

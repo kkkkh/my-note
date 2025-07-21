@@ -146,8 +146,109 @@ requestAnimationFrame(callback)
   - 返回 Promise
   - 支持流式处理
   - 等
-- 参考：[Fetch_API](https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch)
-
+- request
+  - Fetch API 的 Request 接口用来表示资源请求。
+  - 你可以使用 Request() 构造函数创建一个新的 Request 对象
+  ```js
+  const request = new Request("https://www.mozilla.org/favicon.ico");
+  const url = request.url;
+  const method = request.method;
+  const credentials = request.credentials;
+  fetch(request)
+  .then((response) => response.blob())
+  .then((blob) => {
+    image.src = URL.createObjectURL(blob);
+  });
+  ```
+- 参考：
+  - [Fetch_API](https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch)
+  - [Request](https://developer.mozilla.org/zh-CN/docs/Web/API/Request)
+### XMLHttpRequest
+```js
+function ajax(options) {
+  // 1. 创建 XMLHttpRequest 对象
+  const xhr = new XMLHttpRequest();
+  // 2. 设置请求方法和 URL
+  xhr.open(options.method, options.url);
+  // 3. 设置请求头 (可选)
+  if (options.headers) {
+    for (const key in options.headers) {
+      xhr.setRequestHeader(key, options.headers[key]);
+    }
+  }
+  // 4. 设置响应类型 (可选)
+  if (options.responseType) {
+    xhr.responseType = options.responseType;
+  }
+  // 5. 监听状态变化
+  xhr.onload = function() {
+    if (xhr.status >= 200 && xhr.status < 300) {
+      // 请求成功
+      options.onload(xhr.response);
+    } else {
+      // 请求失败
+      options.onerror(xhr.status, xhr.statusText);
+    }
+  };
+  xhr.onerror = function() {
+    // 网络错误
+    options.onerror('Network Error', 'Network Error');
+  };
+  // 6. 发送请求
+  xhr.send(options.data);
+}
+// 示例用法：GET 请求
+ajax({
+  url: 'https://jsonplaceholder.typicode.com/todos/1',
+  method: 'GET',
+  onload: function(response) {
+    console.log('GET 请求成功:', response);
+  },
+  onerror: function(status, statusText) {
+    console.error('GET 请求失败:', status, statusText);
+  }
+});
+// 示例用法：POST 请求
+ajax({
+  url: 'https://jsonplaceholder.typicode.com/posts',
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  data: JSON.stringify({
+    title: 'foo',
+    body: 'bar',
+    userId: 1
+  }),
+  onload: function(response) {
+    console.log('POST 请求成功:', response);
+  },
+  onerror: function(status, statusText) {
+    console.error('POST 请求失败:', status, statusText);
+  }
+});
+// 示例用法：下载文件 (使用 stream)
+ajax({
+  url: 'http://example.com/large-file.txt',
+  method: 'GET',
+  responseType: 'blob', // 使用 blob 下载文件
+  onload: function(response) {
+    // 创建下载链接并触发下载
+    const url = URL.createObjectURL(response);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'large-file.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  },
+  onerror: function(status, statusText) {
+    console.error('下载文件失败:', status, statusText);
+  }
+});
+```
+- 参考：[XMLHttpRequest](https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest)
 ### TextEncoder / TextDecoder
 #### TextEncoder
 - 接受码位流作为输入，并提供 UTF-8 字节流作为输出
@@ -226,6 +327,47 @@ requestAnimationFrame(callback)
   const bytes = new Uint8Array([207, 240, 232, 226, 229, 242, 44, 32, 236, 232, 240, 33]);
   console.log(win1251decoder.decode(bytes)); // Привет, мир!
   ```
+### Stream API（流）
+- 流会将你想要从网络接受的资源分成一个个小的分块，然后按位处理它
+- 流在 JavaScript 中的使用，一切发生了改变——只要原始数据在客户端可用，你就可以使用 JavaScript 按位处理它，而不再需要缓冲区、字符串或 blob
+- 一个成功的 fetch 请求返回的响应体可以暴露为 ReadableStream，之后你可以使用 ReadableStream.getReader()
+#### ReadableStream
+- ReadableStream 接口表示可读的字节数据流。
+- Fetch API 通过 Response 的属性 body 提供了一个具体的 ReadableStream 对象。
+- ReadableStream.getReader()
+  - 创建一个读取器并将流锁定于其上
+- ReadableStream.pipeThrough()
+  - 提供将当前流管道输出到一个转换（transform）流或可写/可读流
+  - 将一个 ReadableStream 通过一个转换流（TransformStream）或者任何具有可写/可读流对的对象进行管道传输
+- ReadableStream.pipeTo()
+  - 将当前的 ReadableStream 中的数据传递给给定的 WritableStream
+  - pipeTo() 方法将一个 ReadableStream 的数据直接管道（pipe）到一个 WritableStream
+  - readableStream.pipeTo(destination: WritableStream, options?: PipeOptions): Promise<void>
+#### WritableStream
+WritableStream 接口为将流数据写入目的地（称为接收器）提供了一个标准的抽象。该对象带有内置的背压和队列。
+#### TransformStream
+- TransformStream
+  - 链式管道传输（pipe chain）转换流（transform stream）概念的具体实现。
+  - 它可以传递给 ReadableStream.pipeThrough() 方法，以便将流数据从一种格式转换成另一种
+- 参考：
+  - [Streams API](https://developer.mozilla.org/zh-CN/docs/Web/API/Streams_API)
+  - [ReadableStream](https://developer.mozilla.org/zh-CN/docs/Web/API/ReadableStream)
+  - [WritableStream](https://developer.mozilla.org/zh-CN/docs/Web/API/WritableStream)
+  - [TransformStream](https://developer.mozilla.org/zh-CN/docs/Web/API/TransformStream)
+#### 对比
+- WritableStream vs nodejs/fs.createWriteStream
+  - WritableStream
+    - 运行环境: 主要用于浏览器环境和一些现代 JavaScript 运行环境，如 Deno。也支持nodejs
+    - Web Streams API 的一部分，处理 Web 流数据
+    - 用于处理来自网络请求（例如 fetch API 的 response.body）或其他流式数据源的数据
+    - 基于 Promise 的异步操作
+  - fs.createWriteStream
+    - 运行环境: 只能在 Node.js 环境中使用。
+    - 文件写入
+    - 基于事件和回调的异步操作
+```js
+
+```
 ## 功能
 ### [window](https://developer.mozilla.org/zh-CN/docs/Web/API/Window)
 #### window.open

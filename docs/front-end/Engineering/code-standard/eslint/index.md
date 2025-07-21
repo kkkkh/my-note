@@ -4,11 +4,11 @@ outline: deep
 # eslint
 ## eslint9
 ### Configuration File
-eslint.config.js
-eslint.config.mjs
-eslint.config.cjs
-eslint.config.ts (requires additional setup)
-eslint.config.mts (requires additional setup)
+- eslint.config.js
+- eslint.config.mjs
+- eslint.config.cjs
+- eslint.config.ts (requires additional setup)
+- eslint.config.mts (requires additional setup)
 eslint.config.cts (requires additional setup)
 ### eslint Configure Language Options
 使用的 JavaScript 语言特性和环境
@@ -254,6 +254,8 @@ module.exports = {
     // https://github.com/import-js/eslint-plugin-import/blob/v2.31.0/docs/rules/no-unresolved.md
     "import/no-unresolved": [0] // import tailwindcss from '@tailwindcss/vite' 报错
     "import/no-unresolved": [2, { caseSensitive: true }] // 严格 区分大小写
+    'no-underscore-dangle': ['error', { allow: ['__vScrollUp__'] }], // 允许下划线开头 如 __vScrollUp__
+    'import/named': ['warn'], // import，如果export 未定义，则警告
   },
 }
 ```
@@ -285,7 +287,7 @@ processors 处理器包含两个主要方法：preprocess 和 postprocess。
   - filename 属性可以是任意值，但应包含文件扩展名，以便 ESLint 知道如何处理代码块。
   - ESLint 会分别检查每个代码块，但它们仍然与原始文件名关联。
 
-- postprocess(messages, filename): 
+- postprocess(messages, filename):
   - 接收一个二维数组 messages 和文件名作为参数。
   - messages 数组中的每个元素对应于 preprocess 方法返回的代码块中的 lint 信息。
   - postprocess 方法必须调整所有错误的位置，使其与原始的、未处理的代码中的位置对应，并将它们聚合成一个一维数组并返回。
