@@ -64,10 +64,21 @@ export default withMermaid(defineConfig({
       { text: '文档', items:[
         { text: 'tool', link: '/tools/blog' },
         { text: 'play', link: 'https://kkkkh.github.io/play/' },
+        { text: 'hd', link: '/hd/index'},
       ] },
       { text: '文章', link: '/article/' },
     ],
     sidebar: {
+      'hd': [
+        {
+          text: 'history',
+          link: '/hd/history/index',
+        },
+        {
+          text: 'blog',
+          link: '/hd/blog/index',
+        },
+      ],
       'article': [
         {
           text: '技术',
@@ -75,10 +86,7 @@ export default withMermaid(defineConfig({
         },
         {
           text: '面试',
-          link: '/article/interview/',
-          items: [
-            { text: '前端', link: '/article/interview/font-end/' },
-          ]
+          link: '/article/interview/font-end/',
         },
         {
           text: '感想',

@@ -342,7 +342,7 @@ ajax({
 - ReadableStream.pipeTo()
   - 将当前的 ReadableStream 中的数据传递给给定的 WritableStream
   - pipeTo() 方法将一个 ReadableStream 的数据直接管道（pipe）到一个 WritableStream
-  - readableStream.pipeTo(destination: WritableStream, options?: PipeOptions): Promise<void>
+  - `readableStream.pipeTo(destination: WritableStream, options?: PipeOptions): Promise<void>`
 #### WritableStream
 WritableStream 接口为将流数据写入目的地（称为接收器）提供了一个标准的抽象。该对象带有内置的背压和队列。
 #### TransformStream
@@ -365,9 +365,6 @@ WritableStream 接口为将流数据写入目的地（称为接收器）提供�
     - 运行环境: 只能在 Node.js 环境中使用。
     - 文件写入
     - 基于事件和回调的异步操作
-```js
-
-```
 ## 功能
 ### [window](https://developer.mozilla.org/zh-CN/docs/Web/API/Window)
 #### window.open
