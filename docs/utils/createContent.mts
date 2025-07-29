@@ -15,13 +15,15 @@ export { data }
 export default (url:string) => createContentLoader(url, {
   excerpt: true,
   transform(raw): Post[] {
+    const dateFmt = new Intl.DateTimeFormat('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit' });
     return raw
       .filter(item => item.frontmatter.title)
       .map(({ url, frontmatter, excerpt }) => ({
         title: frontmatter.title,
         url,
         excerpt,
-        date: formatDate(frontmatter.date)
+        date: formatDate(frontmatter.date),
+        dateTime: dateFmt.format(new Date(frontmatter.date)),
       }))
       .sort((a, b) =>  a.date.time - b.date.time)
   }
@@ -32,10 +34,6 @@ function formatDate(raw: string): Post['date'] {
   date.setUTCHours(12)
   return {
     time: +date,
-    string: date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    })
+    string: date.toLocaleDateString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit' })
   }
 }
