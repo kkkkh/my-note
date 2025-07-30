@@ -2,7 +2,7 @@
 outline: deep
 ---
 <script setup>
-import PropsIndex from '@play/vue/src/components/Props/Index.vue'
+import PropsIndex from '@play/vue3/src/components/Props/Index.vue'
 </script>
 
 # vue2
@@ -162,9 +162,9 @@ Vue.component('base-input', {
 
   <PropsIndex />
 
-  <<< @/submodule/play/packages/vue/src/components/Props/Index.vue
+  <<< @/submodule/play/packages/vue3/src/components/Props/Index.vue
 
-  <<< @/submodule/play/packages/vue/src/components/Props/Child.vue
+  <<< @/submodule/play/packages/vue3/src/components/Props/Child.vue
 
 ## 模板
 

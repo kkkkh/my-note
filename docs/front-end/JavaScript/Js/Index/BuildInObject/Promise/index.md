@@ -8,9 +8,10 @@
 
 <!-- <ImgView :images="['./components/Promise/promise.drawio.svg']" /> -->
 
-<<< ./components/Promise/index.vue
+<<< @/front-end/JavaScript/Js/components/Promise/index.vue
 
-<Test :is="Promise" />
+<Test :is="modules['Promise']" />
+
 
 - [Promise A+ 规范](https://promisesaplus.com/)
 - [Promise v8 源码实现](https://chromium.googlesource.com/v8/v8/+/3.29.45/src/promise.js?autodive=0/) 比较旧

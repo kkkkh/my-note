@@ -1,6 +1,13 @@
 <template>
+  <div>
+  </div>
 </template>
 <script setup>
+
+defineOptions({
+  name: 'Promise'
+})
+
 class MyPromise {
   constructor(executor) {
     this.state = 'pending'; // 初始状态为 pending

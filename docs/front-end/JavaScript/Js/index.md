@@ -2,12 +2,16 @@
 outline: deep
 ---
 <script setup>
-import ImgView from '@/components/ImgView.vue'
 import Test from '@/components/Test.vue'
-import Json from './components/JSON/index.vue'
-import Promise from './components/Promise/index.vue'
-import Generator from './components/Generator/index.vue'
+const jsModules = import.meta.glob('@/front-end/JavaScript/Js/components/*/index.vue',{
+  eager:true,
+  import:'default'
+})
+const modules = Object.fromEntries(Object.entries(jsModules).map(([key,value])=>{
+  return [value.name,value]
+}))
 </script>
+
 # Js
 [JavaScript 参考](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference)
 ## 表达式与操作符
@@ -147,12 +151,8 @@ console.log(set1.has(6)); // true
 
 <!--@include: ./Index/BuildInObject/Intl/index.md-->
 
+<!--@include: ./Index/BuildInObject/Generator/index.md-->
 
-### Generator
 
-<<< ./components/Generator/index.vue
 
-<Test :is="Generator" />
 
-- 参考：
-  - [Generator](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Generator)

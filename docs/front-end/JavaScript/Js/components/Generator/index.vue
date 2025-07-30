@@ -3,6 +3,9 @@
   </div>
 </template>
 <script setup>
+  defineOptions({
+    name: 'Generator'
+  })
   const test1 = () => {
     function* generator() {
       yield 1

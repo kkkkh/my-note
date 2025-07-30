@@ -204,6 +204,22 @@ outline: deep
 - 静态资源处理方式，有很多种，[参考 vite assets](https://cn.vitejs.dev/guide/assets)
 
 ## 配置
+### 共享配置
+- css.preprocessorOptions`[extension]`.additionalData
+  - 该选项可以用来为每一段样式内容添加额外的代码。
+  - 但是要注意，如果你添加的是实际的样式而不仅仅是变量，那这些样式在最终的产物中会重复。
+  - 适用：给所有scss文件添加额外的代码 `@use "/styles/element/index.scss" as *;` 直接使用这个scss文件中的变量信息等
+  ```js
+  export default defineConfig({
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `$injectedColor: orange;`,
+        },
+      },
+    },
+  })
+  ```
 ### 多配置文件 1 script
 - 场景：一个 vue 代码仓库，其中包含多个子项目，每个子项目对应，各自配置文件\入口文件
 - 示例代码：

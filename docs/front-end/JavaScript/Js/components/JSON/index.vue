@@ -2,6 +2,9 @@
   <div id="json"></div>
 </template>
 <script setup>
+defineOptions({
+  name: 'Json'
+})
 function replacer(key, value) {
   if (typeof value === "string") {
     return undefined; // 返回 undefined 表示该属性将被忽略
