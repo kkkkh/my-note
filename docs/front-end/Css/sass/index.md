@@ -679,7 +679,7 @@ code {
       color: green;
     }
     ```
-- 总结：
+- @import、@use 对比：
   - @import
     - 将被导入文件的内容直接插入到调用点，导致样式的全局性。
     - 多次导入同一文件会重复其内容。
@@ -691,7 +691,15 @@ code {
     - 文件只加载一次，无论在何处调用。
     - 支持配置共享变量和函数的显式定义，模块化设计更强。
     - 更高效，推荐用于新项目。
-
+### 总结
+- 三种@规则简单理解
+  - @use：就是引用模块
+    - `a模块`引入到`b模块`，`a模块`中的变量、函数、mixin 等都可以在`b模块`直接使用，
+    - `b模块`引入到`c模块`，a模块中的变量、函数、mixin 等在c模块中不能访问
+  - @forward：实现模块聚合（转发）
+    - 就是转发模块，可以将a模块中的变量、函数、mixin 等聚合到b模块，
+    - c模块@use b模块，c模块可以访问a模块中的变量、函数、mixin 等
+  - @import：就是引入文件，引入文件后，文件中的样式可以直接使用（后续不建议使用了）
 参考：
 - [@at-root](https://sass-lang.com/documentation/at-rules/at-root/)
 - [@import](https://sass-lang.com/documentation/at-rules/import/)

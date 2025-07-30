@@ -9,7 +9,7 @@ date: 2025-07-29
 
 1、按照设计稿的尺寸，将px按比例计算转为vw和vh，sass转换公式
 
-<<< @/submodule/play/packages/vue3/src/assets/styles/BigScreen.scss
+<<< @/submodule/play/packages/vue3/src/assets/styles/bigScreen.scss
 
 2、 vite配置sass.additionalData，全局使用
 
