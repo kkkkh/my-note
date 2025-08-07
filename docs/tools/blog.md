@@ -20,6 +20,7 @@ outline: deep
 - [云谦的博客](https://sorrycc.com)
 - [antfu](https://antfu.me/) 比较牛逼的前端
 - [大史不说话](https://github.com/dashnowords/blogs/) [博客园](https://www.cnblogs.com/dashnowords/p/10127926.html)
+- [集合](https://artiely.github.io/bookmark)
 - 系列 & 集合
   - [若川](https://juejin.cn/user/1415826704971918/posts) 源码解读
   - [冴羽](https://juejin.cn/user/712139234359182/posts)

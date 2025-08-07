@@ -233,4 +233,5 @@ outline: deep
 - [leetcode](https://leetcode.cn/)
 - [牛客](https://www.nowcoder.com/interview/center?entranceType=%E5%AF%BC%E8%88%AA%E6%A0%8F)
 - [javascript jobs](https://jobs.date-fns.org/)
+- [谁在招人？](https://github.com/ruanyf/weekly/issues/7408)
 

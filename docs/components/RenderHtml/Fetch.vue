@@ -17,7 +17,7 @@ onMounted(async () => {
     const response = await fetch(props.url);
     // debugger
     htmlContent.value = await response.text();
-    console.log(htmlContent.value)
+    // console.log(htmlContent.value)
   } catch (error) {
     console.error('Error fetching HTML file:', error);
     htmlContent.value = '<p>Failed to load HTML content.</p>';

@@ -1,4 +1,39 @@
 ### Array
+#### from
+Array.from() 静态方法从可迭代或类数组对象创建一个新的浅拷贝的数组实例。
+```js
+console.log(Array.from("foo"));
+// Expected output: Array ["f", "o", "o"]
+
+console.log(Array.from([1, 2, 3], (x) => x + x));
+// Expected output: Array [2, 4, 6]
+
+// 初始化一个长度为5的数组，值为索引
+console.log(Array.from({length: 5}, (_, i) => i));
+// Expected output: Array [0, 1, 2, 3, 4]
+
+// 另外一种方法
+new Array(5).fill(0).map((_, i) => i);
+// Expected output: Array [0, 1, 2, 3, 4]
+```
+```js
+// 序列生成器函数（通常称为“range”，例如 Clojure、PHP 等）
+const range = (start, stop, step) =>
+  Array.from({ length: (stop - start) / step + 1 }, (_, i) => start + i * step);
+// 生成的数字范围 0..4
+range(0, 4, 1);
+// [0, 1, 2, 3, 4]
+// 生成的数字范围 1..10，步长为 2
+range(1, 10, 2);
+// [1, 3, 5, 7, 9]
+// 使用 Array.from 生成字母表，并将其序列排序
+range("A".charCodeAt(0), "Z".charCodeAt(0), 1).map((x) =>
+  String.fromCharCode(x),
+);
+// ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+```
+参考：
+- [Array.from()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/from)
 #### push pop shift unshift
 - unshift() 加到开头，返回长度
 - push() 加到末尾，返回长度
@@ -23,7 +58,7 @@ const atWay = colors.at(-2);
 console.log(atWay); // 输出：'green'
 ```
 #### flatMap
-- 调用 map() 方法后再调用深度为 1 的 flat() 
+- 调用 map() 方法后再调用深度为 1 的 flat()
 ```js
 const arr1 = [1, 2, 1];
 const result = arr1.flatMap((num) => (num === 2 ? [2, 2] : 1));
@@ -46,7 +81,7 @@ console.log(arr2.flat(Infinity));
 #### splice
 最大的问题是会改变原数组
 - splice(start, deleteCount, item1, item2, /* …, */ itemN) 
-- start 
+- start
   - 负索引从数组末尾开始计算——如果 -buffer.length <= start < 0，使用 start + array.length。
   - 如果 start < -array.length，使用 0。
   - 如果 start >= array.length，则不会删除任何元素，但是该方法会表现为添加元素的函数，添加所提供的那些元素。

@@ -213,7 +213,7 @@ export default {
 
 - 4、动态生成文件名称
 
-<<< @/back-end/Lang/NodeJs/Script/include/index.data.js#nodejs-scriprt-include
+<<< @/front-end/Runtime/NodeJs/Module/Script/include/index.data.js#nodejs-scriprt-include
 
 ### alias 路径别名
 - alias

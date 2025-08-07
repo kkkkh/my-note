@@ -4,6 +4,7 @@
   - [electron-vite](https://cn.electron-vite.org/guide/)
 - 辅助工具
   - [vite-electron-builder](https://github.com/cawa-93/vite-electron-builder?tab=readme-ov-file) Vite + Electron-Builder 样板库
+  - [@electron-toolkit/preload](https://www.npmjs.com/package/@electron-toolkit/preload) 封装预加载脚本，简化预加载脚本开发
   - ~~[webpack-electron](https://webpack.electron.build/)~~ 建议使用vite
   - [Electron API演示工具](https://github.com/electron/electron-api-demos/releases) Electron API演示工具
   - [electron fiddle](https://github.com/electron/fiddle/releases) 试验工具

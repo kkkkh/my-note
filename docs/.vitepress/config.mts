@@ -75,8 +75,8 @@ export default withMermaid(defineConfig({
           link: '/hd/history/index',
         },
         {
-          text: 'blog',
-          link: '/hd/blog/index',
+          text: 'records',
+          link: '/hd/records/index',
         },
       ],
       'article': [
@@ -293,6 +293,27 @@ export default withMermaid(defineConfig({
           ],
         },
         {
+          text: '运行时',
+          link: '/front-end/Runtime/',
+          items: [
+            {
+              text: 'NodeJs',
+              link: '/front-end/Runtime/NodeJs/',
+              items: [
+                { text: 'Base', link: '/front-end/Runtime/NodeJs/Base/' },
+                { text: '《深入浅出nodejs》', link: '/front-end/Runtime/NodeJs/Book/' },
+                { text: 'Module', items:
+                  [
+                    { text: '脚本', link: '/front-end/Runtime/NodeJs/Module/Script/' },
+                    { text: 'crypto', link: '/front-end/Runtime/NodeJs/Module/Crypto/' },
+                    { text: 'c++ addons', link: '/front-end/Runtime/NodeJs/Module/c++/' },
+                  ]
+                 },
+              ]
+            },
+          ],
+        },
+        {
           text: '其他端',
           link: '/front-end/OtherEnd/',
           items: [
@@ -339,28 +360,13 @@ export default withMermaid(defineConfig({
       ],
       'back-end': [
         {
-          text: 'Lang',
-          link: '/back-end/Lang/',
+          text: 'Python',
+          link: '/back-end/Python/',
           items: [
-            {
-              text: 'NodeJs',
-              link: '/back-end/Lang/NodeJs/',
-              items: [
-                { text: 'Base', link: '/back-end/Lang/NodeJs/Base/' },
-                { text: 'Book', items: [
-                  { text: '深入浅出nodejs', link: '/back-end/Lang/NodeJs/Book/note/' },
-                ]},
-                { text: '脚本', link: '/back-end/Lang/NodeJs/Script/' },
-                { text: 'Module', items:
-                  [
-                    { text: 'crypto', link: '/back-end/Lang/NodeJs/Module/Crypto/' },
-                    { text: 'c++ addons', link: '/back-end/Lang/NodeJs/Module/c++/' },
-                  ]
-                 },
-              ]
-            },
+            { text: 'aiAsking', link: '/back-end/Python/aiAsking/' },
           ],
-        },{
+        },
+        {
           text: 'Ops',
           link: '/back-end/Ops/',
           items:[

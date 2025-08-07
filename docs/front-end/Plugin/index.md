@@ -252,10 +252,13 @@ outline: deep
 - art
   - [p5js](https://p5js.org/zh-Hans/)
   - [roughjs](https://roughjs.com/)
+- 粒子动画
+  - [canvas-particle-network](https://github.com/JulianLaval/canvas-particle-network)
+  - [interactive-particle-network](https://github.com/LeonKohli/interactive-particle-network) 交互式粒子网络
+  - [particles.js](https://github.com/VincentGarreau/particles.js/) [playground](https://vincentgarreau.com/particles.js/)
 - other
   - [sigmajs](https://www.sigmajs.org/) 节点
   - [getspringy](http://getspringy.com/) 图形布局
-
 ## 其他端
 ### uniapp
 - [ucharts](https://www.ucharts.cn/v2/#/guide/index)

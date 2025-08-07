@@ -32,7 +32,7 @@ outline: deep
     - 1. 硬连接只能创建文件的链接，不能链接文件夹（目录）
     - 2. 硬连接不能跨文件系统：不能让C盘的文件在D盘有另外一个名字
     - 3. 硬连接是指向 inode（相同内容）：inode 其实就是操作系统给文件的“身份证”，里面有文件的各种信息（权限、修改时间、数据位置等），硬连接就是创建了一个新的“文件名”指向和原文件一样的 inode。
-  - 参考：[nodejs 创建硬链接和软链接](/back-end/Lang/NodeJs/Base/index.md#link-symlink)
+  - 参考：[nodejs 创建硬链接和软链接](/front-end/Runtime/NodeJs/Base/index.md#link-symlink)
 ### pnpm store
 pnpm 安装的包真实存储位置是一个`全局的内容寻址存储库`
 实际地址在，例如：`D:\.pnpm-store\store\v3`
