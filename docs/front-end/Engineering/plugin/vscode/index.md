@@ -159,6 +159,7 @@ https://code.visualstudio.com/api/get-started/your-first-extension
 - [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
 - [Five Server](https://marketplace.visualstudio.com/items?itemName=yandeu.five-server) 可以对当前目录启动服务
 - [Tabnine](https://marketplace.visualstudio.com/items?itemName=TabNine.tabnine-vscode)
+- [package-json-inspector](https://marketplace.visualstudio.com/items?itemName=kricsleo.vscode-package-json-inspector) 查看 package.json 文件
 - 主题
   - [Material Icon Theme](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme)
   - [Atom One Dark Theme](https://marketplace.visualstudio.com/items?itemName=akamud.vscode-theme-onedark) 主题
@@ -222,7 +223,7 @@ https://code.visualstudio.com/api/get-started/your-first-extension
 - [Markdown Preview Enhanced](https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced)
 - [Markdown table prettifier](https://marketplace.visualstudio.com/items?itemName=darkriszty.markdown-table-prettify) 格式化md table
 - [excel-to-markdown-table](https://marketplace.visualstudio.com/items?itemName=csholmq.excel-to-markdown-table&ssr=false#review-details) 自动生成md table（Shift+Alt+V）
-#### runne
+#### runner
 - [code-runner](https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner)
 - [jest-runner](https://marketplace.visualstudio.com/items?itemName=firsttris.vscode-jest-runner)
 - [vitest-runner](https://marketplace.visualstudio.com/items?itemName=kingwl.vscode-vitest-runner)

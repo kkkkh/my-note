@@ -62,9 +62,9 @@ export default withMermaid(defineConfig({
         ]
       },
       { text: '文档', items:[
+        { text: 'hd', link: '/hd/index'},
         { text: 'tool', link: '/tools/blog' },
         { text: 'play', link: 'https://kkkkh.github.io/play/' },
-        { text: 'hd', link: '/hd/index'},
       ] },
       { text: '文章', link: '/article/' },
     ],

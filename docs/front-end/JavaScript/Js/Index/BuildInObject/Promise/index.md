@@ -4,7 +4,7 @@
 源码分析
 
 
-<img src="./components/Promise/promise.drawio.svg" alt="promise" v-viewer/>
+<img src="@/front-end/JavaScript/Js/components/Promise/promise.drawio.svg" alt="promise" v-viewer/>
 
 <!-- <ImgView :images="['./components/Promise/promise.drawio.svg']" /> -->
 
