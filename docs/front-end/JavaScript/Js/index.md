@@ -15,7 +15,7 @@ import Test from '@/components/Test.vue'
 
 import Generator from '@/front-end/JavaScript/Js/components/Generator/index.vue'
 import Promise from '@/front-end/JavaScript/Js/components/Promise/index.vue'
-import Json from '@/front-end/JavaScript/Js/components/Json/index.vue'
+import Json from '@/front-end/JavaScript/Js/components/JSON/index.vue'
 
 </script>
 
@@ -154,7 +154,7 @@ console.log(set1.has(6)); // true
 
 <!--@include: ./Index/BuildInObject/Promise/index.md-->
 
-<!--@include: ./Index/BuildInObject/Json/index.md-->
+<!--@include: ./Index/BuildInObject/JSON/index.md-->
 
 <!--@include: ./Index/BuildInObject/Intl/index.md-->
 

@@ -32,7 +32,7 @@ const obj = JSON.parse(jsonString); // { name: "Alice", age: 25 }
 
 <<< @/front-end/JavaScript/Js/components/JSON/index.vue
 
-<Test :is="Json" />
+<Test :is="JSON" />
 <!-- <Test :is="modules['Json']" /> -->
 
 ```js
