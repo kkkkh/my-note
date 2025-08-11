@@ -10,7 +10,8 @@
 
 <<< @/front-end/JavaScript/Js/components/Promise/index.vue
 
-<Test :is="modules['Promise']" />
+<!-- <Test :is="modules['Promise']" /> -->
+<Test :is="Promise" />
 
 
 - [Promise A+ 规范](https://promisesaplus.com/)

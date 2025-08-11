@@ -15,7 +15,7 @@ export { data }
 export default (url:string) => createContentLoader(url, {
   excerpt: true,
   transform(raw): Post[] {
-    console.log(raw)
+    // console.log(raw)
     const dateFmt = new Intl.DateTimeFormat('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit' });
     return raw
       .filter(item => item.frontmatter.title && !item.frontmatter.filter)

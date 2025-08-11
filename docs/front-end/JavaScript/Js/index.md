@@ -3,13 +3,20 @@ outline: deep
 ---
 <script setup>
 import Test from '@/components/Test.vue'
-const jsModules = import.meta.glob('@/front-end/JavaScript/Js/components/*/index.vue',{
-  eager:true,
-  import:'default'
-})
-const modules = Object.fromEntries(Object.entries(jsModules).map(([key,value])=>{
-  return [value.name,value]
-}))
+
+// const components = import.meta.glob('@/front-end/JavaScript/Js/components/*/index.vue',{
+//   // eager: true,
+//   // import:'default'
+// })
+// const jsModules = Object.fromEntries(Object.entries(components).map(([key,value])=>{
+//   return [key.split('/').slice(-2,-1)[0],value]
+// }))
+// console.log("jsModules",jsModules)
+
+import Generator from '@/front-end/JavaScript/Js/components/Generator/index.vue'
+import Promise from '@/front-end/JavaScript/Js/components/Promise/index.vue'
+import Json from '@/front-end/JavaScript/Js/components/Json/index.vue'
+
 </script>
 
 # Js
@@ -152,7 +159,3 @@ console.log(set1.has(6)); // true
 <!--@include: ./Index/BuildInObject/Intl/index.md-->
 
 <!--@include: ./Index/BuildInObject/Generator/index.md-->
-
-
-
-

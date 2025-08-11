@@ -45,7 +45,7 @@ outline: deep
     viteFinal: async (config, { configType }) => {
       config.resolve.alias['~'] = path.resolve(__dirname, '../src')
       config.resolve.alias['@'] = path.resolve(__dirname, '../src')
-      console.log(config.plugins)
+      <!-- console.log(config.plugins) -->
       // vite中内置了react插件
       // 临时解决方案：将其替换为vue-jsx插件
       config.plugins.forEach((element,index) => {

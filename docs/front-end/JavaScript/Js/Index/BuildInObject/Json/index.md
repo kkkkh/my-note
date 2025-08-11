@@ -32,7 +32,8 @@ const obj = JSON.parse(jsonString); // { name: "Alice", age: 25 }
 
 <<< @/front-end/JavaScript/Js/components/JSON/index.vue
 
-<Test :is="modules['Json']" />
+<Test :is="Json" />
+<!-- <Test :is="modules['Json']" /> -->
 
 ```js
 // 可以在stringify层处理
