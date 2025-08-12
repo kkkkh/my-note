@@ -3,6 +3,8 @@ outline: deep
 ---
 # Eletron
 ## 原理
+### windows 底层理解
+- [windows electron](https://chat.deepseek.com/a/chat/s/4d1ed153-1e19-4582-add2-53a279f6b054)
 ### electron 基本原理
 - app 模块，它控制应用程序的事件生命周期。
 - BrowserWindow 模块，它创建和管理应用程序 窗口。

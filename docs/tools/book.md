@@ -20,6 +20,11 @@ outline: deep
 - 《C++ Primer 中文版》[豆瓣](https://weread.qq.com/web/reader/ff732fe072021a24ff7bb24) &nbsp;[微信读书](https://book.douban.com/subject/25708312/) C++ 初学者的最佳指南，比《C++ Primer Plus》难一些。
 - 《C++ Primer Plus》：适合 C++ 初学者的书籍
 - 《Effective C++》 要让自己的水平上升到更高的档次，此书必看
+### windows
+- [深入解析Windows操作系统 第7版 卷1](https://book.douban.com/subject/35453564/)
+- [深入解析Windows操作系统 第7版 卷2](https://book.douban.com/subject/36784317/)
+- [Windows 核心编程 (第5版)](https://book.douban.com/subject/3235659/) Jeffrey Richter
+- [Windows 程序设计（第6版）](https://book.douban.com/subject/25925555/) 佩措尔德 (Charles Petzold)
 ## 后端
 ### python
 - [Python源码剖析](https://book.douban.com/subject/3117898/)
@@ -29,3 +34,4 @@ outline: deep
 - Node.js：来一打 C++ 扩展 [豆瓣](https://book.douban.com/subject/30247892/) &nbsp;[微信读书](https://weread.qq.com/web/reader/35e32e1071dbdd8a35e331f#outline?noScroll=1)
 ## 前端
 ### javascript
+- [Electron跨平台开发实战](https://book.douban.com/subject/34838092/)
