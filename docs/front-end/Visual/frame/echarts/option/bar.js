@@ -1,5 +1,24 @@
 export const getOption = (xAxisData = [], seriesData = [], labelData = []) => {
+  // 设置默认信息 、 无数据展示
+  const graphic =
+        xAxisData.length === 0
+          ? [
+              {
+                type: 'text',
+                left: '40%',
+                top: '28%',
+                z: 1000,
+                style: {
+                  text: '暂无数据',
+                  textAlign: 'center',
+                  fill: '#bcd2ff', // 设置文本颜色
+                  fontSize: 18,
+                },
+              },
+            ]
+          : []
   return {
+    graphic,
     title: {
     },
     tooltip: {
@@ -7,17 +26,18 @@ export const getOption = (xAxisData = [], seriesData = [], labelData = []) => {
     },
     calculable: true,
     grid: {
-      top: '20%',
-      bottom: '50px',
-      left: '5%',
-      right: '5%',
+      top: '10%',
+      bottom: '130px',
+      left: '0',
+      right: '10%',
     },
     xAxis: [
       // x轴
       {
         type: 'category',
         data: xAxisData,
-        axisLine: {
+        height: 100,
+          axisLine: {
           show: true,
           lineStyle: {
             color: '#bcd2ff',
@@ -31,13 +51,14 @@ export const getOption = (xAxisData = [], seriesData = [], labelData = []) => {
           color: '#bcd2ff',
           interval: 0, // 显示所有标签
           rotate: -45,
-          fontSize: 10,
+          fontSize: 18,
           /*
             x轴 label 超出范围...展示
             设置下边三个属性：width、overflow、ellipsis
             grid.bottom 控制label的展示区域的大小
           */
-          width: 50, // 标签宽度
+          lineHeight: 130,
+          width: 130, // 标签宽度
           overflow: 'truncate', // 超出显示省略号
           ellipsis: '...', // 省略号
         },
@@ -52,6 +73,16 @@ export const getOption = (xAxisData = [], seriesData = [], labelData = []) => {
           lineStyle: {
             color: '#bcd2ff',
           },
+        },
+        axisTick: {
+          show: false,
+        },
+        axisLabel: {
+          color: '#bcd2ff',
+          show: false,
+        },
+        splitLine: {
+          show: false,
         },
         max: Math.max(...seriesData) * 1.1, // 设置y轴顶部的空间
       },
@@ -71,13 +102,14 @@ export const getOption = (xAxisData = [], seriesData = [], labelData = []) => {
         },
         markPoint: {
           // 柱状图顶部位置展示label
-          symbol: 'image://', // 设置为image://，默认背景没有图案和北京
+          symbol: 'image://', // 设置为image://，默认背景没有图案和背景
           symbolSize: 10,
           label: {
             color: '#bcd2ff',
             show: true,
             position: 'top',
             formatter: '{c}', // 显示数值
+            fontSize: 18,
           },
           data: seriesData.map((item, index) => ({
             value: item,
@@ -85,7 +117,25 @@ export const getOption = (xAxisData = [], seriesData = [], labelData = []) => {
           })),
         },
         itemStyle: {
-          borderRadius: [12, 12, 0, 0],
+          borderRadius: [10, 10, 10, 10],
+          color: {
+            type: 'linear',
+            x: 0,
+            y: 0,
+            x2: 0,
+            y2: 1,
+            colorStops: [
+              {
+                offset: 0,
+                color: 'rgba(2, 201, 213, 1)', // 0% 处的颜色
+              },
+              {
+                offset: 1,
+                color: 'rgba(1, 164, 251, 1)', // 100% 处的颜色
+              },
+            ],
+            global: false, // 缺省为 false
+          },
         },
       },
     ],

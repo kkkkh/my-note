@@ -1,28 +1,113 @@
 ---
 outline: deep
 ---
+<script setup>
+import Test from '@/components/Test.vue'
+import GetBoundingClientRect from './components/getBoundingClientRect.vue'
+import CapturePropagation from './components/capturePropagation.vue'
+import Keydown from './components/keydown.vue'
+import ActiveElement from './components/activeElement.vue'
+import CreateElementNS from './components/createElementNS.vue'
+</script>
 ## Dom
 [文档对象模型（DOM）](https://developer.mozilla.org/zh-CN/docs/Web/API/Document_Object_Model)
-### Document
+### Document / Element / Node
+#### Element
+- Element.tagName 等同于 Element.nodeName
+  ```js
+  var span = document.getElementById("born");
+  alert(span.tagName); // SPAN
+  ```
+#### createElementNS
+- 创建一个具有指定的命名空间 URI 和限定名称的元素
+- HTML - 参阅 http://www.w3.org/1999/xhtml
+- SVG - 参阅 http://www.w3.org/2000/svg
+<CreateElementNS />
+::: details 查看代码
+<<< @/front-end/JavaScript/Dom/components/createElementNS.vue
+:::
+
+#### HTMLInputElement
+- selectionStart
+  - 一个表示选择文本的开始索引的数字。
+  - 当没有选择时，它返回当前文本输入光标位置的偏移量。
+- selectionEnd
+  - 一个表示选择文本的结束索引的数字。
+  - 当没有选择时，它返回当前文本输入光标位置后面的字符的偏移量。
+- setSelectionRange() 设定当前选中文本的起始和结束位置。
+#### parentElement / parentNode
+##### parentElement
+- 当前节点的父元素。
+- 它永远是一个 DOM 元素 对象，
+- 或者 null。
+- [参考](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/parentElement) 
+##### parentNode
+- 是指定节点的父节点。
+- 一个元素节点的父节点可能是一个元素 (Element) 节点，
+- 也可能是一个文档 (Document) 节点，
+- 或者是个文档碎片 (DocumentFragment`) 节点。
+- [参考](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/parentNode) 
+### Document / Element / Node 属性调用
+#### textContent
+- 获取或设置指定节点的文本内容。、
+```js
+document.getElementById("divA").textContent = "This text is different!";
+```
+- [参考](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/textContent)
+#### innerHTML
+- 获取或设置指定节点的 HTML 内容。
+- [参考](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/innerHTML)
+#### outerHTML
+- 获取或设置指定节点的 HTML 内容。
+### Document / Element / Node 方法调用
+#### cloneNode
+`var dupNode = node.cloneNode(deep);`
+- node 将要被克隆的节点
+- dupNode 克隆生成的副本节点
+- deep 是否采用深度克隆，如果为 true，则该节点的所有后代节点也都会被克隆，如果为 false，则只克隆该节点本身。
+```js
+let p = document.getElementById("para1");
+let p_prime = p.cloneNode(true);
+```
+- [参考](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/cloneNode)
+#### append / appendChild / prepend
+##### appendchild
+- 只能传一个节点，且不直接支持传字符串
+- 返回追加的子节点
+- 存在节点移位，不需要事先删除
+- 需要保留原位，Node.cloneNode 复制副本，然后在插入到新位置
+##### append （更加新）
+- 兼容，一组 Node 对象或 DOMString 对象
+- 没有返回值
+```js
+var parent = document.createElement("div");
+var p = document.createElement("p");
+parent.append("Some text", p);
+console.log(parent.childNodes); // NodeList [ #text "Some text", <p> ]
+```
+- [参考](https://developer.mozilla.org/zh-CN/docs/Web/API/ParentNode/append)
+##### prepend
+- 父节点的第一个子节点之前
+- 插入一系列 Node 对象或者 DOMString 对象
+#### remove
+- 把对象从它所属的 DOM 树中删除
+```js
+el.remove()
+```
+#### Element.getBoundingClientRect()
+![getBoundingClientRect](./img/getBoundingClientRect-1.png)
+<Test :is="GetBoundingClientRect" />
+::: details 查看代码
+<<< @/front-end/JavaScript/Dom/components/getBoundingClientRect.vue
+:::
+
 #### activeElement
 Document 接口的 activeElement 只读属性返回 DOM 中当前拥有焦点的 Element。
-```js
-function onMouseUp(e) {
-  const activeTextarea = document.activeElement;
-  const selection = activeTextarea.value.substring(
-    activeTextarea.selectionStart,
-    activeTextarea.selectionEnd,
-  );
-  const outputElement = document.getElementById("output-element");
-  const outputText = document.getElementById("output-text");
-  outputElement.innerHTML = activeTextarea.id;
-  outputText.innerHTML = selection;
-}
-const textarea1 = document.getElementById("ta-example-one");
-const textarea2 = document.getElementById("ta-example-two");
-textarea1.addEventListener("mouseup", onMouseUp, false);
-textarea2.addEventListener("mouseup", onMouseUp, false);
-```
+<ActiveElement />
+::: details 查看代码
+<<< @/front-end/JavaScript/Dom/components/activeElement.vue
+:::
+
 ### Event
 #### 事件捕获（capture）、事件冒泡（propagation）
 - 父子关系：div1 -> div2 -> div3
@@ -30,53 +115,21 @@ textarea2.addEventListener("mouseup", onMouseUp, false);
 - 事件冒泡：由内向外，div3,div2,div1
 - addEventListener 第三个参数设置为true，事件在捕获阶段触发，打印顺序：1,2,3，反之则在冒泡阶段触发3,2,1
 - 捕获阶段与冒泡阶段都可以设置e.stopPropagation()，阻止事件往下一层触发
-```html
-<div id="div1" onclick="handleClick1(event)">
-  <div id="div2" onclick="handleClick2(event)">
-    <div id="div3" onclick="handleClick3(event)">Click div3</div>
-  </div>
-</div>
-<script>
-  document.getElementById('div1').addEventListener('click',(e) => {
-    e.stopPropagation()
-    debugger
-  }, true)
-  document.getElementById('div2').addEventListener('click',(e) => {
-    e.stopPropagation()
-    debugger
-  }, true)
-  document.getElementById('div3').addEventListener('click',(e) => {
-    e.stopPropagation()
-    debugger 
-  }, true)
-  function handleClick1(event) {
-    debugger
-    console.log('div1 clicked')
-  }
-  function handleClick2(event) {
-    debugger
-    // event.stopPropagation(); // 阻止事件从 div2 继续冒泡
-  }
-  function handleClick3(event) {
-    debugger
-    // event.stopPropagation(); // 阻止事件从 div3 继续冒泡
-  }
-```
+<CapturePropagation></CapturePropagation>
+::: details 查看代码
+<<< @/front-end/JavaScript/Dom/components/capturePropagation.vue
+:::
+
 #### keydown/keyup
 - ~~keypress~~<font color=red>(已弃用)</font> 当按下产生字符或符号值的键时，将触发 keypress 事件
 - keyup 事件在按键被松开时触发
 - keydown 事件在按键被松开时触发
 - 扫描枪触发就是 input事件 + keydown Enter事件（生成的条形码中包含英文，输入法是英文状态下，才会触发keydown/keyup事件）
+<Keydown></Keydown>
+::: details 查看代码
+<<< @/front-end/JavaScript/Dom/components/keydown.vue
+::: 
 
-```js
-// 按回车键时
-document.getElementById("app").addEventListener('keydown',(e)=>{
-  console.log(e.code) //Enter
-  console.log(e.key)//Enter
-  // e.keyCode弃用
-  console.log(e.keyCode)//13 
-})
-```
 参考：
 - [keyup_event](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/keyup_event)
 - [KeyboardEvent](https://developer.mozilla.org/zh-CN/docs/Web/API/KeyboardEvent)
@@ -395,65 +448,3 @@ console.log(`?x=${encodeURIComponent("我和你")}`);
       return str.replace(/[^a-zA-Z0-9\-_.!~*'()]/g, replacer);
   }
   ```
-### Element
-#### Element
-- Element.tagName 等同于 Element.nodeName
-  ```js
-  var span = document.getElementById("born");
-  alert(span.tagName); // SPAN
-  ```
-#### HTMLInputElement
-- selectionStart
-  - 一个表示选择文本的开始索引的数字。
-  - 当没有选择时，它返回当前文本输入光标位置的偏移量。
-- selectionEnd
-  - 一个表示选择文本的结束索引的数字。
-  - 当没有选择时，它返回当前文本输入光标位置后面的字符的偏移量。
-- setSelectionRange() 设定当前选中文本的起始和结束位置。
-#### Element.getBoundingClientRect()
-![alt text](getBoundingClientRect-1.png)
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style>
-      body{margin:0,padding:0}
-      div {
-        width: 400px;
-        height: 200px;
-        padding: 20px;
-        margin: 50px 60px;
-        background: purple;
-      }
-    </style>
-  </head>
-  <body>
-    <div></div>
-    <script>
-      let elem = document.querySelector('div');
-      let rect = elem.getBoundingClientRect();
-      for (var key in rect) {
-        if(typeof rect[key] !== 'function') {
-          let para = document.createElement('p');
-          para.textContent  = `${ key } : ${ rect[key] }`;
-          document.body.appendChild(para);
-          /*
-          x :60
-          y : 50
-          width : 440
-          height : 240
-          top : 50
-          right : 500
-          bottom : 290
-          left : 60
-          */
-        }
-      }
-    </script>
-  </body>
-</html>
-```

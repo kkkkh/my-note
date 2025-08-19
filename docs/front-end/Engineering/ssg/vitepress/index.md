@@ -331,7 +331,8 @@ export default {
 - https://github.com/clark-cui/vitepress-blog-zaun
 
 ## vitepress 插件
-
+- vitepress 插件
+  - [vitepress-plugin-codeblocks-fold](https://github.com/T-miracle/vitepress-plugin-codeblocks-fold) 代码折叠
 - markdown-it 插件
   - [markdown-it-attrs](https://www.npmjs.com/package/markdown-it-attrs)
   - [markdown-it-toc-done-right](https://www.npmjs.com/package/markdown-it-toc-done-right)

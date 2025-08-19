@@ -137,35 +137,45 @@ Vue.component('base-input', {
 #### vue2
 - vitepress 不支持vue2组件的展示
 <!-- <PropsIndexVue2 /> -->
-
+  ::: details 查看代码
   <<< @/submodule/play/packages/vue2/src/components/Props/Index.vue
-
+  :::
 - 直接修改props，响应式更新父组件
-
+  ::: tip
+  最简单直接的方案
+  :::
+  ::: details 查看代码
   <<< @/submodule/play/packages/vue2/src/components/Props/Child.vue
-
+  :::
 - watch 监听 props 变化，更新localForm，输入更新，调用emit update 更新父组件
-
+  ::: tip
+  较复杂
+  :::
+  ::: details 查看代码
   <<< @/submodule/play/packages/vue2/src/components/Props/Child2.vue
-
+  :::
 - computed formValue get中接受 props form，set中捕捉不到，watch formValue变化，调用emit update 更新父组件
-
+  ::: tip
+  较为折中的方案
+  :::
+  ::: details 查看代码
   <<< @/submodule/play/packages/vue2/src/components/Props/Child3.vue
-
+  :::
 - computed 单个form的属性，set可以捕捉到
-
+  ::: details 查看代码
   <<< @/submodule/play/packages/vue2/src/components/Props/Child4.vue
-
+  :::
 #### vue3
 
 - 代码展示
 
   <PropsIndex />
-
+  ::: details 查看代码
   <<< @/submodule/play/packages/vue3/src/components/Props/Index.vue
-
+  :::
+  ::: details 查看代码
   <<< @/submodule/play/packages/vue3/src/components/Props/Child.vue
-
+  :::
 ## 模板
 
 ### watch
