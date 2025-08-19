@@ -176,6 +176,15 @@ Vue.component('base-input', {
   ::: details 查看代码
   <<< @/submodule/play/packages/vue3/src/components/Props/Child.vue
   :::
+### Vue.extend
+- 使用基础 Vue 构造器，创建一个“子类”。参数是一个包含组件选项的对象。
+- 创建构造器 `var Profile = Vue.extend(component)`
+- 创建 Profile 实例，并挂载到一个元素上 `new Profile().$mount('#mount-point')`
+::: details 查看代码
+<<< @/submodule/play/packages/vue2/src/components/Extend/Index.vue
+:::
+
+- 参考：[Vue.extend](https://v2.cn.vuejs.org/v2/api/#Vue-extend)
 ## 模板
 
 ### watch

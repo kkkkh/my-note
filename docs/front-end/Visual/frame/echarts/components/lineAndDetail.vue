@@ -1,16 +1,18 @@
 <template>
-  <ChartTest ref="component" :init-option="initOption" :test-option="testOption" :mouseoverHandle="mouseoverHandle" />
+  <ChartTest ref="component" :init-option="initOption" :test-option="testOption" :defineEvents="defineEvents" />
 </template>
 <script setup>
-import { getOption } from '../option/lineAndDetail'
+import { getOption, mouseoverHandle } from '../option/lineAndDetail'
 import { getRadomNumber } from '@/utils/echarts'
 import ChartTest from '@/components/ChartTest.vue'
 import Test from "@/utils/test"
-const mouseoverHandle = ()=>{
-  // if (params.componentType === 'series' && params.seriesType === 'line') {
-  
-  // }
-}
+
+const defineEvents = [
+  {
+    name: 'mouseover',
+    handle: mouseoverHandle
+  }
+]
 const initOption = getOption(
   ['6-11', '6-12', '6-13', '6-14', '6-15'],
   Array.from({ length: 5 }).map((_val, index) => {
@@ -18,7 +20,7 @@ const initOption = getOption(
     return {
       a: cur,
       b: index,
-      data:  Array.from({ length: 5 }).map(() => getRadomNumber(1, 100)),
+      data: Array.from({ length: 5 }).map(() => getRadomNumber(1, 100)),
     }
   }),
   50
@@ -30,7 +32,7 @@ const testOption = getOption(
     return {
       a: cur,
       b: index,
-      data:  Array.from({ length: 5 }).map(() => getRadomNumber(1, 100)),
+      data: Array.from({ length: 5 }).map(() => getRadomNumber(1, 100)),
     }
   }),
   50

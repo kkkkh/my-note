@@ -128,3 +128,47 @@ export function getOption(timeData = [], lineData = [], standardUph = null) {
     ],
   }
 }
+
+
+export const mouseoverHandle = (params, echartInstance) => {
+  if (params.componentType === 'series' && params.seriesType === 'line') {
+    const table = document.createElement('table')
+    //  这里也可以使用vue组件，可使用vue extend 实现
+    table.innerHTML = `
+    <thead>
+      <tr>
+        <th>name</th>
+        <th>value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>${params.name}</td>
+        <td>${params.seriesName}</td>
+      </tr>
+    </tbody>
+    `
+    echartInstance.setOption({
+      tooltip: {
+        show: true,
+        hideDelay: 500,
+        confine: true, // 是否限制在图表区域内
+        // alwaysShowContent: true,
+        // triggerOn: 'click',
+        // trigger: 'item',
+        enterable: true, // 是否可进入tooltip
+        formatter: () => {
+          return table
+        },
+        borderColor: '#f0f0f0',
+      },
+    })
+  } else if (params.componentType === 'markLine') {
+    echartInstance.setOption({
+      tooltip: {
+        show: false,
+        hideDelay: 0,
+      },
+    })
+  }
+}
