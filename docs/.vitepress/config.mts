@@ -363,6 +363,7 @@ export default withMermaid(defineConfig({
           text: 'Python',
           link: '/back-end/Python/',
           items: [
+            { text: 'QuickStart', link: '/back-end/Python/QuickStart/' },
             { text: 'aiAsking', link: '/back-end/Python/aiAsking/' },
           ],
         },
