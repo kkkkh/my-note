@@ -3,6 +3,8 @@ title: python 关于字符串、字典、函数的一些问答
 date: 2025-08-27
 ---
 # python 关于字符串的一些问答
+参考：[devv](https://devv.ai/zh/search/eun0ylc1pd6o)
+
 ## Q1: python中字符串 unicode_a ='\N{LATIN SMALL LETTER A}'   这是什么操作，Unicode名称吗？
 是的，`\N{LATIN SMALL LETTER A}` 是在 Python 中使用 Unicode 名称来表示 Unicode 字符的操作 [3].
 
