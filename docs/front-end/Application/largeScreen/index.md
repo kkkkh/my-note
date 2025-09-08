@@ -17,7 +17,7 @@ date: 2025-07-29
 
 3、vue中直接使用
 
-<<< @/submodule/play/packages/vue3/src/components/BigScreen/Index.vue
+<<< @/submodule/play/packages/vue3/src/components/BigScreen/index.vue
 
 参考：
 - [一次搞懂数据大屏适配方案 (vw vh、rem、scale)](https://juejin.cn/post/7163932925955112996?searchId=202507221002590876F10B9AA440B4C673)
