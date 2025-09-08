@@ -55,3 +55,31 @@ play
 - 需要将页面常用功能迁移：权限管控、右击、验证控制等
 - 尤其electron的核心功能
 - 开源库的使用代码
+
+
+
+
+https://developer.mozilla.org/zh-CN/docs/Web/API/Event/Event
+https://chatgpt.com/c/68b50998-95cc-8328-8ab9-4e3829fde8f6
+
+
+play vue2 与 mynote 整合 √
+vue3 指令加入 √
+play vue3 与 mynote 整合 √
+按需加载 √
+histoire √
+
+https://chatgpt.com/c/68ba9b4a-d4a4-832c-9167-642e78450e25
+
+https://devv.ai/zh/search/eqh7baxoho1s
+https://www.npmjs.com/package/unplugin-vue-components
+play electron 与 mynote 整合
+
+nodejs stream 继续整理
+https://chatgpt.com/c/68b952c8-9850-832d-a1da-2a26c691234a
+大文件的上传 流式上传
+
+play vue2 插件 i18n + scanner i18n 插件 整理
+微前端 vue2+vue3+react
+搭建网站
+vxe-table 前端渲染

@@ -202,8 +202,9 @@ git config --global credential.helper store
 # 设置代理
 git config http.proxy http://127.0.0.1:7897
 git config --global --unset http.proxy
+# 忽略大小写
+git config core.ignorecase false # 不忽略 Index 与 index 不同
 
-git config core.ignoreCase
 ```
 #### git log
 ```bash

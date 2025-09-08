@@ -19,8 +19,3 @@ outline: deep
 ### vscode
 ### brower
 ### markdown
-
-## version manage
-### git
-### svn
-

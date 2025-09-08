@@ -1,20 +1,15 @@
 ---
 outline: deep
 ---
-<script setup>
-import PropsIndex from '@play/vue3/src/components/Props/Index.vue'
-</script>
-
 # vue2
-## 应用
-### v-model和.sync
-####  v-model
+## v-model和.sync
+###  v-model
 ```html
 <input v-model="searchText">
 相当于
 <input v-bind:value="searchText" v-on:input="searchText = $event">
 ```
-#### 组件绑定 v-model
+### 组件绑定 v-model
 ```html
 <custom-input v-model="searchText"></custom-input>
 相当于
@@ -36,7 +31,7 @@ Vue.component("custom-input", {
     `,
 });
 ```
-#### 组件绑定 type="checkbox"
+### 组件绑定 type="checkbox"
 ```html
 <base-checkbox v-model="lovingVue"></base-checkbox>;
 相当于
@@ -62,7 +57,7 @@ Vue.component("base-checkbox", {
   `,
 });
 ```
-#### .sync 修饰符
+### .sync 修饰符
 - 是在 v-model 基础上的升级：
 - v-model 为\$emit('input', $event.target.value)
 - async 为 this.\$emit('update:title',value)
@@ -76,8 +71,8 @@ Vue.component("base-checkbox", {
 ```js
 this.$emit("update:title", value);
 ```
-### event
-#### .native
+## event
+### .native
 - 1、在一个组件的根元素上直接监听一个原生事件，使用.native修饰符
 ```vue
 <!-- 父组件 -->
@@ -133,13 +128,8 @@ Vue.component('base-input', {
 ```vue
 <base-input v-on:keyup.native="onKeyup" v-on:click.native="onKeyup"></base-input>
 ```
-### props
-#### vue2
-- vitepress 不支持vue2组件的展示
-<!-- <PropsIndexVue2 /> -->
-  ::: details 查看代码
-  <<< @/submodule/play/packages/vue2/src/components/Props/Index.vue
-  :::
+## props
+
 - 直接修改props，响应式更新父组件
   ::: tip
   最简单直接的方案
@@ -165,18 +155,8 @@ Vue.component('base-input', {
   ::: details 查看代码
   <<< @/submodule/play/packages/vue2/src/components/Props/Child4.vue
   :::
-#### vue3
 
-- 代码展示
-
-  <PropsIndex />
-  ::: details 查看代码
-  <<< @/submodule/play/packages/vue3/src/components/Props/Index.vue
-  :::
-  ::: details 查看代码
-  <<< @/submodule/play/packages/vue3/src/components/Props/Child.vue
-  :::
-### Vue.extend
+## Vue.extend
 - 使用基础 Vue 构造器，创建一个“子类”。参数是一个包含组件选项的对象。
 - 创建构造器 `var Profile = Vue.extend(component)`
 - 创建 Profile 实例，并挂载到一个元素上 `new Profile().$mount('#mount-point')`
@@ -185,9 +165,9 @@ Vue.component('base-input', {
 :::
 
 - 参考：[Vue.extend](https://v2.cn.vuejs.org/v2/api/#Vue-extend)
-## 模板
 
-### watch
+## watch
+::: details 查看代码
 ```js
 var vm = new Vue({
   data: {
@@ -232,7 +212,9 @@ var vm = new Vue({
 })
 vm.a = 2 // => new: 2, old: 1
 ```
-### 渲染函数 & JSX
+:::
+## 渲染函数 & JSX
+::: details 查看代码
 ```js
 {
   // 与 `v-bind:class` 的 API 相同，
@@ -298,21 +280,9 @@ vm.a = 2 // => new: 2, old: 1
   refInFor: true
 }
 ```
-### 自定义指令
-```js
-// 注册一个全局自定义指令 `v-focus`
-Vue.directive('focus', {
-  // 当被绑定的元素插入到 DOM 中时……
-  inserted: function (el) {
-    // 聚焦元素
-    el.focus()
-  }
-})
-```
-```html
-<input v-focus>
-```
-#### 钩子函数
+:::
+## 自定义指令
+### 钩子函数
 一个指令定义对象可以提供如下几个钩子函数 (均为可选)：
 - bind：只调用一次，指令第一次绑定到元素时调用。在这里可以进行一次性的初始化设置。
 - inserted：被绑定元素插入父节点时调用 (仅保证父节点存在，但不一定已被插入文档中)。
@@ -322,7 +292,7 @@ Vue.directive('focus', {
   - 但是你可以通过比较更新前后的值来忽略不必要的模板更新 (详细的钩子函数参数见下)。
 - componentUpdated：指令所在组件的 VNode 及其子 VNode 全部更新后调用。
 - unbind：只调用一次，指令与元素解绑时调用。
-
+::: details 查看代码
 ```js
 Vue.directive('table-scroll', {
   bind: (el, binding) => {
@@ -364,8 +334,8 @@ Vue.directive('table-scroll', {
   }
 })
 ```
-
-#### 钩子函数参数
+:::
+### 钩子函数参数
 指令钩子函数会被传入以下参数：
 - el：指令所绑定的元素，可以用来直接操作 DOM。
 - binding：一个对象，包含以下 property：
@@ -378,7 +348,7 @@ Vue.directive('table-scroll', {
 - vnode：Vue 编译生成的虚拟节点。移步 VNode API 来了解更多详情。
 - oldVnode：上一个虚拟节点，仅在 update 和 componentUpdated 钩子中可用。
 
-#### 样例
+### 样例
 ```html
 <div id="hook-arguments-example" v-demo:foo.a.b="message"></div>
 ```
@@ -406,8 +376,63 @@ new Vue({
 name: "demo"<br>value: "hello!"<br>expression: "message"<br>argument: "foo"<br>modifiers: {"a":true,"b":true}<br>vnode keys: tag, data, children, text, elm, ns, context, fnContext, fnOptions, fnScopeId, key, componentOptions, componentInstance, parent, raw, isStatic, isRootInsert, isComment, isCloned, isOnce, asyncFactory, asyncMeta, isAsyncPlaceholder
 </div>
 
-## 指令 以及 属性
-### v-show和v-if &I
+### 实现
+- sortbale-drag 拖拽表头排序
+::: details 查看代码
+<<< @/submodule/play/packages/vue2/src/directives/sortable-drag.js
+:::
+- table-scroll 表格滚动
+::: details 查看代码
+<<< @/submodule/play/packages/vue2/src/directives/table-scroll.js
+:::
+- permission-control 权限控制
+::: details 查看代码
+<<< @/submodule/play/packages/vue2/src/directives/permission-control.js
+:::
+- v-enable-keyboard 启用键盘
+::: details 查看代码
+<<< @/submodule/play/packages/vue2/src/directives/enable-keyboard.js
+:::
+## css
+### scoped
+- 当 style 标签带有 scoped attribute 的时候，它的 CSS 只会影响当前组件的元素
+- 使用 scoped 后，父组件的样式将不会渗透到子组件中。
+- 不过，子组件的根节点会同时被父组件的作用域样式和子组件的作用域样式影响。
+```vue
+<style scoped>
+.example {
+  color: red;
+}
+</style>
+<template>
+  <div class="example">hi</div>
+</template>
+```
+```vue
+<style>
+.example[data-v-f3f3eg9] {
+  color: red;
+}
+</style>
+<template>
+  <div class="example" data-v-f3f3eg9>hi</div>
+</template>
+```
+### :v-deep
+处于 scoped 样式中的选择器如果想要影响到子组件，可以使用 :deep() 这个伪类：
+```html
+<style scoped>
+.a :deep(.b) {
+  /* ... */
+}
+</style>
+```
+```css
+.a[data-v-f3f3eg9] .b {
+  /* ... */
+}
+```
+## v-show和v-if &I
 - 对比
   - v-if 是“真实的”按条件渲染，因为它确保了在切换时，条件区块内的事件监听器和子组件都会被销毁与重建。
   - v-if 也是惰性的：如果在初次渲染时条件值为 false，则不会做任何事。条件区块只有当条件首次变为 true 时才被渲染。
@@ -415,11 +440,11 @@ name: "demo"<br>value: "hello!"<br>expression: "message"<br>argument: "foo"<br>m
 - 场景
   - 如果需要频繁切换，则使用 v-show 较好；
   - 如果在运行时绑定条件很少改变，则 v-if 会更合适。
-### data &I
+## data &I
 - data 是函数
   - 保证每个组件实例都有自己独立的数据副本（组件复用）
   - 如果 data 是一个对象，那么所有组件实例将会共享同一个数据对象，这会导致状态污染和不可预测的行为（避免数据共享）
-### nextTick &I
+## nextTick &I
 - 核心原理：异步更新队列
   - 数据变更： 当你修改 Vue 组件中的响应式数据时，Vue 会侦听到这些变化。
   - 更新队列： Vue 不会立即更新 DOM，而是将这些更新放入一个队列中。
@@ -434,7 +459,13 @@ name: "demo"<br>value: "hello!"<br>expression: "message"<br>argument: "foo"<br>m
   - MutationObserver： 如果浏览器支持 MutationObserver，则使用 MutationObserver。MutationObserver 可以在 DOM 发生变化时异步执行回调函数。
   - setTimeout： 如果以上都不支持，则使用 setTimeout(callback, 0)。
   - 这些策略的共同目标是：将回调函数放入事件循环的下一个 "tick" 中执行，确保在 DOM 更新完成后执行。
-### 优化 &I
+## 虚拟dom &I
+- 虚拟 DOM 是一个存在于内存中的 JavaScript 对象，它是真实 DOM 的抽象
+- 最终需要更新真实 DOM，当真实 DOM 发生变化时，浏览器仍然需要进行重排和重绘
+- 虚拟dom优势
+  - 减少直接 DOM 操作：新旧虚拟 DOM 树的差异，通过 diff 算法计算出需要更新的部分，然后更新真实 DOM
+  - 批量更新：虚拟 DOM 允许将多次 DOM 修改合并为一次更新
+## 优化 &I
 - v-if 和 v-show
   - `v-if` 组件销毁/重建
   - `v-show` 组件隐藏（切换 CSS `display`）
@@ -493,83 +524,4 @@ name: "demo"<br>value: "hello!"<br>expression: "message"<br>argument: "foo"<br>m
   - 路由切换时，页面会 scroll 到顶部。例如，在一个新闻列表页下滑到一定位置，点击进入详情页，在返回列表页，此时会 scroll 到顶部，并重新渲染列表页。所有的 SPA 都会有这个问题，并不仅仅是 Vue 。
   - 在列表页缓存数据和 `scrollTop`
   - 返回列表页时（用 Vue-router [导航守卫](https://router.vuejs.org/zh/guide/advanced/navigation-guards.html)，判断 `from`），使用缓存数据渲染页面，然后 `scrollTo(scrollTop)`
-### 虚拟dom &I
-- 虚拟 DOM 是一个存在于内存中的 JavaScript 对象，它是真实 DOM 的抽象
-- 最终需要更新真实 DOM，当真实 DOM 发生变化时，浏览器仍然需要进行重排和重绘
-- 虚拟dom优势
-  - 减少直接 DOM 操作：新旧虚拟 DOM 树的差异，通过 diff 算法计算出需要更新的部分，然后更新真实 DOM
-  - 批量更新：虚拟 DOM 允许将多次 DOM 修改合并为一次更新
-## vue-router
-### 模式
-- 模式
-  - createWebHashHistory
-  - createWebHistory
-  - createMemoryHistory
-- 区别
-  - hash - 使用 url hash 变化记录路由地址
-  - history - 使用 H5 history API 来改 url 记录路由地址
-  - abstract - 不修改 url ，路由地址在内存中，**但页面刷新会重新回到首页**。
-#### hash
-- hash 的特点
-  - 会触发页面跳转，可使用浏览器的“后退” “前进”
-  - 但不会刷新页面，支持 SPA 必须的特性
-  - hash 不会被提交到 server 端（因此刷新页面也会命中当前页面，让前端根据 hash 处理路由）
-  - url 中的 hash ，是不会发送给 server 端的。前端 `onhashchange` 拿到自行处理。
-  ```js
-  // 页面初次加载，获取 hash
-  document.addEventListener('DOMContentLoaded', () => {
-      console.log('hash', location.hash)
-  })
-  // hash 变化，包括：
-  // a. JS 修改 url
-  // b. 手动修改 url 的 hash
-  // c. 浏览器前进、后退
-  window.onhashchange = (event) => {
-      console.log('old url', event.oldURL)
-      console.log('new url', event.newURL)
-      console.log('hash', location.hash)
-  }
-  ```
-  ```js
-  // http://127.0.0.1:8881/hash.html?a=100&b=20#/aaa/bbb
-  location.protocol // 'http:'
-  location.hostname // '127.0.0.1'
-  location.host // '127.0.0.1:8881'
-  location.port // '8881'
-  location.pathname // '/hash.html'
-  location.search // '?a=100&b=20'
-  location.hash // '#/aaa/bbb'
-  ```
-#### H5 history API
 
-- 调用`history.pushState` `window.onpopstate`
-- 问题：
-  - 由于我们的应用是一个单页的客户端应用，如果没有适当的服务器配置，用户在浏览器中直接访问 https://example.com/user/id，就会得到一个 404 错误。这就尴尬了。
-  - 要解决这个问题，你需要做的就是在你的服务器上添加一个简单的回退路由。如果 URL 不匹配任何静态资源，它应提供与你的应用程序中的 index.html 相同的页面（首页）。
-  - [参考](https://router.vuejs.org/zh/guide/essentials/history-mode.html#%E5%90%8E%E7%AB%AF%E9%85%8D%E7%BD%AE%E4%BE%8B%E5%AD%90)
-- 分析
-  - 按照 url 规范，不同的 url 对应不同的资源，例如：
-    - `https://github.com/` server 返回首页
-    - `https://github.com/username/` server 返回用户页
-    - `https://github.com/username/project1/` server 返回项目页
-  - 但是用了 SPA 的前端路由，就改变了这一规则，假如 github 用了的话：
-    - `https://github.com/` server 返回首页
-    - `https://github.com/username/` server 返回首页，前端路由跳转到用户页
-    - `https://github.com/username/project1/` server 返回首页，前端路由跳转到项目页
-  - 所以，从开发者的实现角度来看，前端路由是一个违反规则的形式。
-  - 但是从不关心后端，只关心前端页面的用户，或者浏览器来看，更喜欢 `pushState` 这种方式。
-### 钩子函数
-#### activated/mounted 触发
-触发四种情况：
-- this.$router.push
-  - 如果组件不存在，调用activated 和 mounted
-  - 如果组件存在，调用activated
-- router-link（组件存在）
-  - 调用activated
-- this.$router.replace（在当前路由，替换为其他路由，再替换回来，组件不存在）
-  - 调用mounted
-- 页面全量刷新
-  - 调用mounted
-总结：（只要涉及到这个页面）
-  - 缓存的：keep-alive、已加载的：activated
-  - 第一次加载：mounted

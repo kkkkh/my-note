@@ -184,6 +184,7 @@ export default withMermaid(defineConfig({
           items: [
             { text: 'vue3', link: '/front-end/Vue/vue3/' },
             { text: 'vue2', link: '/front-end/Vue/vue2/' },
+            { text: 'vue-router', link: '/front-end/Vue/vue-router/' },
             { text: 'element-ui', link: '/front-end/Vue/element-ui/' },
           ],
         },
@@ -249,22 +250,15 @@ export default withMermaid(defineConfig({
               items: [
                 { text: 'vscode插件', link: '/front-end/Engineering/plugin/vscode/' },
                 { text: '浏览器插件', link: '/front-end/Engineering/plugin/brower/' },
-                { text: 'markdown', link: '/front-end/Engineering/plugin/markdown/' },
-              ],
-            },
-            {
-              text: '版本管理',
-              link: '/front-end/Engineering/version-manage/',
-              items: [
-                { text: 'git', link: '/front-end/Engineering/version-manage/git/' },
-                { text: 'svn', link: '/front-end/Engineering/version-manage/svn' },
               ],
             },
             {
               text:'ssg',
               link: '/front-end/Engineering/ssg/',
               items: [
+                { text: 'markdown', link: '/front-end/Engineering/ssg/markdown/' },
                 { text: 'vitepress', link: '/front-end/Engineering/ssg/vitepress/' },
+                { text: 'histoire', link: '/front-end/Engineering/ssg/histoire/' },
               ],
             },
             {
@@ -420,7 +414,15 @@ export default withMermaid(defineConfig({
               link: '/computer-science/Os/mac/',
             }
           ],
-        }
+        },
+        {
+          text: '版本管理',
+          link: '/computer-science/version-manage/',
+          items: [
+            { text: 'git', link: '/computer-science/version-manage/git/' },
+            { text: 'svn', link: '/computer-science/version-manage/svn' },
+          ],
+        },
       ],
       'web3': [
         {

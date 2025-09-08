@@ -13,7 +13,7 @@ date: 2025-07-29
 
 2、 vite配置sass.additionalData，全局使用
 
-<<< @/submodule/play/packages/vue3/vite.config.bigScreen.js
+<<< @/submodule/play/packages/vue3/vite.config.bigScreen.ts
 
 3、vue中直接使用
 

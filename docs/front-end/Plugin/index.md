@@ -189,6 +189,10 @@ outline: deep
   - [viewerjs](https://github.com/fengyuanchen/viewerjs)
 - ui图标
   - [vue-data-ui](https://vue-data-ui.graphieros.com/)
+- i18n
+  - [vue-i18n v8.x](https://kazupon.github.io/vue-i18n/started.html) for Vue2
+  - [vue-i18n-composable](https://github.com/intlify/vue-i18n-composable) for Vue2 compositionApi
+  - [vue-i18n v9.x+](https://vue-i18n.intlify.dev/guide/installation.html) for Vue3
 ### api
 - [VueRequest](https://cn.attojs.org/guide/introduction.html#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9-vuerequest)
   - [useRequest](https://cn.attojs.org/api/#%E5%85%AC%E5%85%B1-api)

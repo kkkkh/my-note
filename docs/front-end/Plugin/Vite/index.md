@@ -2,36 +2,27 @@
 outline: deep
 ---
 ## Vite plugin
-### unplugin-vue-components 
-- On-demand components auto importing for Vue.
-- 按需加载组件
+### unplugin-vue-components / unplugin-auto-import 按需加载
+- 按需加载组件示例：
+::: details 查看代码
 ```js
-// vite.config.js
+// AntDesignVue、ElementPlus、Vant、Icons
 import Components from 'unplugin-vue-components/vite'
 import {
   AntDesignVueResolver,
   ElementPlusResolver,
   VantResolver,
 } from 'unplugin-vue-components/resolvers'
-// your plugin installation
-Components({
-  resolvers: [
-    AntDesignVueResolver(),
-    ElementPlusResolver(),
-    VantResolver(),
-  ],
-})
-```
-### unplugin-icons
-- 按需加载图标
-```js
-import Components from 'unplugin-vue-components/vite'
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
+
 export default {
   plugins: [
     Components({
       resolvers: [
+        AntDesignVueResolver(),
+        ElementPlusResolver(),
+        VantResolver(),
         IconsResolver()
       ],
     }),
@@ -39,6 +30,15 @@ export default {
   ],
 }
 ```
+:::
+- vue2 按需加载element-ui组件
+::: details 查看代码
+<<< @/submodule/play/packages/vue2/vite.config.js
+:::
+- vue3 按需加载naive-ui组件 / 按需加载 vue api 、naive-ui api
+::: details 查看代码
+<<< @/submodule/play/packages/vue3/vite.config.base.ts
+:::
 ### rollup-plugin-visualizer
 - 可视化并分析您的 Rollup 包，看看哪些模块占用了空间
 ```js

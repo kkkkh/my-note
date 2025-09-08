@@ -1,7 +1,39 @@
 ---
 outline: deep
 ---
+<script setup>
+import PropsIndex from '@play/vue3/src/components/Props/Index.vue'
+</script>
 # vue3
+## props
+<PropsIndex />
+- Props Index
+::: details 查看代码
+<<< @/submodule/play/packages/vue3/src/components/Props/Index.vue
+:::
+- Props Child
+::: details 查看代码
+<<< @/submodule/play/packages/vue3/src/components/Props/Child.vue
+:::
+
+## 自定义指令
+### 实现
+- permission-control 权限控制
+::: details 查看代码
+<<< @/submodule/play/packages/vue3/src/directives/permission-control.ts
+:::
+
+- enable-keyboard 键盘控制启用
+::: details 查看代码
+<<< @/submodule/play/packages/vue3/src/directives/enable-keyboard.ts
+:::
+### 其他
+- 自定义指令中调用 provide
+- 在 Vue 3 的自定义指令中直接使用 inject 是不可以的。
+- inject 只能在组件的 setup 函数或生命周期钩子中使用，而不能在指令的钩子函数中直接使用。
+
+<<< @/submodule/play/packages/vue3/src/directives/permission-control.ts#provide
+
 ## TS 与 组合式API
 ### props
 ```ts
@@ -244,47 +276,6 @@ import ComA from './components/comA.vue'
 
 <<< ./signal/index.js
 
-## css
-### scoped
-- 当 style 标签带有 scoped attribute 的时候，它的 CSS 只会影响当前组件的元素
-- 使用 scoped 后，父组件的样式将不会渗透到子组件中。
-- 不过，子组件的根节点会同时被父组件的作用域样式和子组件的作用域样式影响。
-```vue
-<style scoped>
-.example {
-  color: red;
-}
-</style>
 
-<template>
-  <div class="example">hi</div>
-</template>
-```
-```vue
-<style>
-.example[data-v-f3f3eg9] {
-  color: red;
-}
-</style>
-
-<template>
-  <div class="example" data-v-f3f3eg9>hi</div>
-</template>
-```
-### :v-deep
-处于 scoped 样式中的选择器如果想要影响到子组件，可以使用 :deep() 这个伪类：
-```html
-<style scoped>
-.a :deep(.b) {
-  /* ... */
-}
-</style>
-```
-```css
-.a[data-v-f3f3eg9] .b {
-  /* ... */
-}
-```
-## 自定义指令
 https://devv.ai/zh/search/eqh7baxoho1s 自定义指令 调用 provide
 https://devv.ai/zh/search/eqkl4p4badxc vue-demi postinstall
