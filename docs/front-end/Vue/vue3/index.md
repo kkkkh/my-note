@@ -277,5 +277,3 @@ import ComA from './components/comA.vue'
 <<< ./signal/index.js
 
 
-https://devv.ai/zh/search/eqh7baxoho1s 自定义指令 调用 provide
-https://devv.ai/zh/search/eqkl4p4badxc vue-demi postinstall

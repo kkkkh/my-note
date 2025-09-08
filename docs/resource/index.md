@@ -51,14 +51,6 @@ vite 工程化：
 解决方案： 利用 Vite 的环境变量和条件编译功能，实现了不同环境的灵活配置，简化了环境管理。
 
 
-play 
-- 需要将页面常用功能迁移：权限管控、右击、验证控制等
-- 尤其electron的核心功能
-- 开源库的使用代码
-
-
-
-
 https://developer.mozilla.org/zh-CN/docs/Web/API/Event/Event
 https://chatgpt.com/c/68b50998-95cc-8328-8ab9-4e3829fde8f6
 
@@ -69,11 +61,14 @@ play vue3 与 mynote 整合 √
 按需加载 √
 histoire √
 
-https://chatgpt.com/c/68ba9b4a-d4a4-832c-9167-642e78450e25
+https://devv.ai/zh/search/eqkl4p4badxc vue-demi postinstall
 
-https://devv.ai/zh/search/eqh7baxoho1s
-https://www.npmjs.com/package/unplugin-vue-components
-play electron 与 mynote 整合
+
+play 
+- 需要将页面常用功能迁移：右击、验证控制等
+- electron的核心功能
+- 开源库的使用代码
+- play electron 与 mynote 整合
 
 nodejs stream 继续整理
 https://chatgpt.com/c/68b952c8-9850-832d-a1da-2a26c691234a
