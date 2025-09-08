@@ -161,7 +161,7 @@ Vue.component('base-input', {
 - 创建构造器 `var Profile = Vue.extend(component)`
 - 创建 Profile 实例，并挂载到一个元素上 `new Profile().$mount('#mount-point')`
 ::: details 查看代码
-<<< @/submodule/play/packages/vue2/src/components/Extend/Index.vue
+<<< @/submodule/play/packages/vue2/src/components/Extend/index.vue
 :::
 
 - 参考：[Vue.extend](https://v2.cn.vuejs.org/v2/api/#Vue-extend)

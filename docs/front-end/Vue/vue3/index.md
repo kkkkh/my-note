@@ -2,14 +2,14 @@
 outline: deep
 ---
 <script setup>
-import PropsIndex from '@play/vue3/src/components/Props/Index.vue'
+import PropsIndex from '@play/vue3/src/components/Props/index.vue'
 </script>
 # vue3
 ## props
 <PropsIndex />
 - Props Index
 ::: details 查看代码
-<<< @/submodule/play/packages/vue3/src/components/Props/Index.vue
+<<< @/submodule/play/packages/vue3/src/components/Props/index.vue
 :::
 - Props Child
 ::: details 查看代码
