@@ -2,15 +2,14 @@
 outline: deep
 ---
 # 后端
-## lang
-### nodejs
-- [nodejs](https://nodejs.org/docs/latest/api/) &nbsp;&nbsp;&nbsp;[nodejs 中文](https://nodejs.cn/api/)
-- [meteor](https://docs.meteor.com/about/what-is.html#introduction)
-- 社区
-  - [cnodejs](https://cnodejs.org/)  &nbsp;&nbsp;&nbsp;[egg-cnode](https://github.com/cnodejs/egg-cnode)
+## python
+- [python](https://www.python.org/)
 ## DB
+- [sqlite](https://sqlite.org/)
 - [rxdb](https://rxdb.info/)
 - [MongoDB](https://www.mongodb.com/zh-cn/docs/drivers/node/current/)
+## DB tool
+- [DBeaver](https://dbeaver.io/)
 - [NavicatPremium16](https://www.cnblogs.com/kkdaj/p/16260681.html) 安装
 ## 接口服务 & mock
 - [apifox](https://apifox.com/)

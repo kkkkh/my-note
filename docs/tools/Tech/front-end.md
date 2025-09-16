@@ -186,14 +186,18 @@ outline: deep
 - [westore](https://github.com/Tencent/westore)
 - [微信调试](chrome://inspect/#devices)
 ### 运行时
-- [nodejs](https://nodejs.org/en/docs)
+- [nodejs](https://nodejs.org/en/docs)&nbsp;&nbsp;&nbsp;[nodejs 中文](https://nodejs.cn/api/)
 - [deno](https://docs.deno.com/runtime/manual)
 - [bun](https://bun.sh/docs)
 #### nodejs
-- [express](https://expressjs.com/en/starter/installing.html) &nbsp;&nbsp;&nbsp;[express 中文](https://www.expressjs.com.cn/starter/installing.html)
-- [koa](https://koajs.com/#introduction) &nbsp;&nbsp;&nbsp;[koa 中文](https://www.koajs.net/)
-- [fastify](https://fastify.dev/) &nbsp;&nbsp;&nbsp;[fastify 中文](https://www.fastify.cn/)
-- [nestjs](https://docs.nestjs.com/)
+- 框架
+  - [express](https://expressjs.com/en/starter/installing.html) &nbsp;&nbsp;&nbsp;[express 中文](https://www.expressjs.com.cn/starter/installing.html)
+  - [koa](https://koajs.com/#introduction) &nbsp;&nbsp;&nbsp;[koa 中文](https://www.koajs.net/)
+  - [fastify](https://fastify.dev/) &nbsp;&nbsp;&nbsp;[fastify 中文](https://www.fastify.cn/)
+  - [nestjs](https://docs.nestjs.com/)
+  - [meteor](https://docs.meteor.com/about/what-is.html#introduction)
+- 社区
+  - [cnodejs](https://cnodejs.org/)  &nbsp;&nbsp;&nbsp;[egg-cnode](https://github.com/cnodejs/egg-cnode)
 ### 代码编辑器（code palyground）
 - 浏览器
   - [codepen](https://codepen.io/)

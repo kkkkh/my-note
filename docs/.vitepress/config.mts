@@ -95,48 +95,28 @@ export default withMermaid(defineConfig({
       ],
       'tools': [
         {
-          text: 'blog',
-          link: '/tools/blog',
+          text: '技术',
+          link: '/tools/Tech',
+          items: [
+            { text: 'blog', link: '/tools/Tech/blog' },
+            { text: '计算机', link: '/tools/Tech/computer-science' },
+            { text: 'UI', link: '/tools/Tech/ui' },
+            { text: '前端', link: '/tools/Tech/front-end' },
+            { text: '后端', link: '/tools/Tech/back-end' },
+            { text: 'Ops', link: '/tools/Tech/ops' },
+            { text: '其他工具', link: '/tools/Tech/other' },
+            { text: 'AI', link: '/tools/Tech/ai' },
+          ],
         },
         {
-          text: 'book',
-          link: '/tools/book',
-        },
-        {
-          text: 'ai',
-          link: '/tools/ai',
-        },
-        {
-          text: '计算机',
-          link: '/tools/computer-science',
-        },
-        {
-          text: 'UI',
-          link: '/tools/ui',
-        },
-        {
-          text: '前端',
-          link: '/tools/front-end',
-        },
-        {
-          text: '后端',
-          link: '/tools/back-end',
-        },
-        {
-          text: 'Ops',
-          link: '/tools/ops',
-        },
-        {
-          text: '其他工具',
-          link: '/tools/other',
-        },
-        {
-          text: '软件安装',
-          link: '/tools/software',
-        },
-        {
-          text: '业务',
-          link: '/tools/business',
+          text: '其他',
+          link: '/tools/Other',
+          items: [
+            { text: 'English', link: '/tools/Other/English/' },
+            { text: 'book', link: '/tools/Other/book' },
+            { text: 'community', link: '/tools/Other/community' },
+            { text: 'business', link: '/tools/Other/business' },
+          ],
         },
       ],
       'front-end': [
@@ -362,6 +342,16 @@ export default withMermaid(defineConfig({
           ],
         },
         {
+          text: 'DB',
+          link: '/back-end/DB/',
+          items: [
+            { text: 'SQL', link: '/back-end/DB/SQL/' },
+            { text: 'SQLite', link: '/back-end/DB/SQLite/' },
+            { text: 'MongoDB', link: '/back-end/DB/MongoDB/' },
+            { text: 'DB tools', link: '/back-end/DB/Tools/' },
+          ],
+        },
+        {
           text: 'Ops',
           link: '/back-end/Ops/',
           items:[
@@ -377,8 +367,10 @@ export default withMermaid(defineConfig({
             },
             {
               text: 'CI-CD',
-              link: '/back-end/Ops/CI/CD/',
+              link: '/back-end/Ops/CI-CD/',
               items: [
+                { text: 'Drone', link: '/back-end/Ops/CI-CD/Drone/' },
+                { text: 'Jenkins', link: '/back-end/Ops/CI-CD/Jenkins/' },
                 { text: 'github', link: '/back-end/Ops/CI-CD/github/' },
               ],
             },

@@ -64,7 +64,15 @@
 <<< @/submodule/play-Python/src/9program/n2w.py
 :::
 - 9
+:::details 查看代码 file_os
+<<< @/submodule/play-Python/src/10file_os.py
+:::
+- 10
 :::details 查看代码 file
-<<< @/submodule/play-Python/src/10file.py
+<<< @/submodule/play-Python/src/11file.py
+:::
+- 12
+:::details 查看代码 error
+<<< @/submodule/play-Python/src/12error.py
 :::
 

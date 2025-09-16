@@ -2,7 +2,9 @@
 outline: deep
 ---
 # book
+## 电子书
 - [z-library](https://zh.z-library.sk/)
+- [书栈网](https://www.bookstack.cn/)
 ## 计算机
 - [观止](https://book.douban.com/subject/3699395/)
 - [深入理解计算机系统 (原书第3版)](https://book.douban.com/subject/26912767/)对计算机的内存、寄存器等原理有一定了解，示例代码是用 C 语言写的
