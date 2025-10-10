@@ -6,7 +6,14 @@ outline: deep
 ### 几种引入代码的方式
 1 导入代码片段（推荐）
 ```markdown
+<!-- 指定区间 -->
 <<< ./index.js#snippet
+<!-- 指定语言 -->
+<<< @/snippets/snippet.cs{c#}
+<!-- 带行高亮: -->
+<<< @/snippets/snippet.cs{1,2,4-6 c#}
+<!-- 带行号: -->
+<<< @/snippets/snippet.cs{1,2,4-6 c#:line-numbers}
 ```
 ```js
 // #region snippet
