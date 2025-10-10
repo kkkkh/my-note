@@ -339,6 +339,12 @@ export default withMermaid(defineConfig({
           items: [
             { text: 'QuickStart', link: '/back-end/Python/QuickStart/' },
             { text: 'aiAsking', link: '/back-end/Python/aiAsking/' },
+            { text: 'Lib',
+              items: [
+                { text: '库列表', link: '/back-end/Python/Lib/List/index.md' },
+                { text: '库实践', link: '/back-end/Python/Lib/Use/index.md' },
+              ],
+             },
           ],
         },
         {
@@ -364,6 +370,10 @@ export default withMermaid(defineConfig({
               text: 'SSH',
               link: '/back-end/Ops/SSH/',
               items: [],
+            },
+            {
+              text: "Nginx",
+              link: '/back-end/Ops/Nginx/',
             },
             {
               text: 'CI-CD',
