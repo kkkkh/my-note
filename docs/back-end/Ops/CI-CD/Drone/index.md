@@ -26,13 +26,20 @@ drone（国内服务器）默认拉取github代码，总是超时，改为 ssh �
 ::: details 查看代码
 <<< ./.drone.total.yml
 :::
-### 发布
-::: details 查看代码
-<<< ./.drone.push.yml
-:::
 
-## 不常用配置
-### plugins/docker 打包不推送（没有生效）❌
-::: details 查看代码
-<<< ./.drone.no-push.yml
-:::
+
+## 关于 plugins
+- [drone plugins](https://plugins.drone.io//docker)
+### plugins/docker 
+- 主要用来 build 和 push [plugins/docker](https://plugins.drone.io/plugins/docker)
+- 实现打包不推送：
+  - ai给的配置 skip_push、push、skip_login（没有生效）❌
+  - 查看了官方文档，其实只配置 dry_run: true 即可实现 ✅
+  ::: details 查看代码
+  <<< ./.drone.no-push.yml{27}
+  :::
+
+- 打包发布
+  ::: details 查看代码
+  <<< ./.drone.push.yml
+  :::

@@ -20,9 +20,11 @@ steps:
       dockerfile: ./web/Dockerfile
       context: ./web
       # 都没有生效 skip_push、push、skip_login
-      skip_push: true   # 不推送，需要registry设置，都则不生效
-      push: false        # ✅ 取代 skip_push:true
-      skip_login: true   # ✅ 避免 docker login
+      # skip_push: true   # 不推送，需要registry设置，都则不生效
+      # push: false        # ✅ 取代 skip_push:true
+      # skip_login: true   # ✅ 避免 docker login
+      # 官方配置
+      dry_run: true     # ✅ 只构建，不推送
     depends_on:
       - switch-to-ssh
 
