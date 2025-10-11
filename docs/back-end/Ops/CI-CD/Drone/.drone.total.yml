@@ -1,0 +1,40 @@
+kind: pipeline
+type: docker
+name: default
+
+workspace: # 这里设置工作目录
+  base: /drone
+  path: src/repname
+
+clone:
+  disable: true # 不使用 默认克隆代码
+
+volumes: # 共享文件、目录、缓存、socket 等
+  - name: dockersock
+    host: # 映射宿主机路径
+      path: /var/run/docker.sock
+
+steps:
+  - name: switch-to-ssh
+    image: alpine/git
+    environment:
+      GIT_SSH_KEY:
+        from_secret: DRONE_GIT_SSH_KEY # 要在drone settings 中设置一个 id_rsa私钥
+    commands:
+      - mkdir -p ~/.ssh
+      - echo "$GIT_SSH_KEY" > ~/.ssh/id_rsa # 存储私钥
+      - chmod 600 ~/.ssh/id_rsa
+      - ssh-keyscan github.com >> ~/.ssh/known_hosts
+      - git clone --depth 2 git@github.com:username/repname.git .
+  - name: build-and-run-web
+    image: docker
+    volumes:
+    - name: dockersock
+      path: /var/run/docker.sock
+    commands:
+    - cd web
+    - docker build -t image-name:latest .
+    - docker rm -f container-name
+    - docker run -d -p 8080:3000 --name container-name --restart=always image-name:latest
+    depends_on:
+      - switch-to-ssh

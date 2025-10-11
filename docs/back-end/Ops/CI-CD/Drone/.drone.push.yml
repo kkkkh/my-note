@@ -1,0 +1,24 @@
+volumes:
+  - name: dockersock
+    host:
+      path: /var/run/docker.sock
+steps:
+  - name: build-and-push
+    image: plugins/docker
+    settings:
+      repo: xxxx.cr.aliyuncs.com/space-name/image-name
+      registry: xxxx.cr.aliyuncs.com # Docker Hub 默认，可省略
+      tags:
+        - latest
+        - ${DRONE_COMMIT_SHA:0:7}
+      dockerfile: ./sub-dir/Dockerfile
+      context: ./sub-dir
+      username:
+        from_secret: aliyun_username
+      password:
+        from_secret: aliyun_password
+    volumes:
+    - name: dockersock
+      path: /var/run/docker.sock
+    depends_on:
+      - switch-to-ssh

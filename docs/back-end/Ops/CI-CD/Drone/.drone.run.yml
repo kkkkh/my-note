@@ -1,0 +1,25 @@
+
+kind: pipeline
+type: docker
+name: default
+
+volumes: # 共享文件、目录、缓存、socket 等
+  - name: dockersock
+    host: # 主机卷（host 类型）
+      path: /var/run/docker.sock
+      # 映射宿主机路径；
+      # 生命周期独立于 pipeline；
+      # 可用于访问宿主机资源（比如 /var/run/docker.sock）或持久化缓存。
+steps:
+  - name: build-and-run
+    image: docker
+    volumes:
+    - name: dockersock
+      path: /var/run/docker.sock
+    commands:
+    - cd web
+    - docker build -t image-name:latest .
+    - docker rm -f container-name
+    - docker run -d -p 8080:3000 --name container-name --restart=always image-name:latest
+    depends_on:
+      - switch-to-ssh

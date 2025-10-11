@@ -1,0 +1,24 @@
+volumes:
+  - name: cache
+    temp: {} # 临时卷（temp 类型）
+    # 生命周期仅在 一次 pipeline 执行期间 存在；
+    # 可用于步骤之间传递中间文件或缓存；
+    # 不会持久化到宿主机。
+
+steps:
+  - name: build
+    image: node:18
+    volumes:
+      - name: cache
+        path: /tmp/cache
+    commands:
+      - npm install
+      - npm run build
+
+  - name: test
+    image: node:18
+    volumes:
+      - name: cache
+        path: /tmp/cache
+    commands:
+      - npm test

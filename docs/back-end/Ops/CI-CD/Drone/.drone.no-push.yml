@@ -1,0 +1,39 @@
+
+volumes: # 共享文件、目录、缓存、socket 等
+  - name: dockersock
+    host: # 映射宿主机路径
+      path: /var/run/docker.sock
+steps:
+  - name: build-image
+    # 使用plugins/docker
+    # 不推送打包镜像到宿主机，配置没有起作用
+    image: plugins/docker
+    volumes:
+      - name: dockersock
+        path: /var/run/docker.sock
+    settings:
+      registry: xxxx.cr.aliyuncs.com
+      repo: xxxx.cr.aliyuncs.com/space-name/image-name
+      tags:
+        - latest
+        # - ${DRONE_COMMIT_SHA:0:7}
+      dockerfile: ./web/Dockerfile
+      context: ./web
+      # 都没有生效 skip_push、push、skip_login
+      skip_push: true   # 不推送，需要registry设置，都则不生效
+      push: false        # ✅ 取代 skip_push:true
+      skip_login: true   # ✅ 避免 docker login
+    depends_on:
+      - switch-to-ssh
+
+  - name: run-on-host
+    image: docker/cli
+    volumes:
+      - name: dockersock
+        path: /var/run/docker.sock
+    commands:
+      - docker stop container-name || true
+      - docker rm container-name || true
+      - docker run -d --name container-name -p 8080:3000 xxxx.cr.aliyuncs.com/space-name/image-name:latest
+    depends_on:
+      - build-image

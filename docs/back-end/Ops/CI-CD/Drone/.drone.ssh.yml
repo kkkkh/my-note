@@ -1,0 +1,29 @@
+
+kind: pipeline
+type: docker
+name: default
+
+workspace: # 这里设置工作目录
+  base: /drone
+  path: src/repname
+
+# clone:
+#   git:
+#     depth: 1
+#     ssh_key:
+#       from_secret: DRONE_GIT_SSH_KEY（无效）
+clone:
+  disable: true # 不使用 默认克隆代码
+
+steps:
+  - name: switch-to-ssh
+    image: alpine/git
+    environment:
+      GIT_SSH_KEY:
+        from_secret: DRONE_GIT_SSH_KEY # 要在drone settings 中设置一个 id_rsa私钥
+    commands:
+      - mkdir -p ~/.ssh
+      - echo "$GIT_SSH_KEY" > ~/.ssh/id_rsa # 存储私钥
+      - chmod 600 ~/.ssh/id_rsa
+      - ssh-keyscan github.com >> ~/.ssh/known_hosts
+      - git clone --depth 2 git@github.com:username/repname.git .

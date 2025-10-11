@@ -379,7 +379,13 @@ export default withMermaid(defineConfig({
               text: 'CI-CD',
               link: '/back-end/Ops/CI-CD/',
               items: [
-                { text: 'Drone', link: '/back-end/Ops/CI-CD/Drone/' },
+                {
+                  text: 'Drone', link: '/back-end/Ops/CI-CD/Drone/',
+                  // items:[
+                  //   {text: 'Drone Base', link: '/back-end/Ops/CI-CD/Drone/Base'},
+                  //   {text: 'Drone Use', link: '/back-end/Ops/CI-CD/Drone/Use'},
+                  // ]
+                },
                 { text: 'Jenkins', link: '/back-end/Ops/CI-CD/Jenkins/' },
                 { text: 'github', link: '/back-end/Ops/CI-CD/github/' },
               ],
