@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  web:
+    # 这里的镜像名称将是您推送到 Docker Hub 的私有仓库镜像
+    # 例如：your-dockerhub-username/my-fullstack-app-frontend:latest
+    image: xxxx.cr.aliyuncs.com/space-name/image-name:latest
+    ports:
+      - "9001:3000"
+    restart: always
+  server:
+    # 例如：your-dockerhub-username/my-fullstack-app-backend:latest
+    image: xxxx.cr.aliyuncs.com/space-name/image-name:latest
+    ports:
+      - "9002:8000"
+    restart: always
+    # 如果后端需要连接数据库或其他服务，可以在这里添加依赖
+    # depends_on:
+    #   - database
+    environment:
+      - ENV=production
+    #   # 示例环境变量
+    #   FLASK_APP: app.py
+    #   FLASK_ENV: production

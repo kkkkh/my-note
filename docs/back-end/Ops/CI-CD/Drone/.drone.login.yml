@@ -1,0 +1,19 @@
+steps:
+  #region no-env
+  - name: docker-login
+    image: docker:20.10
+    commands:
+      - echo "$ALIYUN_PASSWORD" | docker login --username "$ALIYUN_USERNAME" --password-stdin xxxx.cr.aliyuncs.com
+  #endregion no-env
+
+  #region env
+  - name: docker-login-env
+    image: docker:20.10
+    environment:
+      ALIYUN_USERNAME:
+        from_secret: aliyun_username
+      ALIYUN_PASSWORD:
+        from_secret: aliyun_password
+    commands:
+      - echo "$ALIYUN_PASSWORD" | docker login --username "$ALIYUN_USERNAME" --password-stdin xxxx.cr.aliyuncs.com
+  #endregion env

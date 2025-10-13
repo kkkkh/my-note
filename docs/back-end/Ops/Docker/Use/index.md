@@ -48,3 +48,9 @@ docker image prune -a
 # 删除停止容器、无用网络、build缓存
 docker system prune -f
 ```
+### “同名 + 同标签”镜像的行为
+- 如果本地已经存在一个名为 image-name:latest 的镜像，
+- Docker 再次构建同名+同标签镜像 `docker build -t image-name:latest .`
+- 自动覆盖旧的 tag 指向，旧的镜像本身仍然存在（以镜像 ID 区分），
+- 但 latest 这个标签会被重新绑定到新的镜像 ID，
+- 标签只是一个“指针”，新构建的镜像不会真正删除旧镜像，只是“latest”这个名字被移动了。

@@ -3,9 +3,10 @@
 layout: home
 
 hero:
-  name: "Odyssey Technology"
+  # name: "Odyssey Technology"
   text: "Note & Blog"
-  tagline: "A long and adventurous journey,\nan exploration of the unknown world and a discovery of self,\nfull of challenges and hardships,\nbut never giving up the belief of returning."
+  tagline: "In this journey, I have found a new direction"
+  # tagline: "A long and adventurous journey,\nan exploration of the unknown world and a discovery of self,\nfull of challenges and hardships,\nbut never giving up the belief of returning."
   actions:
     - theme: brand
       text: 计算机

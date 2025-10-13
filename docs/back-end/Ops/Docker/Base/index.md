@@ -189,3 +189,23 @@ ping db
 # 64 bytes from 172.18.0.3: icmp_seq=0 ttl=64 time=0.092 ms
 # ...
 ```
+## docker-compose
+### 常用命令
+```bash
+docker compose -f docker-compose.yml
+docker compose up -d --remove-orphans
+```
+### 配置文件
+- 从镜像仓库拉取镜像，生成实例
+::: details 查看代码
+<<< ./docker-compose/docker-compose.deploy.yml
+:::
+## Dockfile
+- nextjs.Dockerfile
+::: details 查看代码
+<<< ./Dockerfile/nextjs.Dockerfile{dockerfile}
+:::
+- python.Dockerfile
+::: details 查看代码
+<<< ./Dockerfile/python.Dockerfile{dockerfile}
+:::

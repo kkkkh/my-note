@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>系统维护升级中</title>
+  <style>
+    body{
+      margin: 0;
+      padding: 0;
+      background-color:cadetblue;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
+    }
+    .main{
+      width: 400px;
+      height:200px;
+      color:black;
+      background-color: antiquewhite;
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      border-radius: 20px;
+    }
+    .sub{
+      font-size: 14px;
+      margin-top: 20px;
+      color: #808080;
+    }
+    .title span:nth-child(2){
+      animation: contentView1 3000ms linear  infinite;
+    }
+    .title span:nth-child(3){
+      animation: contentView2 3000ms linear  infinite;
+    }
+    .title span:nth-child(4){
+      animation: contentView3 3000ms linear  infinite;
+    }
+    @keyframes contentView1 {
+      0% {
+        opacity: 0;
+      }
+      25% {
+        opacity: 0;
+      }
+      50% {
+        opacity: 100;
+      }
+      75% {
+        opacity: 100;
+      }
+      100% {
+        opacity: 100;
+      }
+    }
+    @keyframes contentView2 {
+      0% {
+        opacity: 0;
+      }
+      25% {
+        opacity: 0;
+      }
+      50% {
+        opacity: 0;
+      }
+      75% {
+        opacity: 100;
+      }
+      100% {
+        opacity: 100;
+      }
+    }
+    @keyframes contentView3 {
+      0% {
+        opacity: 0;
+      }
+      25% {
+        opacity: 0;
+      }
+      50% {
+        opacity: 0;
+      }
+      75% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 100;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="main">
+    <div class="title">
+      <span>系统维护升级中</span>
+      <span>.</span>
+      <span>.</span>
+      <span>.</span>
+    </div>
+    <div class="sub">预计下月恢复访问</div>
+  </div>
+</body>
+</html>

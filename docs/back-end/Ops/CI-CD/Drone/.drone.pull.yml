@@ -1,0 +1,36 @@
+volumes:
+  - name: dockersock
+    host:
+      path: /var/run/docker.sock
+steps:
+  #region pull-and-run
+  - name: pull-and-run
+    image: plugins/docker
+    settings:
+      username:
+        from_secret: aliyun_username
+      password:
+        from_secret: aliyun_password
+      registry: xxxx.cr.aliyuncs.com
+      repo: xxxx.cr.aliyuncs.com/space-name/english-web
+      tags:
+        - latest
+      pull: true        # 拉取镜像
+      skip_push: true   # 不推送
+      use_host_docker_socket: true # 确保宿主机上存在
+    volumes:
+      - name: dockersock
+        path: /var/run/docker.sock
+  #endregion pull-and-run
+  #region pull-image
+  - name: pull-image
+    image: docker:27.0
+    volumes:
+      - name: dockersock
+        path: /var/run/docker.sock
+    commands:
+      - docker pull xxxx.cr.aliyuncs.com/space-name/image-name:latest
+    volumes:
+      - name: dockersock
+        path: /var/run/docker.sock
+  #endregion pull-image

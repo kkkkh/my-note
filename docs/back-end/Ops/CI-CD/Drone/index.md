@@ -1,4 +1,6 @@
 # Drone
+## 关于 plugins
+- [drone plugins](https://plugins.drone.io/docker)
 ## 部署思路
 ### 1、宿主机打包、并部署
 - docker镜像打包到本宿主机
@@ -12,7 +14,7 @@
 ### switch to ssh
 drone（国内服务器）默认拉取github代码，总是超时，改为 ssh 拉取
 ::: details 查看代码
-<<< ./.drone.ssh.yml
+<<< ./.drone.switch-to-ssh.yml
 :::
 ### 共享宿主机docker，打包镜像，创建实例
 ::: details 查看代码
@@ -26,11 +28,7 @@ drone（国内服务器）默认拉取github代码，总是超时，改为 ssh �
 ::: details 查看代码
 <<< ./.drone.total.yml
 :::
-
-
-## 关于 plugins
-- [drone plugins](https://plugins.drone.io//docker)
-### plugins/docker 
+### plugins/docker
 - 主要用来 build 和 push [plugins/docker](https://plugins.drone.io/plugins/docker)
 - 实现打包不推送：
   - ai给的配置 skip_push、push、skip_login（没有生效）❌
@@ -43,3 +41,35 @@ drone（国内服务器）默认拉取github代码，总是超时，改为 ssh �
   ::: details 查看代码
   <<< ./.drone.push.yml
   :::
+- 只拉取，不发布 （不支持）❌
+  ::: details 查看代码
+  <<< ./.drone.pull.yml#pull-and-run
+  :::
+### 直接拉取
+::: details 查看代码
+<<< ./.drone.pull.yml#pull-image
+:::
+### 登录
+- 直接使用 Secrets ❌
+- Must provide --username with --password-stdin（获取不到环境变量）
+::: details 查看代码
+<<< ./.drone.login.yml#no-env
+:::
+- 设置环境变量 ✅
+::: details 查看代码
+<<< ./.drone.login.yml#env
+:::
+### 其他服务器拉取发布
+- 配置 key ❌
+  - ssh.ParsePrivateKey: ssh: no key found
+  - ssh: handshake failed: ssh: unable to authenticate, attempted methods `[none]`, no supported methods remain
+- 配置 password ✅
+  - 成功
+::: details 查看代码
+<<< ./.drone.deploy.yml{10-13}
+:::
+- 执行docker-compose
+  - docker-compose.deploy.yml处于其他服务器：拉取docker镜像，部署
+::: details 查看代码
+<<< ../../Docker/Base/docker-compose/docker-compose.deploy.yml
+:::

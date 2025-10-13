@@ -8,6 +8,7 @@ import { withMermaid } from "vitepress-plugin-mermaid";
 export default withMermaid(defineConfig({
   title: 'Odyssey Technology',
   description: 'A long and adventurous journey, an exploration of the unknown world and a discovery of self, full of challenges and hardships, but never giving up the belief of returning.',
+  // description: 'A long and adventurous journey, an exploration of the unknown world and a discovery of self, full of challenges and hardships, but never giving up the belief of returning.',
   // lang: 'zh',
   base: '/my-note/',
   srcDir: '.',

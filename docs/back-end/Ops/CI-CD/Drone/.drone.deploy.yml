@@ -1,0 +1,16 @@
+steps:
+  - name: deploy
+    image: appleboy/drone-ssh
+    settings:
+      host:
+        from_secret: DEPLOY_SERVER_HOST
+      username:
+        from_secret: DEPLOY_SERVER_USER
+      port: 22 # 默认 SSH 端口
+      # key:
+      #   from_secret: ssh_private_key
+      password:
+        from_secret: ssh_password
+      script:
+        - docker compose -f docker-compose.deploy.yml
+        - docker compose up -d --remove-orphans
