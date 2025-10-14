@@ -14,7 +14,6 @@ pip install --no-cache-dir -r requirements.txt -i https://pypi.tuna.tsinghua.edu
 RUN mkdir -p ~/.pip
 echo "[global]\nindex-url=https://pypi.tuna.tsinghua.edu.cn/simple\ntrusted-host=pypi.tuna.tsinghua.edu.cn" > ~/.pip/pip.conf
 ```
-
 ## 其他资源
 - [最近迫切应学的编程语言 python](https://www.jianshu.com/p/08ca8573e681)
 - [tinygrad](https://github.com/tinygrad/tinygrad) 深度学习框架

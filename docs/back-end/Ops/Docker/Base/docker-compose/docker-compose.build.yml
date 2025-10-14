@@ -1,0 +1,24 @@
+version: '3.9'
+
+services:
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    ports:
+      - "80:3000" # Next.js 运行端口映射
+    depends_on:
+      - api
+    restart: always
+    environment:
+      - NODE_ENV=production
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    restart: always
+    environment:
+      - ENV=production

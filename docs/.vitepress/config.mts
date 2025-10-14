@@ -338,14 +338,23 @@ export default withMermaid(defineConfig({
           text: 'Python',
           link: '/back-end/Python/',
           items: [
-            { text: 'QuickStart', link: '/back-end/Python/QuickStart/' },
-            { text: 'aiAsking', link: '/back-end/Python/aiAsking/' },
+            { text: '基础学习',
+              items:[
+                { text: '快速入门', link: '/back-end/Python/QuickStart/',},
+                { text: 'AI问答', link: '/back-end/Python/aiAsking/' },
+              ]
+            },
+            { text: '应用整理',
+              items:[
+                { text: '常见问题', link: '/back-end/Python/App/',},
+              ],
+            },
             { text: 'Lib',
               items: [
                 { text: '库列表', link: '/back-end/Python/Lib/List/index.md' },
                 { text: '库实践', link: '/back-end/Python/Lib/Use/index.md' },
               ],
-             },
+            },
           ],
         },
         {

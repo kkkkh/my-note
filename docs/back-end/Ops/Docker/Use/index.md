@@ -1,4 +1,30 @@
 # Docker use
+## 原理
+### windows
+- 严格来说，Windows 本身不能直接像在 Linux 上那样原生安装 Docker Engine，
+- 原因是 Docker Engine 依赖 Linux 内核特性（cgroups、namespace 等），而 Windows 内核不支持这些。
+- WSL2 + Docker Engine（开源免费）
+  - 在 Windows 上启用 WSL2（轻量 Linux 内核）
+  - Docker Engine 安装在 WSL2 的 Linux 发行版里
+  - Windows 可通过命令行调用 Docker
+```bash
+# 安装 WSL2 默认会安装 Ubuntu 发行版
+wsl --install
+# 确认 WSL 版本为 2：
+wsl --list --verbose
+# 如果不是
+wsl --set-version Ubuntu-22.04 2
+```
+```bash
+# 打开 WSL Ubuntu 终端：
+sudo apt update
+sudo apt install -y docker.io
+sudo systemctl enable docker
+sudo systemctl start docker
+# 测试
+docker --version
+docker run hello-world
+```
 ## 常用场景
 ### 删除 docker 镜像
 ```bash

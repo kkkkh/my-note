@@ -2,13 +2,13 @@
 ## 关于 plugins
 - [drone plugins](https://plugins.drone.io)
 ## 核心
-- volumes 的重要性
-  - 如果没有加volumes，drone的一个step，则是在docker中运行的
-  - 此时如果无法连接dockerhub 则连接失败
-  - 如果添加volumes则，走宿主机的docker
-  - 可以对宿主机docker的 /etc/docker/daemon.json增加加速镜像源
-  - 实现快速拉取
-- 手动缓存
+### volumes 的重要性
+- 如果没有加volumes，drone的一个step，则是在docker中运行的
+- 此时如果无法连接dockerhub 则连接失败
+- 如果添加volumes则，走宿主机的docker
+- 可以对宿主机docker的 /etc/docker/daemon.json增加加速镜像源
+- 实现快速拉取
+### 手动缓存（安装依赖命令在drone中执行）
   - 每一层step是独立的，
   - 想复用缓存，则需要volumes支持，使用宿主机的docker，
   - 已经下载的镜像，下一次可以直接服用，
@@ -20,6 +20,42 @@
   ::: details 查看代码
   <<< ./.drone.pip-cache.yml
   :::
+### docker build 缓存（执行dockfile，实际又生成了一个层docker）
+  - 使用了volumes，只是把宿主机路径挂到该 step 容器里
+  - 这能在不同 step 之间共享文件
+  - 但 docker build 的实际构建是在宿主机的 Docker daemon / BuildKit 中完成的
+  - 把缓存放在 step 容器的某路径并不自动生效到 Docker build
+  - 要让 docker build 重用缓存，必须利用 Docker 层缓存（daemon 层面）或 BuildKit 的 cache mount / cache export/import，或把缓存显式拷入 build context
+#### 方案A：靠 Docker 层缓存
+- 把依赖安装放在 Dockerfile 的早期层，并只在 lockfile 变化时重新安装
+- 依赖安装会成为一层，Docker daemon 会缓存该层
+- 之后只要使用同一宿主 Docker daemon，重建时会复用该层
+- 只要宿主不清理镜像/cache，下次构建会复用
+- 不要在 docker build 时使用 --no-cache（或者在插件里开启了避免缓存的选项）。
+::: details 查看代码
+<<< ../../Docker/Base/Dockerfile/nextjs.Dockerfile{dockerfile}
+:::
+::: details 查看代码
+<<< ../../Docker/Base/Dockerfile/python.Dockerfile{dockerfile}
+:::
+#### 方案B：BuildKit 的 RUN --mount=type=cache
+- 在 Dockerfile 用 BuildKit 的 cache mount
+- 把包管理器的 cache 存在 BuildKit 的可复用 cache 存储中（更高效）
+- 需要启用 BuildKit（DOCKER_BUILDKIT=1）
+```bash
+export DOCKER_BUILDKIT=1
+docker build -f data/Dockerfile -t myimage data
+```
+::: details 查看代码
+<<< ../../Docker/Base/Dockerfile/BuildKit.Dockerfile{dockerfile}
+:::
+#### 方案C：buildx 把 cache 导出到宿主目录（跨 runner / 持久化）
+- 把 BuildKit cache 存在宿主某个目录（你可以用 Drone 的 host volume 挂载该目录）
+- Cache 持久化到宿主 /data/docker-build-cache（只要该 host path 挂载给 Runner），下次构建可以直接命中。
+- 适合在自管理 Runner 上长期保存 cache。
+::: details 查看代码
+<<< ./.drone.buildx.yml
+:::
 ## 部署思路
 ### 1、宿主机打包、并部署
 - docker镜像打包到本宿主机
@@ -29,6 +65,10 @@
 - docker镜像打包
 - 发布到dockerhub 或 [阿里云容器镜像服务](https://cr.console.aliyun.com/cn-chengdu/instances)
 - 其他服务器也可以拉取镜像部署
+## 设置
+### Allow Pull Requests
+- drone 的web页面Allow Pull Requests选项是起什么作用
+- 是否允许来自 Pull Request（PR）事件的构建被触发。
 ## 常用配置
 ### switch to ssh
 drone（国内服务器）默认拉取github代码，总是超时，改为 ssh 拉取

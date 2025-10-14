@@ -1,0 +1,23 @@
+volumes:
+  - name: buildkit_cache
+    host:
+      path: /data/docker-build-cache
+  - name: docker_sock
+    host:
+      path: /var/run/docker.sock
+
+steps:
+  - name: docker-build
+    image: docker
+    volumes:
+      - name: docker_sock
+        path: /var/run/docker.sock
+      - name: buildkit_cache
+        path: /cache
+    commands:
+      - docker buildx create --use --name mybuilder || true
+      - docker buildx build \
+          --cache-from=type=local,src=/cache \
+          --cache-to=type=local,dest=/cache,mode=max \
+          --load \
+          -f data/Dockerfile -t myimage:latest data
