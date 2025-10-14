@@ -15,7 +15,4 @@ outline: deep
 - [apifox](https://apifox.com/)
 - [evernote](https://www.evernote.com/)
 - [yapi](https://hellosean1025.github.io/yapi/index.html) 停止维护了
-## deploy
-- [vercel](https://vercel.com/docs/cli)
-- [netlify](https://cli.netlify.com/)
-- [cloudflare](https://developers.cloudflare.com/workers/wrangler/install-and-update/)
+

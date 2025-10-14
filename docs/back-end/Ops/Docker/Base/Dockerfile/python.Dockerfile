@@ -12,7 +12,8 @@ WORKDIR /app
 
 COPY requirements.txt ./
 RUN pip install --upgrade pip -i https://pypi.tuna.tsinghua.edu.cn/simple \
-    && pip install --no-cache-dir -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple --timeout 100
+    && pip install --no-cache-dir -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple --timeout 100 
+# 如果没加 --no-cache-dir，pip 会在 /root/.cache/pip 里留下很多缓存
 
 RUN pip install uvicorn -i https://pypi.tuna.tsinghua.edu.cn/simple
 

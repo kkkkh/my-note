@@ -3,7 +3,7 @@ kind: pipeline
 type: docker
 name: default
 
-workspace: # 这里设置工作目录
+workspace: # 这里设置工作目录 (保证其他step的目录和clone这一层一致)
   base: /drone
   path: src/repname
 

@@ -1,0 +1,15 @@
+volumes:
+  - name: pnpm_cache
+    host: # 持久缓存
+      path: /data/pnpm-cache
+
+steps:
+  - name: build-frontend
+    image: node:20
+    volumes:
+      - name: pnpm_cache
+        path: /root/.pnpm-store
+    commands:
+      - corepack enable
+      - pnpm install
+      - pnpm build

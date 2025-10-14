@@ -5,6 +5,10 @@
 # 查看版本
 ssh -V
 # 生成ssh-key（生成对应多个）
+# 当出现提示：
+# Enter passphrase (empty for no passphrase):
+# 直接 按回车，不输入任何内容（两次回车）。
+# 这样生成的密钥将没有密码保护。
 ssh-keygen -t rsa -b 2048 -C "email@example.com" -f ~/.ssh/gitlab/id_rsa
 # ssh-add
 # 1、这个命令不是用来永久性的记住你所使用的私钥的

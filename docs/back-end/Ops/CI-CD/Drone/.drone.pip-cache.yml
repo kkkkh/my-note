@@ -1,0 +1,14 @@
+volumes:
+  - name: pip_cache
+    host:
+      path: /data/pip-cache
+
+steps:
+  - name: build-backend
+    image: python:3.11
+    volumes:
+      - name: pip_cache
+        path: /root/.cache/pip
+    commands:
+      - pip install --upgrade pip
+      - pip install -r requirements.txt
