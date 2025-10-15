@@ -84,6 +84,7 @@ outline: deep
   - [radix-ui](https://www.radix-ui.com/)
   - [ant design](https://ant-design.antgroup.com/docs/react/getting-started-cn)
   - [atlassian design system](https://atlassian.design/)
+  - [daisyui](https://daisyui.com/docs/install/)
 #### 其他框架
 - [svelte](https://svelte.dev/docs/svelte/getting-started)
 - [htmx](https://htmx.org/docs/)

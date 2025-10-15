@@ -3,6 +3,17 @@
 - com         → 顶级域名（Top-level domain）
 - baidu.com   → 一级域名（主域名 / 根域名）
 - map.baidu.com → 二级域名（子域名）
+## linux
+### 目录地址
+| 类型     | 路径                                  | 说明                               |
+| ------ | ----------------------------------- | -------------------------------- |
+| 主程序    | `/usr/sbin/nginx`                   | 可执行文件，命令 `nginx` 实际就是这里          |
+| 主配置文件  | `/etc/nginx/nginx.conf`             | 主配置文件，启动和全局配置                    |
+| 站点配置目录 | `/etc/nginx/conf.d/`                | 子配置（vhost）文件目录                   |
+| 网站根目录  | `/var/www/html/`                    | 默认网页目录                           |
+| 日志目录   | `/var/log/nginx/`                   | 访问日志 access.log、错误日志 error.log   |
+| 运行时文件  | `/var/run/nginx.pid`                | Nginx 运行时的 PID 文件                |
+| 服务脚本   | `/lib/systemd/system/nginx.service` | Systemd 启动脚本（可通过 `systemctl` 控制） |
 ## 常用配置
 - 基础配置
 

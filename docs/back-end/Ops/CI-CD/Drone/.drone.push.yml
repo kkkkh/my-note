@@ -6,8 +6,8 @@ steps:
   - name: build-and-push
     image: plugins/docker
     settings:
-      repo: xxxx.cr.aliyuncs.com/space-name/image-name
-      registry: xxxx.cr.aliyuncs.com # Docker Hub 默认，可省略
+      repo: xxxx.cr.aliyuncs.com/space-name/image-name # 镜像在仓库里的完整路径和名字
+      registry: xxxx.cr.aliyuncs.com # 镜像仓库服务器的地址（Docker Hub 默认，可省略）
       tags:
         - latest
         - ${DRONE_COMMIT_SHA:0:7}

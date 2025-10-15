@@ -26,6 +26,9 @@ outline: deep
   - [seamless](https://github.com/chenxuan0000/seamless-scroll) 滚动
   - [vue-seamless-scroll](https://chenxuan0000.github.io/vue-seamless-scroll/guide/) vue2滚动
   - [vue3-seamless-scroll](https://www.npmjs.com/package/vue3-seamless-scroll) vue3滚动
+  - [DragSelect](https://github.com/ThibaultJanBeyer/DragSelect) 拖动
+  - [viselect](https://github.com/simonwep/viselect?tab=readme-ov-file) 拖选
+  - [rangy](https://github.com/timdown/rangy?tab=readme-ov-file) [demo](https://www.tomasr.com/rangy/demos/core.html) range选择文字
 - 高亮 & 代码编辑 & 解析器
   - 高亮
     - highlightjs
@@ -51,6 +54,18 @@ outline: deep
   - [iconify 文档](https://iconify.design/docs/) &nbsp;&nbsp;&nbsp;[Browse Icons](https://icon-sets.iconify.design/) &nbsp;&nbsp;&nbsp;[icones](https://icones.js.org/)(Icon Explorer with Instant searching, powered by Iconify)
   - [svg4everybody](https://www.npmjs.com/package/svg4everybody) svg兼容
   - [xicons](https://xicons.org/#/zh-CN)
+- 新手引导
+  - [driverjs](https://driverjs.com/docs/installation)
+  - [react-joyride](https://github.com/gilbarbara/react-joyride)
+  - [shepherdjs](https://www.shepherdjs.dev/)
+- 音频
+  - [aplayer](https://aplayer.js.org/#/home?id=installation)
+  - [howlerjs](https://howlerjs.com/)
+  - [plyr](https://plyr.io/)
+- 视频
+  - [videojs](https://videojs.org/advanced/?video=disneys-oceans)
+  - [dplayer](https://dplayer.diygod.dev/guide.html#installation)
+  - [clappr](https://clappr.github.io/)
 - pdf
   - [html2pdf](https://github.com/eKoopmans/html2pdf.js)
   - [html2canvas](https://html2canvas.hertzen.com/)
@@ -81,6 +96,8 @@ outline: deep
   - [underscorejs](https://underscorejs.org/)
   - [qs](https://github.com/ljharb/qs) Querystring
   - [ajv](https://ajv.js.org/guide/getting-started.html) 数据验证
+  - [just-debounce](https://www.npmjs.com/package/just-debounce)
+  - [just-throttle](https://www.npmjs.com/package/just-throttle)
 - es
   - [core-js](https://github.com/zloirock/core-js)
   - [core-js@3](https://github.com/zloirock/core-js/blob/master/docs/2019-03-19-core-js-3-babel-and-a-look-into-the-future.md) &nbsp;&nbsp;&nbsp;[core-js@next](https://github.com/zloirock/core-js/blob/master/docs/2023-02-14-so-whats-next.md)
@@ -160,6 +177,7 @@ outline: deep
   - [ts-node](https://github.com/TypeStrong/ts-node) &nbsp;&nbsp;&nbsp;[ts-node 文档](https://typestrong.org/ts-node/docs/)
   - [nodemon](https://github.com/remy/nodemon#nodemon)
   - [ts-node-dev](https://github.com/wclr/ts-node-dev)
+  - [corepack](https://www.npmjs.com/package/corepack) Corepack 允许您使用 Yarn、npm 和 pnpm，而无需安装它们
 - eslint
   - [generator-eslint](https://www.npmjs.com/package/generator-eslint)
 - config

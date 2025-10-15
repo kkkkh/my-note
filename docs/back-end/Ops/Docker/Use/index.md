@@ -105,6 +105,10 @@ sudo systemctl daemon-reload
 sudo systemctl restart docker
 ```
 - 还有可能是dns的问题
+- 另外可以使用更可靠的镜像源:名称映射 [public-image-mirror](https://github.com/DaoCloud/public-image-mirror)
+```bash
+docker run -d -P m.daocloud.io/docker.io/library/nginx
+```
 ### 磁盘空间不足 `ERR_CONTENT_LENGTH_MISMATCH`
 - 报错 GET https://www.xxxx.com/static/js/2.eda3eeaf.chunk.js net::ERR_CONTENT_LENGTH_MISMATCH 200 (OK)
 - nginx 排查

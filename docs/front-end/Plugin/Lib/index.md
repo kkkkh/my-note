@@ -225,3 +225,41 @@ eval "$(fnm env --use-on-cd)"
 # node lts（Long Term Support 长期支持）
 fnm install --lts
 ```
+## iconify
+- @iconify/react  @iconify-icons/mdi
+```tsx
+// example: src/components/IconDemo.tsx
+import { Icon } from '@iconify/react';
+import homeIcon from '@iconify-icons/mdi/home'; // 从某个图标集导入
+export default function IconDemo() {
+  return (
+    <div className="flex items-center space-x-2">
+      <Icon icon={homeIcon} width="24" height="24" />
+      <span>Home</span>
+    </div>
+  );
+}
+```
+```tsx
+// 如果你不想安装那么多包，可以使用直接字符串引用在线图标
+// ✅ 优点：无需单独安装图标包。
+// ⚠️ 缺点：图标数据在运行时加载，略影响首屏性能。
+import { Icon } from '@iconify/react';
+export default function IconDemo() {
+  return (
+    <div className="flex items-center space-x-2">
+      <Icon icon="mdi:home" width="24" height="24" />
+      <Icon icon="tabler:bell" width="24" height="24" />
+      <Icon icon="fluent:person-24-regular" width="24" height="24" />
+    </div>
+  );
+}
+```
+- iconify 特点
+| 名称              | 作用                       | 示例                                               |
+| --------------- | ------------------------ | ------------------------------------------------ |
+| **IconifyIcon** | 图标对象的数据结构（本地导入）          | `import homeIcon from '@iconify-icons/mdi/home'` |
+| **IconifyJSON** | 一整个图标集的数据（比如包含所有 MDI 图标） | `import mdi from '@iconify-json/mdi/icons.json'` |
+| **iconifyInfo** | 描述图标集的元数据（作者、license）    | 一般不用手动管                                          |
+| **icon** 属性     | 在组件中使用图标的入口，可以是字符串或对象    | `icon="mdi:home"` 或 `icon={homeIcon}`            |
+

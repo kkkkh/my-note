@@ -372,14 +372,20 @@ export default withMermaid(defineConfig({
           link: '/back-end/Ops/',
           items:[
             {
-              text: 'Command',
-              link: '/back-end/Ops/Command/',
-              items: [],
-            },
-            {
-              text: 'SSH',
-              link: '/back-end/Ops/SSH/',
-              items: [],
+              text: 'Linux',
+              link: '/back-end/Ops/Linux/',
+              items: [
+                {
+                  text: 'Command',
+                  link: '/back-end/Ops/Linux/Command/',
+                  items: [],
+                },
+                {
+                  text: 'SSH',
+                  link: '/back-end/Ops/Linux/SSH/',
+                  items: [],
+                },
+              ],
             },
             {
               text: "Nginx",

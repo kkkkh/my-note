@@ -89,11 +89,23 @@ console.log(parent.childNodes); // NodeList [ #text "Some text", <p> ]
 ##### prepend
 - 父节点的第一个子节点之前
 - 插入一系列 Node 对象或者 DOMString 对象
-#### remove
+##### remove
 - 把对象从它所属的 DOM 树中删除
 ```js
 el.remove()
 ```
+##### dataset
+```js
+<div id="user" data-id="1234567890" data-user="johndoe" data-date-of-birth>
+  John Doe
+</div>
+const el = document.querySelector("#user");
+// 设置值
+el.dataset.dateOfBirth = "1960-10-03";
+// 获取值 "1960-10-03"
+console.log(el.dataset.dateOfBirth);
+```
+- [参考](https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLElement/dataset)
 #### Element.getBoundingClientRect()
 ![getBoundingClientRect](./img/getBoundingClientRect-1.png)
 <Test :is="GetBoundingClientRect" />

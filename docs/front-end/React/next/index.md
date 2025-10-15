@@ -2,6 +2,13 @@
 ```bash
 npx create-next-app@latest
 ```
+## next.config.js
+### env
+- .env.development	开发环境使用（next dev）
+- .env.production	生产环境使用（next build + next start）
+- Next.js 默认只暴露 以 NEXT_PUBLIC_ 开头的环境变量给前端`process.env.NEXT_PUBLIC_API_URL`
+- 其他的只在服务端可用
+- [参考](https://nextjs.org/docs/app/guides/environment-variables)
 ## 服务器组件
 - 服务器组件
   - 服务器组件就是只在服务器端运行的 React 组件，它完全在服务器端渲染，渲染结果会随着 SSR 渲染的 HTML 传递给客户端（即浏览器端）。
