@@ -12,6 +12,17 @@ import CreateElementNS from './components/createElementNS.vue'
 ## Dom
 [文档对象模型（DOM）](https://developer.mozilla.org/zh-CN/docs/Web/API/Document_Object_Model)
 ### Document / Element / Node
+#### Node 节点
+```js
+// 节点类型
+element.nodeType || node.nodeType // 结果是一个数字 1
+// 节点名字
+Element.nodeName  // 文本节点#text || DIV
+```
+```js
+// 类型种类
+Node.ELEMENT_NODE === 1 // 元素节点
+```
 #### Element
 - Element.tagName 等同于 Element.nodeName
   ```js
@@ -49,7 +60,7 @@ import CreateElementNS from './components/createElementNS.vue'
 - [参考](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/parentNode) 
 ### Document / Element / Node 属性调用
 #### textContent
-- 获取或设置指定节点的文本内容。、
+- 获取或设置指定节点的文本内容。
 ```js
 document.getElementById("divA").textContent = "This text is different!";
 ```
@@ -59,6 +70,17 @@ document.getElementById("divA").textContent = "This text is different!";
 - [参考](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/innerHTML)
 #### outerHTML
 - 获取或设置指定节点的 HTML 内容。
+##### dataset
+```js
+<div id="user" data-id="1234567890" data-user="johndoe" data-date-of-birth>
+  John Doe
+</div>
+const el = document.querySelector("#user");
+// 设置值
+el.dataset.dateOfBirth = "1960-10-03";
+// 获取值 "1960-10-03"
+console.log(el.dataset.dateOfBirth);
+```
 ### Document / Element / Node 方法调用
 #### cloneNode
 `var dupNode = node.cloneNode(deep);`
@@ -94,16 +116,15 @@ console.log(parent.childNodes); // NodeList [ #text "Some text", <p> ]
 ```js
 el.remove()
 ```
-##### dataset
+##### contains
+Node 接口的 contains() 方法返回一个布尔值，表示一个节点是否是给定节点的后代
+该节点本身、其直接子节点（childNodes）、子节点的直接子节点等
 ```js
-<div id="user" data-id="1234567890" data-user="johndoe" data-date-of-birth>
-  John Doe
-</div>
-const el = document.querySelector("#user");
-// 设置值
-el.dataset.dateOfBirth = "1960-10-03";
-// 获取值 "1960-10-03"
-console.log(el.dataset.dateOfBirth);
+const parent = document.querySelector("#parent");
+const child = document.querySelector("#child");
+parent.contains(child); // true
+// or
+document.body.contains(node)
 ```
 - [参考](https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLElement/dataset)
 #### Element.getBoundingClientRect()
@@ -196,6 +217,10 @@ activeElement.dispatchEvent(new Event('input', { bubbles: true }))
 mouseleave 和 mouseout 是相似的，但是两者的不同在于
 - mouseleave 不会冒泡：当指针离开元素及其所有后代时，会触发 mouseleave
 - mouseout 会冒泡：而当指针离开元素或离开元素的后代（即使指针仍在元素内）时，会触发 mouseout
+#### selectionchange
+- selectionchange 是一个全局事件
+- 只能绑定到 document 上
+- 拖动文本获取当前选区时触发
 ### Navigator
 #### navigator.clipboard
 - writeText() 写入特定字符串到操作系统的剪切板，返回一个promise

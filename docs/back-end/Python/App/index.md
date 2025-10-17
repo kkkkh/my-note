@@ -1,5 +1,40 @@
 # App
-## fastapi
+## 项目开发
+### 安装依赖
+```bash
+python -m venv venv # 创建虚拟环境
+source venv/Scripts/activate # windows 激活虚拟环境
+# source .venv/bin/activate # mac
+pip install --no-cache-dir -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple --timeout 100 # 安装依赖
+```
+```bash
+pip install uv
+uv venv
+source venv/Scripts/activate # 激活虚拟环境
+# source .venv/bin/activate # mac
+uv pip install --no-cache-dir -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple --timeout 100
+```
+### 启动服务
+```bash
+python -m uvicorn main:app --reload
+```
+### requirements.txt 维护
+```bash
+# 维护依赖
+pipreqs . --force --savepath requirements.in
+pip-compile requirements.in
+# 安装依赖
+pip install -r requirements.txt
+pip-sync requirements.txt
+pip install --no-cache-dir -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple --timeout 100
+```
+## fastapi sqlalchemy
+### vscode 无法解析导入 “fastapi”
+vscode 提示：无法解析导入“fastapi”（PylancereportMissingImports）
+- 1、按下 Ctrl + Shift + P（mac 是 Cmd + Shift + P）；
+- 2、搜索并选择 “Python: 选择解释器 (Select Interpreter)”；
+- 3、找到并选择你的虚拟环境，比如：venv\Scripts\python.exe
+- 4、重新打开文件，Pylance 就能识别 fastapi 了。
 ### 线程管理
 - 报错
 ```bash
@@ -84,7 +119,7 @@ The object was created in thread id 25824 and this is thread id 31456.
 - `cursor.execute()`
   - ⚙️ 优点：你可以重复使用 cursor 来执行多条 SQL，控制更灵活；
   - ⚠️ 缺点：代码略长，但更符合数据库操作习惯。
-## SQLAlchemy Core 返回结果
+### SQLAlchemy Core 返回结果
 - result 返回的结果是 Row 对象，表现形式像元组，但它实际上是一个可映射的结构。
 - 但这个 result 不是简单的 tuple，它其实是 sqlalchemy.engine.Row
 ```py
@@ -97,3 +132,97 @@ rows = session.execute(text("SELECT * FROM stardict LIMIT 3")).fetchall()
 data = [dict(r._mapping) for r in rows]
 print(data)
 ```
+### sqlalchemy 与 sqlalchemy.orm 区别
+- 同一个库的不同模块
+- sqlalchemy
+  - 核心模块 (SQLAlchemy Core)
+  - 提供了 底层的 SQL 表达式语言 和 数据库连接管理。
+  - 偏向于操作 SQL 层，类似写 SQL 语句，但用 Python 方式构建。
+  - 这种方式和写 SQL 很接近，适合对 SQL 比较熟悉的人。
+```py
+from sqlalchemy import create_engine, Table, Column, Integer, String, MetaData, select
+
+engine = create_engine("sqlite:///./test.db", echo=True)
+metadata = MetaData()
+# 定义表
+user_table = Table(
+    "users", metadata,
+    Column("id", Integer, primary_key=True),
+    Column("name", String),
+)
+metadata.create_all(engine)
+# 插入数据
+with engine.connect() as conn:
+    conn.execute(user_table.insert().values(name="Alice"))
+    conn.commit()
+# 查询数据
+with engine.connect() as conn:
+    result = conn.execute(select(user_table))
+    for row in result:
+        print(row)
+```
+- sqlalchemy.orm
+  - ORM模块 (Object Relational Mapper)
+  - 在 Core 的基础上提供了 面向对象的方式 来操作数据库。
+  - 把数据库的表映射成 Python 类，把行映射成对象。
+```py
+from sqlalchemy import create_engine, Column, Integer, String
+from sqlalchemy.orm import sessionmaker, declarative_base
+engine = create_engine("sqlite:///./test.db", echo=True)
+SessionLocal = sessionmaker(bind=engine)
+
+Base = declarative_base()
+# 定义ORM模型
+class User(Base):
+    __tablename__ = "users"
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String)
+Base.metadata.create_all(engine)
+db = SessionLocal()
+# 插入数据
+new_user = User(name="Bob")
+db.add(new_user)
+db.commit()
+# 查询数据
+user = db.query(User).first()
+print(user.id, user.name)
+```
+### default 与 server_default区别
+- default
+  - 作用：在 Python/ORM 层面 生成默认值。
+  - 当你创建一个 ORM 对象时，如果没有给字段赋值，SQLAlchemy 会在 Python 层自动设置这个值。
+  - 不会直接影响数据库本身的默认值。
+  - 如果直接用数据库执行 INSERT，而不是通过 ORM，不会自动填充
+- server_default
+  - 默认值在 数据库层生成
+  - 直接执行 SQL INSERT 时，也会生效
+  - ORM 插入时，如果使用 refresh() 可以读取数据库生成的值
+
+```py
+class Item(Base):
+  __tablename__ = "items"
+  created_at = Column(DateTime, default=datetime.now, nullable=False) # default
+  created_at = Column(DateTime, server_default=func.now(), nullable=False) # server_default
+```
+### 唯一字段约束
+- `unique=True`
+  - 适用于简单唯一字段
+  - 只能作用在单个列。
+  - 自动生成的约束名（不同数据库可能随机命名），你无法自定义。()
+  - 不方便在迁移（Alembic）或多字段唯一时精确控制。
+- `UniqueConstraint('name', name='uix_name')`
+  - 在 表级别 显式定义唯一约束。
+  - 可以控制约束的名称（name='uix_name'）。
+  - 适用于单字段或多字段组合唯一的场景。
+- 同时写会重复定义唯一约束，不要一起用。
+```py
+class Item(Base):
+  __tablename__ = "items"
+  name = Column(String, index=True, unique=True) # 唯一约束，约束名不能自定义，但是可配合naming_convention自定义
+  # 在 SQLAlchemy 定义模型时，加 唯一约束：
+  __table_args__ = (
+    UniqueConstraint('name', name='uix_name'),  # name 字段唯一 约束名uix_name自定义
+    UniqueConstraint('first_name', 'last_name', name='uix_fullname'), # first_name + last_name 组合唯一
+  )
+```
+

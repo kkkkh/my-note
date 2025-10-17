@@ -5,7 +5,7 @@
 <script setup>
 import { onMounted } from 'vue'
 onMounted(() => {
-  test()
+  // test()
 })
 let num  = 0
 const test1 = () => {

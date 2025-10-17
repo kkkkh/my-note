@@ -373,7 +373,7 @@ WritableStream 接口为将流数据写入目的地（称为接收器）提供�
 返回一个 Selection 对象，表示用户选择的文本范围或光标的当前位置。
 ```js
 let selObj = window.getSelection();
-var selectedText = selObj.toString();
+var selectedText = selObj.toString(); // 获取选中的文本
 ```
 - 插入光标的位置可通过 Selection 获取，这时它被标记为 Collapsed
 - anchor 指向用户开始选择的地方，而 focus 指向用户结束选择的地方。
@@ -382,11 +382,50 @@ var selectedText = selObj.toString();
 Selection 对象所对应的是用户所选择的 ranges（区域），俗称拖蓝。默认情况下，该函数只针对一个区域，我们可以这样使用这个函数：
 ```js
 var selObj = window.getSelection();
+// 返回一个包含当前选区内容的区域对象。
 var range = selObj.getRangeAt(0);
+```
+```js
+let ranges = [];
+sel = window.getSelection();
+for (var i = 0; i < sel.rangeCount; i++) {
+  ranges[i] = sel.getRangeAt(i);
+}
+/* 在 ranges 数组的每一个元素都是一个 range 对象，
+ * 对象的内容是当前选区中的一个。 */
+```
+- 获取选区的坐标
+```js
+const rects = range?.getClientRects()
+const y = rects?.[0]?.y
+const x = rects?.[0]?.x
+```
+- 获取节点和父级元素
+```js
+function getElement(node) {
+  // 节点的nodeType 是不是 元素节点 ，则返回这个元素，否则返回其父级元素
+  return node.nodeType === Node.ELEMENT_NODE ? node : node.parentElement;
+}
+
+const startNode = range.startContainer;
+const endNode = range.endContainer;
+console.log("选区开始节点：", startNode); // 就是选中的开始文字的所在节点
+console.log("选区结束节点：", endNode); // 就是选中的结束文字的所在节点
+const startEl = getElement(range.startContainer);
+const endEl = getElement(range.endContainer);
+console.log("开始元素：", startEl);
+console.log("结束元素：", endEl);
+
+const commonAncestor = range.commonAncestorContainer; // 两个节点 共同往父节点以上找，找到共同的父级元素
+console.log("公共父节点：", commonAncestor);
+
 ```
 参考：
 - [Selection](https://developer.mozilla.org/zh-CN/docs/Web/API/Selection)
 - [Range](https://developer.mozilla.org/zh-CN/docs/Web/API/Range)
+
+<Test :is="modules['./components/GetSelection.vue']" />
+
 ### Console
 #### console.log
 ```js

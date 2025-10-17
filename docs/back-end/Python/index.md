@@ -50,7 +50,7 @@ echo "[global]\nindex-url=https://pypi.tuna.tsinghua.edu.cn/simple\ntrusted-host
 ### 音视频
 - 动画
   - [toonboom](https://www.toonboom.com/products/harmony)
-## 其他资源
+### 其他资源
 - [最近迫切应学的编程语言 python](https://www.jianshu.com/p/08ca8573e681)
 - [tinygrad](https://github.com/tinygrad/tinygrad) 深度学习框架
 

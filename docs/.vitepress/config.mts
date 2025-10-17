@@ -157,7 +157,9 @@ export default withMermaid(defineConfig({
           text: 'TypeScript',
           link: '/front-end/TypeScript/',
           items: [
-            { text: 'ts', link: '/front-end/TypeScript/' }],
+            { text: 'study', link: '/front-end/TypeScript/' },
+            { text: 'app', link: '/front-end/TsApp/' },
+          ],
         },
         {
           text: 'Vue',
@@ -176,7 +178,7 @@ export default withMermaid(defineConfig({
             { text: 'react', link: '/front-end/React/react/' },
             { text: 'react-router', link: '/front-end/React/react-router/' },
             { text: 'preact', link: '/front-end/React/preact/' },
-            { text: 'next', link: '/front-end/React/next/' },
+            { text: 'nextjs', link: '/front-end/React/nextjs/' },
           ],
         },
         {
@@ -346,6 +348,7 @@ export default withMermaid(defineConfig({
             },
             { text: '应用整理',
               items:[
+                { text: 'FastApi', link: '/back-end/Python/FastApi/' },
                 { text: '常见问题', link: '/back-end/Python/App/',},
               ],
             },
