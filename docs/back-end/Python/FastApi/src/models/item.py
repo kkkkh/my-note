@@ -6,6 +6,7 @@ models —— 数据库模型（ORM层）
 对应层次：数据库层。
 """
 from sqlalchemy import Column, Integer, String, DateTime, func, UniqueConstraint
+from sqlalchemy.dialects.sqlite import JSON
 from src.database import Base
 from datetime import datetime
 class Item(Base):
@@ -17,9 +18,13 @@ class Item(Base):
     description = Column(String, nullable=True)
     # nullable=False 不允许为空
     age = Column(Integer, nullable=False)
-
+    # 但 SQLite 有个坑：如果索引列都是 ''，在某些场景下仍然会触发唯一性错误（取决于建表时有没有隐式约束，比如组合索引或主键）。
+    # 去掉 default = ""
+    alias = Column(String, nullable=True, default = "")
+    # 用 JSON 存储数组
+    tags = Column(JSON, nullable=True)
     # 创建时间，默认当前时间
-    # created_at = Column(DateTime, default=datetime.now, nullable=False) # default 
+    created_at = Column(DateTime, default=datetime.now, nullable=False) # default
     created_at = Column(DateTime, server_default=func.now(), nullable=False) # server_default
     # 更新时间，每次更新时自动修改
     updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now(), nullable=False)

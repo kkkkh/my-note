@@ -218,11 +218,84 @@ class Item(Base):
 ```py
 class Item(Base):
   __tablename__ = "items"
-  name = Column(String, index=True, unique=True) # 唯一约束，约束名不能自定义，但是可配合naming_convention自定义
+  # 唯一约束，约束名不能自定义，但是可配合naming_convention自定义
+  name = Column(String, index=True, unique=True) 
   # 在 SQLAlchemy 定义模型时，加 唯一约束：
   __table_args__ = (
     UniqueConstraint('name', name='uix_name'),  # name 字段唯一 约束名uix_name自定义
     UniqueConstraint('first_name', 'last_name', name='uix_fullname'), # first_name + last_name 组合唯一
   )
 ```
+### sqllite 如何存储数组
+SQLite 从 3.9.0 版本开始支持 JSON 函数，可以把数组存成 JSON 格式的字符串。
+```py
+from sqlalchemy.dialects.sqlite import JSON
+class Item(Base):
+  __tablename__ = "items"
+  tags = Column(JSON, nullable=True)  # 用 JSON 存储数组
+```
+### 数据库提交 事务控制
 
+<<< ../FastApi/src/crud/work.py
+
+<<< ../FastApi/src/routers/work.py
+
+### 数据库 api对比
+| 方法                | 作用                        | 是否触发 SQL 执行 | 是否影响事务    | 常见用途     |
+| ----------------- | ------------------------- | -------| --------- | ------------------------------ |
+| `db.begin()`      | 显式开启一个事务（上下文管理器）      | 否           | ✅ 开启新事务   | 用于需要手动控制事务范围的情况 |
+| `db.add(obj)`     | 把对象加入会话（pending 状态）       | 否           | 否         | 准备插入或更新 |
+| `db.flush()`      | 把会话中的变更发送到数据库（执行 SQL）但不提交 | ✅ 是  | ❌ 不提交，只同步 | 检查是否会出错（唯一约束、外键等），或需要获得新生成的 ID |
+| `db.commit()`     | 提交事务（真正写入数据库）             | ✅ 是   | ✅ 提交并结束事务 | 操作成功后确认永久保存                    |
+| `db.refresh(obj)` | 从数据库重新加载该对象的最新值          | ✅ 是   | ❌ 不影响事务   | 获取数据库端生成的字段（如自增 ID、触发器字段、时间戳）|
+| `db.rollback()`   | 回滚事务（撤销未提交操作）             | ❌ 否   | ✅ 回滚并结束事务 | 出现异常后恢复一致状态                    |
+
+### 字典转为一个对象（实例），可以使用a.b调用
+- types.SimpleNamespace
+```py
+from types import SimpleNamespace
+data = {"english": "apple", "chinese": "苹果"}
+obj = SimpleNamespace(**data)
+print(obj.english)  # apple
+print(obj.chinese)  # 苹果
+```
+- pydantic.BaseModel
+```py
+from pydantic import BaseModel
+class Translation(BaseModel):
+    english: str
+    chinese: str
+data = {"english": "apple", "chinese": "苹果"}
+obj = Translation(**data)
+print(obj.english)   # apple
+print(obj.chinese)   # 苹果
+```
+- namedtuple 是不可变对象，不能修改字段。
+```py
+from collections import namedtuple
+Translation = namedtuple("Translation", ["english", "chinese"])
+data = {"english": "apple", "chinese": "苹果"}
+obj = Translation(**data)
+print(obj.english)  # apple
+print(obj.chinese)  # 苹果
+
+```
+- 自定义
+```py
+class Dict2Obj:
+    def __init__(self, **entries):
+        self.__dict__.update(entries)
+data = {"english": "apple", "chinese": "苹果"}
+obj = Dict2Obj(**data)
+print(obj.english)  # apple
+print(obj.chinese)  # 苹果
+```
+
+### 使用泛型
+
+<<< ../FastApi/src/schemas/common.py
+
+<<< ../FastApi/src/routers/all.py
+
+### sqlit 改变一个表中的属性的类型
+SQLite 对 ALTER TABLE 的支持很有限,不支持直接修改列的类型。

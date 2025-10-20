@@ -279,6 +279,7 @@ export default withMermaid(defineConfig({
               items: [
                 { text: 'Base', link: '/front-end/Runtime/NodeJs/Base/' },
                 { text: '《深入浅出nodejs》', link: '/front-end/Runtime/NodeJs/Book/' },
+                { text: 'Fastify', link: '/front-end/Runtime/NodeJs/Fastify/' },
                 { text: 'Module', items:
                   [
                     { text: '脚本', link: '/front-end/Runtime/NodeJs/Module/Script/' },
