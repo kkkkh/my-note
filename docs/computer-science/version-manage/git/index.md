@@ -252,11 +252,11 @@ git checkout --theirs .
 git rm test.txt
 #恢复删除文件，工作区和版本库统一
 git checkout -- test.txt
-# 版本库和工作区统一
-git commit -m "remove test.txt"
-# 其中，`<file/folder>`是被提交的文件或目录的名称。
 # 该命令会将文件或目录从Git仓库中删除，但不会删除本地文件。
 git rm --cached <file/folder>
+# 如果 __pycache__ 之类的文件已经被提交过了，需要先让 git 停止追踪
+git rm -r --cached __pycache__
+git rm -r --cached *.pyc
 ```
 #### git switch
 ```bash

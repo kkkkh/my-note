@@ -28,6 +28,49 @@ pip install -r requirements.txt
 pip-sync requirements.txt
 pip install --no-cache-dir -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple --timeout 100
 ```
+### Alembic
+- SQLAlchemy 官方提供的数据库迁移工具
+```bash
+# 安装
+pip install alembic
+# 初始化
+alembic init alembic
+```
+- 修改 alembic.ini
+  - 统一改成 UTF-8 编码
+  - 确保文件中没有奇怪的字符
+::: details 查看代码
+<<< ./alembic.ini
+:::
+- 修改 alembic/env.py
+```py
+# 可以正确加载模型路径（项目中模型）
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# 导入模型（必改）
+from app.database import Base
+target_metadata = Base.metadata
+# 修改 run_migrations_online（与 alembic.ini 配置sqlalchemy.url 二选一）
+from app.database import DATABASE_URL
+from sqlalchemy import create_engine
+connectable = create_engine(DATABASE_URL)
+```
+- 创建迁移
+```bash
+# alembic/versions 里生成一个新文件，例如： alembic/versions/20251020_XXXX_init.py
+alembic revision --autogenerate -m "init"
+
+```
+```bash
+# 如果创建迁移，但是没有执行迁移（此次不生效），想再次创建迁移
+# 将数据库标记为最新版本，但不执行迁移,可以再次创建迁移
+alembic stamp head
+# 执行迁移
+alembic upgrade head
+# 针对不同 env.py 执行迁移
+alembic -c alembic/user_service/env.py upgrade head
+```
 ## fastapi sqlalchemy
 ### vscode 无法解析导入 “fastapi”
 vscode 提示：无法解析导入“fastapi”（PylancereportMissingImports）
@@ -297,5 +340,174 @@ print(obj.chinese)  # 苹果
 
 <<< ../FastApi/src/routers/all.py
 
-### sqlit 改变一个表中的属性的类型
+### sqlite 改变一个表中的属性的类型
 SQLite 对 ALTER TABLE 的支持很有限,不支持直接修改列的类型。
+- 开发阶段（表没啥数据 / 数据可丢）
+  - 最简单的办法就是：
+  - 直接 删除数据库文件（通常是 test.db 或 sqlite.db 之类的 .db 文件）。
+  - 重新运行你的模型定义（Base.metadata.create_all(engine)），就会用最新的字段类型重新建表。
+- 标准做法（SQLite 官方推荐）
+  - 如果你要改一个字段的类型，要走 “重建表” 这套流程：
+  - 创建一个新表（定义你想要的字段类型）。
+  - 把旧表的数据拷贝过去。
+  - 删除旧表。
+  - 把新表改名为旧表的名字。
+  ```sql
+  -- 1. 创建一个新表
+  CREATE TABLE new_table (
+      id INTEGER PRIMARY KEY,
+      name TEXT,
+      age INTEGER
+  );
+  -- 2. 把旧表的数据迁移到新表
+  INSERT INTO new_table (id, name, age)
+  SELECT id, name, CAST(age AS INTEGER) -- 在这里可以转换类型
+  FROM old_table;
+  -- 3. 删除旧表
+  DROP TABLE old_table;
+  -- 4. 改名
+  ALTER TABLE new_table RENAME TO old_table;
+  ```
+- Alembic（SQLAlchemy 的迁移工具）
+### 接受请求参数
+- 多个query
+```py
+@router.get("/getByPodId", response_model=CommonResponse)
+def read_translations(
+    podId: int,
+    lang: str = None,
+    status: str = "active",
+    db: Session = Depends(get_db)
+):
+    ...
+```
+- 还可以用 Query 更精细控制
+```py
+from fastapi import Query
+
+@router.get("/getByPodId", response_model=CommonResponse)
+def read_translations(
+    podId: int = Query(..., description="Pod 的 ID", gt=0),
+    lang: str = Query(None, description="语言类型，如 en、zh"),
+    status: str = Query("active", description="状态"),
+    db: Session = Depends(get_db)
+):
+    ...
+```
+- 如果你想接收很多参数，可以用 Pydantic 模型来包一层
+```py
+from pydantic import BaseModel
+
+class QueryParams(BaseModel):
+    podId: int
+    lang: str | None = None
+    status: str = "active"
+
+@router.get("/getByPodId", response_model=CommonResponse)
+def read_translations(params: QueryParams = Depends(), db: Session = Depends(get_db)):
+    print(params.podId, params.lang, params.status)
+    ...
+```
+- post请求 Query + Body 参数
+```py
+from fastapi import APIRouter, Query, Depends
+from pydantic import BaseModel
+from sqlalchemy.orm import Session
+from typing import Optional
+
+router = APIRouter()
+
+class Item(BaseModel):
+    name: str
+    price: float
+
+@router.post("/items/create")
+def create_item(
+    lang: str = Query("en", description="语言类型"),  # query 参数
+    item: Item = None,                               # body 参数
+    db: Session = Depends(get_db)
+):
+    print(f"lang={lang}, item={item}")
+    return {"lang": lang, "item": item.dict()}
+
+```
+- post请求 混合 Query + Path + Body
+```py
+@router.post("/users/{user_id}")
+def update_user(
+    user_id: int,                          # Path 参数：/users/123
+    notify: bool = Query(False),           # Query 参数：?notify=true
+    user_data: dict = Body(...),           # Body 参数：JSON
+):
+    return {
+        "user_id": user_id,
+        "notify": notify,
+        "user_data": user_data
+    }
+
+```
+
+| 参数类型     | 定义位置                      | 来源       | 示例                   |
+| -------- | ------------------------- | -------- | -------------------- |
+| Path 参数  | 函数签名 `{param}`            | URL 路径   | `/users/123`         |
+| Query 参数 | 函数参数或 `Query()`           | URL 查询串  | `?lang=zh`           |
+| Body 参数  | `Body(...)` 或 Pydantic 模型 | JSON 请求体 | `{ "name": "Book" }` |
+| Form 参数  | `Form(...)`               | 表单提交     | HTML form            |
+| File 参数  | `File(...)`               | 文件上传     | multipart/form-data  |
+## Alembic
+### Alembic + 多服务架构
+- Alembic 在容器化环境中落地的核心机制：
+  - 一是 迁移脚本的可访问性（迁移逻辑来源）；
+  - 二是 迁移操作的落脚点（修改对象目标）。
+- 实现
+  - 迁移脚本的可访问性：Volume 挂载方案（迁移脚本不属于运行时状态，而属于数据库版本历史的一部分）
+  - 迁移操作：
+    - 文件系统 `/data/mydb.db`
+    - 数据库服务 `postgres://user:pwd@host:5432/db`
+```yml
+version: '3.9'
+services:
+  alembic:
+    image: my-alembic-runner:latest
+    container_name: alembic_runner
+    volumes:
+      - ./project_a/alembic:/migrations/project_a/alembic
+      - ./project_a/alembic.ini:/migrations/project_a/alembic.ini
+      - ./project_b/alembic:/migrations/project_b/alembic
+      - ./project_b/alembic.ini:/migrations/project_b/alembic.ini
+    environment:
+      - DB_A_URL=sqlite:///data/db_a.db
+      - DB_B_URL=postgresql://user:pwd@postgres:5432/db_b
+    command: python /migrations/run_migrations.py
+```
+```py
+import subprocess
+services = [
+    ("service_a", "mysql+pymysql://user:pwd@db-service-a:3306/db_a"),
+    ("service_b", "postgresql://user:pwd@db-service-b:5432/db_b"),
+]
+for name, db_url in services:
+    print(f"Running migrations for {name}...")
+    subprocess.run([
+        "alembic", "-c", f"migrations/{name}/alembic.ini",
+        "upgrade", "head"
+    ], check=True)
+```
+### Alembic 不同模式下迁移
+- run_migrations_offline 离线生成 SQL
+  - 不连接真实数据库
+  - 只会 生成 SQL 脚本，输出到屏幕或者文件
+  - 生成迁移 SQL 给 DBA 审核
+  - 无法直接连接数据库的环境
+  - 运行效果 `alembic upgrade head --sql`
+- run_migrations_online 在线直接修改数据库
+  - 在 在线模式下运行迁移，直接连接数据库
+  - Alembic 会执行生成的 SQL 去修改真实数据库
+  - 开发环境直接升级数据库
+  - 部署时自动迁移数据库
+  - 运行效果 `alembic upgrade head`
+
+| 模式      | 是否连接数据库 | 输出     | 典型用途       |
+| ------- | ------- | ------ | ---------- |
+| offline | ❌       | SQL 脚本 | 审核、生成 SQL  |
+| online  | ✅       | 修改数据库  | 开发、部署、自动迁移 |

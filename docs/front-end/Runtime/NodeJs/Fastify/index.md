@@ -54,3 +54,6 @@
 - （通常是 fastify.mongo.client）中的 url 属性，它存储了 MongoDB 连接字符串（与第一种方式中的 URI 是一样的）。
 - 因为 db.s.url 本质上是连接 MongoDB 的 URI，因此 mongoose.connect(db.s.url, {...}) 是在使用相同的连接字符串进行连接。
 - 它们是通过相同的 MongoDB URI 创建连接，且在 Mongoose 中，如果在同一实例中调用 mongoose.connect() 多次，它会自动管理连接并且只会创建一个连接。
+
+### migrate-mongo
+- 官方推荐，MongoDB迁移工具，使用 JS 文件定义升级/降级脚本
