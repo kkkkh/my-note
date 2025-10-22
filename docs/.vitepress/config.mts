@@ -175,7 +175,17 @@ export default withMermaid(defineConfig({
           text: 'React',
           link: '/front-end/React/',
           items: [
-            { text: 'react', link: '/front-end/React/react/' },
+            {
+              text: 'react',
+              items:[
+                {
+                  text: 'react base',link: '/front-end/React/react/',
+                },
+                {
+                  text: 'react app',link: '/front-end/React/react/app.md',
+                },
+              ]
+            },
             { text: 'react-router', link: '/front-end/React/react-router/' },
             { text: 'preact', link: '/front-end/React/preact/' },
             { text: 'nextjs', link: '/front-end/React/nextjs/' },

@@ -1,3 +1,16 @@
+const svgActive = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="12">
+    <path d="M2 6 H28" stroke="#ff0000" stroke-width="2" stroke-dasharray="6 4" stroke-linecap="round" fill="none"/>
+  </svg>`;
+
+const svgInactive = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="12">
+    <path d="M2 6 H28" stroke="#ccc" stroke-width="2" stroke-dasharray="6 4" stroke-linecap="round" fill="none"/>
+  </svg>`;
+
+const iconActive = `image://data:image/svg+xml;utf8,${encodeURIComponent(svgActive)}`;
+const iconInactive = `image://data:image/svg+xml;utf8,${encodeURIComponent(svgInactive)}`;
+
 export function getOption(timeData = [], lineData = [], standardUph = null) {
   const graphic =
     timeData.length === 0
@@ -17,13 +30,18 @@ export function getOption(timeData = [], lineData = [], standardUph = null) {
         ]
       : []
 
+
   return {
     graphic,
     // title: {
     //   text: title,
     // },
     legend: {
-      // data: ['inputting', 'outting', '理论UPH'],
+      data: [...lineData.map((item )=> `${item.a}-${item.b}`),{
+        name: '标准',
+        icon: iconActive,
+
+      }],
       textStyle: {
         color: '#323232',
         fontSize: 14,
@@ -99,7 +117,7 @@ export function getOption(timeData = [], lineData = [], standardUph = null) {
       // 单独增加一条参考线
       standardUph
         ? {
-            name: 'F:标准UPH',
+            name: '标准',
             type: 'line',
             itemStyle: {
               color: 'red',
@@ -171,4 +189,18 @@ export const mouseoverHandle = (params, echartInstance) => {
       },
     })
   }
+}
+
+
+export const legendHandle = (option, params,echartInstance)=>{
+  const selected = params.selected;
+  const newLegendData = option.legend.data.map((item) => {
+    if (item.name === '标准') {
+      // 根据选中状态切换icon
+      item.icon = selected[item.name] ? iconActive : iconInactive;
+    }
+    return item;
+  });
+  // option.legend.data = newLegendData;
+  echartInstance.setOption({legend:{data:newLegendData}});
 }

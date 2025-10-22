@@ -132,7 +132,8 @@ requestAnimationFrame(callback)
 - token为什么要保存在localStorge，为什么不用cookie
   - 安全性问题：
     - Cookie 容易受到跨站请求伪造（CSRF）攻击。（通过设置 SameSite 属性来缓解 CSRF 攻击）
-    - localStorage 最主要的风险是容易受到 XSS 攻击，HttpOnly Cookie 中可以防止客户端 JavaScript 访问 Token
+    - localStorage 最主要的风险是容易受到 XSS 攻击
+    - HttpOnly Cookie 中可以防止客户端 JavaScript 访问 Token
   - 性能：
     - Cookie 会随着每次 HTTP 请求自动发送到服务器，这会增加请求的大小，降低性能。
   - 存储：
@@ -163,6 +164,10 @@ requestAnimationFrame(callback)
 - 参考：
   - [Fetch_API](https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch)
   - [Request](https://developer.mozilla.org/zh-CN/docs/Web/API/Request)
+#### Fetch封装
+::: details 查看代码
+<<< ./components/fetch.ts
+:::
 ### XMLHttpRequest
 ```js
 function ajax(options) {

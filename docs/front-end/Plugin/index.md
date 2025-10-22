@@ -98,6 +98,9 @@ outline: deep
   - [ajv](https://ajv.js.org/guide/getting-started.html) 数据验证
   - [just-debounce](https://www.npmjs.com/package/just-debounce)
   - [just-throttle](https://www.npmjs.com/package/just-throttle)
+- fetch
+  - [ky](https://github.com/sindresorhus/ky)
+  - [ofetch](https://github.com/unjs/ofetch)
 - es
   - [core-js](https://github.com/zloirock/core-js)
   - [core-js@3](https://github.com/zloirock/core-js/blob/master/docs/2019-03-19-core-js-3-babel-and-a-look-into-the-future.md) &nbsp;&nbsp;&nbsp;[core-js@next](https://github.com/zloirock/core-js/blob/master/docs/2023-02-14-so-whats-next.md)
