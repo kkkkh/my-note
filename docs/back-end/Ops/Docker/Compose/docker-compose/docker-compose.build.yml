@@ -1,0 +1,41 @@
+version: '3.9'
+
+services:
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    container_name: my_web
+    ports:
+      - "80:3000" # Next.js 运行端口映射
+    depends_on:
+      - api
+    restart: always
+    environment:
+      - NODE_ENV=production
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: my_server
+    ports:
+      - "8000:8000"
+    restart: always
+    environment:
+      - ENV=production
+
+  redis:
+    image: redis
+    container_name: my_redis
+    ports:
+      - "9000:6379"
+    volumes:
+      # - /english-server/redis:/usr/local/etc/redis
+      # 这个挂载会覆盖 Redis 镜像内的 /usr/local/etc/redis 文件夹，包括默认的 redis.conf
+      # 会营销到这里
+      - /english-server/redis/data:/data
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    environment:
+      REDIS_PASSWORD: "${REDIS_PASSWORD}"
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf", "--requirepass", "${REDIS_PASSWORD}"]

@@ -511,3 +511,79 @@ for name, db_url in services:
 | ------- | ------- | ------ | ---------- |
 | offline | ❌       | SQL 脚本 | 审核、生成 SQL  |
 | online  | ✅       | 修改数据库  | 开发、部署、自动迁移 |
+### dockerfile中的执行
+- 问题：
+  - 使用pdm 安装Alembic
+  - 部署的是时候，pdm 生成 requirements.txt，安装依赖 pip install
+    - `RUN pdm export -o requirements.txt --without-hashes`
+    - ` pip install --no-cache-dir -r requirements.txt`
+  - 如果在api-runner阶段 RUN alembic upgrade head
+  - 会找不到 alembic
+- 解决：
+  - 在api-builder阶段 RUN alembic upgrade head
+  - `COPY --from=api-builder /usr/local/bin /usr/local/bin` 将二进制文件拷贝到api-runner阶段
+  - 或者在api-runner阶段，安装pip 安装 Alembic
+## Uvicorn Gunicorn
+### Uvicorn
+```bash
+# --workers 启动多个进程（worker）
+# --proxy-headers 从反向代理（如 Nginx、Traefik、Caddy）读取真实客户端 IP 和协议
+uvicorn main:app --host 0.0.0.0 --port 8000 --workers 4 --proxy-headers
+# or
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "4", "--proxy-headers"]
+```
+### Gunicorn
+- Uvicorn 自带 server，但进程管理能力弱，特别是生产环境：
+  - 没有进程崩溃自动重启机制 🟥
+  - 多 worker 管理不够可靠 🟥
+- Gunicorn：
+  - 多 worker 进程管理 ✅
+  - worker 崩溃自动重启 ✅
+  - 负载均衡 ✅
+  - 生产稳定 ✅
+  - Gunicorn 本身不支持 ASGI，所以要搭配 uvicorn 的 worker 才能跑。
+```bash
+gunicorn main:app \
+    --workers 4 \
+    --worker-class uvicorn.workers.UvicornWorker \
+    --bind 0.0.0.0:8000
+gunicorn app.main:app \
+  -k uvicorn.workers.UvicornWorker \ 
+  -w 4 \
+  --threads 2 \
+  -b 0.0.0.0:8000 \
+  --log-level info \
+  --timeout 60
+# or
+CMD ["gunicorn", "main:app", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "-b", "0.0.0.0:8000"]
+```
+| 参数                 | 解释            |
+| ------------------ | ------------- |
+| `-w 4`             | worker 数量     |
+| `--threads 2`      | 每 worker 的线程数 |
+| `--timeout 60`     | 超时            |
+| `--log-level info` | 日志等级          |
+| `--daemon`         | 后台运行（容器不用）    |
+- Worker 数量怎么选？
+  - workers = CPU核心数 * 2 + 1
+  - CPU核心数 = Core(s) per socket × Socket(s) （每颗 CPU 的核心数 * 物理 CPU 颗数）
+## WSGI ASGI
+- WSGI（Web Server Gateway Interface）
+  - 工作模式：同步阻塞
+- ASGI（Asynchronous Server Gateway Interface）
+  - async/await ✅
+  - WebSocket ✅
+  - 长连接 ✅
+  - 事件驱动 ✅
+  - 后台任务 ✅
+
+| 协议       | 代表框架                        | 能力                          |
+| -------- | --------------------------- | --------------------------- |
+| **WSGI** | Django、Flask                | 只支持**同步**、单请求、阻塞方式          |
+| **ASGI** | FastAPI、Starlette、Django 3+ | 支持**异步**、WebSocket、长连接、背景任务 |
+
+| 类型      | 工具                                          | 说明                           |
+| ------- | ------------------------------------------- | ---------------------------- |
+| WSGI 服务 | `gunicorn`、`uwsgi`                          | 用来跑 Flask/Django             |
+| ASGI 服务 | `uvicorn`、`hypercorn`                       | 用来跑 FastAPI/Django(ASGI)     |
+| 混合      | `gunicorn -k uvicorn.workers.UvicornWorker` | **Gunicorn托管进程 + Uvicorn执行** |

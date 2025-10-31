@@ -1,15 +1,28 @@
 # Ts App
 ## 常见问题：
 ### 没有类型声明文件的第三方库
-写一个global-env.d.ts模块声明文件
+- 写一个module-env.d.ts模块声明文件
 ```ts
-// global-env.d.ts
+// declare module 'xxx' 用于给第三方模块声明类型。
 declare module 'moudleName' {
   const moudle: any;
   export default moudle;
 }
-// window.APlayer = APlayer;
 ```
+- global-env.d.ts 用于全局类型
+```ts
+// declare global 用于给全局对象（如 window）扩展类型。
+declare global { 
+  interface Window {
+    particlesJS: any;
+  }
+}
+export {};
+```
+- 如果两个混用
+  - 在 TypeScript 中，带 export {} 的 .d.ts 文件会被认为是一个模块，这个模块的作用域默认 不是全局的
+  - 你把 declare global { ... } 写在模块中没问题，但是 同一个文件里如果直接写 declare module '...'
+  - 它会被认为是在模块作用域里声明，不是全局生效的，可能导致模块声明无效或者报错
 ### 保证ts可以正确的识别moudleName模块
 - global-env.d.ts 放在项目根目录或 src 目录下
   - 通常，TypeScript 会自动识别项目中的 .d.ts 文件，无论它们在哪里，只要它们不在 exclude 列表里。

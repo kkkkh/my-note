@@ -20,3 +20,13 @@ UPDATE mytable SET status = ? WHERE id = ?;
 ```sql
 DELETE FROM mytable WHERE id = ?;
 ```
+## 命令行操作
+```bash
+# 连接
+sqlite3 ./path/sqlite.db
+----
+.tables                             # 查看所有表
+.schema table_name                  # 查看表结构
+SELECT * FROM table_name LIMIT 10;  # 查看前10条数据
+.quit                               # 退出
+```

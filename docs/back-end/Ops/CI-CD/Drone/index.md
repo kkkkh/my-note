@@ -5,7 +5,7 @@
 ### volumes 的重要性
 - 如果没有加volumes，drone的一个step，则是在docker中运行的
 - 此时如果无法连接dockerhub 则连接失败
-- 如果添加volumes则，走宿主机的docker
+- 如果添加volumes则，只让容器能访问宿主机 Docker Daemon（Docker 服务你共享了 socket）
 - 可以对宿主机docker的 /etc/docker/daemon.json增加加速镜像源
 - 实现快速拉取
 ### 手动缓存（安装依赖命令在drone中执行）
@@ -159,6 +159,14 @@ systemctl restart sshd
   - docker-compose.deploy.yml处于其他服务器：拉取docker镜像，部署
   - 服务器已登录相应docker仓库 `docker login --username=<username> xxxx.cr.aliyuncs.com`
 ::: details 查看代码
-<<< ../../Docker/Base/docker-compose/docker-compose.deploy.yml
+<<< ../../Docker/Compose/docker-compose/docker-compose.deploy.yml
 :::
-
+### 没有 docker compose
+- v1 版本不推荐 ❌
+::: details 查看代码
+<<< ./.drone.docker-compose.yml#compose-v1
+::: 
+- v2 版本不推荐 ✅ （image: docker:24.0 直接内置了 compose v2 版本）
+::: details 查看代码
+<<< ./.drone.docker-compose.yml#compose-v2
+::: 

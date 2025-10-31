@@ -133,4 +133,7 @@ df -h -> use 100%
   - 1、none docker  批量删除
     - docker rmi $(docker images | grep "none" |awk '{print $3}')
   - 2、[prune 清除](./#清除无用镜像)
-
+### 进入docker
+```bash
+docker exec -it your_container_name /bin/sh
+```

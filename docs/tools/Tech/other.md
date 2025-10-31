@@ -15,6 +15,9 @@ outline: deep
   - [mermaid](https://mermaid.js.org/intro/) 图表
   - [lottiefiles](https://lottiefiles.com/) lotties动画
   - [raphael AI](https://raphael.app/zh) AI 生成图像
+  - 科学绘图平台
+    - [edrawsoft](https://www.edrawsoft.com/)
+    - [biorender](https://www.biorender.com/)
 - 文档
   - [trello](https://trello.com/) 看板/任务
   - [语雀](https://www.yuque.com/)

@@ -1,0 +1,15 @@
+steps:
+  #region compose-v1
+  - name: compose-v1
+    image: docker/compose # 使用的是v1 版本，报错 Version in "./docker-compose.yml" is unsupported
+    commands:
+    - docker-compose -f docker-compose.yml build server
+    - docker-compose up -d --remove-orphans --force-recreate
+  #endregion compose-v1
+  #region compose-v2
+  - name: compose-v2
+    image: docker:24.0 # 内置了，compose v2版本
+    commands:
+      - docker compose -f docker-compose.yml build server
+      - docker compose up -d --remove-orphans --force-recreate
+  #endregion compose-v2
