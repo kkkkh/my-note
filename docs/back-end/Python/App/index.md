@@ -18,16 +18,6 @@ uv pip install --no-cache-dir -r requirements.txt -i https://pypi.tuna.tsinghua.
 ```bash
 python -m uvicorn main:app --reload
 ```
-### requirements.txt 维护
-```bash
-# 维护依赖
-pipreqs . --force --savepath requirements.in
-pip-compile requirements.in
-# 安装依赖
-pip install -r requirements.txt
-pip-sync requirements.txt
-pip install --no-cache-dir -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple --timeout 100
-```
 ### Alembic
 - SQLAlchemy 官方提供的数据库迁移工具
 ```bash

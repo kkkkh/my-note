@@ -5,9 +5,9 @@ outline: deep
 ## CI/CD
 - [travis](https://www.travis-ci.com/)
 - [drone](https://www.drone.io/)
-- [drone plugins](https://plugins.drone.io/)
-- code rep
-  - [github](https://github.com/)
+  - [drone plugins](https://plugins.drone.io/)
+## code rep
+- [github](https://github.com/)
 ## docker
 - [docker](https://www.docker.com/)
 - [docker hub](https://hub.docker.com/)
@@ -16,4 +16,9 @@ outline: deep
 ## deploy
 - [vercel](https://vercel.com/docs/cli)
 - [netlify](https://cli.netlify.com/)
-- [cloudflare](https://developers.cloudflare.com/workers/wrangler/install-and-update/)
+- [cloudflare-cn](https://www.cloudflare-cn.com/)
+  - [Wrangler](https://developers.cloudflare.com/workers/wrangler/install-and-update/) Wrangler
+  - [tempmail](https://tempmail.plus/) 临时邮箱
+  - [namecheap](https://www.namecheap.com/) 域名
+- [aliyun](https://www.aliyun.com/)
+

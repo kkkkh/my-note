@@ -64,7 +64,7 @@ export default withMermaid(defineConfig({
       },
       { text: '文档', items:[
         { text: 'hd', link: '/hd/index'},
-        { text: 'tool', link: '/tools/blog' },
+        { text: 'tool', link: '/tools/' },
         { text: 'play', link: 'https://kkkkh.github.io/play/' },
       ] },
       { text: '文章', link: '/article/' },
@@ -412,7 +412,10 @@ export default withMermaid(defineConfig({
                   text: 'Base', link: '/back-end/Ops/Docker/Base/',
                 },
                 {
-                  text: 'Use', link: '/back-end/Ops/Docker/Use/',
+                  text: 'docker compose', link: '/back-end/Ops/Docker/Compose/',
+                },
+                {
+                  text: 'App', link: '/back-end/Ops/Docker/App/',
                 }
               ]
             },
