@@ -59,18 +59,25 @@ Node.ELEMENT_NODE === 1 // 元素节点
 - 或者是个文档碎片 (DocumentFragment`) 节点。
 - [参考](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/parentNode) 
 ### Document / Element / Node 属性调用
-#### textContent
+#### textContent / innerText
 - 获取或设置指定节点的文本内容。
 ```js
 document.getElementById("divA").textContent = "This text is different!";
 ```
+- 对比
+  - .textContent：
+    - 功能: 获取或设置元素的所有文本内容，包括隐藏元素的文本。
+    - 速度: 通常比 innerText 快，因为它不需要计算样式。
+  - .innerText：
+    - 功能: 获取或设置元素的“可见”文本内容。也就是说，它只返回页面上渲染出来的文本。
+    - 计算样式: innerText 会考虑 CSS 样式，可能会因为样式影响显示而有所不同。例如，隐藏的元素（display: none 或 visibility: hidden）中的文本不会被返回。
 - [参考](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/textContent)
 #### innerHTML
 - 获取或设置指定节点的 HTML 内容。
 - [参考](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/innerHTML)
 #### outerHTML
 - 获取或设置指定节点的 HTML 内容。
-##### dataset
+#### dataset
 ```js
 <div id="user" data-id="1234567890" data-user="johndoe" data-date-of-birth>
   John Doe
@@ -81,6 +88,7 @@ el.dataset.dateOfBirth = "1960-10-03";
 // 获取值 "1960-10-03"
 console.log(el.dataset.dateOfBirth);
 ```
+element.textContent 或 element.innerText
 ### Document / Element / Node 方法调用
 #### cloneNode
 `var dupNode = node.cloneNode(deep);`
@@ -127,6 +135,14 @@ parent.contains(child); // true
 document.body.contains(node)
 ```
 - [参考](https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLElement/dataset)
+#### querySelectorAll
+- querySelectorAll 不仅支持单个标签，还其实支持任意合法的 CSS 选择器，所以你完全可以同时获取多个标签
+```javascript
+const elements = document.querySelectorAll("p, li, h1, h2, h3, h4, h5");
+elements.forEach(el => {
+  console.log(el.tagName, el.textContent);
+});
+```
 #### Element.getBoundingClientRect()
 ![getBoundingClientRect](./img/getBoundingClientRect-1.png)
 <Test :is="GetBoundingClientRect" />
@@ -221,6 +237,20 @@ mouseleave 和 mouseout 是相似的，但是两者的不同在于
 - selectionchange 是一个全局事件
 - 只能绑定到 document 上
 - 拖动文本获取当前选区时触发
+#### DOMContentLoaded onload
+- 在浏览器中，DOMContentLoaded 事件是指 DOM 文档结构完全加载和解析完成（但不等 CSS、图片等外部资源加载完成）时触发。
+```javascript
+javascript复制代码document.addEventListener("DOMContentLoaded", function() {
+  console.log("DOM 已经完全加载和解析");
+  // 这里可以安全操作 DOM 元素
+});
+```
+- window.onload 等到 页面所有资源（图片、CSS、iframe 等）加载完成 才触发，和 DOMContentLoaded 不同。
+```javascript
+javascript复制代码window.onload = function() {
+  console.log("页面和资源都加载完成");
+};
+```
 ### Navigator
 #### navigator.clipboard
 - writeText() 写入特定字符串到操作系统的剪切板，返回一个promise

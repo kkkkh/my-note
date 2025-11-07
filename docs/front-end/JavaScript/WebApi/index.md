@@ -370,6 +370,13 @@ WritableStream 接口为将流数据写入目的地（称为接收器）提供�
     - 运行环境: 只能在 Node.js 环境中使用。
     - 文件写入
     - 基于事件和回调的异步操作
+### DOMParser
+```js
+const pureCode = `<code>&lt;div&gt;Hello&lt;/div&gt;</code>`
+const parser = new DOMParser();
+const decoded = parser.parseFromString(pureCode, "text/html").documentElement.textContent;
+// &lt;div&gt;Hello&lt;/div&gt; => '<div>Hello</div>'
+```
 ## 功能
 ### [window](https://developer.mozilla.org/zh-CN/docs/Web/API/Window)
 #### window.open

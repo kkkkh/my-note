@@ -7,6 +7,7 @@ import AnimationTimingFunctionAttr from './components/animation/animation-timing
 import AnimationTimingFunctionSteps from './components/animation/animation-timing-function-steps.vue'
 import AnimationFillMode from './components/animation/animation-fill-mode.vue'
 import AnimationDirection from './components/animation/animation-direction.vue'
+import accentColor from './components/background/accent-color.vue'
 </script>
 
 # css
@@ -290,6 +291,14 @@ backdrop-filter: invert(80%);
 ```
 参考：
 - [backdrop-filter](https://developer.mozilla.org/zh-CN/docs/Web/CSS/backdrop-filter)
+### background
+#### accent-color
+
+<accent-color></accent-color>
+
+参考:
+- [accent-color](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Reference/Properties/accent-color)
+
 ## 动画
 ### animation &I
 ```css

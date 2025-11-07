@@ -2,8 +2,12 @@
 outline: deep
 ---
 # 浏览器扩展
-## 开发
-- [参考](https://developer.mozilla.org/zh-CN/docs/Mozilla/Add-ons/WebExtensions)
+
+<!--@include: ./Plasmo/index.md-->
+
+## 开发参考
+- [浏览器扩展](https://developer.mozilla.org/zh-CN/docs/Mozilla/Add-ons/WebExtensions)
+- [Chrome Extensions](https://developer.chrome.google.cn/docs/extensions/get-started/tutorial/hello-world?hl=zh-cn)
 ## Chrome 浏览器插件
 - [Smart TOC](https://chromewebstore.google.com/detail/smart-toc/lifgeihcfpkmmlfjbailfpfhbahhibba?hl=zh-CN&utm_source=ext_sidebar) 预览目录
 - [react-developer-tools](https://chromewebstore.google.com/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) react 开发工具

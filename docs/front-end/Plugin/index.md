@@ -19,7 +19,8 @@ outline: deep
   - [vcalendar](https://vcalendar.io/)
   - [fullcalendar](https://fullcalendar.io/docs/getting-started)
 - 交互
-  - [popper.js v2](https://popper.js.org/docs/v2/) &nbsp;&nbsp;&nbsp;[floating-ui](https://floating-ui.com/docs/getting-started) [Tippy.js](https://atomiks.github.io/tippyjs/) 创建“浮动”元素
+  - [popper.js v2](https://popper.js.org/docs/v2/) &nbsp;&nbsp;&nbsp; => 更新 [floating-ui](https://floating-ui.com/docs/getting-started) 创建“浮动”元素（支持动态添加）
+  - [Tippy.js](https://atomiks.github.io/tippyjs/) 提示tooltip（更简单）
   - [sortablejs](https://github.com/SortableJS/Sortable) &nbsp;&nbsp;&nbsp;[sortablejs demo](https://sortablejs.github.io/Sortable/) 拖拽
   - [panzoom](https://github.com/anvaka/panzoom) 缩放平移
   - [clipboard.js](https://clipboardjs.com/) 剪切
@@ -191,6 +192,13 @@ outline: deep
 - glup
   - [vinyl-fs](https://github.com/gulpjs/vinyl-fs)
   - [vinyl](https://github.com/gulpjs/vinyl)
+- brower extensions
+  - [Plasmo](https://docs.plasmo.com/framework)
+- dom
+  - [jquery](https://jquery.com/) 24k
+  - [zeptojs](https://zeptojs.com/) 9.6k
+  - [nanojs](https://nanojs.org/) 12kb
+  - [cashjs](https://github.com/fabiospampinato/cash)
 ## Vue plugin (Vue 扩展)
 ### cli
 - [~~Vue CLI~~](https://cli.vuejs.org/)(停止维护) => [create-vue](https://github.com/vuejs/create-vue)
