@@ -1,2 +1,2 @@
 # AI
-## code
+## cursor

@@ -23,6 +23,9 @@ outline: deep
   - [语雀](https://www.yuque.com/)
   - [Markdown](https://markdown.com.cn/) &nbsp;[markdownguide](https://www.markdownguide.org/getting-started/) &nbsp;[excel-to-markdown](https://tableconvert.com/excel-to-markdown)
   - [石墨文档](https://shimo.im)
+  - [obsidian](https://obsidian.md/)
+  - [gitbook](https://www.gitbook.com/)
+  - [notion](https://www.notion.com/)
 - 截图
   - [snipaste](https://www.snipaste.com/download.html)
   - [Lightshot](https://app.prntscr.com/zh-cn/help.html)

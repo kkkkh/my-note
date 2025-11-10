@@ -263,3 +263,18 @@ export default function IconDemo() {
 | **iconifyInfo** | 描述图标集的元数据（作者、license）    | 一般不用手动管                                          |
 | **icon** 属性     | 在组件中使用图标的入口，可以是字符串或对象    | `icon="mdi:home"` 或 `icon={homeIcon}`            |
 
+## axios
+### axios post x-www-form-urlencoded 以及 query 传参
+```js
+const axios = require('axios');
+const qs = require('qs');
+
+const data = { name: '张三', age: 30 };       // 请求体
+const query = { token: 'abc123', page: 1 };  // URL query
+
+axios.post('/api/user', qs.stringify(data), {
+  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+  params: query   // 这里就是 URL query
+})
+.then(res => console.log(res.data));
+```

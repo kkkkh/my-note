@@ -194,6 +194,8 @@ outline: deep
   - [vinyl](https://github.com/gulpjs/vinyl)
 - brower extensions
   - [Plasmo](https://docs.plasmo.com/framework)
+  - [WXT](https://wxt.dev/) Vite + TypeScript 的 extension 框架，新一代热门
+  - [crxjs](https://crxjs.dev/zh/guide/installation/create-crxjs)
 - dom
   - [jquery](https://jquery.com/) 24k
   - [zeptojs](https://zeptojs.com/) 9.6k
