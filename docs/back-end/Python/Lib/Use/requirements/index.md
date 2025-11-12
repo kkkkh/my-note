@@ -65,8 +65,31 @@ pdm import -f requirements requirements.old.txt
 pdm install
 
 # 检查虚拟环境
+pdm info
+# PDM version:
+#   2.26.1
+# Python Interpreter: 这里要使用pdm虚拟环境的py
+#   D:\WorkSpace\xxxxx\.venv\Scripts\python.exe (3.11)
+# Project Root:
+#   D:/WorkSpace/xxxxx
+# Local Packages:
+#   D:\WorkSpace\xxxxx\.venv\Lib\site-packages
+
+# 查看安装的包
 pdm list
+# ╭───────────────────┬─────────┬──────────╮
+# │ name              │ version │ location │
+# ├───────────────────┼─────────┼──────────┤
+# │ alembic           │ 1.17.1  │          │
+# ...
 ```
+
+- pyproject.toml 里配置脚本
+```bash
+[tool.pdm.scripts]
+start = "uvicorn app.main:app --reload"
+```
+
 - pdm init 相关
 
 | 提示                    | 说明                  | 示例                           |

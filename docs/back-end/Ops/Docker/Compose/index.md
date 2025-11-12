@@ -10,20 +10,39 @@
 ```bash
 # 指定要使用的 Compose 文件
 docker compose -f docker-compose.yml
-# 构建镜像
-docker compose build
+
+# 构建镜像 启动镜像
+docker compose build web # 仅构建镜像，不启动容器
+docker compose build --no-cache # 强制重新构建（忽略缓存）
+
+# build 只构建镜像，不会动容器；up 才会处理新旧容器替换。
+docker compose up # 如果镜像存在（名称和标签匹配），直接用现成的
+docker compose up --build # 强制重新构建镜像，如果镜像变则重建容器，否则不创建
+docker-compose up --force-recreate # 强制重新创建容器，
 # 创建并启动所有定义的容器
 # 在后台运行（detached 模式）
 # 移除上次运行时存在但当前 Compose 文件中已被删除的服务容器（孤儿容器）
 docker compose up -d --remove-orphans
+
 # 停止服务
 docker compose -f docker-compose.prod.yml down
+
 # 拉取镜像
 docker compose -f docker-compose.prod.yml pull
+
 # 使用多个docker-compose文件
 docker compose -f docker-compose.yml -f docker-compose.override.yml pull
+
+# 版本
 docker compose version
+
+#查看容器状态
+docker compose ps
+
+# help
 docker compose --help
+
+
 ```
 ### 配置文件
 - 镜像仓库拉取：本地镜像、mongdb、redis
