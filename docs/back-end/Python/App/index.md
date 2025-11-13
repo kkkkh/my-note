@@ -1,73 +1,59 @@
 # App
-## 项目开发
-### 安装依赖
-```bash
-python -m venv venv # 创建虚拟环境
-source venv/Scripts/activate # windows 激活虚拟环境
-# source .venv/bin/activate # mac
-pip install --no-cache-dir -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple --timeout 100 # 安装依赖
+## python基本
+### 三目
+```python
+# 简单判断
+a = 10
+b = 20
+max_val = a if a > b else b
+print(max_val)  # 输出 20
+
+# 可以嵌套
+score = 85
+grade = "A" if score >= 90 else "B" if score >= 80 else "C"
+print(grade)  # 输出 B
 ```
-```bash
-pip install uv
-uv venv
-source venv/Scripts/activate # 激活虚拟环境
-# source .venv/bin/activate # mac
-uv pip install --no-cache-dir -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple --timeout 100
-```
-### 启动服务
-```bash
-python -m uvicorn main:app --reload
-```
-### Alembic
-- SQLAlchemy 官方提供的数据库迁移工具
-```bash
-# 安装
-pip install alembic
-# 初始化
-alembic init alembic
-```
-- 修改 alembic.ini
-  - 统一改成 UTF-8 编码
-  - 确保文件中没有奇怪的字符
-::: details 查看代码
-<<< ./alembic.ini
-:::
-- 修改 alembic/env.py
+### 字典转为一个对象（实例），可以使用a.b调用
+- types.SimpleNamespace
 ```py
-# 可以正确加载模型路径（项目中模型）
-import os
-import sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-# 导入模型（必改）
-from app.database import Base
-target_metadata = Base.metadata
-# 修改 run_migrations_online（与 alembic.ini 配置sqlalchemy.url 二选一）
-from app.database import DATABASE_URL
-from sqlalchemy import create_engine
-connectable = create_engine(DATABASE_URL)
+from types import SimpleNamespace
+data = {"english": "apple", "chinese": "苹果"}
+obj = SimpleNamespace(**data)
+print(obj.english)  # apple
+print(obj.chinese)  # 苹果
 ```
-- 创建迁移
-```bash
-# alembic/versions 里生成一个新文件，例如： alembic/versions/20251020_XXXX_init.py
-alembic revision --autogenerate -m "init"
+- pydantic.BaseModel
+```py
+from pydantic import BaseModel
+class Translation(BaseModel):
+    english: str
+    chinese: str
+data = {"english": "apple", "chinese": "苹果"}
+obj = Translation(**data)
+print(obj.english)   # apple
+print(obj.chinese)   # 苹果
+```
+- namedtuple 是不可变对象，不能修改字段。
+```py
+from collections import namedtuple
+Translation = namedtuple("Translation", ["english", "chinese"])
+data = {"english": "apple", "chinese": "苹果"}
+obj = Translation(**data)
+print(obj.english)  # apple
+print(obj.chinese)  # 苹果
 
 ```
-```bash
-# 如果创建迁移，但是没有执行迁移（此次不生效），想再次创建迁移
-# 将数据库标记为最新版本，但不执行迁移,可以再次创建迁移
-alembic stamp head
-# 执行迁移
-alembic upgrade head
-# 针对不同 env.py 执行迁移
-alembic -c alembic/user_service/env.py upgrade head
+- 自定义
+```py
+class Dict2Obj:
+    def __init__(self, **entries):
+        self.__dict__.update(entries)
+data = {"english": "apple", "chinese": "苹果"}
+obj = Dict2Obj(**data)
+print(obj.english)  # apple
+print(obj.chinese)  # 苹果
 ```
-## fastapi sqlalchemy
-### vscode 无法解析导入 “fastapi”
-vscode 提示：无法解析导入“fastapi”（PylancereportMissingImports）
-- 1、按下 Ctrl + Shift + P（mac 是 Cmd + Shift + P）；
-- 2、搜索并选择 “Python: 选择解释器 (Select Interpreter)”；
-- 3、找到并选择你的虚拟环境，比如：venv\Scripts\python.exe
-- 4、重新打开文件，Pylance 就能识别 fastapi 了。
+## fastapi sqlalchemy Pydantic
 ### 线程管理
 - 报错
 ```bash
@@ -283,47 +269,6 @@ class Item(Base):
 | `db.refresh(obj)` | 从数据库重新加载该对象的最新值          | ✅ 是   | ❌ 不影响事务   | 获取数据库端生成的字段（如自增 ID、触发器字段、时间戳）|
 | `db.rollback()`   | 回滚事务（撤销未提交操作）             | ❌ 否   | ✅ 回滚并结束事务 | 出现异常后恢复一致状态                    |
 
-### 字典转为一个对象（实例），可以使用a.b调用
-- types.SimpleNamespace
-```py
-from types import SimpleNamespace
-data = {"english": "apple", "chinese": "苹果"}
-obj = SimpleNamespace(**data)
-print(obj.english)  # apple
-print(obj.chinese)  # 苹果
-```
-- pydantic.BaseModel
-```py
-from pydantic import BaseModel
-class Translation(BaseModel):
-    english: str
-    chinese: str
-data = {"english": "apple", "chinese": "苹果"}
-obj = Translation(**data)
-print(obj.english)   # apple
-print(obj.chinese)   # 苹果
-```
-- namedtuple 是不可变对象，不能修改字段。
-```py
-from collections import namedtuple
-Translation = namedtuple("Translation", ["english", "chinese"])
-data = {"english": "apple", "chinese": "苹果"}
-obj = Translation(**data)
-print(obj.english)  # apple
-print(obj.chinese)  # 苹果
-
-```
-- 自定义
-```py
-class Dict2Obj:
-    def __init__(self, **entries):
-        self.__dict__.update(entries)
-data = {"english": "apple", "chinese": "苹果"}
-obj = Dict2Obj(**data)
-print(obj.english)  # apple
-print(obj.chinese)  # 苹果
-```
-
 ### 使用泛型
 
 <<< ../FastApi/src/schemas/common.py
@@ -444,7 +389,96 @@ def update_user(
 | Body 参数  | `Body(...)` 或 Pydantic 模型 | JSON 请求体 | `{ "name": "Book" }` |
 | Form 参数  | `Form(...)`               | 表单提交     | HTML form            |
 | File 参数  | `File(...)`               | 文件上传     | multipart/form-data  |
+### pydantic 验证
+- 👉 把正则校验逻辑放在 Pydantic 模型层（也就是 FastAPI 的请求体模型），而不是放在 SQLAlchemy 的 ORM 模型里。
+- 字段 pattern 中设置
+```python
+from pydantic import BaseModel, Field
+import re
+class UserCreate(BaseModel):
+    username: str = Field(..., pattern=r'^[a-zA-Z0-9_]{4,20}$', description="用户名只允许字母数字下划线，长度4-20")
+    email: str = Field(..., pattern=r'^[\w\.-]+@[\w\.-]+\.\w+$', description="邮箱格式")
+    password: str = Field(..., min_length=6, max_length=20)
+```
+- Pydantic 的 validator
+```python
+from pydantic import BaseModel, validator
+class UserCreate(BaseModel):
+    username: str
+    password: str
+    @validator('username')
+    def check_username(cls, v):
+        if not re.match(r'^[a-zA-Z0-9_]{4,20}$', v):
+            raise ValueError('用户名必须是字母数字下划线，长度4-20')
+        return v
+```
+### 复杂 pattern 会报错
+- JSON Schema 校验中部分复杂正则会报错
+- `password: str = Field(..., pattern=r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$',description="密码必须包含字母和数字，长度8-20位")`
+- Pydantic（尤其是 v2.x 版本）在生成 JSON Schema 时，会尝试将 pattern 编译为 JSON Schema 兼容的正则。
+- 而 (?=...) 这种前瞻（lookahead）语法不被 JSON Schema 原生支持，
+- 导致它在生成 OpenAPI 文档时报错或无效。
+- ✅ 使用 validator，完全兼容任何正则
+### Pydantic v2 @field_validator
+```python
+from pydantic import BaseModel, Field, field_validator
+import re
+
+class UserCreate(BaseModel):
+    password: str = Field(..., description="密码必须包含字母和数字，长度8-20位")
+
+    @field_validator('password')
+    @classmethod
+    def validate_password(cls, v):
+        pattern = r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$'
+        if not re.match(pattern, v):
+            raise ValueError('密码必须包含字母和数字，长度8-20位')
+        return v
+```
 ## Alembic
+### Alembic 使用
+- SQLAlchemy 官方提供的数据库迁移工具
+```bash
+# 安装
+pip install alembic
+# 初始化
+alembic init alembic
+```
+- 修改 alembic.ini
+  - 统一改成 UTF-8 编码
+  - 确保文件中没有奇怪的字符
+::: details 查看代码
+<<< ./alembic.ini
+:::
+- 修改 alembic/env.py
+```py
+# 可以正确加载模型路径（项目中模型）
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# 导入模型（必改）
+from app.database import Base
+target_metadata = Base.metadata
+# 修改 run_migrations_online（与 alembic.ini 配置sqlalchemy.url 二选一）
+from app.database import DATABASE_URL
+from sqlalchemy import create_engine
+connectable = create_engine(DATABASE_URL)
+```
+- 创建迁移
+```bash
+# alembic/versions 里生成一个新文件，例如： alembic/versions/20251020_XXXX_init.py
+alembic revision --autogenerate -m "init"
+
+```
+```bash
+# 如果创建迁移，但是没有执行迁移（此次不生效），想再次创建迁移
+# 将数据库标记为最新版本，但不执行迁移,可以再次创建迁移
+alembic stamp head
+# 执行迁移
+alembic upgrade head
+# 针对不同 env.py 执行迁移
+alembic -c alembic/user_service/env.py upgrade head
+```
 ### Alembic + 多服务架构
 - Alembic 在容器化环境中落地的核心机制：
   - 一是 迁移脚本的可访问性（迁移逻辑来源）；
@@ -514,6 +548,10 @@ for name, db_url in services:
   - `COPY --from=api-builder /usr/local/bin /usr/local/bin` 将二进制文件拷贝到api-runner阶段
   - 或者在api-runner阶段，安装pip 安装 Alembic
 ## Uvicorn Gunicorn
+### 启动服务
+```bash
+python -m uvicorn main:app --reload
+```
 ### Uvicorn
 ```bash
 # --workers 启动多个进程（worker）
@@ -557,7 +595,7 @@ CMD ["gunicorn", "main:app", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "
 - Worker 数量怎么选？
   - workers = CPU核心数 * 2 + 1
   - CPU核心数 = Core(s) per socket × Socket(s) （每颗 CPU 的核心数 * 物理 CPU 颗数）
-## WSGI ASGI
+### WSGI ASGI
 - WSGI（Web Server Gateway Interface）
   - 工作模式：同步阻塞
 - ASGI（Asynchronous Server Gateway Interface）
@@ -577,3 +615,48 @@ CMD ["gunicorn", "main:app", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "
 | WSGI 服务 | `gunicorn`、`uwsgi`                          | 用来跑 Flask/Django             |
 | ASGI 服务 | `uvicorn`、`hypercorn`                       | 用来跑 FastAPI/Django(ASGI)     |
 | 混合      | `gunicorn -k uvicorn.workers.UvicornWorker` | **Gunicorn托管进程 + Uvicorn执行** |
+## 配置
+### vscode 无法解析导入 “fastapi”
+vscode 提示：无法解析导入“fastapi”（PylancereportMissingImports）
+- 1、按下 Ctrl + Shift + P（mac 是 Cmd + Shift + P）；
+- 2、搜索并选择 “Python: 选择解释器 (Select Interpreter)”；
+- 3、找到并选择你的虚拟环境，比如：venv\Scripts\python.exe
+- 4、重新打开文件，Pylance 就能识别 fastapi 了。
+### dotenv / .env
+```bash
+.env.development
+.env.production
+.env.test
+```
+```python
+import os
+from dotenv import load_dotenv
+
+env = os.getenv("APP_ENV", "development")  # 默认开发环境
+load_dotenv(f".env.{env}")
+
+print(f"当前环境：{env}")
+```
+```bash
+export APP_ENV=production
+python main.py
+```
+### BaseSettings
+- 使用 pydantic v2 的 BaseSettings（更专业）
+- 自动从环境变量和 .env 加载配置：
+```python
+from pydantic import BaseSettings
+
+class Settings(BaseSettings):
+    db_host: str = "localhost"
+    db_port: int = 3306
+    db_user: str
+    db_pass: str
+
+    class Config:
+        env_file = ".env"  # 自动加载
+
+settings = Settings()
+print(settings.db_user)
+```
+

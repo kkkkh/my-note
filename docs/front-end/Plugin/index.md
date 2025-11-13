@@ -291,6 +291,9 @@ outline: deep
   - [canvas-particle-network](https://github.com/JulianLaval/canvas-particle-network)
   - [interactive-particle-network](https://github.com/LeonKohli/interactive-particle-network) 交互式粒子网络
   - [particles.js](https://github.com/VincentGarreau/particles.js/) [playground](https://vincentgarreau.com/particles.js/)
+  - [vantajs](https://www.vantajs.com/)
+  - [tsparticles](https://particles.js.org/)
+  - [particles3d](https://www.particles3d.com/#framework)
 - other
   - [sigmajs](https://www.sigmajs.org/) 节点
   - [getspringy](http://getspringy.com/) 图形布局

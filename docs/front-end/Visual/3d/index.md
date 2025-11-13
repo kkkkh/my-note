@@ -3,3 +3,4 @@ gpu driven
   - [基于WebGPU的gpu-driven rendering探索](https://juejin.cn/post/7363674253168492584)
   - [Motion Matching 技术介绍和实现](https://zhuanlan.zhihu.com/p/136971426)
   - [3D 数字可视化地图](https://www.bilibili.com/video/BV1U54y1B7r3/)
+  - [3d框架](https://chatgpt.com/g/g-p-68ef105d3324819198640a1d56609ad9/c/691444a5-7604-8320-be8b-8fe84e77409c)

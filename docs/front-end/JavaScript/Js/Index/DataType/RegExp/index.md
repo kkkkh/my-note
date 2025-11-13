@@ -1,4 +1,23 @@
 ### RegExp
+#### 常用正则
+```js
+// 邮箱
+/^[A-Za-z0-9\u4E00-\u9FA5]+(\.[A-Za-z0-9\u4E00-\u9FA5]+)+@[a-zA-Z0-9_-]+(.[a-zA-Z0-9_-]+)+$/
+// 手机号
+const reg = /^1[3456789]\d{9}$/
+// 数字要求：最大13位，小数最大4位
+const regNumber = /^([1-9]\d{0,12}(\.\d{1,4})?|0\.\d{1,4})$/
+// 数字要求：最大9位，小数最大2位（排除0）
+const regNumber =  /^([1-9]\d{0,8}(\.\d{1,2})?|0\.0[1-9]|0\.[1-9]\d{0,1})$/
+
+// 强密码
+^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$
+// - 至少一个小写字母；
+// - 至少一个大写字母；
+// - 至少一个数字；
+// - 至少一个特殊字符；
+// - 总长度 8–20。
+```
 #### 特殊字符
 ```js
 /\d/  // \d 范围大 也包含中文全角0-9
@@ -7,7 +26,7 @@
 /\w/ // A-Za-z0-9_
 /\W/ //	匹配一个非单字字符 等价于 [^A-Za-z0-9_]。
 /[\u4e00-\u9fa5]/ //汉字
-/\s/ // 匹配一个空白字符，包括空格、制表符、换页符和换行符 等价于 
+/\s/ // 匹配一个空白字符，包括空格、制表符、换页符和换行符 等价于
 /[\f\n\r\t\v\u0020\u00a0\u1680\u180e\u2000-\u200a\u2028\u2029\u202f\u205f\u3000\ufeff]/ //与上同
 /\S/ // 匹配一个非空白字符
 /\f/ // 匹配一个换页符 (U+000C)
@@ -47,20 +66,56 @@
 /((x)yz)(abc)/.exec("xyzabc") // 嵌套捕获组，先由外到内，再由左到右 => ['xyzabc', 'xyz', 'x', 'abc', index: 0, input: 'xyzabc', groups: undefined]
 ```
 参考：[Groups and ranges](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_expressions/Groups_and_backreferences)
-#### RegExp
-  ```js
-  // 1
-  var re = /ab+c/;
-  // 构造函数创建的正则表达式会被编译
-  // 构造函数 可以动态生成正则
-  var re = new RegExp("ab+c");
-  // 2
-  var re = /[a-z]\s/i
-  var re = new RegExp("[a-z]\\s", "i")
-  ```
+#### 修饰符
+| 标志 | 描述                                                                |
+|------|-------------------------------------------------------------------|
+| g    | 全局搜索。                                                           |
+| i    | 不区分大小写搜索。                                                   |
+| m    | 多行搜索。                                                           |
+| s    | 允许 . 匹配换行符。                                                  |
+| u    | 使用 unicode 码的模式进行匹配。                                      |
+| y    | 执行“粘性 (sticky)”搜索，匹配从目标字符串的当前位置开始。             |
+| d    | 表示正则表达式匹配的结果应该包含每个捕获组子字符串开始和结束的索引。 |
+
+##### -y
+- RegExp.prototype.sticky
+- sticky 属性反映了搜索是否具有粘性（仅从正则表达式的 lastIndex 属性表示的索引处搜索）
+- 如果一个表达式同时指定了 sticky 和 global，其将会忽略 global 标志。
+```js
+const str1 = 'table football';
+const regex1 = new RegExp('foo', 'y');
+regex1.lastIndex = 6;
+console.log(regex1.sticky); // true
+console.log(regex1.test(str1));// true
+console.log(regex1.lastIndex);// 9
+console.log(regex1.test(str1));// false
+```
+- 当使用带有 y 标识的匹配模式时，^ 断言总是会匹配输入的开始位置或者（如果是多行模式）每一行的开始位置。
+```js
+var regex = /^foo/y;
+regex.lastIndex = 2;
+regex.test("..foo"); // false - 索引 2 不是字符串的开始
+var regex2 = /^foo/my; // m 多行搜索
+regex2.lastIndex = 2;
+regex2.test("..foo"); // false - 索引 2 不是字符串或行的开始
+regex2.lastIndex = 2;
+regex2.test(".\nfoo"); // true - 索引 2 是行的开始
+```
 #### RegExp涉及的api
-  - RegExp 的 exec 和 test 方法
-  - String 的 match、matchAll、replace、replaceAll、search 和 split
+- RegExp
+- RegExp 的 exec 和 test 方法
+- String 的 match、matchAll、replace、replaceAll、search 和 split
+#### RegExp
+```js
+// 1
+var re = /ab+c/;
+// 构造函数创建的正则表达式会被编译
+// 构造函数 可以动态生成正则
+var re = new RegExp("ab+c");
+// 2
+var re = /[a-z]\s/i
+var re = new RegExp("[a-z]\\s", "i")
+```
 #### exec
 ```js
 const regex1 = RegExp('foo(?<rGroup>[^foo]*)', 'dg');
@@ -180,105 +235,95 @@ array[0];
 array[1];
 // ['test2', 'e', 'st2', '2', index: 5, input: 'test1test2', length: 4]
 ```
-#### 修饰符
-| 标志 | 描述                                                                |
-|------|-------------------------------------------------------------------|
-| g    | 全局搜索。                                                           |
-| i    | 不区分大小写搜索。                                                   |
-| m    | 多行搜索。                                                           |
-| s    | 允许 . 匹配换行符。                                                  |
-| u    | 使用 unicode 码的模式进行匹配。                                      |
-| y    | 执行“粘性 (sticky)”搜索，匹配从目标字符串的当前位置开始。             |
-| d    | 表示正则表达式匹配的结果应该包含每个捕获组子字符串开始和结束的索引。 |
-
-##### -y
-- RegExp.prototype.sticky
-- sticky 属性反映了搜索是否具有粘性（仅从正则表达式的 lastIndex 属性表示的索引处搜索）
-- 如果一个表达式同时指定了 sticky 和 global，其将会忽略 global 标志。
+#### 前瞻（Lookahead）
+- 前瞻：当前位置之后，必须匹配上括号里的内容。
+  - ⚙️ 它不会真正匹配这些内容，只是检查条件是否成立。
+  - 这也是它和普通分组 () 的最大区别。
+  ```js
+  // 匹配：foobar 中的 foo，
+  // 但不会匹配 foobaz。
+  foo(?=bar)
+  ```
+- 负前瞻（Negative Lookahead）：当前位置之后，不能匹配括号里的内容
+  ```js
+  // 匹配 foobaz 中的 foo，但不匹配 foobar。
+  // （因为后面是 bar，会被排除）
+  foo(?!bar)
+  ```
+- 密码校验：经常用到前瞻
 ```js
-const str1 = 'table football';
-const regex1 = new RegExp('foo', 'y');
-regex1.lastIndex = 6;
-console.log(regex1.sticky); // true
-console.log(regex1.test(str1));// true
-console.log(regex1.lastIndex);// 9
-console.log(regex1.test(str1));// false
+^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$
 ```
-- 当使用带有 y 标识的匹配模式时，^ 断言总是会匹配输入的开始位置或者（如果是多行模式）每一行的开始位置。
+| 片段                 | 含义                    |
+| ------------------ | --------------------- |
+| `^`                | 匹配字符串开头               |
+| `(?=.*[A-Za-z])`   | 前瞻：要求后面**至少出现一个字母**   |
+| `(?=.*\d)`         | 前瞻：要求后面**至少出现一个数字**   |
+| `[A-Za-z\d]{8,20}` | 实际匹配：只允许字母或数字，长度 8–20 |
+| `$`                | 匹配字符串结尾               |
+- 其他例子
+| 正则                                       | 含义                |
+| ---------------------------------------- | ----------------- |
+| `(?=.*[A-Z])`                            | 至少包含一个大写字母        |
+| `(?=.*[a-z])`                            | 至少包含一个小写字母        |
+| `(?=.*\W)`                               | 至少包含一个特殊字符（非字母数字） |
+| `(?=.*[@$!%*?&])`                        | 至少包含上述符号之一        |
+| `(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*\W)` | 同时包含大小写字母、数字、特殊字符 |
+#### 贪婪 / 懒惰
 ```js
-var regex = /^foo/y;
-regex.lastIndex = 2;
-regex.test("..foo"); // false - 索引 2 不是字符串的开始
-var regex2 = /^foo/my; // m 多行搜索
-regex2.lastIndex = 2;
-regex2.test("..foo"); // false - 索引 2 不是字符串或行的开始
-regex2.lastIndex = 2;
-regex2.test(".\nfoo"); // true - 索引 2 是行的开始
+// 1
+// *?懒惰查找 默认是贪婪查找
+// $1 代表正则中第一个()
+// [^$] 代表非$的字符 反向字符集
+// $$t 插入一个 "$"
+const reg = /placeholder="([^$]*?)"/
+const str = `placeholder="请输入信息"`
+const res = str.replace(reg,`:placeholder="$$t('N:$1')"`)
+console.log(res)
+// :placeholder="$t('N:请输入信息')"
+const reg = /label="([^$]*?)"/
+const str = `label="重置"`
+const res = str.replace(reg,`:label="$$t('F:$1')"`)
+console.log(res)
+```
+```js
+var str = "bbbaaccaa";
+var reg1 = /.*aa/;
+console.log(reg1.exec(str)); // bbbaaccaa
+// 增加?，非贪婪
+var reg2 = /.*?aa/;
+console.log(reg2.exec(str)); // bbbaa 只找最前面
+/**
+ * exec每次只查询一次,
+ * g在上一次基础上继续往下查找
+ */
+var reg3 = /.*?aa/g;
+console.log(reg3.exec(str)); // bbbaa
+console.log(reg3.exec(str)); // ccaa 只找最前面
 ```
 #### 案例
-- 示例：[String replace](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
-  ```js
-  // 1
-  // *?懒惰查找 默认是贪婪查找
-  // $1 代表正则中第一个()
-  // [^$] 代表非$的字符 反向字符集
-  // $$t 插入一个 "$"
-  const reg = /placeholder="([^$]*?)"/
-  const str = `placeholder="请输入信息"`
-  const res = str.replace(reg,`:placeholder="$$t('N:$1')"`)
-  console.log(res)
-  // :placeholder="$t('N:请输入信息')"
-  const reg = /label="([^$]*?)"/
-  const str = `label="重置"`
-  const res = str.replace(reg,`:label="$$t('F:$1')"`)
-  console.log(res)
-  ```
-  ```js
-  //2 字符串通过“换行”截取为 => 数据组
-  const strings= "111\n222"
-  const arr = strings.split(/\r?\n+/).filter((val) => val !== '').map((item) => item.trim())
-  ```
-  ```js
-  // 3 贪婪
-  var str = "bbbaaccaa";
-  var reg1 = /.*aa/;
-  console.log(reg1.exec(str)); // bbbaaccaa
-  // 增加?，非贪婪
-  var reg2 = /.*?aa/;
-  console.log(reg2.exec(str)); // bbbaa 只找最前面
-  /**
-   * exec每次只查询一次, 
-   * g在上一次基础上继续往下查找
-   */
-  var reg3 = /.*?aa/g;
-  console.log(reg3.exec(str)); // bbbaa
-  console.log(reg3.exec(str)); // ccaa 只找最前面
-  ```
-  ```js
-  // 4
-  /**
-   * 获取标签、key:
-   * <el-input v-model="form.type"></el-input>
-   * input、type
-   */
-  const reg = /<([\w-]+)\n?\s*[\w"'=]*\n?\s*v-model=["']\w*[Ff]orm\.(\w+)/g
-  ```
-  ```js
-  // 路径中获取文件名
-  const path = "/*/**/01.text"
-  const res = path.match(/\/([^\/]+)$/)[1]
-  ```
-- 常用正则
-  ```js
-  // 邮箱
-  /^[A-Za-z0-9\u4E00-\u9FA5]+(\.[A-Za-z0-9\u4E00-\u9FA5]+)+@[a-zA-Z0-9_-]+(.[a-zA-Z0-9_-]+)+$/
-  // 手机号
-  const reg = /^1[3456789]\d{9}$/
-  // 数字要求：最大13位，小数最大4位
-  const regNumber = /^([1-9]\d{0,12}(\.\d{1,4})?|0\.\d{1,4})$/
-  // 数字要求：最大9位，小数最大2位（排除0）
-  const regNumber =  /^([1-9]\d{0,8}(\.\d{1,2})?|0\.0[1-9]|0\.[1-9]\d{0,1})$/
-  ```
+- 字符串通过“换行”截取为 => 数据组
+```js
+const strings= "111\n222"
+const arr = strings.split(/\r?\n+/).filter((val) => val !== '').map((item) => item.trim())
+```
+- 获取标签、key
+```js
+/**
+ * 获取标签、key:
+ * <el-input v-model="form.type"></el-input>
+ * input、type
+ */
+const reg = /<([\w-]+)\n?\s*[\w"'=]*\n?\s*v-model=["']\w*[Ff]orm\.(\w+)/g
+```
+- 路径中获取文件名
+```js
+// 路径中获取文件名
+const path = "/*/**/01.text"
+const res = path.match(/\/([^\/]+)$/)[1]
+```
+- 其他示例：[String replace](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
+
 - 参考：
   - [正则表达式](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_expressions#special-line-feed)
   - [learn-regex-zh](https://github.com/cdoco/learn-regex-zh)

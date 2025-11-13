@@ -19,23 +19,28 @@ services:
       context: ./server
       dockerfile: Dockerfile
     container_name: my_server
+    volumes:
+      - db_data:/app/db  # 本
     ports:
       - "8000:8000"
     restart: always
     environment:
       - ENV=production
-
+  # region redis
   redis:
     image: redis
     container_name: my_redis
     ports:
       - "9000:6379"
     volumes:
-      # - /english-server/redis:/usr/local/etc/redis
+      # - redis_data:/usr/local/etc/redis
       # 这个挂载会覆盖 Redis 镜像内的 /usr/local/etc/redis 文件夹，包括默认的 redis.conf
-      # 会营销到这里
-      - /english-server/redis/data:/data
+      - redis_data:/data
       - ./redis.conf:/usr/local/etc/redis/redis.conf
     environment:
       REDIS_PASSWORD: "${REDIS_PASSWORD}"
     command: ["redis-server", "/usr/local/etc/redis/redis.conf", "--requirepass", "${REDIS_PASSWORD}"]
+  # endregion redis
+volumes:
+  db_data:
+  redis_data:

@@ -137,3 +137,13 @@ df -h -> use 100%
 ```bash
 docker exec -it your_container_name /bin/sh
 ```
+### 环境变量
+- 运行容器时手动设置（可覆盖 Dockerfile 环境变量）
+```bash
+docker run -e APP_ENV=production myapp
+```
+| 设置方式                       | 优先级    |
+| -------------------------- | ------ |
+| docker run `-e`            | ✅最高    |
+| docker-compose environment | ✅中     |
+| Dockerfile `ENV`           | ✅默认/最低 |

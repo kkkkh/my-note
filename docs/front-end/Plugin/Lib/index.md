@@ -278,3 +278,22 @@ axios.post('/api/user', qs.stringify(data), {
 })
 .then(res => console.log(res.data));
 ```
+### particles.js
+- 在nextjs中使用 particles.js
+```js
+"use client";
+import { useEffect } from "react"
+import "particles.js"
+
+export default function Point (){
+  useEffect(()=>{
+    window.particlesJS.load("point", '/particlesjs-config.json', function() {
+      console.log('callback - particles-js config loaded');
+    });
+  },[])
+  return <>
+    <div id="point" className="absolute z-2 left-0 top-0 w-full h-full"></div>
+  </>
+}
+```
+- 使用 react-tsparticles

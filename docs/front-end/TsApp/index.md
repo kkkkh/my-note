@@ -12,7 +12,7 @@ declare module 'moudleName' {
 - global-env.d.ts 用于全局类型
 ```ts
 // declare global 用于给全局对象（如 window）扩展类型。
-declare global { 
+declare global {
   interface Window {
     particlesJS: any;
   }
