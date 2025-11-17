@@ -57,7 +57,26 @@ Node.ELEMENT_NODE === 1 // 元素节点
 - 一个元素节点的父节点可能是一个元素 (Element) 节点，
 - 也可能是一个文档 (Document) 节点，
 - 或者是个文档碎片 (DocumentFragment`) 节点。
-- [参考](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/parentNode) 
+- [参考](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/parentNode)
+#### childNodes
+```js
+<div id="box">
+  Hello <span>World</span> !
+</div>
+const el = document.getElementById("box");
+// childNodes 包含所有子节点（包括文本、元素、注释等）
+const texts = Array.from(el.childNodes)
+  .filter(node => node.nodeType === Node.TEXT_NODE) // 仅保留文本节点
+  .map(node => node.textContent.trim()) // 去掉首尾空白
+  .filter(Boolean) // 去掉空字符串
+  .join(" ");
+
+console.log(texts); // 输出: "Hello  !"
+
+const textOnly = Array.from(el.childNodes)
+  .reduce((acc, n) => n.nodeType === 3 ? acc + n.textContent : acc, "");
+
+```
 ### Document / Element / Node 属性调用
 #### textContent / innerText
 - 获取或设置指定节点的文本内容。
@@ -142,6 +161,8 @@ const elements = document.querySelectorAll("p, li, h1, h2, h3, h4, h5");
 elements.forEach(el => {
   console.log(el.tagName, el.textContent);
 });
+// or
+const els = document.querySelectorAll('.name p, .name li, .name div');
 ```
 #### Element.getBoundingClientRect()
 ![getBoundingClientRect](./img/getBoundingClientRect-1.png)

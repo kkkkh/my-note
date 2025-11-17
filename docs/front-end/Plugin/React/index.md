@@ -58,3 +58,56 @@ export default {
   stories: "./packages/**/src/**/*.stories.{js,jsx,ts,tsx,mdx}",
 };
 ```
+## Yup / Formik
+```javascript
+import * as Yup from "yup";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Formik, Field, Form } from 'formik';
+
+const schema = Yup.object({
+  firstName: Yup.string()
+    .matches(/^[a-zA-Z0-9_]{3,15}$/, {
+      message:"用户名只能包含字母、数字和下划线，长度3-15位",
+      excludeEmptyString: true, // 忽略空字符串时不会触发正则验证
+    })
+    .required("用户名必填"),
+});
+
+const Basic = () => (
+  <div>
+    <h1>Sign Up</h1>
+    <Formik
+      initialValues={{
+        firstName: '',
+        lastName: '',
+        email: '',
+      }}
+      validationSchema={schema}
+      onSubmit={async (values) => {
+        await new Promise((r) => setTimeout(r, 500));
+        alert(JSON.stringify(values, null, 2));
+      }}
+    >
+      <Form>
+        <label htmlFor="firstName">First Name</label>
+        <Field id="firstName" name="firstName" placeholder="Jane" />
+
+        <label htmlFor="lastName">Last Name</label>
+        <Field id="lastName" name="lastName" placeholder="Doe" />
+
+        <label htmlFor="email">Email</label>
+        <Field
+          id="email"
+          name="email"
+          placeholder="jane@acme.com"
+          type="email"
+        />
+        <button type="submit">Submit</button>
+      </Form>
+    </Formik>
+  </div>
+);
+
+ReactDOM.render(<Basic />, document.getElementById('root'));
+```

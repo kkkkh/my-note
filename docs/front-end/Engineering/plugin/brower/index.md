@@ -3,8 +3,6 @@ outline: deep
 ---
 # 浏览器扩展
 
-<!--@include: ./Plasmo/index.md-->
-
 ## 开发参考
 - [浏览器扩展](https://developer.mozilla.org/zh-CN/docs/Mozilla/Add-ons/WebExtensions)
 - [Chrome Extensions](https://developer.chrome.google.cn/docs/extensions/get-started/tutorial/hello-world?hl=zh-cn)

@@ -241,8 +241,15 @@ export default withMermaid(defineConfig({
               text: 'plugin',
               link: '/front-end/Engineering/plugin/',
               items: [
-                { text: 'vscode插件', link: '/front-end/Engineering/plugin/vscode/' },
-                { text: '浏览器插件', link: '/front-end/Engineering/plugin/brower/' },
+                {
+                  text: 'vscode插件', link: '/front-end/Engineering/plugin/vscode/'
+                },
+                {
+                  text: '浏览器插件', link: '/front-end/Engineering/plugin/brower/',
+                  items:[
+                    {text: 'plasmo', link: '/front-end/Engineering/plugin/brower/plasmo/',}
+                  ]
+                },
               ],
             },
             {

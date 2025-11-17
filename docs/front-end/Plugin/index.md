@@ -244,6 +244,7 @@ outline: deep
 - 表单
   - [formik](https://formik.org/docs/overview)
   - [react-hook-form](https://react-hook-form.com/get-started#Quickstart)
+  - [yup](https://github.com/jquense/yup)
 - 动画
   - [react-spring](https://react-spring.dev/docs/getting-started)
 - 测试
