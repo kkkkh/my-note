@@ -158,3 +158,15 @@ module.exports = {
   内容
 </div>
 ```
+### 颜色透明度
+```html
+<button class="bg-sky-500/100 ..."></button>
+<button class="bg-sky-500/75 ..."></button>
+<button class="bg-sky-500/50 ..."></button>
+```
+```html
+<button class="bg-indigo-500 opacity-100 ..."></button>
+<button class="bg-indigo-500 opacity-75 ..."></button>
+<button class="bg-indigo-500 opacity-50 ..."></button>
+<button class="bg-indigo-500 opacity-25 ..."></button>
+```

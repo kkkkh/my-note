@@ -75,7 +75,8 @@ package.json
 
 ## 开发实践
 ### 操作页面已有结构
-- 报错 setTimeout 延迟处理调用
+- 报错：setTimeout 延迟处理调用
+- 另外：注入网站做了限制以后，好像基本上没有报错了
 ### tailwindcss v3
 ```bash
 # pnpm / npm / yarn 二选一

@@ -133,12 +133,35 @@ export default withMermaid(defineConfig({
           text: 'Css',
           link: '/front-end/Css/',
           items: [
-            { text: 'base', link: '/front-end/Css/base/' },
-            { text: 'flex', link: '/front-end/Css/flex/' },
-            { text: 'css-modules', link: '/front-end/Css/css-modules/' },
-            { text: 'styled-components', link: '/front-end/Css/styled-components/' },
-            { text: 'sass', link: '/front-end/Css/sass/' },
-            { text: 'tailwindcss', link: '/front-end/Css/tailwindcss/' },
+            {
+              text: 'base',
+              items: [
+                {
+                  text: 'layout',
+                  link: '/front-end/Css/base/layout/',
+                },
+                {
+                  text: 'attr',
+                  link: '/front-end/Css/base/attr/',
+                },
+                { text: 'flex', link: '/front-end/Css/base/flex/' },
+              ]
+            },
+            {
+              text: '预处理',
+              items:[
+                { text: 'sass', link: '/front-end/Css/preprocessor/sass/' },
+              ]
+            },
+            {
+              text: 'css 工程化',
+              link: '/front-end/Css/engineering/',
+              items: [
+                { text: 'css-modules', link: '/front-end/Css/engineering/css-modules/' },
+                { text: 'styled-components', link: '/front-end/Css/engineering/styled-components/' },
+                { text: 'tailwindcss', link: '/front-end/Css/engineering/tailwindcss/' },
+              ]
+            }
           ],
         },
         {

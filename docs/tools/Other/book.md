@@ -9,6 +9,7 @@ outline: deep
 - [观止](https://book.douban.com/subject/3699395/)
 - [深入理解计算机系统 (原书第3版)](https://book.douban.com/subject/26912767/)对计算机的内存、寄存器等原理有一定了解，示例代码是用 C 语言写的
 - [leetbook](https://leetcode.cn/leetbook/)
+- [编码：隐匿在计算机软硬件背后的语言](https://book.douban.com/subject/20260928/)
 ### 汇编语言
 - 《汇编语言(第3版)》 [豆瓣](https://book.douban.com/subject/25726019/) &nbsp;[微信读书](https://weread.qq.com/web/reader/55132f10811e5f3d7g010f91) 不枯燥，而且由浅入深
 ### c
