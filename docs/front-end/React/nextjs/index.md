@@ -117,3 +117,8 @@ export default function Page() {
 - [next/dynamic](https://nextjs.org/docs/app/guides/lazy-loading)
 - [Suspense](https://react.dev/reference/react/Suspense)
 - [lazy](https://react.dev/reference/react/lazy)
+### 动态路由
+```bash
+app/blog/[postId]/page.tsx
+app/blog/[anything]/page.tsx
+```

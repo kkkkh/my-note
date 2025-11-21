@@ -384,13 +384,14 @@ export default withMermaid(defineConfig({
             { text: '基础学习',
               items:[
                 { text: '快速入门', link: '/back-end/Python/QuickStart/',},
-                { text: 'AI问答', link: '/back-end/Python/aiAsking/' },
+                // { text: 'AI问答', link: '/back-end/Python/aiAsking/' },
               ]
             },
-            { text: '应用整理',
+            { text: '应用',
               items:[
-                { text: 'FastApi', link: '/back-end/Python/FastApi/' },
-                { text: '常见问题', link: '/back-end/Python/App/',},
+                { text: 'FastApi', link: '/back-end/Python/App/fastApi/' },
+                { text: 'Alembic', link: '/back-end/Python/App/alembic',},
+                { text: '代码示例', link: '/back-end/Python/App/code/' },
               ],
             },
             { text: 'Lib',

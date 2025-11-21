@@ -234,5 +234,6 @@ https://code.visualstudio.com/api/get-started/your-first-extension
 #### python
 - [用 VS Code 写 Python，这几个插件是必装的](https://cloud.tencent.com/developer/article/1786086)
 - [VSCode最新格式化Python文件的方法](https://blog.csdn.net/StephanieXYM/article/details/133767499)
+- [SQLite Viewer](https://marketplace.visualstudio.com/items?itemName=qwtel.sqlite-viewer)
 #### 参考
 - [分享 VSCode 必备精品插件](https://blog.csdn.net/Mirs_Zhu/article/details/141431948)

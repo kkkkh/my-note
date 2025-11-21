@@ -13,7 +13,7 @@ class ItemBase(BaseModel):
     description: Optional[str] = None
     # Optional[str] 等价于 Union[str, None]，意思是：
     # 这个字段可以是字符串，也可以是 None（空值）。
-    
+
 class ItemRequest(ItemBase):
     pass
 # class ItemRead(ItemBase):

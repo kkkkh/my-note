@@ -76,3 +76,10 @@
 <<< @/submodule/play-Python/src/12error.py
 :::
 
+## Python AI 问答
+<script setup>
+import { data as posts } from '../aiAsking//index.data.mts'
+import Content from '@/components/Content.vue'
+</script>
+
+<Content :posts="posts" />

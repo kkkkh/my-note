@@ -145,6 +145,9 @@ outline: deep
 - [hexo](https://hexo.io/zh-cn/)
 - [blogger](https://www.blogger.com/about/?bpli=1)
 ### 可视化
+#### 动画
+- [lottiefiles](https://lottiefiles.com/) lotties动画
+- [Spline](https://spline.design/) 可视化编辑 + Web 导出，轻松实现动态人物和场景。
 #### canvas
 - [echarts](https://echarts.apache.org/handbook/zh/get-started/)
 - [g6](http://g6-v3-2.antv.vision/zh/docs/manual/introduction)

@@ -283,7 +283,25 @@ animation:
 
 ### animation 实践
 #### 无限循环之间的间隔
-
+- 如果你想在每轮动画之间有一个“静止间隔”，可以在关键帧中 增加一段不变化的状态。
+- animation-delay 只在动画第一次开始前生效。
+```css
+@keyframes pulse {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  80%, 100% { opacity: 1; } /* 80%-100%之间不变化 = 间隔 */
+}
+```
+```html
+<div class="animate-pulse-slow">淡入淡出</div>
+```
+```css
+@layer utilities {
+  .animate-pulse-slow {
+    animation: pulse 3s infinite;
+  }
+}
+```
 
 - 参考
   - [animation](https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation)

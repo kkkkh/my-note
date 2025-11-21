@@ -59,6 +59,10 @@ outline: deep
   - [driverjs](https://driverjs.com/docs/installation)
   - [react-joyride](https://github.com/gilbarbara/react-joyride)
   - [shepherdjs](https://www.shepherdjs.dev/)
+- 打字机效果
+  - [Typed.js](https://mattboldt.github.io/typed.js/?utm_source=chatgpt.com) 简单
+  - [TypewriterJS](https://sooraj-gupta.github.io/typewriterjs/?utm_source=chatgpt.com) 简单 支持promise
+  - [TypeIt.js](https://www.typeitjs.com/?utm_source=chatgpt.com) 复杂
 - 音频
   - [aplayer](https://aplayer.js.org/#/home?id=installation)
   - [howlerjs](https://howlerjs.com/)
@@ -81,7 +85,7 @@ outline: deep
     - [postcss-load-config](https://github.com/postcss/postcss-load-config)
     - [postcss-nesting](https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-nesting)
 - 动画
-  - [lottie-ios](https://github.com/airbnb/lottie-ios)
+  - [lottie-ios](https://github.com/airbnb/lottie-ios) lottie ios
 - UI库
   - [uiverse](https://uiverse.io/)
   - [daisyui](https://daisyui.com/docs/install/)

@@ -4,6 +4,7 @@ outline: deep
 # python
 ## 文档
 - [python 3.13 文档](https://docs.python.org/zh-cn/3.13/reference/index.html)
+- [fastapi](https://fastapi.tiangolo.com/)
 - [pypi 仓库地址](https://pypi.org/)
 ## 常见问题
 ### Microsoft Store Python
