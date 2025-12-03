@@ -26,3 +26,8 @@
   - `passlib[bcrypt]` 会依赖底层 bcrypt，它会自动调用 bcrypt 库的 hashpw 和 checkpw。
 - 虚拟环境
   - venv
+- models 相关
+  - tqdm 进度条库
+  - requests HTTP 客户端库，发送各种网络请求
+  - faster_whisper 音频转文字
+

@@ -1,4 +1,4 @@
-# Docker use
+# Docker app
 ## 原理
 ### windows
 - 严格来说，Windows 本身不能直接像在 Linux 上那样原生安装 Docker Engine，
@@ -147,3 +147,34 @@ docker run -e APP_ENV=production myapp
 | docker run `-e`            | ✅最高    |
 | docker-compose environment | ✅中     |
 | Dockerfile `ENV`           | ✅默认/最低 |
+
+### 查看docker volumes
+
+- 列出所有 volume
+```bash
+docker volume ls
+```
+输出类似：
+```bash
+DRIVER    VOLUME NAME
+local     db_data
+```
+- 查看 volume 的挂载路径
+```bash
+docker volume inspect db_data
+```
+输出类似：这里的 Mountpoint 就是宿主机上实际存储的目录。
+```bash
+[
+    {
+        "Name": "db_data",
+        "Driver": "local",
+        "Mountpoint": "/var/lib/docker/volumes/db_data/_data",
+        ...
+    }
+]
+```
+- 进入 volume 目录
+```bash
+ls /var/lib/docker/volumes/db_data/_data
+```

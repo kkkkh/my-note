@@ -515,9 +515,8 @@ export default withMermaid(defineConfig({
       ],
       'ai': [
         {
-          text: 'code',
-          link: '/ai/code/',
-          items: [],
+          text: 'cursor',
+          link: '/ai/cursor/',
         },
       ],
     },
