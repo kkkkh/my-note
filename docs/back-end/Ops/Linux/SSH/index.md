@@ -1,6 +1,6 @@
 # ssh
 ## ssh 基础
-### 命令行 
+### 命令行
 ```bash
 # 查看版本
 ssh -V
@@ -22,7 +22,7 @@ ps -e | grep ssh-agent # 检查 SSH Agent 是否已启动
 ssh-copy-id -i ~/.ssh/id_rsa.pub 用户名字@192.168.x.xxx #公钥复制到远程
 # 登录
 ssh -p 22 zhanghaotian@10.10.200.35
-# 测试 
+# 测试
 ssh -T git@github.com #测试 SSH 连接是否正常
 ```
 ### ~/.ssh
@@ -62,77 +62,88 @@ systemctl restart sshd
 - 由于服务器重新安装系统了，所以会出现以上错误
 - 解决办法：ssh-keygen -R 服务器端的 ip 地址
 
-### Permission denied (publickey). fatal: Could not read from remote repository.
-- 需要把专用密钥添加到 ssh-agent 的高速缓存中
-- 注意：执行路径（/usr/bin/ssh-add 、home/）
+### git push 失败 Permission denied (publickey). fatal: Could not read from remote repository.  
+- 主要原因：SSH key 没有持久化到 ssh-agent
+- 临时处理
 ```bash
-# 临时添加
-ssh-add ~/.ssh/id_rsa
 eval `ssh-agent`
+ssh-add ~/.ssh/id_rsa 
+```
+- 使用 macOS Keychain 持久化 SSH Key（推荐）重启后自动加载：
+- 打开终端，先确认 key 没有被添加：
+```bash
 ssh-add -l
 ```
-
-### mac os 每次开机hou，git push 都没有权限
-提示：
-Load key "/Users/usename/.ssh/id_rsa": Permission denied
-git@github.com: Permission denied (publickey).
-fatal: Could not read from remote repository.
-
-Please make sure you have the correct access rights
-and the repository exists.
-
-解决思路1：Keychain Access
+如果提示 The agent has no identities.，说明没加载。
+- 添加 key 并保存到 Keychain：
 ```bash
-# ~/.ssh/config 要配置 
+ssh-add --apple-use-keychain ~/.ssh/id_rsa
+```
+- 确认添加成功：会显示你的 key。
+```bash
+ssh-add -l
+```
+- 为了让 Git 每次都用这个 key，可以在 ~/.ssh/config 里添加：
+```bash
+Host github.com
 AddKeysToAgent yes
-# Keychain Access（钥匙串访问）访问权限问题: Keychain Access中没有搜索到id_rsa
-ssh-add -K ~/.ssh/id_rsa_github #就找到了
+UseKeychain yes
+IdentityFile ~/.ssh/id_rsa
 ```
+### ssh安全组ip的配置
+- sftp 是ssh连接的，连接ssh 22 端口，在阿里云安全组设置 可访问的公网ip；
+- 不推荐0.0.0.0/0，临时用用完立刻删，因为这样任何人都可以访问了；
+- 缩小范围
+  - 123.45.67.89/32 （/32 表示“只允许这一个 IP”）这是 最小、最精确、最安全 的授权方式。
+  - （IP地址 / 子网掩码位数）
+  - 123.45.67.0/24 等于允许：123.45.67.1 ~ 123.45.67.254
 
-解决思路2：使用 launchd 配置 SSH Agent 自动启动
-launchd 是 macOS 的系统级服务管理框架，可以用来配置 SSH agent 在开机时自动启动。
+- 123.45.67.0/24 中 24 和 254 关系
+  - 123.45.67.0 -> 01111011.00101101.01000011.00000000 主机位
+  - 每一个ip值是8位
+  - /24 的意思是：固定前3组，前 24 位是“网络位”，后 8 位是“主机位”
+  - 2⁸ = 256 个组合 x.x.x.0  ~  x.x.x.255
+- 为什么不是 256，而是 254？
+- 因为 有 2 个地址不能分配给主机 👇
+- 🚫 1️⃣ 网络地址（Network Address）
+  ```
+  123.45.67.0
+  ```
+  - 主机位全是 0
+  - 表示「这个网段本身」
+  - ❌ 不能给设备用
+- 🚫 2️⃣ 广播地址（Broadcast Address）
+  ```
+  123.45.67.255
+  ```
+  - 主机位全是 1
+  - 用来「广播给整个网段」
+  - ❌ 不能给设备用
+  - 查看外网 IP（公网 IP）
+  - 所以就是 256 - 2 = 254
+- 查看公网IP curl ifconfig.me
 ```bash
-touch ~/Library/LaunchAgents/com.openssh.ssh-agent.plist # 内容为下边xml
-vim ~/Library/LaunchAgents/com.openssh.ssh-agent.plist
-mkdir -p /tmp/ssh-username
-launchctl load ~/Library/LaunchAgents/com.openssh.ssh-agent.plist
-export SSH_AUTH_SOCK=/tmp/ssh-username/agent.sock #在 ~/.bash_profile 或 ~/.zshrc 中添加
-source ~/.bash_profile
-source ~/.zshrc
+curl ifconfig.me
 ```
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-    <key>Label</key>
-    <string>com.openssh.ssh-agent</string>
-    <key>ProgramArguments</key>
-    <array>
-        <string>/usr/bin/ssh-agent</string>
-        <string>-l</string>
-    </array>
-    <key>Sockets</key>
-    <dict>
-        <key>SSH_AUTH_SOCK</key>
-        <dict>
-            <key>Path</key>
-            <string>/tmp/ssh-username/agent.sock</string>
-            <key>SockFamily</key>
-            <string>Unix</string>
-            <key>SockProtocol</key>
-            <string>Stream</string>
-        </dict>
-    </dict>
-    <key>EnvironmentVariables</key>
-    <dict>
-        <key>SSH_AUTH_SOCK</key>
-        <string>/tmp/ssh-username/agent.sock</string>
-    </dict>
-    <key>RunAtLoad</key>
-    <true/>
-    <key>KeepAlive</key>
-    <true/>
-</dict>
-</plist>
-```
+- 第一个数字动态变化：
+  - 动态公网 IP（最常见）
+  - 你开着 VPN / 代理 / 加速器
+  - 校园网、公司网络
+    - 👉 实际上是从 不同出口节点 出网
+    - 👉 每次都会不一样
+
+- 为什么本地电脑一开始连不上，后来连上了
+  - 大概率是 有更大范围123.45.0.0/16，或者vpn访问
+- mac查看ip
+  - 查看本机局域网 IP（Wi-Fi）
+  ```bash
+  ipconfig getifaddr en0
+  ```
+  - 如果用的是有线网络（Ethernet）
+  ```bash
+  ipconfig getifaddr en1
+  ```
+  - 查看所有网络信息（找到 en0 或 en1 下的 inet 192.168.xx.xx）
+  ```bash
+  ifconfig
+  ```

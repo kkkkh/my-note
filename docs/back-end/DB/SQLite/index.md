@@ -50,17 +50,36 @@ CREATE INDEX ix_pod_english_records_user_id ON pod_english_records(user_id);
 ```
 ## 批量操作
 ```bash
-# 批量插入
+# 机械批量插入
 INSERT INTO table_name (group_id, seq, name, 'desc',  created_at, updated_at ) VALUES
 (1, 1, '1', '', '2025-11-27 17:41:07.51734','2025-11-27 17:41:07.51734'),
 ...
 
-# 批量依赖其他字段生成
+# 批量插入 - 多条数据 100 -200
+WITH cnt(id) AS (
+    SELECT 10
+    UNION ALL
+    SELECT id + 1 FROM cnt WHERE id < 100
+)
+INSERT INTO resources (group_id, seq, name, created_at, updated_at, lrcUrl, audioUrl, desc )
+SELECT
+    1 AS group_id,
+    id AS seq,
+    '1_' || id AS name,
+    '2025-11-27 17:41:07.51734',
+    '2025-11-27 17:41:07.51734',
+    './resource/' || '1' || '_' || CAST(id AS TEXT) || '.lrc',
+    '/resource/audio/' || '1' || '_' || CAST(id AS TEXT) || '/playlist.m3u8',
+    ''
+FROM cnt;
+
+# 批量更新-依赖其他字段生成
 UPDATE table_name
-SET lrcUrl = '/resource/' || CAST(group_id AS TEXT) || '_' || CAST(id AS TEXT) || '.lrc';
+SET
+  lrcUrl = '/resource/' || CAST(group_id AS TEXT) || '_' || CAST(id AS TEXT) || '.lrc',
+  audioUrl = '/resource/audio/' || CAST(group_id AS TEXT) || '_' || CAST(id AS TEXT) || '/playlist.m3u8',
+  desc = '1_' || id
+WHERE group_id = 1 AND lrcUrl IS NULL;
+
 # SET lrcUrl = '/resource/' || CAST(group_id + id AS TEXT) || '.lrc'; # 加法运算
-
-
-UPDATE table_name
-SET audioUrl = '/resource/audio/' || CAST(group_id AS TEXT) || '_' || CAST(id AS TEXT) || '/playlist.m3u8';
 ```
