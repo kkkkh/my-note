@@ -54,5 +54,14 @@ echo "[global]\nindex-url=https://pypi.tuna.tsinghua.edu.cn/simple\ntrusted-host
 ### 其他资源
 - [最近迫切应学的编程语言 python](https://www.jianshu.com/p/08ca8573e681)
 - [tinygrad](https://github.com/tinygrad/tinygrad) 深度学习框架
-
-
+### Anaconda
+- Anaconda的发行版也越来越受欢迎，特别是在科学计算和数据科学用户当中
+- 安装Anaconda之后，不仅Python已就绪，还拥有了R语言和大量预装的数据科学软件包，还可以用附带的conda软件包管理器添加很多其他内容。
+### IDLE
+- 按下Alt+P或Alt+N键，就可以在历史记录中前后切换命令(macos 是 `ctrl + P/N`)
+- help() 函数是pydoc库
+- dir() 列出了特定名称空间中的对象
+  - 在没有给出参数时，它会列出当前的全局变量 dir()
+  - 但它也可以列出某个模块中的全部对象，甚至某个类型的全部对象 dir(int)
+  - dir()函数在查找方法和数据的定义时十分有用，可以一眼就看到属于某个对象或模块的全部成员。
+- globals()和locals()函数会显示与对象关联的值
