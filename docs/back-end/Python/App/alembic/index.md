@@ -9,6 +9,7 @@ pip install alembic
 alembic init alembic
 ```
 - 修改 alembic.ini
+  - 默认使用了 GBK 编码，而文件里有非 GBK 字符（比如 UTF-8 中的字符）
   - 统一改成 UTF-8 编码
   - 确保文件中没有奇怪的字符
 ::: details 查看代码
@@ -195,7 +196,17 @@ print(Base.metadata.tables.keys()) # 打印查看
 ```bash
 # 产看历史
 alembic history
+# 9e84025aa5c4 -> 57f7358187f6 (head), test
+# c4fdfa2f7a93 -> 9e84025aa5c4, role
+# ...
 alembic history --verbose
+
+# 查看当前版本
+alembic current
+# dict_keys(['users',...])
+# INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+# INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+# 57f7358187f6 (head)
 
 # 查看 当前
 alembic heads
@@ -217,3 +228,62 @@ alembic upgrade head
 # 多人协作或分支切换导致 revision 指向丢失
 alembic merge -m "merge branches" C D
 ```
+### sqlite 文件，开发和生产的配置
+- 把 SQLite 文件加进 .gitignore 不提交；
+- db_url 根据环境走不同路径
+  - 开发环境：本地文件连接 -> `f"sqlite:///{os.path.abspath('./db/sqlite.db')}"`
+  - 生产环境：db_url -> `f"sqlite:////app/db/sqlite.db"`
+- 开发环境：
+  - 开发启动时如果没有 DB 文件，自动创建
+  - 启动时手动跑一次迁移 alembic upgrade head
+- alembic.ini
+  - sqlalchemy.url 只提供占位符，实际不使用
+  - alembic/env.py 中加载环境变量
+  ```py
+  from alembic import context
+  import os
+
+  config = context.config
+  db_url = os.getenv("DATABASE_URL")
+  if db_url:
+      config.set_main_option("sqlalchemy.url", db_url)
+  ```
+- alembic upgrade head 生产中运行时机
+  - ❌ 不要在 Dockerfile 里执行 alembic upgrade head
+  - 应该在 容器启动时 执行，而不是 build 时。
+  - 创建文件：entrypoint.sh
+  ```sh
+  #!/bin/sh
+  set -e
+  # 运行 Alembic 迁移
+  alembic upgrade head
+
+  # 启动你的应用
+  exec "$@"
+  ```
+  - Dockerfile 加入：
+  ```dockerfile
+  COPY entrypoint.sh /entrypoint.sh
+  RUN chmod +x /entrypoint.sh
+
+  ENTRYPOINT ["/entrypoint.sh"]
+  CMD ["python", "your_app.py"]   # 或 uvicorn
+  ```
+- 生产环境：db_url app/db 疑惑
+  - 在docker-compose中配置
+  ```bash
+  volumes:
+    db_data:
+  services:
+    app:
+      volumes:
+        - db_data:/app/db
+  ```
+  - 这里 /app/db 是容器内部路径，提供给内部使用
+  - 连接数据库直接使用这个路径就可以 `f"sqlite:////app/db/sqlite.db"`
+  - 实际的数据库文件位置在：/var/lib/docker/volumes/hometown_db_data/_data/sqlite.db这里
+  - 如果后边改动，db_data:/db，数据库连接路径跟着变，实际数据库文件位置指向没有变，改变的是「容器内挂载点」
+  - 与 dockerfile中WORKDIR /app 没有关系，WORKDIR 只是改变默认运行目录，不影响 volume 挂载路径
+  - Docker named volume 的本质是：volume 名字  →  宿主机上的一个固定目录
+  - 
+
