@@ -162,12 +162,21 @@ backdrop-filter: invert(80%);
 参考：
 - [backdrop-filter](https://developer.mozilla.org/zh-CN/docs/Web/CSS/backdrop-filter)
 ### background
-#### accent-color
+#### accent-color 勾选框背景色
 
 <accent-color></accent-color>
 
 参考:
 - [accent-color](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Reference/Properties/accent-color)
+#### background-clip 设置字体颜色渐变
+```css
+.gradient-text {
+  background: linear-gradient(90deg, #ff6a00, #ee0979);
+  -webkit-background-clip: text; /* Chrome / Safari */
+  background-clip: text;
+  color: transparent;
+}
+```
 ### animation &I
 ```css
 /* @keyframes duration | easing-function | delay |

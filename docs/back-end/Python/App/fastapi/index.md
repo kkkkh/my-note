@@ -742,6 +742,31 @@ class Item(Base):
 | `db.refresh(obj)` | 从数据库重新加载该对象的最新值          | ✅ 是   | ❌ 不影响事务   | 获取数据库端生成的字段（如自增 ID、触发器字段、时间戳）|
 | `db.rollback()`   | 回滚事务（撤销未提交操作）             | ❌ 否   | ✅ 回滚并结束事务 | 出现异常后恢复一致状态                    |
 
+
+| 操作          | 本质                    | 什么时候用             | 常见误用        |
+| ----------- | --------------------- | ----------------- | ----------- |
+| `flush()`   | 把内存变更 **发送到 DB**（不提交） | **极少数**：需要 DB 生成值 | 当成 commit 用 |
+| `commit()`  | 提交事务（隐式 flush）        | **事务边界**          | 写在业务函数里     |
+| `refresh()` | 从 DB **重新加载对象**       | DB 改了你不知道         | 当成“更新对象”    |
+
+- 不使用
+  - 👉 90% 的 CRUD 都不需要显式 flush / refresh
+  - 用了 with db.begin(): 之后，还用不用它们？
+  - 在 with db.begin(): 中：
+  - ❌ 不要再手动 commit()
+  - ❌ 99% 不要 flush()
+  - ❌ 99.9% 不要 refresh()
+- 何时 ✅ 必须用 flush()
+  - 子表要用父表 id
+  - 同一事务里依赖自增主键
+  ```python
+  db.add(obj)
+  db.flush()
+  use(obj.id)
+  ```
+- 结论
+  - 🔑 flush / refresh 是“底层工具”，commit 是“事务边界”
+  - 🔑 业务函数只改对象，不碰事务
 ### 使用泛型
 
 <<< ../code/src/schemas/common.py
@@ -793,6 +818,30 @@ python -m uvicorn main:app --reload
 uvicorn main:app --host 0.0.0.0 --port 8000 --workers 4 --proxy-headers
 # or
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "4", "--proxy-headers"]
+```
+### sqlite 更新数据操作 & 多条件查询
+```py
+def update_data(item):
+  existing = (
+    db.query(Users)
+    .filter(
+        and_( 
+          # 另外一种推荐，不使用and_，待验证
+          ## ✅ 与 or_ 组合时（很重要）
+            Users.id == ite.id,
+            Users.name == ite.name,
+            Users.age == ite.age,
+          # or_(
+          #   Users.name == ite.name,
+          #   Users.age == ite.age,
+          # )
+        )
+    )
+    .first()
+  )
+  existing.timePoint = [*existing.timePoint, item.timePoint]
+  db.flush() // [!code --]
+  db.refresh(existing) // [!code --]
 ```
 ### Gunicorn
 - Uvicorn 自带 server，但进程管理能力弱，特别是生产环境：

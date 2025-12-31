@@ -154,7 +154,7 @@ body {
 }
 ```
 ### Operators
-Sass 有一些标准数学运算符，例如 +、-、*、math.div() 和 %
+Sass 有一些标准数学运算符，例如 +、-、*、math.div() 和 % (1.33.0)
 ```scss
 @use "sass:math";
 .container {

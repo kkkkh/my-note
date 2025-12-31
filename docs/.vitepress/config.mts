@@ -145,6 +145,7 @@ export default withMermaid(defineConfig({
                   link: '/front-end/Css/base/attr/',
                 },
                 { text: 'flex', link: '/front-end/Css/base/flex/' },
+                { text: 'grid', link: '/front-end/Css/base/grid/' },
               ]
             },
             {

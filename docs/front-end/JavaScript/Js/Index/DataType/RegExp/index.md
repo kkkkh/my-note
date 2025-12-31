@@ -322,6 +322,70 @@ const reg = /<([\w-]+)\n?\s*[\w"'=]*\n?\s*v-model=["']\w*[Ff]orm\.(\w+)/g
 const path = "/*/**/01.text"
 const res = path.match(/\/([^\/]+)$/)[1]
 ```
+- 分词：三种方式
+- 1、前瞻
+  - 文本非常长（前瞻是 O(n²)）
+  - 关键词很多（100+）
+  - 高亮实时输入文本（卡）
+  ```js
+  // \b 单词边界：用来分词，不会把 aaabbb 里的 aaa 匹配出来，只匹配独立的 aaa
+  // (${texts?.join('|')) 捕获组1
+  // ?! (?![\s\S]*...) 负向前瞻：每次都扫到结尾 → O(n²)
+  // [\s\S]* 万能匹配任意字符  ->  .* 在多行时可能失效，用 [\s\S]* 更稳。
+  // \1：引用捕获组 1 的内容
+  const reg = new RegExp(`\\b(${texts?.join('|')})\\b(?![\\s\\S]*\\b\\1\\b)`, 'g')
+  const newText = props.text.replace(reg, '<span class="bg-warning text-neutral">$1</span>')
+  // props.text = “aaa bbb ccc ddd aaa” texts是["aaa"]
+  // 结果是给的最后一个的aaa高亮
+  // 为什么匹配到是最后一个
+  // (?![\s\S]*...) 当前位置后面，不能再出现同样的单词
+  // “只要后面还存在同样的词，就否掉当前匹配”
+  // 在 JS 正则里，无法用“后行前瞻”稳定地匹配第一次出现
+  ```
+- 2、scan + Set
+  ```js
+    const seen = new Set();
+    const escape = (s:string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const pattern = texts?.map(escape).join('|');
+    const reg = new RegExp(`\\b(${pattern})\\b`, 'g');
+    const newText = props.text.replace(reg, (match) => {
+      if (seen.has(match)) {
+        return match; // 已出现，不高亮
+      }
+      seen.add(match);
+      return `<span class="bg-warning text-neutral">${match}</span>`;
+    })
+  ```
+- 3、tokenize → render
+  ```js
+  // tokenize
+  function tokenize(text) {
+    return text.split(/(\b)/);
+  }
+  const tokens = tokenize(props.text);
+
+  // annotated
+  const keywords = new Set(['aaa', 'bbb']);
+  const seen = new Set();
+  const annotated = tokens.map(token => {
+    if (keywords.has(token) && !seen.has(token)) {
+      seen.add(token);
+      return { type: 'highlight', value: token };
+    }
+    return { type: 'text', value: token };
+  });
+  // react
+  {
+    annotated.map((t, i) =>
+      t.type === 'highlight'
+        ? <span key={i} className="bg-warning text-neutral">{t.value}</span>
+        : t.value
+    )
+  }
+  ```
+
+
+
 - 其他示例：[String replace](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
 
 - 参考：

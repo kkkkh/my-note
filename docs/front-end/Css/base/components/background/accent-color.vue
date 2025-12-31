@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input type="checkbox"></input>
+    <input type="checkbox" checked ></input>
   </div>
 </template>
 <style scoped>
