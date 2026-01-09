@@ -278,7 +278,7 @@ axios.post('/api/user', qs.stringify(data), {
 })
 .then(res => console.log(res.data));
 ```
-### particles.js
+## particles.js
 - 在nextjs中使用 particles.js
 ```js
 "use client";
@@ -297,3 +297,5 @@ export default function Point (){
 }
 ```
 - 使用 react-tsparticles
+## floating-ui
+

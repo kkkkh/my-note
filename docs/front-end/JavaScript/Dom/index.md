@@ -190,6 +190,17 @@ Document 接口的 activeElement 只读属性返回 DOM 中当前拥有焦点的
 <<< @/front-end/JavaScript/Dom/components/capturePropagation.vue
 :::
 
+#### target/currentTarget
+- event.currentTarget = 事件监听器“绑在哪个元素上”
+- event.target = 事件“真正发生”的那个最内层元素
+- ✅ 1. 做「事件委托」一定要用 target
+```js
+ul.addEventListener('click', (e) => {
+  if (e.target.tagName === 'LI') {
+    console.log('点的是 li')
+  }
+})
+```
 #### keydown/keyup
 - ~~keypress~~<font color=red>(已弃用)</font> 当按下产生字符或符号值的键时，将触发 keypress 事件
 - keyup 事件在按键被松开时触发

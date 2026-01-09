@@ -170,3 +170,66 @@ module.exports = {
 <button class="bg-indigo-500 opacity-50 ..."></button>
 <button class="bg-indigo-500 opacity-25 ..."></button>
 ```
+### 响应式控制
+- 默认（无前缀） → 所有屏幕
+- sm: ≥ 640px
+- md: ≥ 768px
+- lg: ≥ 1024px
+- `w-[calc()]`计算
+```html
+<!-- 默认 50% w-[50%] -->
+<!-- sm: 640px <= w <768px 区间 w-[calc(100%/2)] -->
+<div className="w-[50%] xs:w-[calc(100%/2)] md:w-[calc(100%/3)] lg:w-[calc(100%/4)] xl:w-[calc(100%/6)]"></div>
+<!-- 或者换成 -->
+<div className="grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+  <div>
+</div>
+```
+- 显示隐藏控制
+```html
+<!-- 设置hidden，md (≥ 768px)显示-->
+<span className="hidden md:inline">我的音频</span>
+```
+### 样式复用
+- @apply
+```css
+/* globals.css 或 styles/components.css */
+.icon-action {
+  @apply bg-amber-400/70 cursor-pointer hover:bg-amber-400/100 mr-1
+         transition-colors rounded;
+}
+```
+```tsx
+<Icon className="icon-action" />
+```
+- 👉 Icon 一律封装成语义组件（更推荐）
+```tsx
+import clsx from "clsx";
+
+type ActionIconProps = {
+  className?: string;
+  children: React.ReactNode;
+};
+
+export function ActionIcon({ className, children }: ActionIconProps) {
+  return (
+    <span
+      className={clsx(
+        "bg-amber-400/70 cursor-pointer hover:bg-amber-400/100 mr-1 rounded transition-colors",
+        className
+      )}
+    >
+      {children}
+    </span>
+  );
+}
+```
+```tsx
+<ActionIcon>
+  <Icon />
+</ActionIcon>
+
+<ActionIcon className="bg-red-400">
+  <DeleteIcon />
+</ActionIcon>
+```
