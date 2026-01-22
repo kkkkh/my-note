@@ -2,13 +2,13 @@ import { resolve } from 'path';
 import { loadConfigFromFile } from 'vite';
 import { promises as fs } from 'fs';
 import markdownit from 'markdown-it'
-import { createContentLoader } from 'vitepress'
 
 const md = markdownit()
 const getIVInfo = (data, node)=>{
   const regexp = /([^\s].+\s*)\&I/g
   const res = [...data.matchAll(regexp)];
   return res.map((item,index) => {
+    // 关键替换
     const title = item[1]
     const sTitle = title?.replaceAll(/[#\s]/g,"")?.replaceAll(/\//g ,"-")
     return md.render(`- ${index + 1} ${sTitle} [1](/my-note${node.link}#${sTitle})`)
@@ -50,7 +50,7 @@ async function  articleTransformations(watchedFiles) {
   const articleIv = await Promise.all(watchedFiles.map(async(url) => {
     const fileContent = await fs.readFile(url, 'utf-8');
     const reg = /\/(name)\/index\.md$/
-    const text = url.replace(reg, "$1")
+    const text = url.replace(reg, "$1") // 没什么作用
     const link = url.replaceAll(/(docs|index\.md)/g, "") // 注意将index.md也去掉
     return getIVInfo(fileContent, {text, link})
   }));
@@ -58,6 +58,7 @@ async function  articleTransformations(watchedFiles) {
     "text": "<h2>应用</h2>\n",
     iv:articleIv
   }
+  console.log(articleIv)
   return articleNode;
 }
 

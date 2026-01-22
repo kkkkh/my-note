@@ -27,7 +27,7 @@ export default withMermaid(defineConfig({
   },
   head: [
     ['link', { rel: 'stylesheet', href: 'viewerjs/dist/viewer.css' }],
-    // ['link', { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css' }],
+    ['link', { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css' }],
     // ['link', { rel: 'stylesheet', href: 'https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css' }],
     // ['script', { src: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js' }]
   ],
@@ -61,15 +61,15 @@ export default withMermaid(defineConfig({
           { text: 'web3', link: '/web3' },
           { text: 'AI', link: '/ai' },
           { text: 'HD', link: '/hd'},
+          { text: 'interview', link: '/interview/font-end/'},
         ]
       },
+      { text: '文章', link: '/article/' },
       { text: '文档',
         items:[
           { text: 'tool', link: '/tools/' },
-          { text: 'interview', link: '/interview/font-end/'},
           { text: 'play', link: 'https://kkkkh.github.io/play/' },
       ] },
-      { text: '文章', link: '/article/' },
     ],
     sidebar: {
       'tools': [

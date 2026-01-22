@@ -19,7 +19,7 @@ hero:
       link: /back-end
     - theme: alt
       text: 文档
-      link: /tools/blog
+      link: /tools
 features:
   - title: Html
     details: Html 相关资源
