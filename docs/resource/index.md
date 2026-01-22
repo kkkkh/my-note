@@ -64,7 +64,7 @@ histoire √
 https://devv.ai/zh/search/eqkl4p4badxc vue-demi postinstall
 
 
-play 
+play
 - 需要将页面常用功能迁移：右击、验证控制等
 - electron的核心功能
 - 开源库的使用代码

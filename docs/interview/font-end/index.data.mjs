@@ -2,8 +2,9 @@ import { resolve } from 'path';
 import { loadConfigFromFile } from 'vite';
 import { promises as fs } from 'fs';
 import markdownit from 'markdown-it'
-const md = markdownit()
+import { createContentLoader } from 'vitepress'
 
+const md = markdownit()
 const getIVInfo = (data, node)=>{
   const regexp = /([^\s].+\s*)\&I/g
   const res = [...data.matchAll(regexp)];
@@ -45,8 +46,25 @@ async function processTreeData(treeData) {
   return await Promise.all(treeData.map((node) => processTreeNode(node)));
 }
 
+async function  articleTransformations(watchedFiles) {
+  const articleIv = await Promise.all(watchedFiles.map(async(url) => {
+    const fileContent = await fs.readFile(url, 'utf-8');
+    const reg = /\/(name)\/index\.md$/
+    const text = url.replace(reg, "$1")
+    const link = url.replaceAll(/(docs|index\.md)/g, "") // 注意将index.md也去掉
+    return getIVInfo(fileContent, {text, link})
+  }));
+  const articleNode = {
+    "text": "<h2>应用</h2>\n",
+    iv:articleIv
+  }
+  return articleNode;
+}
+
+
 export default {
-  async load() {
+  watch: ['../../article/tech/index/**/*.md'],
+  async load(watchedFiles) {
     const configFilePath = resolve(process.cwd(), 'docs/.vitepress/config.mts');
     const loadedConfig = await loadConfigFromFile(
       { command: 'serve', mode: 'development' },
@@ -56,6 +74,8 @@ export default {
     // console.log(JSON.stringify(dir, null, 2))
     const updatedTreeData = await processTreeData(dir);
     // console.log(JSON.stringify(updatedTreeData, null, 2));
-    return updatedTreeData
+   const articleNode = await articleTransformations(watchedFiles)
+    return [...updatedTreeData, articleNode]
   }
 }
+

@@ -60,40 +60,18 @@ export default withMermaid(defineConfig({
           { text: '后端', link: '/back-end' },
           { text: 'web3', link: '/web3' },
           { text: 'AI', link: '/ai' },
+          { text: 'HD', link: '/hd'},
         ]
       },
-      { text: '文档', items:[
-        { text: 'hd', link: '/hd/index'},
-        { text: 'tool', link: '/tools/' },
-        { text: 'play', link: 'https://kkkkh.github.io/play/' },
+      { text: '文档',
+        items:[
+          { text: 'tool', link: '/tools/' },
+          { text: 'interview', link: '/interview/font-end/'},
+          { text: 'play', link: 'https://kkkkh.github.io/play/' },
       ] },
       { text: '文章', link: '/article/' },
     ],
     sidebar: {
-      'hd': [
-        {
-          text: 'history',
-          link: '/hd/history/index',
-        },
-        {
-          text: 'records',
-          link: '/hd/records/index',
-        },
-      ],
-      'article': [
-        {
-          text: '技术',
-          link: '/article/tech/',
-        },
-        {
-          text: '面试',
-          link: '/article/interview/font-end/',
-        },
-        {
-          text: '感想',
-          link: '/article/thoughts/',
-        },
-      ],
       'tools': [
         {
           text: '技术',
@@ -105,8 +83,8 @@ export default withMermaid(defineConfig({
             { text: '前端', link: '/tools/Tech/front-end' },
             { text: '后端', link: '/tools/Tech/back-end' },
             { text: 'Ops', link: '/tools/Tech/ops' },
-            { text: '其他工具', link: '/tools/Tech/other' },
             { text: 'AI', link: '/tools/Tech/ai' },
+            { text: '其他工具', link: '/tools/Tech/other' },
           ],
         },
         {
@@ -174,7 +152,6 @@ export default withMermaid(defineConfig({
             { text: 'bom', link: '/front-end/JavaScript/Bom/' },
             { text: 'webapi', link: '/front-end/JavaScript/WebApi/' },
             { text: 'brower', link: '/front-end/JavaScript/Browser/' },
-            // { text: 'es', link: '/front-end/JavaScript/ES6/' },
           ],
         },
         {
@@ -361,21 +338,21 @@ export default withMermaid(defineConfig({
           text: '算法',
           link: '/front-end/Algorithm/',
         },
-        {
-          text: '应用',
-          link: '/front-end/Application/',
-          items: [
-            { text: '常用算法', link: '/front-end/Application/algorithm/'},
-            { text: '分片',
-              items: [
-                { text: '分片上传', link: '/front-end/Application/sharding/upload'  },
-                { text: '分片下载', link: '/front-end/Application/sharding/download'  },
-              ]
-            },
-            { text: '竞态', link: '/front-end/Application/race/' },
-            { text: '任务队列', link: '/front-end/Application/taskQueue/' },
-          ]
-        },
+        // {
+        //   text: '应用',
+        //   link: '/front-end/Application/',
+        //   items: [
+        //     { text: '常用算法', link: '/front-end/Application/algorithm/'},
+        //     { text: '分片',
+        //       items: [
+        //         { text: '分片上传', link: '/front-end/Application/sharding/upload'  },
+        //         { text: '分片下载', link: '/front-end/Application/sharding/download'  },
+        //       ]
+        //     },
+        //     { text: '竞态', link: '/front-end/Application/race/' },
+        //     { text: '任务队列', link: '/front-end/Application/taskQueue/' },
+        //   ]
+        // },
       ],
       'back-end': [
         {
