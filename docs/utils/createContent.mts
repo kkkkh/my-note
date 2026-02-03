@@ -27,7 +27,7 @@ export default (url:string) => createContentLoader(url, {
         dateTime: dateFmt.format(new Date(frontmatter.date)),
         tags: frontmatter.tags || []
       }))
-      .sort((a, b) =>  a.date.time - b.date.time)
+      .sort((a, b) =>  b.date.time - a.date.time)
   }
 })
 

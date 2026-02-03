@@ -25,7 +25,8 @@ import Content from '@/components/Content.vue'
   display:flex;
   justify-content: space-between;
   main{
-    flex:1
+    flex:1;
+    margin:0 4px;
   }
 }
 </style>

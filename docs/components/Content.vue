@@ -7,7 +7,7 @@ import { withBase } from 'vitepress'
 
 </script>
 <template>
-  <ul>
+  <ul class="post">
     <li class="post-item" v-for="post of posts">
       <div class="post-title">
         <a :href="withBase(post.url)" class="post-title-link">{{ post.title }}</a>
@@ -24,6 +24,9 @@ import { withBase } from 'vitepress'
 
 
 <style scoped lang="scss">
+.post{
+  padding-left:0;
+}
 .post-item {
   display: flex;
   flex-direction: column;
