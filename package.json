@@ -17,7 +17,12 @@
     "test": "jest"
   },
   "dependencies": {
+    "@braintree/sanitize-url": "^7.1.2",
     "@highlightjs/vue-plugin": "^2.1.0",
+    "cytoscape": "^3.33.1",
+    "cytoscape-cose-bilkent": "^4.1.0",
+    "dayjs": "^1.11.19",
+    "debug": "^4.4.3",
     "echarts": "^5.6.0",
     "highlight.js": "^11.11.1",
     "highlightjs-copy": "^1.0.6",
