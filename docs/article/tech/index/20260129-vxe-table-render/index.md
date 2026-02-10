@@ -1,56 +1,16 @@
 ---
-title: vxe-table 二次封装（筛选 + 排序 + 分页）+ 前端控制数据渲染（筛选 + 排序+ 分页）
+title: vxe-table 前端控制数据渲染（筛选 + 排序+ 分页）(2)
 date: 2026-01-29
 ---
-# vxe-table 二次封装（筛选 + 排序 + 分页）+ 前端控制数据渲染（筛选 + 排序+ 分页）
+# vxe-table 前端控制数据渲染（筛选 + 排序+ 分页）
 ## 业务需求
 - 由于业务场景需求，调用后端接口每次查询的数据，要累加到前端做存储，做统一控制
 - 实现功能：分页查看，搜索筛选，排序
 - 技术栈：vue2 + vxe-table@3.8.22
-## 基本调研
-- 查看[v3版本文档](https://vxetable.cn/v3/#/demo/list)
-
-- 一些demo的代码实现：
-  - 本地数据，简单筛查：https://vxetable.cn/v3.8/#/table/base/filter
-  - 本地数据，复杂筛选：https://vxetable.cn/v3.8/#/table/advanced/manualFilter
-    - 手动筛选：调用 setFilter 和 updateData 方法来处理复杂场景
-    - 修改筛选条件
-    - 展示、关闭筛选面板
-    - 清除所有筛选条件
-  - 设置筛选渲染：https://vxetable.cn/v3.8/#/table/renderer/filter
-  - 本地数据，分页：https://vxetable.cn/v3.8/#/table/advanced/page
-  - 数据代理，分页：https://vxetable.cn/v3.8/#/table/grid/pageProxy
-
-- 一些常用api以及配置：
-  - 常用方法/事件
-  ```js
-  <vxe
-    @checkbox-change="checkboxChange"
-    @checkbox-all="checkboxChange"
-  ></vxe>
-  // 设置选中
-  setCheckboxRow(rows, checked)
-  setAllCheckboxRow(checked)
-  // 清除选中
-  clearCheckboxRow()
-  clearCheckboxReserve()
-  // 获取
-  getCheckboxRecords()
-  getCheckboxReserveRecords()
-  ```
-  - 保持勾选记录
-  ```js
-  <vxe
-    :row-config="{
-      keyField: 'id',
-    }"
-    :checkbox-config="{ reserve: true }"
-  ></vxe>
-  ```
-## 前置条件
-对vxe-table进行配置，实现以下功能功能
-- 漏斗筛查
-- 排序
+## 前置
+- [vxe-table 二次封装（筛选 + 排序 + 分页）](../20260127-vxe-table-pack/)
+- 基于vxe-table二次封装的基础上，增强前端数据渲染
+- 主要是将分页查看，搜索筛选，排序的触发事件，使用返回的事件参数列表，过滤数据
 ## 实现思路
 - 外层触发计算：列表数据增加
 - 前端计算table顺序：1、过滤filter/2、排序sort/3、分页page
