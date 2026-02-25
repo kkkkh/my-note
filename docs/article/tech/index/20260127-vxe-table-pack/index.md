@@ -1,11 +1,12 @@
 ---
-title: vxe-table 二次封装（筛选 + 排序 + 分页）(1)
+title: vxe-table 二次封装（筛选 + 排序 + 分页）（1）
 date: 2026-01-27
 ---
-# vxe-table 二次封装（筛选 + 排序 + 分页）
-## 业务场景
+# vxe-table 二次封装（筛选 + 排序 + 分页）（1）
+## 场景需求
 - 在vxe-table的基础上，增加对排序和筛选的配置
 - 同时增加对分页的支持
+- 技术栈：vue2 + vxe-table@3.8.22
 ## 基本调研
 - 查看[v3版本文档](https://vxetable.cn/v3/#/demo/list)
 
