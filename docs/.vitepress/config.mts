@@ -411,6 +411,10 @@ export default withMermaid(defineConfig({
               ],
             },
             {
+              text:'SSL/TLS',
+              link: '/back-end/Ops/SSL-TLS/',
+            },
+            {
               text: "Nginx",
               link: '/back-end/Ops/Nginx/',
             },
