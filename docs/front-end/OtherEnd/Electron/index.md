@@ -260,9 +260,9 @@ func()
 - 参考：
   - [electron postMessage](https://www.electronjs.org/zh/docs/latest/tutorial/message-ports)
 - 其他通信参考
-  - [web worker 通信](../../JavaScript/Dom/index.md#web-worker)
-  - [iframe 通信](../../JavaScript/Dom/index.md#iframe)
-  - [MessageChannel 通信](../../JavaScript/Dom/index.md#messagechannel--messageport)
+  - [web worker 通信](../../Foundation/JavaScript/Dom/index.md#web-worker)
+  - [iframe 通信](../../Foundation/JavaScript/Dom/index.md#iframe)
+  - [MessageChannel 通信](../../Foundation/JavaScript/Dom/index.md#messagechannel--messageport)
 ### 主进程 api
 #### ipcMain
 - ipcMain.handle(channel, listener)
