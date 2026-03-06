@@ -71,7 +71,14 @@ export default {
       { command: 'serve', mode: 'development' },
       configFilePath
     );
-    const dir = loadedConfig?.config.themeConfig.sidebar["front-end"]
+    const sidebar = loadedConfig?.config.themeConfig.sidebar
+    let dir = []
+    for(const key of Object.keys(sidebar)) {
+      if(key.includes("front-end")){
+        dir.push(...sidebar[key])
+      }
+    } 
+    // const dir = loadedConfig?.config.themeConfig.sidebar["front-end"]
     // console.log(JSON.stringify(dir, null, 2))
     const updatedTreeData = await processTreeData(dir);
     // console.log(JSON.stringify(updatedTreeData, null, 2));
