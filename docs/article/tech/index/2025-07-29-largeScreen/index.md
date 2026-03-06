@@ -2,6 +2,9 @@
 outline: deep
 title: 大屏方案
 date: 2025-07-29
+tags:
+  - front-end
+  - Css
 ---
 # 大屏方案 &I
 

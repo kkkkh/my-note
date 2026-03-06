@@ -1,6 +1,9 @@
 ---
 title: 编辑器（文本标注引擎）实现思路
 date: 2026-01-22
+tags:
+  - front-end
+  - Lib
 ---
 <script setup>
   import ResRender from "@/components/Render.vue"

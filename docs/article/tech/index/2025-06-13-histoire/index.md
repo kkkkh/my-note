@@ -1,6 +1,9 @@
 ---
 title: histoire 使用记录
 date: 2025-06-13
+tags:
+  - front-end
+  - Engineering
 ---
 # histoire
 ## 1、在monorepo中使用

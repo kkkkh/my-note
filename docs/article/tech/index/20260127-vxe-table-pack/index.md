@@ -1,6 +1,10 @@
 ---
 title: vxe-table 二次封装（筛选 + 排序 + 分页）（1）
 date: 2026-01-27
+tags:
+  - front-end
+  - Lib
+  - Vue
 ---
 # vxe-table 二次封装（筛选 + 排序 + 分页）（1）
 ## 场景需求

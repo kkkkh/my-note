@@ -2,6 +2,9 @@
 outline: deep
 title: 函数顺序调用
 date: 2025-07-04
+tags:
+  - front-end
+  - Js
 ---
 # 函数顺序调用
 ## 需求场景

@@ -1,6 +1,9 @@
 ---
 title: LLM-PyTorch
 date: 2026-02-25
+tags:
+  - AI
+  - LLM
 ---
 # LLM-PyTorch
 ## LLM 大语言模型

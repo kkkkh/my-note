@@ -193,15 +193,15 @@ export default withMermaid(defineConfig({
           ],
         },
         {
-          text: 'Plugin',
-          link: '/front-end/Plugin/',
+          text: 'Lib',
+          link: '/front-end/Lib/',
           items: [
-            { text: 'Lib', link: '/front-end/Plugin/Lib/' },
-            { text: 'vue plugin', link: '/front-end/Plugin/Vue/' },
-            { text: 'react plugin', link: '/front-end/Plugin/React/' },
-            { text: 'Vite plugin', link: '/front-end/Plugin/Vite/' },
-            { text: 'Ts plugin', link: '/front-end/Plugin/Ts/' },
-            { text: 'git', link: '/front-end/Plugin/Git/' },
+            { text: 'js', link: '/front-end/Lib/Base/' },
+            { text: 'vue', link: '/front-end/Lib/Vue/' },
+            { text: 'react', link: '/front-end/Lib/React/' },
+            { text: 'Vite', link: '/front-end/Lib/Vite/' },
+            { text: 'ts', link: '/front-end/Lib/Ts/' },
+            { text: 'git', link: '/front-end/Lib/Git/' },
           ],
         },
         {
