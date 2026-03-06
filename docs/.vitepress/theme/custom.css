@@ -1,0 +1,10 @@
+/* 放宽文档正文区域 */
+.VPDoc .container {
+  max-width: 1440px !important;
+}
+
+/* 放宽真正的文章内容宽度 */
+.VPDoc.has-aside .content-container,
+.VPDoc:not(.has-aside) .content-container {
+  max-width: 960px !important;
+}
