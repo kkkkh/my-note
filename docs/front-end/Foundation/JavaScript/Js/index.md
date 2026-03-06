@@ -4,7 +4,7 @@ outline: deep
 <script setup>
 import Test from '@/components/Test.vue'
 
-// const components = import.meta.glob('@/front-end/JavaScript/Js/components/*/index.vue',{
+// const components = import.meta.glob('@/front-end/Foundation/JavaScript/Js/components/*/index.vue',{
 //   // eager: true,
 //   // import:'default'
 // })
@@ -13,9 +13,9 @@ import Test from '@/components/Test.vue'
 // }))
 // console.log("jsModules",jsModules)
 
-import Generator from '@/front-end/JavaScript/Js/components/Generator/index.vue'
-import Promise from '@/front-end/JavaScript/Js/components/Promise/index.vue'
-import Json from '@/front-end/JavaScript/Js/components/JSON/index.vue'
+import Generator from '@/front-end/Foundation/JavaScript/Js/components/Generator/index.vue'
+import Promise from '@/front-end/Foundation/JavaScript/Js/components/Promise/index.vue'
+import Json from '@/front-end/Foundation/JavaScript/Js/components/JSON/index.vue'
 
 </script>
 

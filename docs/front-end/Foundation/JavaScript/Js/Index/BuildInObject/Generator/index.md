@@ -1,6 +1,6 @@
 ### Generator
 
-<<< @/front-end/JavaScript/Js/components/Generator/index.vue
+<<< @/front-end/Foundation/JavaScript/Js/components/Generator/index.vue
 
 <Test :is="Generator" />
 <!-- <Test :is="jsModules['Generator']" /> -->

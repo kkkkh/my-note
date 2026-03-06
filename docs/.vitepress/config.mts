@@ -53,23 +53,33 @@ export default withMermaid(defineConfig({
     },
     nav: [
       { text: '首页', link: '/' },
+      { text: '文章', link: '/article/' },
+      { 
+        text: '前端', 
+        items: [
+          { text: '基础语言' , link: '/front-end/Foundation',},
+          { text: '框架' , link: '/front-end/Frame',},
+          { text: '运行时' , link: '/front-end/Runtime',},
+          { text: '库' , link: '/front-end/Lib',},
+          { text: '工程化' , link: '/front-end/Engineering',},
+          { text: '可视化' , link: '/front-end/Visual',},
+          { text: '其他端' , link: '/front-end/OtherEnd',},
+          { text: 'interview', link: '/interview/font-end/'},
+          { text: 'playgroud', link: 'https://kkkkh.github.io/play/' },
+
+        ]
+      },
       { text: '技术',
         items: [
           { text: '计算机', link: '/computer-science' },
-          { text: '前端', link: '/front-end' },
           { text: '后端', link: '/back-end' },
+          { text: '运维', link: '/ops' },
           { text: 'web3', link: '/web3' },
           { text: 'AI', link: '/ai' },
           { text: 'HD', link: '/hd'},
-          { text: 'interview', link: '/interview/font-end/'},
         ]
       },
-      { text: '文章', link: '/article/' },
-      { text: '文档',
-        items:[
-          { text: 'tool', link: '/tools/' },
-          { text: 'play', link: 'https://kkkkh.github.io/play/' },
-      ] },
+      { text: '文档', link: '/tools/' },
     ],
     sidebar: {
       'tools': [
@@ -98,116 +108,119 @@ export default withMermaid(defineConfig({
           ],
         },
       ],
-      'front-end': [
+      'front-end/Foundation': [
         {
           text: 'Html',
-          link: '/front-end/Html/',
+          link: '/front-end/Foundation/Html/',
           items: [
-            { text: 'html', link: '/front-end/Html/html/' },
-            { text: 'xml', link: '/front-end/Html/xml/' },
+            { text: 'html', link: '/front-end/Foundation/Html/html/' },
+            { text: 'xml', link: '/front-end/Foundation/Html/xml/' },
           ],
         },
         {
           text: 'Css',
-          link: '/front-end/Css/',
+          link: '/front-end/Foundation/Css/',
           items: [
             {
               text: 'base',
               items: [
                 {
                   text: 'layout',
-                  link: '/front-end/Css/base/layout/',
+                  link: '/front-end/Foundation/Css/base/layout/',
                 },
                 {
                   text: 'attr',
-                  link: '/front-end/Css/base/attr/',
+                  link: '/front-end/Foundation/Css/base/attr/',
                 },
-                { text: 'flex', link: '/front-end/Css/base/flex/' },
-                { text: 'grid', link: '/front-end/Css/base/grid/' },
+                { text: 'flex', link: '/front-end/Foundation/Css/base/flex/' },
+                { text: 'grid', link: '/front-end/Foundation/Css/base/grid/' },
               ]
             },
             {
               text: '预处理',
               items:[
-                { text: 'sass', link: '/front-end/Css/preprocessor/sass/' },
+                { text: 'sass', link: '/front-end/Foundation/Css/preprocessor/sass/' },
               ]
             },
             {
               text: 'css 工程化',
-              link: '/front-end/Css/engineering/',
+              link: '/front-end/Foundation/Css/engineering/',
               items: [
-                { text: 'css-modules', link: '/front-end/Css/engineering/css-modules/' },
-                { text: 'styled-components', link: '/front-end/Css/engineering/styled-components/' },
-                { text: 'tailwindcss', link: '/front-end/Css/engineering/tailwindcss/' },
+                { text: 'css-modules', link: '/front-end/Foundation/Css/engineering/css-modules/' },
+                { text: 'styled-components', link: '/front-end/Foundation/Css/engineering/styled-components/' },
+                { text: 'tailwindcss', link: '/front-end/Foundation/Css/engineering/tailwindcss/' },
               ]
             }
           ],
         },
         {
           text: 'JavaScript',
-          link: '/front-end/JavaScript/',
+          link: '/front-end/Foundation/front-end/JavaScript/',
           items: [
-            { text: 'js', link: '/front-end/JavaScript/Js/' },
-            { text: 'dom', link: '/front-end/JavaScript/Dom/' },
-            { text: 'bom', link: '/front-end/JavaScript/Bom/' },
-            { text: 'webapi', link: '/front-end/JavaScript/WebApi/' },
-            { text: 'brower', link: '/front-end/JavaScript/Browser/' },
+            { text: 'js', link: '/front-end/Foundation/front-end/JavaScript/Js/' },
+            { text: 'dom', link: '/front-end/Foundation/front-end/JavaScript/Dom/' },
+            { text: 'bom', link: '/front-end/Foundation/front-end/JavaScript/Bom/' },
+            { text: 'webapi', link: '/front-end/Foundation/front-end/JavaScript/WebApi/' },
+            { text: 'brower', link: '/front-end/Foundation/front-end/JavaScript/Browser/' },
           ],
         },
         {
           text: 'TypeScript',
-          link: '/front-end/TypeScript/',
+          link: '/front-end/Foundation/TypeScript/',
           items: [
-            { text: 'study', link: '/front-end/TypeScript/' },
-            { text: 'app', link: '/front-end/TsApp/' },
+            { text: 'study', link: '/front-end/Foundation/TypeScript/' },
           ],
         },
         {
+          text: '算法',
+          link: '/front-end/Foundation/Algorithm/',
+        },
+      ],
+      'front-end/Frame': [
+        {
+          text: '设计模式',
+          link: '/front-end/Frame/DesignPatterns/',
+        },
+        {
           text: 'Vue',
-          link: '/front-end/Vue/',
+          link: '/front-end/Frame/Vue/',
           items: [
-            { text: 'vue3', link: '/front-end/Vue/vue3/' },
-            { text: 'vue2', link: '/front-end/Vue/vue2/' },
-            { text: 'vue-router', link: '/front-end/Vue/vue-router/' },
-            { text: 'element-ui', link: '/front-end/Vue/element-ui/' },
+            { text: 'vue3', link: '/front-end/Frame/Vue/vue3/' },
+            { text: 'vue2', link: '/front-end/Frame/Vue/vue2/' },
+            { text: 'vue-router', link: '/front-end/Frame/Vue/vue-router/' },
+            { text: 'element-ui', link: '/front-end/Frame/Vue/element-ui/' },
           ],
         },
         {
           text: 'React',
-          link: '/front-end/React/',
+          link: '/front-end/Frame/React/',
           items: [
             {
               text: 'react',
               items:[
                 {
-                  text: 'react base',link: '/front-end/React/react/',
+                  text: 'react base',link: '/front-end/Frame/React/react/',
                 },
                 {
-                  text: 'react app',link: '/front-end/React/react/app.md',
+                  text: 'react app',link: '/front-end/Frame/React/react/app.md',
                 },
               ]
             },
-            { text: 'react-router', link: '/front-end/React/react-router/' },
-            { text: 'preact', link: '/front-end/React/preact/' },
-            { text: 'nextjs', link: '/front-end/React/nextjs/' },
+            { text: 'react-router', link: '/front-end/Frame/React/react-router/' },
+            { text: 'preact', link: '/front-end/Frame/React/preact/' },
+            { text: 'nextjs', link: '/front-end/Frame/React/nextjs/' },
           ],
         },
-        {
-          text: 'Lib',
-          link: '/front-end/Lib/',
-          items: [
+        ],
+        'front-end/Lib':[
             { text: 'js', link: '/front-end/Lib/Base/' },
             { text: 'vue', link: '/front-end/Lib/Vue/' },
             { text: 'react', link: '/front-end/Lib/React/' },
             { text: 'Vite', link: '/front-end/Lib/Vite/' },
             { text: 'ts', link: '/front-end/Lib/Ts/' },
             { text: 'git', link: '/front-end/Lib/Git/' },
-          ],
-        },
-        {
-          text: '工程化',
-          link: '/front-end/Engineering/',
-          items: [
+        ],
+        'front-end/Engineering':[
             {
               text: '构建工具',
               link: '/front-end/Engineering/build-tools/',
@@ -267,11 +280,7 @@ export default withMermaid(defineConfig({
               link: '/front-end/Engineering/micro-frontend/',
             },
           ],
-        },
-        {
-          text: '可视化',
-          link: '/front-end/Visual/',
-          items: [
+        'front-end/Visual': [
             { text: '动画',
               link: '/front-end/Visual/animation/',
               items: [
@@ -280,17 +289,17 @@ export default withMermaid(defineConfig({
              },
              {
               text: '框架',
-              link: '/front-end/Visual/frame/',
+              link: '/front-end/Visual/Frame/',
               items: [
-                { text: 'echarts', link: '/front-end/Visual/frame/echarts/' },
+                { text: 'echarts', link: '/front-end/Visual/Frame/echarts/' },
               ],
              },
           ],
-        },
-        {
-          text: '运行时',
-          link: '/front-end/Runtime/',
-          items: [
+        'front-end/Runtime':[
+            {
+              text: 'Browser',
+              link: '/front-end/Runtime/Browser/'
+            },
             {
               text: 'NodeJs',
               link: '/front-end/Runtime/NodeJs/',
@@ -307,53 +316,24 @@ export default withMermaid(defineConfig({
                  },
               ]
             },
+            {
+              text: 'Http',
+              link: '/front-end/Runtime/Http/',
+              items: [
+                { text: 'ajax', link: '/front-end/Runtime/Http/Ajax/' },
+                { text: '状态码', link: '/front-end/Runtime/Http/StatusCode/' },
+                { text: '缓存', link: '/front-end/Runtime/Http/Cache/' },
+                { text: '安全', link: '/front-end/Runtime/Http/Safe/' },
+                { text: 'Cdn', link: '/front-end/Runtime/Http/Cdn/' },
+                { text: '抓包', link: '/front-end/Runtime/Http/PacketCapture/' },
+              ],
+            },
           ],
-        },
-        {
-          text: '其他端',
-          link: '/front-end/OtherEnd/',
-          items: [
-            { text: '小程序', link: '/front-end/OtherEnd/小程序/' },
-            { text: 'Electron', link: '/front-end/OtherEnd/Electron/' },
-            { text: 'terminal', link: '/front-end/OtherEnd/terminal/' },
-          ],
-        },
-        {
-          text: 'Http',
-          link: '/front-end/Http/',
-          items: [
-            { text: 'ajax', link: '/front-end/Http/Ajax/' },
-            { text: '状态码', link: '/front-end/Http/StatusCode/' },
-            { text: '缓存', link: '/front-end/Http/Cache/' },
-            { text: '安全', link: '/front-end/Http/Safe/' },
-            { text: 'Cdn', link: '/front-end/Http/Cdn/' },
-            { text: '抓包', link: '/front-end/Http/PacketCapture/' },
-          ],
-        },
-        {
-          text: '设计模式',
-          link: '/front-end/DesignPatterns/',
-        },
-        {
-          text: '算法',
-          link: '/front-end/Algorithm/',
-        },
-        // {
-        //   text: '应用',
-        //   link: '/front-end/Application/',
-        //   items: [
-        //     { text: '常用算法', link: '/front-end/Application/algorithm/'},
-        //     { text: '分片',
-        //       items: [
-        //         { text: '分片上传', link: '/front-end/Application/sharding/upload'  },
-        //         { text: '分片下载', link: '/front-end/Application/sharding/download'  },
-        //       ]
-        //     },
-        //     { text: '竞态', link: '/front-end/Application/race/' },
-        //     { text: '任务队列', link: '/front-end/Application/taskQueue/' },
-        //   ]
-        // },
-      ],
+        '/front-end/OtherEnd/':[
+          { text: '小程序', link: '/front-end/OtherEnd/小程序/' },
+          { text: 'Electron', link: '/front-end/OtherEnd/Electron/' },
+          { text: 'terminal', link: '/front-end/OtherEnd/terminal/' },
+        ],
       'back-end': [
         {
           text: 'Python',
@@ -390,66 +370,62 @@ export default withMermaid(defineConfig({
             { text: 'DB tools', link: '/back-end/DB/Tools/' },
           ],
         },
-        {
-          text: 'Ops',
-          link: '/back-end/Ops/',
-          items:[
-            {
-              text: 'Linux',
-              link: '/back-end/Ops/Linux/',
-              items: [
-                {
-                  text: 'Command',
-                  link: '/back-end/Ops/Linux/Command/',
-                  items: [],
-                },
-                {
-                  text: 'SSH',
-                  link: '/back-end/Ops/Linux/SSH/',
-                  items: [],
-                },
-              ],
-            },
-            {
-              text:'SSL/TLS',
-              link: '/back-end/Ops/SSL-TLS/',
-            },
-            {
-              text: "Nginx",
-              link: '/back-end/Ops/Nginx/',
-            },
-            {
-              text: "Docker",
-              items: [
-                {
-                  text: 'Base', link: '/back-end/Ops/Docker/Base/',
-                },
-                {
-                  text: 'docker compose', link: '/back-end/Ops/Docker/Compose/',
-                },
-                {
-                  text: 'App', link: '/back-end/Ops/Docker/App/',
-                }
-              ]
-            },
-            {
-              text: 'CI-CD',
-              link: '/back-end/Ops/CI-CD/',
-              items: [
-                {
-                  text: 'Drone', link: '/back-end/Ops/CI-CD/Drone/',
-                  // items:[
-                  //   {text: 'Drone Base', link: '/back-end/Ops/CI-CD/Drone/Base'},
-                  //   {text: 'Drone Use', link: '/back-end/Ops/CI-CD/Drone/Use'},
-                  // ]
-                },
-                { text: 'Jenkins', link: '/back-end/Ops/CI-CD/Jenkins/' },
-                { text: 'github', link: '/back-end/Ops/CI-CD/github/' },
-              ],
-            },
-          ],
-        }
       ],
+      'ops':[
+          {
+            text: 'Linux',
+            link: '/ops/Linux/',
+            items: [
+              {
+                text: 'Command',
+                link: '/ops/Linux/Command/',
+                items: [],
+              },
+              {
+                text: 'SSH',
+                link: '/ops/Linux/SSH/',
+                items: [],
+              },
+            ],
+          },
+          {
+            text:'SSL/TLS',
+            link: '/ops/SSL-TLS/',
+          },
+          {
+            text: "Nginx",
+            link: '/ops/Nginx/',
+          },
+          {
+            text: "Docker",
+            items: [
+              {
+                text: 'Base', link: '/ops/Docker/Base/',
+              },
+              {
+                text: 'docker compose', link: '/ops/Docker/Compose/',
+              },
+              {
+                text: 'App', link: '/ops/Docker/App/',
+              }
+            ]
+          },
+          {
+            text: 'CI-CD',
+            link: '/ops/CI-CD/',
+            items: [
+              {
+                text: 'Drone', link: '/ops/CI-CD/Drone/',
+                // items:[
+                //   {text: 'Drone Base', link: '/ops/CI-CD/Drone/Base'},
+                //   {text: 'Drone Use', link: '/ops/CI-CD/Drone/Use'},
+                // ]
+              },
+              { text: 'Jenkins', link: '/ops/CI-CD/Jenkins/' },
+              { text: 'github', link: '/ops/CI-CD/github/' },
+            ],
+          },
+        ],
       'computer-science':[
         {
           text: '汇编语言',

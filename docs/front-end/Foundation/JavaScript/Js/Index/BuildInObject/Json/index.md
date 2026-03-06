@@ -30,7 +30,7 @@ const obj = JSON.parse(jsonString); // { name: "Alice", age: 25 }
   - NaN 和 Infinity 格式的数值及 null 都会被当做 null。
   - 其他类型的对象，包括 Map/Set/WeakMap/WeakSet，仅会序列化可枚举的属性。
 
-<<< @/front-end/JavaScript/Js/components/JSON/index.vue
+<<< @/front-end/Foundation/JavaScript/Js/components/JSON/index.vue
 
 <Test :is="Json" />
 <!-- <Test :is="modules['JSON']" /> -->

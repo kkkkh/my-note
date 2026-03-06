@@ -6,6 +6,5 @@ outline: deep
 ## Dom
 ## Bom
 ## WebApi
-## Browser
 ## WebAssembly
 ## ES6

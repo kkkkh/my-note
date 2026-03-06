@@ -35,7 +35,7 @@ Node.ELEMENT_NODE === 1 // 元素节点
 - SVG - 参阅 http://www.w3.org/2000/svg
 <CreateElementNS />
 ::: details 查看代码
-<<< @/front-end/JavaScript/Dom/components/createElementNS.vue
+<<< @/front-end/Foundation/JavaScript/Dom/components/createElementNS.vue
 :::
 
 #### HTMLInputElement
@@ -168,14 +168,14 @@ const els = document.querySelectorAll('.name p, .name li, .name div');
 ![getBoundingClientRect](./img/getBoundingClientRect-1.png)
 <Test :is="GetBoundingClientRect" />
 ::: details 查看代码
-<<< @/front-end/JavaScript/Dom/components/getBoundingClientRect.vue
+<<< @/front-end/Foundation/JavaScript/Dom/components/getBoundingClientRect.vue
 :::
 
 #### activeElement
 Document 接口的 activeElement 只读属性返回 DOM 中当前拥有焦点的 Element。
 <ActiveElement />
 ::: details 查看代码
-<<< @/front-end/JavaScript/Dom/components/activeElement.vue
+<<< @/front-end/Foundation/JavaScript/Dom/components/activeElement.vue
 :::
 
 ### Event
@@ -187,7 +187,7 @@ Document 接口的 activeElement 只读属性返回 DOM 中当前拥有焦点的
 - 捕获阶段与冒泡阶段都可以设置e.stopPropagation()，阻止事件往下一层触发
 <CapturePropagation></CapturePropagation>
 ::: details 查看代码
-<<< @/front-end/JavaScript/Dom/components/capturePropagation.vue
+<<< @/front-end/Foundation/JavaScript/Dom/components/capturePropagation.vue
 :::
 
 #### target/currentTarget
@@ -208,7 +208,7 @@ ul.addEventListener('click', (e) => {
 - 扫描枪触发就是 input事件 + keydown Enter事件（生成的条形码中包含英文，输入法是英文状态下，才会触发keydown/keyup事件）
 <Keydown></Keydown>
 ::: details 查看代码
-<<< @/front-end/JavaScript/Dom/components/keydown.vue
+<<< @/front-end/Foundation/JavaScript/Dom/components/keydown.vue
 ::: 
 
 参考：
