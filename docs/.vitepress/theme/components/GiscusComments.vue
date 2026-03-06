@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Giscus } from '@giscus/vue'
+import Giscus from '@giscus/vue';
 import { useData } from 'vitepress'
 
 const { isDark, frontmatter } = useData()
@@ -8,6 +8,7 @@ const { isDark, frontmatter } = useData()
 <template>
   <div v-if="frontmatter.comment !== false" style="margin-top: 32px;">
     <Giscus
+      id="comments"
       repo="kkkkh/my-note"
       repoId="R_kgDOMcawfQ"
       category="Announcements"
