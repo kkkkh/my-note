@@ -5,6 +5,8 @@ import Viewer from 'v-viewer'
 import { directive as viewer } from "v-viewer"
 import DefaultTheme from 'vitepress/theme'
 import './custom.css'
+import { h } from 'vue'
+import GiscusComments from './components/GiscusComments.vue'
 
 Viewer.setDefaults({
   // zoomable: false,
@@ -12,9 +14,16 @@ Viewer.setDefaults({
 })
 export default {
   ...DefaultTheme,
+  Layout() {
+    return h(DefaultTheme.Layout, null, {
+      'doc-after': () => h(GiscusComments)
+    })
+  },
   enhanceApp({ app, router, siteData }: EnhanceAppContext) {
     app.directive('viewer', viewer());
+    app.component('GiscusComments', GiscusComments)
     // app.use(Viewer);
   }
+
 }
 // #endregion theme

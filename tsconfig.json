@@ -13,5 +13,10 @@
     "esModuleInterop":true,
     // "module":"esnext",
     // "target": "es2016"
-  }
+  },
+  "include": [
+    "docs/**/*.ts",
+    "docs/**/*.d.ts",
+    "docs/**/*.vue"
+  ]
 }
