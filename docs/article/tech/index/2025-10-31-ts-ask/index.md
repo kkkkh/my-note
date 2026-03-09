@@ -1,6 +1,6 @@
 ---
 outline: deep
-title: Ts 常见问题总结
+title: Ts 常见问题
 date: 2025-10-31
 tags:
   - front-end

@@ -377,14 +377,20 @@ export default withMermaid(defineConfig({
             link: '/ops/Linux/',
             items: [
               {
-                text: 'Command',
-                link: '/ops/Linux/Command/',
-                items: [],
+                text: 'cmd',
+                link: '/ops/Linux/cmd/',
               },
               {
-                text: 'SSH',
-                link: '/ops/Linux/SSH/',
-                items: [],
+                text: 'bash',
+                link: '/ops/Linux/bash/',
+              },
+              {
+                text: 'vim',
+                link: '/ops/Linux/vim/',
+              },
+              {
+                text: 'ssh',
+                link: '/ops/Linux/ssh/',
               },
             ],
           },
@@ -400,14 +406,14 @@ export default withMermaid(defineConfig({
             text: "Docker",
             items: [
               {
-                text: 'Base', link: '/ops/Docker/Base/',
+                text: 'docker', link: '/ops/Docker/docker/',
               },
               {
-                text: 'docker compose', link: '/ops/Docker/Compose/',
+                text: 'dockerFile', link: '/ops/Docker/dockerFile/',
               },
               {
-                text: 'App', link: '/ops/Docker/App/',
-              }
+                text: 'docker-compose', link: '/ops/Docker/docker-compose/',
+              },
             ]
           },
           {

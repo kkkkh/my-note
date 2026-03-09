@@ -47,11 +47,11 @@ docker compose --help
 ### 配置文件
 - 镜像仓库拉取：本地镜像、mongdb、redis
 ::: details 查看代码
-<<< ./docker-compose/docker-compose.yml
+<<< ./yml/docker-compose.yml
 :::
 - 镜像仓库拉取：阿里云镜像
 ::: details 查看代码
-<<< ./docker-compose/docker-compose.deploy.yml
+<<< ./yml/docker-compose.deploy.yml
 :::
 ## 常见问题
 ### 容器之间访问
@@ -83,7 +83,7 @@ docker compose --help
   - `r = redis.Redis(host='my_redis', port=6379, password='你的密码')`
   - 如果你在宿主机上访问 Redis，可以用：`r = redis.Redis(host='127.0.0.1', port=9003, password='...')`
 ::: details 查看代码
-<<< ./docker-compose/docker-compose.build.yml#redis
+<<< ./yml/docker-compose.build.yml#redis
 :::
 ### 顶层 volumes
 - 顶层 volumes 主要用于 命名卷的声明和配置，以及外部卷（external）且必须声指定 external: true
@@ -104,7 +104,7 @@ docker compose --help
   - ✅ 优点：热更新方便，路径清晰。
   - ❌ 缺点：路径硬编码，依赖宿主机目录存在；如果想在多个环境（dev/prod）共享卷或管理更灵活，bind mount 就不太方便。
 ::: details 查看代码
-<<< ./docker-compose/docker-compose.build.yml
+<<< ./yml/docker-compose.build.yml
 :::
 #### 顶层 volumes 作用
 - 声明命名卷（Named Volume）：告诉 Docker Compose 这个卷的名字是什么，可以被多个服务共享。

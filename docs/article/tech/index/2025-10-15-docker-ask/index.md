@@ -1,6 +1,5 @@
-# Docker app
-## 原理
-### windows
+# Docker 常见问题
+## windows 不能直接安装docker
 - 严格来说，Windows 本身不能直接像在 Linux 上那样原生安装 Docker Engine，
 - 原因是 Docker Engine 依赖 Linux 内核特性（cgroups、namespace 等），而 Windows 内核不支持这些。
 - WSL2 + Docker Engine（开源免费）
@@ -25,8 +24,7 @@ sudo systemctl start docker
 docker --version
 docker run hello-world
 ```
-## 常用场景
-### 删除 docker 镜像
+## 删除 docker 镜像
 ```bash
 docker rmi <image_id>
 ```
@@ -60,7 +58,7 @@ docker rm -f <container_id>
 # 再执行
 docker rmi <image_id>
 ```
-### 清除无用镜像
+## 清除无用镜像
 ```bash
 # 清理 <none> 镜像 需要确认
 docker image prune
@@ -76,13 +74,13 @@ docker system prune -f
 # 清理 volumes
 docker volume prune -f
 ```
-### “同名 + 同标签”镜像的行为
+## “同名 + 同标签”镜像的行为
 - 如果本地已经存在一个名为 image-name:latest 的镜像，
 - Docker 再次构建同名+同标签镜像 `docker build -t image-name:latest .`
 - 自动覆盖旧的 tag 指向，旧的镜像本身仍然存在（以镜像 ID 区分），
 - 但 latest 这个标签会被重新绑定到新的镜像 ID，
 - 标签只是一个“指针”，新构建的镜像不会真正删除旧镜像，只是“latest”这个名字被移动了。
-### Docker Hub（registry-1.docker.io）无法访问
+## Docker Hub（registry-1.docker.io）无法访问
 - 镜像源无法访问：增加镜像源
 ```bash
 sudo mkdir -p /etc/docker
@@ -109,7 +107,7 @@ sudo systemctl restart docker
 ```bash
 docker run -d -P m.daocloud.io/docker.io/library/nginx
 ```
-### 磁盘空间不足 `ERR_CONTENT_LENGTH_MISMATCH`
+## 磁盘空间不足 `ERR_CONTENT_LENGTH_MISMATCH`
 - 报错 GET https://www.xxxx.com/static/js/2.eda3eeaf.chunk.js net::ERR_CONTENT_LENGTH_MISMATCH 200 (OK)
 - nginx 排查
 ```bash
@@ -133,11 +131,11 @@ df -h -> use 100%
   - 1、none docker  批量删除
     - docker rmi $(docker images | grep "none" |awk '{print $3}')
   - 2、[prune 清除](./#清除无用镜像)
-### 进入docker
+## 进入docker
 ```bash
 docker exec -it your_container_name /bin/sh
 ```
-### 环境变量
+## 环境变量
 - 运行容器时手动设置（可覆盖 Dockerfile 环境变量）
 ```bash
 docker run -e APP_ENV=production myapp
@@ -148,7 +146,7 @@ docker run -e APP_ENV=production myapp
 | docker-compose environment | ✅中     |
 | Dockerfile `ENV`           | ✅默认/最低 |
 
-### 查看docker volumes
+## 查看docker volumes
 
 - 列出所有 volume
 ```bash

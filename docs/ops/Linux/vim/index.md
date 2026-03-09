@@ -48,7 +48,7 @@
   - :%s/旧字符串/新字符串/g <font size=1>替换所有匹配的旧字符串为新字符串</font>
 - :r file.txt 合并file文件
 - 分屏-略
-### vimrc配置
+## vimrc配置
 - cp /etc/vim/vimrc ~/.vimrc
 - syntax on 语法高亮
 - set background=dark 背景颜色

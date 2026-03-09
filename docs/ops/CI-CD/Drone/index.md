@@ -33,10 +33,10 @@
 - 只要宿主不清理镜像/cache，下次构建会复用
 - 不要在 docker build 时使用 --no-cache（或者在插件里开启了避免缓存的选项）。
 ::: details 查看代码
-<<< ../../Docker/Base/Dockerfile/nextjs.Dockerfile{dockerfile}
+<<< ../../Docker/dockerFile/Dockerfile/nextjs.Dockerfile{dockerfile}
 :::
 ::: details 查看代码
-<<< ../../Docker/Base/Dockerfile/python.Dockerfile{dockerfile}
+<<< ../../Docker/dockerFile/Dockerfile/python.Dockerfile{dockerfile}
 :::
 #### 方案B：BuildKit 的 RUN --mount=type=cache
 - 在 Dockerfile 用 BuildKit 的 cache mount
@@ -47,7 +47,7 @@ export DOCKER_BUILDKIT=1
 docker build -f data/Dockerfile -t myimage data
 ```
 ::: details 查看代码
-<<< ../../Docker/Base/Dockerfile/BuildKit.Dockerfile{dockerfile}
+<<< ../../Docker/dockerFile/Dockerfile/BuildKit.Dockerfile{dockerfile}
 :::
 #### 方案C：buildx 把 cache 导出到宿主目录（跨 runner / 持久化）
 - 把 BuildKit cache 存在宿主某个目录（你可以用 Drone 的 host volume 挂载该目录）
@@ -159,7 +159,7 @@ systemctl restart sshd
   - docker-compose.deploy.yml处于其他服务器：拉取docker镜像，部署
   - 服务器已登录相应docker仓库 `docker login --username=<username> xxxx.cr.aliyuncs.com`
 ::: details 查看代码
-<<< ../../Docker/Compose/docker-compose/docker-compose.deploy.yml
+<<< ../../Docker/docker-compose/yml/docker-compose.deploy.yml
 :::
 ### 没有 docker compose
 - v1 版本不推荐 ❌

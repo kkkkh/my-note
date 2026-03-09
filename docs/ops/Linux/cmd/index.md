@@ -1,6 +1,5 @@
-## Command
-### base
-#### start
+# Command
+##  start
 ```bash
 whoami #用户名
 hostname #主机名称
@@ -9,30 +8,30 @@ Ctrl + R #用于查找使用过的命令
 Ctrl + L #清除
 Ctrl + D #退出
 pwd #显示当前目录的路径
-uname -a #### 查看linux版本
+uname -a ##  查看linux版本
 # windows sudo
 runas
 ```
-#### ls
+##  ls
 ```bash
 ls -a #显式所有
 ls -l #详细列表 total //千字节
 ls -lh #文件大小适合阅读的显示展示
 ls -lt #最近一次修改时间排序
 ```
-#### cd
+##  cd
 ```bash
 cd ~
 cd #回到家目录
 ```
-#### du
+##  du
 ```bash
 du #统计目录大小
 du -h #文件大小适合阅读的形式展示
 du -ha #显示文件和目录的大小
 du -sh #当前目录总大小
 ```
-#### 权限 chmod
+##  权限 chmod
 ```bash
 ls -l a.txt
 -rw-r--r--
@@ -70,7 +69,7 @@ chmod -R 700 /home/oscar #修改目录下所有文件权限
 # 文件所在群组的其他用户具有读的权限；
 # 除此之外的其他用户没有任何权限。
 ```
-#### read
+##  read
 ```bash
 #!/bin/bash
 read name
@@ -95,7 +94,7 @@ echo -e "/nHello $name !"
 # 隐藏输入内容
 read -p 'Please enter your password : ' -s password
 ```
-#### corntab
+##  corntab
 ```bash
 # 创建
 crontab -e
@@ -120,7 +119,7 @@ corntab -l
 # 删除
 corntab -r
 ```
-#### rename 多文件批量改名
+##  rename 多文件批量改名
 ```bash
 rename -n 's/Image\s/logon*1*/' \*
 rename -n 'y/A-Z/a-z/' W*
@@ -136,12 +135,12 @@ rename 's/Imag/logo/' *
   - y 表示更改大小写
   - W* 带 W 字母前缀的文件
 
-#### 查看端口
+##  查看端口
 ```bash
 netstat -tanlp
 netstat -apn | grep 80 # 查看 80 端口
 ```
-#### tail 查看文件内容
+##  tail 查看文件内容
 ```bash
 tail -f -s 5 -n 100 ./logs
 ```
@@ -152,59 +151,28 @@ tail -f -s 5 -n 100 ./logs
 - -s, --sleep-interval=N 每隔 5 秒检查一次文件是否有更新
   - with -f, sleep for approximately N seconds (default 1.0) between iterations;
   - with inotify and --pid=P, check process P atleast once every N seconds
-#### ntpdate 更新系统时间
+##  ntpdate 更新系统时间
 ```bash
 sudo apt-get install -y ntpdate
 dpkg-reconfigure tzdata #设置时区,时区选择'Asia/Shanghai'
 sudo ntpdate -u ntp.aliyun.com
 ```
-#### find & rm
+##  find & rm
 ```bash
 # 进行多次删除
 find / -type d -name "node_modules" -print -exec rm -rf {} +
 find / -type d -name "dist" ! -path "*@*" -print -exec rm -rf {} +
 ```
-#### cp
+##  cp
 ```bash
 cp */**/*.pdf ./ # 一次性复制
 ```
-#### scp
+##  scp
 ```bash
 scp -r localfile.txt username@192.168.0.1:/home/username/
 ```
-#### runas
-```bash
-
-```
-#### yum（centos）
+##  yum（centos）
 ```bash
 yum install ddd
 yum remove ddd
-```
-
-### shell 脚本
-#### 条件 if elif else
-```bash
-if [ $1 = "1" ]
-then
-  echo "Hello $1 "
-elif [ $1 = "2" ]
-then
-  echo "hello $1"
-else
-  echo "hello no"
-fi
-```
-#### func
-```bash
-devPush () {
-    git checkout dev
-    git pull
-    git merge feature_v2.1.$version
-    sleep 3
-    echo "----push：dev,please confirm--------"
-    read
-    git push
-}
-devPush()
 ```
