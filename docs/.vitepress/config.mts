@@ -155,13 +155,13 @@ export default withMermaid(defineConfig({
         },
         {
           text: 'JavaScript',
-          link: '/front-end/Foundation/front-end/JavaScript/',
+          link: '/front-end/Foundation/JavaScript/',
           items: [
-            { text: 'js', link: '/front-end/Foundation/front-end/JavaScript/Js/' },
-            { text: 'dom', link: '/front-end/Foundation/front-end/JavaScript/Dom/' },
-            { text: 'bom', link: '/front-end/Foundation/front-end/JavaScript/Bom/' },
-            { text: 'webapi', link: '/front-end/Foundation/front-end/JavaScript/WebApi/' },
-            { text: 'brower', link: '/front-end/Foundation/front-end/JavaScript/Browser/' },
+            { text: 'js', link: '/front-end/Foundation/JavaScript/Js/' },
+            { text: 'dom', link: '/front-end/Foundation/JavaScript/Dom/' },
+            { text: 'bom', link: '/front-end/Foundation/JavaScript/Bom/' },
+            { text: 'webapi', link: '/front-end/Foundation/JavaScript/WebApi/' },
+            { text: 'brower', link: '/front-end/Foundation/JavaScript/Browser/' },
           ],
         },
         {
