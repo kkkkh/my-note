@@ -124,6 +124,6 @@ tags:
 
 - 外部链接中 `http://.../files/index.html` 调用electron主进程
 
-<<< @/submodule/play-electron/src/renderer/src/files/index.html#ipcRenderer{3}
+<<< @/submodule/play-electron/src/renderer/src/files/index.html#ipcRenderer{3 js}
 
 
