@@ -133,18 +133,6 @@ func()
   ipcMain.on(channel, listener)
   ```
   ```js
-  // 渲染进程
-  let returnValue = ipcRenderer.sendSync('msg_render2main', {  name: 'param1' },{ name: 'param2' });
-  console.log(returnValue) // 123
-  // 主进程
-  ipcMain.on('msg_render2main', (event, param1, param2) => {
-    console.log("param1",param1)
-    console.log("param2",param2)
-    // event.reply('msg_main2render', param1, param2)
-    event.returnValue = "123"
-  })
-  ```
-  ```js
   // 双向转发
   // 渲染进程
   ipcRenderer.send('msg_render2main', {  name: 'param1' },{ name: 'param2' });
@@ -154,6 +142,19 @@ func()
     event.sender.send('msg_main2render', param1, param2)
     // 同上
     event.reply('msg_main2render', param1, param2)
+  })
+  ```
+- 渲染进程 sendSync / 主进程 on （同步阻塞通信，不推荐）
+  ```js
+  // 渲染进程
+  let returnValue = ipcRenderer.sendSync('msg_render2main', {  name: 'param1' },{ name: 'param2' });
+  console.log(returnValue) // 123
+  // 主进程
+  ipcMain.on('msg_render2main', (event, param1, param2) => {
+    console.log("param1",param1)
+    console.log("param2",param2)
+    // event.reply('msg_main2render', param1, param2)
+    event.returnValue = "123"
   })
   ```
 - postMessage / on
