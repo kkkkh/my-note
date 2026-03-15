@@ -110,3 +110,11 @@ tags:
   - preload中绑定 window.electron（调用ipcRenderer.invoke 或者 ipcRenderer.send）
   - preload中绑定 window.electronAPI.app.*方法（是 ipcRenderer.send 的封装）
 ### 1、electron 配置内嵌的 webview
+- new BrowserWindow 配置开启
+
+<<< @/submodule/play-electron/src/main/index.ts#main-BrowserWindow{10}
+
+-vite 配置：自定义元素
+
+<<< @/submodule/play-electron/electron.vite.config.ts#vite-webview{5}
+
