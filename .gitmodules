@@ -8,3 +8,6 @@
 [submodule "docs/submodule/play-Python"]
 	path = docs/submodule/play-Python
 	url = https://github.com/kkkkh/play-Python.git
+[submodule "docs/submodule/play-electron"]
+	path = docs/submodule/play-electron
+	url = https://github.com/kkkkh/play-electron.git
