@@ -1,13 +1,12 @@
 ---
-title: electron 基本操作和实战
+title: electron 基本操作和架构
 date: 2026-03-15
 tags:
   - front-end
   - OtherEnd
   - electron
 ---
-# electron 基本操作和实战
-本文汇聚一些electron的基本操作和实战
+# electron 基本操作和架构
 ## 基本操作
 ### 如何通信
 
@@ -89,7 +88,7 @@ tags:
 <<< @/submodule/play-electron/src/main/ipc/on/appGetPath.ts
 
 
-## 实践
+## 架构
 ### play-electron 整体架构
 - 大目录
   - src/main 主进程相关
@@ -109,21 +108,6 @@ tags:
   - preload/index.js 加载到 new BrowserWindow.webPreferences.preload
   - preload中绑定 window.electron（调用ipcRenderer.invoke 或者 ipcRenderer.send）
   - preload中绑定 window.electronAPI.app.*方法（是 ipcRenderer.send 的封装）
-### 1、electron 配置内嵌的 webview
-- new BrowserWindow 配置开启
 
-<<< @/submodule/play-electron/src/main/index.ts#main-BrowserWindow{10}
-
-- vite 配置：webiew 非自定义元素
-
-<<< @/submodule/play-electron/electron.vite.config.ts#vite-webview{5}
-
-- vue组件中 `<webview>`元素配置，src 配置外部链接，preload 同时注入
-
-<<< @/submodule/play-electron/src/renderer/src/components/Webview.vue#webviewRef{5,7}
-
-- 外部链接中 `http://.../files/index.html` 调用electron主进程
-
-<<< @/submodule/play-electron/src/renderer/src/files/index.html#ipcRenderer{3 js}
 
 
