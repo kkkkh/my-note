@@ -7,6 +7,24 @@ tags:
   - ts
 ---
 # Ts 开发中常见问题：
+## 三斜线
+- TypeScript 的编译期依赖声明机制，用来引入类型定义
+- 三斜线写法（局部）：只对这个 .d.ts 文件生效
+```ts
+// 👉 “把 vite/client 这个类型包（`vite/client.d.ts`）引入到当前文件作用域中”
+
+/// <reference types="vite/client" />
+```
+### 和 tsconfig.json 的关系
+- tsconfig 写法（全局）：全项目生效
+```json
+{
+  "compilerOptions": {
+    "types": ["vite/client"]
+  }
+}
+```
+
 ## 没有类型声明文件的第三方库
 - 写一个module-env.d.ts模块声明文件
 ```ts
@@ -31,7 +49,7 @@ export {};
   - 你把 declare global { ... } 写在模块中没问题，但是 同一个文件里如果直接写 declare module '...'
   - 它会被认为是在模块作用域里声明，不是全局生效的，可能导致模块声明无效或者报错
 ## 保证ts可以正确的识别moudleName模块
-- global-env.d.ts 放在项目根目录或 src 目录下
+- 1、global-env.d.ts 放在项目根目录或 src 目录下
   - 通常，TypeScript 会自动识别项目中的 .d.ts 文件，无论它们在哪里，只要它们不在 exclude 列表里。
 - 2、可以在 tsconfig.json 中使用 include 字段明确包含它
 ```js
