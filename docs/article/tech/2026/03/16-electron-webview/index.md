@@ -17,9 +17,8 @@ tags:
 <<< @/submodule/play-electron/electron.vite.config.ts#vite-webview{5}
 
 - vue组件中 `<webview>`元素配置，src 配置外部链接，preload 同时注入
-
-<<< @/submodule/play-electron/src/renderer/src/components/Webview.vue#webviewRef{5,7}
+<<< @/submodule/play-electron/src/renderer/src/views/webview/index.vue#webviewRef{5,7}
 
 - 外部链接中 `http://.../files/index.html` 调用electron主进程
 
-<<< @/submodule/play-electron/src/renderer/src/files/index.html#ipcRenderer{3 js}
+<<< @/submodule/play-electron/src/renderer/src/views/webview/index.html#ipcRenderer{3 js}
