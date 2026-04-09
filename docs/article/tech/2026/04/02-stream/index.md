@@ -1,18 +1,26 @@
 ---
 title: stream 实践
-date: 2026-04-01 14:48
+date: 2026-04-02 14:48
 tags:
   - front-end
   - nodejs
 ---
 # stream 实践
 ## stream 实现方式
+
 - fs.createReadStream node老牌写法
+
+<<< @/submodule/play/packages/nodejs/src/stream/server/index.ts#node-stream
+
 - stream/web 较新的 Web Streams 风格写法
+
+<<< @/submodule/play/packages/nodejs/src/stream/server/index.ts#web-stream
+
 
 
 > Web Streams 不是 Node.js 发明的，而是 Web 平台后来补上的一套标准流 API；
 > Node.js 为了和 Web 平台更一致，也为了适配 fetch / Response / Request 这些越来越通用的接口，所以增加了对 Web Streams 的支持。
+
 ## contentType 设置
 
 - contentType 设置 与是否使用 stream 没有直接关系

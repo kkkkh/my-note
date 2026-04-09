@@ -1,4 +1,4 @@
 import createContent from '/utils/createContent.mts'
 
 
-export default createContent('/article/records/index/*.md')
+export default createContent('/article/records/index/**/*.md')
