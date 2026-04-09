@@ -225,7 +225,7 @@ const stream = res.body // 流
   - 也不会传 :、{、} 这些 JSON 语法字符，
   - 而是大致传成：字段号 1 + wire type，值 18 的编码结果
 #### wire format（protobuf binary wire format）
-- 核心结构 [具体代码实现](../05-protobufencode-decode/index.md)
+- 核心结构 [具体代码实现](../05-protobuf-encode-decode/index.md)
   - tag：字段号 field number(这是谁) + wire type(它的值长什么样)
   - payload：值本身(真实内容字节)
   - 必要时再加 length
