@@ -1,5 +1,5 @@
 ---
-title: AI 探索 顿悟
+title: 【AI探索】 AI 杀手
 date: 2026-04-01
 tags:
   - AI

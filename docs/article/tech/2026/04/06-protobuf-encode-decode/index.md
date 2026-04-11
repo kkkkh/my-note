@@ -1,6 +1,6 @@
 ---
-title: protobuf varint 编解码原理
-date: 2026-04-05 14:00
+title: 【关于二进制】protobuf varint 编解码原理
+date: 2026-04-06 14:00
 tags:
   - front-end
   - js
@@ -49,6 +49,8 @@ a = 150
   
 > varint 正向编码，本质就是：每次取低 7 位；如果后面还有剩余，就把最高位置 1；最后一组最高位置 0。
 
+<<< ./index.ts#encodeVarint
+
 ## Tag 公式 (field_number << 3) | wire_type
 - 为什么是3位？
   - tag 的低 3 位专门留给 wire type，剩下的高位留给 field number
@@ -71,6 +73,10 @@ a = 150
 
 > 它本质上就是“位打包”，常见的二进制技巧：把多个小字段塞进一个整数的不同 bit 区域里。
 
+<<< ./index.ts#encodeTag
+
+<<< ./index.ts#decodeTag
+
 ## 解码原理分析
 ### 96 01 => 150
 - 96 = 10010110
@@ -89,6 +95,7 @@ a = 150
 - 第2组：0000001
 - 结果 = 0010110 + (0000001 << 7) => 150
 
+<<< ./index.ts#decodeVarint
 
 ## 编码与解码的本质：位权变化
 - 编码：把值按照权重分配到不同位置
@@ -100,3 +107,12 @@ a = 150
 > 操作本质：把不同权重的二进制位拆开、搬运、再放回去
 >
 > 真正不会丢值的根本原因：这是可逆变换
+
+## 参考资料
+- [protobuf](https://protobuf.dev/)
+- 通用
+  - [protobufjs](https://github.com/protobufjs/protobuf.js)
+  - [protobuf-es](https://github.com/bufbuild/protobuf-es)
+- 生成
+  - [protobuf-javascript](https://github.com/protocolbuffers/protobuf-javascript)
+  - [protobuf-ts](https://github.com/timostamm/protobuf-ts)

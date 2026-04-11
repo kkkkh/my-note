@@ -1,10 +1,12 @@
 ---
-outline: deep
+title: vite 问题排查
+date: 2025-09-09 10:00:00
+tags:
+  - front-end
+  - vite
 ---
-# vite app
-## 1、bugs
-
-### process is not defined
+# vite 问题排查
+## process is not defined
 
 - 场景：项目启动报 process is not defined
 - 解决：
@@ -23,7 +25,7 @@ outline: deep
   - [csdn](https://blog.csdn.net/henryhu712/article/details/117897998)
   - [github](https://github.com/vitejs/vite/issues/1973#issuecomment-787571499)
   - [vite 文档](https://cn.vitejs.dev/guide/migration#rework-define-and-import-meta-env-replacement-strategy)
-### storybook 中 When I use the tsx/jsx file , the vue prompt is invalid vnode type
+## storybook 中 When I use the tsx/jsx file , the vue prompt is invalid vnode type
 
 [github bug ](https://github.com/storybookjs/storybook/issues/21681)
 
@@ -140,7 +142,7 @@ outline: deep
 
 - 最终解决方案：[升级到 7.0](https://storybook.js.org/migration-guides/7.0)
 
-### Message 主题色没有变化
+## Message 主题色没有变化
 
 - 场景：在 vue3 项目中，全局引入的 element-plus，设置新主题色，Message 主题色没有生效
 
@@ -240,7 +242,7 @@ outline: deep
     - [unplugin-element-plus](https://github.com/element-plus/unplugin-element-plus/blob/main/README.zh-CN.md)
     - [npm element-plus](https://www.npmjs.com/package/element-plus?activeTab=code)
 
-### JavaScript heap out of memory 内存泄漏
+## JavaScript heap out of memory 内存泄漏
 
 - 场景：服务器内存只有 2G，vite 打包占用内存过大，报错`JavaScript heap out of memory`，入口文件 main.ts ，集中所有项目的路由
 - 过程探索：
@@ -261,151 +263,21 @@ outline: deep
     - vite 打包本身已经占用了一定内存
   - 本地打包，dist 一并上传，不在服务器打包
   - 增大服务器内存
-
-## 2、配置
-
-### 多配置文件 1 script
-
-- 场景：一个 vue 代码仓库，其中包含多个子项目，每个子项目对应，各自配置文件\入口文件
-- 示例代码：
-  ```json
-  {
-    "scripts": {
-      "dev": "vite --mode gen --config vite.gen.config.ts",
-      "dev-lesson": "vite --mode lesson  --config vite.lesson.config.ts",
-      "build": "vue-tsc --noEmit && vite build --mode gen --config vite.gen.config.ts",
-      "build-lesson": "vite build --mode lesson --config vite.lesson.config.ts"
-    }
-  }
-  ```
-
-### 多配置文件 2 vite.config.js
-
-- 场景：不同子项目，使用不同的 index.html\favicon.ico
-
-- 解决思路 a：（只参考，不推荐使用）
-  - 统一在一个根目录下操作，改变所有对应参数（新的子项目根目录设置为 src，与原来的子项目区别开）
-    - 1、改变 root -> resolve(\_\_dirname,'src')
-      - root 改变以后，所有涉及路径都会发生变化，最好全部使用 `resolve(__dirname,'')`绝对路径不容易出错
-      - 围绕一点不变：工作区全部为 src/，以此为参照点路径
-    - 2、将新的 index.html 放到到 src/
-      - index.html -> `<script type="module" src="/main.ts"></script>`
-    - 3、favicon.ico -> `publicDir: resolve(__dirname,'./public/子项目')`
-    - 4、alias -> `entries: [{find: /@\/(.*)/, replacement: '/$1'}],`
-    - 5、build -> `main: resolve(__dirname, 'src/index.html'),`
-    - 6、scss -> `js additionalData: '@use "/styles/element/index.scss" as *;\'`
-  - dev:
-    - 启动以后，根路径就在 src 下工作，
-    - index.html 在 src 下 index.html
-    - 再找对应的 main.ts
-    - 以及模块中 alias
-  - build:
-    - index.html 找 resolve(\_\_dirname, 'src/index.html')，
-    - favicon.ico 也会去 publicDir 对应的目录下找，
-    - 其他与 dev 同
-    - 打包结果：index.html 为对应模板、在最外部；favicon 为对应配置
-  ```ts
-  export default ({ mode }) => {
-    return defineConfig({
-      // 配置了root为src，其他地方默认都在src中
-      root: resolve(__dirname, 'src'),
-      plugins: [
-        vue(),
-        alias({
-          entries: [{ find: /@\/(.*)/, replacement: '/$1' }], //@ -> /$1
-        }),
-        // ...
-      ],
-      css: {
-        preprocessorOptions: {
-          scss: {
-            additionalData: `@use "/styles/element/index.scss" as *;`, // styles 为与src下
-          },
-        },
-      },
-      build: {
-        rollupOptions: {
-          input: {
-            main: resolve(__dirname, 'src/index.html'), // 打包找到对应index.html
-          },
-        },
-        outDir: resolve(__dirname, 'dist'),
-      },
-      publicDir: resolve(__dirname, './public/lesson'), // public对应目录
-    })
-  }
-  ```
-- 解决思路 b：
-
-  - 第一种思路弊端
-    - 1、修改有关路径的地方较多，root、alias、css、build
-    - 2、当再新增一个子项目 index.html，如何跟 src/index.html 区分
-      - 2.1、放入 src 内部文件夹之中，main: resolve(\_\_dirname, 'src/**/**/index.html')，打包出来时，index.html 会嵌套 src 内部的路径
-      - 2.2、如果都放在 src 中，用不用的名字 oauth.html，打包出来的 oauth.html 如何改为 index.html
-  - 采用新思路
-
-    - 使用 [@rollup/plugin-html](https://www.npmjs.com/package/@rollup/plugin-html) 生成 index.html
-    - 优点：
-      - 1、路径所有相关不用再修改，恢复到从前
-      - 2、html 做了分离，只需要各自配置即可
-    - 配置
-
-      - 1、rollupOptions plugins @rollup/plugin-html
-      - 1、rollupOptions input index.html => main.ts
-      - 3、rollupOptions output es
-
-      ```js
-      import { defineConfig, loadEnv } from 'vite'
-      import vue from '@vitejs/plugin-vue'
-      import html from '@rollup/plugin-html'
-      import vueJsx from '@vitejs/plugin-vue-jsx'
-      import { resolve } from 'path'
-
-      export default ({ mode }) => {
-        return defineConfig({
-          // 其他的不必修改
-          ...
-          build: {
-            rollupOptions: {
-              input: {
-                main: resolve(__dirname, 'src/main.ts'),
-              },
-              plugins: [
-                html({
-                  attributes: {},
-                  publicPath: '',
-                  fileName: 'index.html',
-                  title: 'oauth',
-                }),
-              ],
-              output: {
-                dir: resolve(__dirname, 'dist'),
-                format: 'es',
-              },
-            },
-            outDir: resolve(__dirname, 'dist'),
-          },
-          publicDir: resolve(__dirname, './public/oauth'), // public 文件夹，放置favicon.ico
-        })
-      }
-      ```
-
-### 分包
-```js
-export default ({ mode }) => {
-  return defineConfig({
-    build: {
-      rollupOptions: {
-        output: {
-          manualChunks: {
-            lodash: ['lodash'],
-            element: ['element-ui'],
-            xlsx: ['xlsx'],
-            axios: ['axios'],
-          },
-        },
-      },
-    }
-  })
-}
-```
+### 其他思路
+- swap
+- 先关 sourcemap 试一次
+  - 这是高收益排查项。Vite 相关 issue 里，sourcemap 是非常常见的内存放大器。
+- 给 Node 合理提堆，但别无脑拉满
+  - 常见做法是：
+  - NODE_OPTIONS="--max-old-space-size=4096" pnpm build
+  - 或 6144 / 8192 逐步试，而不是一上来极端拉高。因为堆越大，GC 停顿和 swap 风险也会上来。
+- 检查插件链
+  - Vite 官方性能文档明确提醒，社区插件的 transform / load / resolveId 等 hook 可能显著拖慢并放大成本；大型项目里，插件常常比 Vite 本体更容易成为瓶颈。
+- 减少构建期工作量
+  - 关闭 build.reportCompressedSize
+  - 做更细的 code splitting / dynamic import
+  - 避免一次性打进巨量模块
+  - 检查是否某些库整包引入、某些插件全量扫描文件
+  - Vite 文档提到关闭压缩体积报告可提升大型项目构建性能；Rollup 官方也建议用 code splitting、精细导入、关闭 sourcemap 来减轻内存压力。
+  - 必要时升级 Vite / 相关插件，而不是只盯着 Vite 5
+  - 因为很多 OOM 其实落点在 Rollup、插件、框架层封装，而不一定是 “Vite 5 本身有个固定 bug”。

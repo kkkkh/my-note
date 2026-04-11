@@ -1,9 +1,9 @@
 ---
-title: fetch Response  / ajax Response / axios Response 对比
-date: 2026-04-04 10:00
+title: 【关于流】fetch Response  / ajax Response / axios Response 对比
+date: 2026-04-02 11:00
 tags:
   - front-end
-  - js
+  - nodejs
 ---
 # fetch Response / ajax Response / axios Response 对比
 - fetch 是把响应体当成一个 Response 对象，然后你再决定把它读成 arrayBuffer / blob / text / json / stream
