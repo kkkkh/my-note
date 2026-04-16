@@ -188,6 +188,7 @@ outline: deep
   - [corepack](https://www.npmjs.com/package/corepack) Corepack 允许您使用 Yarn、npm 和 pnpm，而无需安装它们
 - eslint
   - [generator-eslint](https://www.npmjs.com/package/generator-eslint)
+  - [standard](https://github.com/standard/standard) &nbsp; [standardjs](https://standardjs.com/readme-zhcn) 代码规范
 - config
   - [lilconfig](https://github.com/antonk52/lilconfig)
   - [cosmiconfig](https://github.com/cosmiconfig/cosmiconfig)
