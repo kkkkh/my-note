@@ -347,7 +347,7 @@ export default withMermaid(defineConfig({
             },
             { text: '应用',
               items:[
-                { text: 'FastApi', link: '/back-end/Python/App/fastApi/' },
+                { text: 'FastApi', link: '/back-end/Python/App/fastapi/' },
                 { text: 'Alembic', link: '/back-end/Python/App/alembic',},
                 { text: '代码示例', link: '/back-end/Python/App/code/' },
               ],
