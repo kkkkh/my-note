@@ -176,3 +176,34 @@ docker volume inspect db_data
 ```bash
 ls /var/lib/docker/volumes/db_data/_data
 ```
+## 查看docker network
+```bash
+tail -n 100 -f /var/log/nginx/error.log
+# 目的：先从入口（Nginx）确认是网络/转发问题，还是上游应用自身 5xx。
+# 结论：如果出现 connect() failed / timeout / 502，多半是上游进程没起来、端口不通或容器不健康；
+#       如果只是看到上游返回 500，需要继续看容器应用日志拿到 Python 堆栈。
+
+docker ps -a | grep 18e853abb0aa
+# 目的：确认容器是否存在、状态是否 Up/Exited、是否频繁重启（CrashLoop）。
+# 结论：如果容器不断 Exited/重启，优先怀疑镜像/依赖/启动命令而不是 Nginx 配置。
+
+docker logs 18e853abb0aa
+# 目的：读取容器 stdout/stderr，拿到应用侧完整异常堆栈。
+# 结论：若看到 `ModuleNotFoundError: No module named 'langchain_core'`，基本可定位为容器运行时 Python 环境 import 不到该模块。
+
+docker exec -it 18e853abb0aa bash -c "pip list | grep langchain_core"
+# 目的：进入容器检查依赖是否安装。
+# 注意：`pip` 不一定等同于应用实际使用的解释器环境（多 Python/venv/路径差异），所以该结果不足以单独闭环。
+# 建议补充“一锤定音”（同一解释器验证 pip + import）：
+#   python -V
+#   python -m pip -V
+#   python -m pip list | grep -E "langchain|langchain-core|langchain_core" || true
+#   python -c "import langchain_core; print(langchain_core.__file__)"
+
+docker stop 18e853abb0aa
+# 目的：停止异常容器，避免持续重启/占用端口，便于做对照排查。
+
+docker run -it --rm --entrypoint bash english-server:latest -c "sleep 300"
+# 目的：用同一镜像起一个“不会立刻跑应用”的容器，留时间 300s进入镜像内部检查环境（依赖、解释器路径、入口脚本等）。
+# 价值：避免应用一启动就崩导致来不及 exec 进去排查。
+```

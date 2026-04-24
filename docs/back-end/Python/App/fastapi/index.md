@@ -1,6 +1,3 @@
-<!-- TOC -->
-
-<!-- /TOC -->
 # App
 ## python基本
 ### 三目
@@ -675,6 +672,18 @@ def init_exception_handlers(app):
     app.add_exception_handler(IntegrityError, db_exception_handler)
 
 ```
+### 枚举使用
+```py
+from enum import Enum
+class AnimalType(str, Enum):
+    a = "a"
+    b = "b"
+```
+- crud/routers/schemas/ 使用AnimalType.a
+- models/ 使用AnimalType.a.value
+- 原因：
+  - 业务层（FastAPI 入参/内部逻辑）：统一用 AnimalType 枚举（更不容易写错）
+  - 持久化层（DB column 是 String）：统一存 "a" / "b"（所以 models 默认值用 .value 很合理）
 ### 状态码
 - 422
   - 服务器理解了请求，但请求格式正确，却因为语义错误无法处理。
