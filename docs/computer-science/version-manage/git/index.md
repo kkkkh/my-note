@@ -289,10 +289,15 @@ git tag v0.9 f52c633 # 给f52c633打标签
 git show <tagname> # 查看标签信息
 git tag -a v0.1 -m "version 0.1 released" 1094adb
 
-git tag -d v1.0 #删除标签
-git push origin <tagname> #推送某个标签到远程
-git push origin --tags # 推送全部
+git tag -d v1.0 # 删除本地标签
+git push origin -d <tagname> # 删除远程标签
 git push origin :refs/tags/v0.9 # 删除远程标签
+
+git push origin <tagname> # 推送某个标签到远程
+git push origin --tags # 推送全部
+
+git ls-remote --tags origin # 查看远程 tag
+
 ```
 #### git check-ignore
 ```bash
