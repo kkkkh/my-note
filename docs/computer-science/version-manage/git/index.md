@@ -283,21 +283,34 @@ git pull --reabse = git fetch + git rebase
 ```
 #### git tag
 ```bash
-git tag # 查看所有标签
+# 打标签
 git tag v1.0 # 当前commit 打标签
 git tag v0.9 f52c633 # 给f52c633打标签
-git show <tagname> # 查看标签信息
 git tag -a v0.1 -m "version 0.1 released" 1094adb
 
+# 迁移
+git tag -f v3.8.5
+git tag -fa v3.8.5 -m "v3.8.5"
+git push --force origin v3.8.5
+
+# 删除
 git tag -d v1.0 # 删除本地标签
 git push origin -d <tagname> # 删除远程标签
 git push origin :refs/tags/v0.9 # 删除远程标签
 
+# 推送
 git push origin <tagname> # 推送某个标签到远程
 git push origin --tags # 推送全部
 
-git ls-remote --tags origin # 查看远程 tag
+# 拉取更新
+git fetch --tags --force
 
+# 查看
+git tag # 查看所有标签
+git show <tagname> # 查看标签信息
+git ls-remote --tags origin # 查看远程 tag
+git show -s --oneline v3.8.5 # 校验一下本地
+git ls-remote --tags origin | grep v3.8.5 # 远端
 ```
 #### git check-ignore
 ```bash
