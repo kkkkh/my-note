@@ -72,6 +72,7 @@ export default withMermaid(defineConfig({
       { text: '技术',
         items: [
           { text: '计算机', link: '/computer-science' },
+          { text: '操作系统', link: '/os' },
           { text: '后端', link: '/back-end' },
           { text: '运维', link: '/ops' },
           { text: 'web3', link: '/web3' },
@@ -82,6 +83,20 @@ export default withMermaid(defineConfig({
       { text: '文档', link: '/tools/' },
     ],
     sidebar: {
+      'os': [{
+          text: '操作系统',
+          link: '/os/',
+          items: [
+            {
+              text: 'windows',
+              link: '/os/windows/',
+            },
+            {
+              text: 'mac',
+              link: '/os/mac/',
+            }
+          ],
+        },],
       'tools': [
         {
           text: '技术',
@@ -261,7 +276,7 @@ export default withMermaid(defineConfig({
                 {
                   text: '浏览器插件', link: '/front-end/Engineering/plugin/brower/',
                   items:[
-                    {text: 'plasmo', link: '/front-end/Engineering/plugin/brower/plasmo/',}
+                    {text: 'plasmo', link: '/front-end/Engineering/plugin/brower/Plasmo/',}
                   ]
                 },
               ],
@@ -449,18 +464,9 @@ export default withMermaid(defineConfig({
           items: [],
         },
         {
-          text: '操作系统',
-          link: '/computer-science/Os/',
-          items: [
-            {
-              text: 'windows',
-              link: '/computer-science/Os/windows/',
-            },
-            {
-              text: 'mac',
-              link: '/computer-science/Os/mac/',
-            }
-          ],
+          text: 'algorithm',
+          link: '/computer-science/Algorithm/',
+          items: [],
         },
         {
           text: '版本管理',
