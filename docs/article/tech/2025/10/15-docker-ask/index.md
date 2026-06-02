@@ -1,3 +1,9 @@
+---
+title: Docker 常见问题
+date: 2025-10-15
+tags:
+  - Docker
+---
 # Docker 常见问题
 ## windows 不能直接安装docker
 - 严格来说，Windows 本身不能直接像在 Linux 上那样原生安装 Docker Engine，

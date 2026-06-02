@@ -41,6 +41,7 @@ outline: deep
     - [shiki](https://shiki.tmrs.site/guide/)
   - 代码编辑
     - [monaco-editor](https://github.com/microsoft/monaco-editor) 代码编辑
+    - [codemirror](https://codemirror.net/) 更小
     - json
       - [JSON Editor](https://github.com/josdejong/jsoneditor) => [json-editor-vue3](https://github.com/guyue88/json-editor-vue3)
       - [JSON Editor doc](https://jsoneditoronline.org/docs/)
