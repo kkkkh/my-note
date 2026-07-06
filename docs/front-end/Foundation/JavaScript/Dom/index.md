@@ -153,7 +153,29 @@ parent.contains(child); // true
 // or
 document.body.contains(node)
 ```
-- [参考](https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLElement/dataset)
+- [参考](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/contains)
+
+#### closest
+`Element.closest(selector)` 从**当前元素**开始，沿父节点链向上查找，返回第一个匹配 CSS 选择器的祖先元素；找不到则返回 `null`。
+- 查找范围包含自身：若当前元素已匹配 `selector`，返回的就是自己
+- `selector` 与 `querySelector` 相同，支持类、属性、组合选择器等
+- 与 `parentElement` 的区别：`parentElement` 只上一层；`closest` 可一次跳到符合条件的祖先
+- 与 `contains` 的方向相反：`contains` 判断「子节点是否在我里面」；`closest` 判断「我是否在某个祖先里面」
+```js
+// 事件委托：判断点击是否落在某块区域内（从 target 向上找）
+container.addEventListener("pointerdown", (e) => {
+  const target = e.target
+  if (!(target instanceof Element)) return
+  if (target.closest('[data-ignore="true"]')) return
+  // 点在「空白」区域，才继续处理
+})
+
+// 从文本节点落到元素：选区 startContainer 常为 #text，没有 dataset
+const el = range.startContainer?.parentElement?.closest?.("[data-line]")
+```
+- 在原生事件里用 `event.target` + `closest` 较稳，不依赖框架组件树
+- [参考](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/closest)
+
 #### querySelectorAll
 - querySelectorAll 不仅支持单个标签，还其实支持任意合法的 CSS 选择器，所以你完全可以同时获取多个标签
 ```javascript
