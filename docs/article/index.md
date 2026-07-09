@@ -8,6 +8,8 @@ import { data as techPosts } from './tech/index.data.mts'
 import Content from '@/components/Content.vue'
 import TagTree from '@/components/TagTree.vue'
 </script>
+
+
 <h1>技术</h1>
 <div class="article-main">
   <main>
