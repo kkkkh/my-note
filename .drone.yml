@@ -22,6 +22,7 @@ steps:
         from_secret: DRONE_GIT_SSH_KEY
     commands:
       - mkdir -p ~/.ssh
+      - echo "$GIT_SSH_KEY"
       - echo "$GIT_SSH_KEY" > ~/.ssh/id_rsa
       - chmod 600 ~/.ssh/id_rsa
       - ssh-keyscan github.com >> ~/.ssh/known_hosts
