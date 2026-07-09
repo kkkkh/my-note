@@ -95,6 +95,14 @@
     }
   }
 
+  .about-page p:has(> img) {
+    @apply mb-6;
+
+    img {
+      @apply border-border mx-0 h-[100px] w-full border object-cover;
+    }
+  }
+
   /* ===== Code Blocks & Syntax Highlighting ===== */
   .astro-code {
     @apply outline-border flex border bg-(--shiki-light-bg) text-(--shiki-light) [&_span]:text-(--shiki-light);

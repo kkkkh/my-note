@@ -32,6 +32,11 @@ export default {
     featured: "Featured",
     recentPosts: "Recent Posts",
     allPosts: "All Posts",
+    heroTitle: "Virtual Roaming",
+    heroIntro1:
+      "Imperfect, but always thinking, reflecting, and creating.",
+    heroIntro2: "Technical notes and content worth keeping.",
+    rssFeed: "RSS Feed",
   },
   footer: {
     copyright: "Copyright",

@@ -30,6 +30,10 @@ export interface UIStrings {
     featured: string;
     recentPosts: string;
     allPosts: string;
+    heroTitle: string;
+    heroIntro1: string;
+    heroIntro2: string;
+    rssFeed: string;
   };
   footer: {
     copyright: string;

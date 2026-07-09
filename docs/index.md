@@ -3,9 +3,10 @@
 layout: home
 
 hero:
-  # name: "Odyssey Technology"
-  text: "Note & Blog"
-  tagline: "In this journey, I have found a new direction"
+  # name: "kkkkh's technology note"
+  text: "Virtual Roaming Note"
+  tagline: "Imperfect, but always thinking, reflecting, and creating. Technical notes and content worth keeping."
+  # tagline: "In this journey, I have found a new direction"
   # tagline: "A long and adventurous journey,\nan exploration of the unknown world and a discovery of self,\nfull of challenges and hardships,\nbut never giving up the belief of returning."
   actions:
     - theme: brand

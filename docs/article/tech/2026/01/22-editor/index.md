@@ -4,6 +4,7 @@ date: 2026-01-22
 tags:
   - front-end
   - Lib
+astro: false
 ---
 <script setup>
   import ResRender from "@/components/Render.vue"

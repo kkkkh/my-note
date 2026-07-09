@@ -3,3 +3,7 @@ node_modules
 .DS_Store
 docs/.vitepress/dist
 docs/.vitepress/cache
+apps/blog/.content
+apps/blog/dist
+apps/blog/.astro
+apps/blog/node_modules

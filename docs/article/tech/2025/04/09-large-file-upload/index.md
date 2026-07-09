@@ -74,7 +74,7 @@ document.getElementById('file').addEventListener('change', function () {
     loadNext();
 });
 ```
-<<< ./index.html#article-file-asyncSharding
+<<< ./index.js#article-file-asyncSharding
 
 ### 测试结果
 - SparkMD5：

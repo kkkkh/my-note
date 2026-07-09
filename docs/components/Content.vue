@@ -26,6 +26,7 @@ import { withBase } from 'vitepress'
 <style scoped lang="scss">
 .post{
   padding-left:0;
+  margin: 0 0;
 }
 .post-item {
   display: flex;
