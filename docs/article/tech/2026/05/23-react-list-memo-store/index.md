@@ -2,7 +2,7 @@
 title: 【React】 长列表 + Zustand：memo 与订阅粒度
 date: 2026-05-23
 tags:
-  - frontend
+  - front-end
   - react
   - zustand
 ---

@@ -2,7 +2,7 @@
 title: 【Java】本地环境探索：在 Cursor 里跑通 Spring Boot 微服务
 date: 2026-06-03
 tags:
-  - backend
+  - back-end
   - java
   - spring-boot
 ---

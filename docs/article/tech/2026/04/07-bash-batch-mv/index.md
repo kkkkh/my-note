@@ -2,6 +2,7 @@
 title: bash 批量修改脚本
 date: 2026-04-07 10:00
 tags:
+  - Ops
   - linux
   - command
 ---

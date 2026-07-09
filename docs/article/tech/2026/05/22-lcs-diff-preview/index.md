@@ -2,7 +2,7 @@
 title: 【algorithm】字符级 LCS Diff：双栏文本对比高亮的实现
 date: 2026-05-22
 tags:
-  - frontend
+  - front-end
   - algorithm
 ---
 # 字符级 LCS Diff：双栏文本对比高亮的实现

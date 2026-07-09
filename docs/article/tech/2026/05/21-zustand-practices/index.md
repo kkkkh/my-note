@@ -2,7 +2,7 @@
 title: 【React】Zustand 的常用模式与踩坑
 date: 2026-05-21
 tags:
-  - frontend
+  - front-end
   - react
   - zustand
 ---

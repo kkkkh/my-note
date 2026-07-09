@@ -2,7 +2,7 @@
 title: ssh 常见问题
 date: 2025-12-15
 tags:
-  - ops
+  - Ops
   - linux
   - ssh
 ---

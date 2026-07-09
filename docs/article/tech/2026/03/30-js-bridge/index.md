@@ -3,8 +3,8 @@ title: JS Bridge 技术对比分析
 date: 2026-03-30
 tags:
   - front-end
-  - js
-  - electron
+  - OtherEnd
+  - JS Bridge
 ---
 # JS Bridge 技术对比分析
 ## JS Bridge
