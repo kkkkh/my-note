@@ -1,0 +1,8 @@
+.git
+**/.git
+**/node_modules
+**/dist
+apps/blog/.content
+docs/.vitepress/cache
+docs/.vitepress/dist
+**/.astro

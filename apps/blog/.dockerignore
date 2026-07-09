@@ -1,8 +1,6 @@
-# Ignore Astro files
-*.astro
+# Build from monorepo root: docker build -f apps/blog/Dockerfile -t blog:latest .
+# Root .dockerignore applies to that context.
 
-# Ignore node_modules directory
 node_modules/
-
-# Ignore build output
 dist/
+.content/

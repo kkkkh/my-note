@@ -1,17 +1,24 @@
-# Base stage for building the static files
-FROM node:lts AS base
+# syntax=docker/dockerfile:1
+# Build from monorepo root: docker build -f apps/blog/Dockerfile -t blog:latest .
+
+FROM node:22-bookworm-slim AS builder
 WORKDIR /app
 
-# Install pnpm
 RUN corepack enable && corepack prepare pnpm@latest --activate
 
-COPY package.json pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY apps/blog/package.json ./apps/blog/
+RUN pnpm install --frozen-lockfile --registry=https://registry.npmmirror.com
 
-COPY . .
-RUN pnpm run build
+COPY scripts ./scripts
+COPY docs/article ./docs/article
+COPY docs/submodule ./docs/submodule
+COPY apps/blog ./apps/blog
 
-# Runtime stage for serving the application
-FROM nginx:mainline-alpine-slim AS runtime
-COPY --from=base /app/dist /usr/share/nginx/html
+RUN pnpm blog:build
+
+FROM nginx:mainline-alpine-slim AS runner
+COPY apps/blog/nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /app/apps/blog/dist /usr/share/nginx/html
+
 EXPOSE 80

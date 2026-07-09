@@ -1,0 +1,52 @@
+kind: pipeline
+type: docker
+name: build-and-run-blog
+
+volumes:
+  - name: dockersock
+    host:
+      path: /var/run/docker.sock
+
+workspace:
+  base: /drone
+  path: src/my-note
+
+clone:
+  disable: true
+
+steps:
+  - name: switch-to-ssh
+    image: alpine/git
+    environment:
+      GIT_SSH_KEY:
+        from_secret: DRONE_GIT_SSH_KEY
+    commands:
+      - mkdir -p ~/.ssh
+      - echo "$GIT_SSH_KEY" > ~/.ssh/id_rsa
+      - chmod 600 ~/.ssh/id_rsa
+      - ssh-keyscan github.com >> ~/.ssh/known_hosts
+      - git clone --depth 1 git@github.com:kkkkh/my-note.git .
+      - git submodule sync --recursive
+      - git submodule update --init --recursive --depth 1
+    volumes:
+      - name: dockersock
+        path: /var/run/docker.sock
+
+  - name: build-and-run-blog
+    image: docker:24.0
+    volumes:
+      - name: dockersock
+        path: /var/run/docker.sock
+    commands:
+      - docker build -f apps/blog/Dockerfile -t blog:latest .
+      - docker rm -f blog || true
+      - docker run -d -p 9003:80 --name blog --restart=always blog:latest
+      - docker image prune -f
+    depends_on:
+      - switch-to-ssh
+
+trigger:
+  branch:
+    - main
+  event:
+    - push
