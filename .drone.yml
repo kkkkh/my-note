@@ -2,6 +2,9 @@ kind: pipeline
 type: docker
 name: build-and-run-blog
 
+concurrency:
+  limit: 1
+
 volumes:
   - name: dockersock
     host:
@@ -40,7 +43,9 @@ steps:
     commands:
       - >-
         docker build
+        --build-arg NODE_BASE_IMAGE=m.daocloud.io/docker.io/library/node:22-bookworm-slim
         --build-arg NGINX_BASE_IMAGE=m.daocloud.io/docker.io/library/nginx:mainline-alpine-slim
+        --pull=false
         -f apps/blog/Dockerfile
         -t blog:latest
         .
