@@ -1,0 +1,192 @@
+name: Build and deploy Astro blog to Aliyun
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: aliyun-blog-production
+  cancel-in-progress: false
+
+env:
+  REGISTRY: crpi-7pv0379anafgyx21.cn-chengdu.personal.cr.aliyuncs.com
+  IMAGE_NAME: kkkkh/blog
+
+jobs:
+  build:
+    name: Build and push image
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    outputs:
+      digest: ${{ steps.build.outputs.digest }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Aliyun ACR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      - name: Build and push image
+        id: build
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: apps/blog/Dockerfile
+          platforms: linux/amd64
+          push: true
+          pull: true
+          provenance: false
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          cache-from: type=gha,scope=my-note-blog
+          cache-to: type=gha,mode=max,scope=my-note-blog
+
+  deploy:
+    name: Deploy image to Aliyun ECS
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs:
+      - build
+
+    steps:
+      - name: Configure SSH
+        env:
+          ECS_SSH_PRIVATE_KEY: ${{ secrets.ECS_SSH_PRIVATE_KEY }}
+          ECS_KNOWN_HOSTS: ${{ secrets.ECS_KNOWN_HOSTS }}
+        run: |
+          set -eu
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$ECS_SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_deploy
+          chmod 600 ~/.ssh/id_deploy
+          printf '%s\n' "$ECS_KNOWN_HOSTS" | tr -d '\r' > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Log in to ACR on ECS
+        env:
+          ECS_HOST: ${{ secrets.ECS_HOST }}
+          ACR_USERNAME: ${{ secrets.ACR_USERNAME }}
+          ACR_PASSWORD: ${{ secrets.ACR_PASSWORD }}
+        run: |
+          set -eu
+          printf '%s' "$ACR_PASSWORD" |
+            ssh -i ~/.ssh/id_deploy root@"$ECS_HOST" \
+              "docker login '${{ env.REGISTRY }}' --username '$ACR_USERNAME' --password-stdin"
+
+      - name: Pull, verify, and deploy image
+        env:
+          ECS_HOST: ${{ secrets.ECS_HOST }}
+          IMAGE_REF: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ needs.build.outputs.digest }}
+          COMMIT_SHA: ${{ github.sha }}
+        run: |
+          set -eu
+          ssh -i ~/.ssh/id_deploy root@"$ECS_HOST" \
+            "IMAGE_REF='$IMAGE_REF' COMMIT_SHA='$COMMIT_SHA' bash -s" <<'REMOTE'
+          set -Eeuo pipefail
+
+          CONTAINER_NAME="blog"
+          CHECK_CONTAINER="blog-check"
+          PUBLIC_PORT="9000"
+          CHECK_PORT="19000"
+
+          check_url() {
+            local url="$1"
+
+            if command -v curl >/dev/null 2>&1; then
+              curl -fsS "$url" >/dev/null
+            elif command -v wget >/dev/null 2>&1; then
+              wget -qO- "$url" >/dev/null
+            else
+              echo "curl or wget is required on the ECS host"
+              return 1
+            fi
+          }
+
+          wait_for_http() {
+            local url="$1"
+
+            for _ in $(seq 1 15); do
+              if check_url "$url"; then
+                return 0
+              fi
+              sleep 2
+            done
+
+            return 1
+          }
+
+          rollback() {
+            docker rm -f "$CONTAINER_NAME" 2>/dev/null || true
+
+            if [ -n "${PREVIOUS_IMAGE_ID:-}" ]; then
+              echo "Rolling back to $PREVIOUS_IMAGE_ID"
+              docker run -d \
+                --name "$CONTAINER_NAME" \
+                --restart=always \
+                -p "${PUBLIC_PORT}:80" \
+                "$PREVIOUS_IMAGE_ID"
+            else
+              echo "No previous blog image is available for rollback"
+            fi
+          }
+
+          echo "Pulling $IMAGE_REF"
+          docker pull "$IMAGE_REF"
+
+          docker rm -f "$CHECK_CONTAINER" 2>/dev/null || true
+          docker run -d \
+            --name "$CHECK_CONTAINER" \
+            -p "127.0.0.1:${CHECK_PORT}:80" \
+            "$IMAGE_REF"
+
+          if ! wait_for_http "http://127.0.0.1:${CHECK_PORT}/"; then
+            docker logs "$CHECK_CONTAINER" || true
+            docker rm -f "$CHECK_CONTAINER" 2>/dev/null || true
+            echo "Candidate container health check failed"
+            exit 1
+          fi
+
+          docker rm -f "$CHECK_CONTAINER"
+
+          PREVIOUS_IMAGE_ID="$(
+            docker inspect -f '{{.Image}}' "$CONTAINER_NAME" 2>/dev/null || true
+          )"
+
+          docker rm -f "$CONTAINER_NAME" 2>/dev/null || true
+
+          if ! docker run -d \
+            --name "$CONTAINER_NAME" \
+            --restart=always \
+            --label "deployment.commit=$COMMIT_SHA" \
+            -p "${PUBLIC_PORT}:80" \
+            "$IMAGE_REF"; then
+            rollback
+            exit 1
+          fi
+
+          if ! wait_for_http "http://127.0.0.1:${PUBLIC_PORT}/"; then
+            docker logs "$CONTAINER_NAME" || true
+            rollback
+            exit 1
+          fi
+
+          docker image prune -f
+          echo "Deployment succeeded: $COMMIT_SHA"
+          REMOTE
