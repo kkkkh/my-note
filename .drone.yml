@@ -27,8 +27,8 @@ steps:
       - chmod 600 ~/.ssh/id_rsa
       - ssh-keyscan github.com >> ~/.ssh/known_hosts
       - git clone --depth 1 git@github.com:kkkkh/my-note.git .
-      - git submodule sync --recursive
-      - git submodule update --init --recursive --depth 1
+      - git -c url."git@github.com:".insteadOf="https://github.com/" \
+  submodule update --init --recursive
     volumes:
       - name: dockersock
         path: /var/run/docker.sock
@@ -41,7 +41,7 @@ steps:
     commands:
       - docker build -f apps/blog/Dockerfile -t blog:latest .
       - docker rm -f blog || true
-      - docker run -d -p 9003:80 --name blog --restart=always blog:latest
+      - docker run -d -p 9000:80 --name blog --restart=always blog:latest
       - docker image prune -f
     depends_on:
       - switch-to-ssh
