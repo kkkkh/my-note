@@ -1,3 +1,10 @@
+# Deprecated deployment pipeline.
+# The Astro blog is now built and deployed by GitHub Actions:
+# .github/workflows/deploy-aliyun.yml
+#
+# This file is intentionally retained for historical reference and rollback.
+# Automatic Drone deployment is disabled by the non-existent branch trigger below.
+
 kind: pipeline
 type: docker
 name: build-and-run-blog
@@ -55,8 +62,9 @@ steps:
     depends_on:
       - switch-to-ssh
 
+# Disabled: no real deployment branch uses this name.
 trigger:
   branch:
-    - main
+    - __drone_deployment_disabled__
   event:
     - push
