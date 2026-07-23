@@ -7,11 +7,11 @@ ARG NGINX_BASE_IMAGE=nginx:mainline-alpine-slim
 FROM ${NODE_BASE_IMAGE} AS builder
 WORKDIR /app
 
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN corepack enable && corepack prepare pnpm@9.5.0 --activate
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY apps/blog/package.json ./apps/blog/
-RUN pnpm install --frozen-lockfile --registry=https://registry.npmmirror.com
+RUN pnpm install --frozen-lockfile
 
 COPY scripts ./scripts
 COPY docs/article ./docs/article
