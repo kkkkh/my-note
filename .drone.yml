@@ -22,13 +22,12 @@ steps:
         from_secret: DRONE_GIT_SSH_KEY
     commands:
       - mkdir -p ~/.ssh
-      - echo "$GIT_SSH_KEY"
-      - echo "$GIT_SSH_KEY" > ~/.ssh/id_rsa
+      - chmod 700 ~/.ssh
+      - printf '%s\n' "$GIT_SSH_KEY" | tr -d '\r' > ~/.ssh/id_rsa
       - chmod 600 ~/.ssh/id_rsa
-      - ssh-keyscan github.com >> ~/.ssh/known_hosts
-      - git clone --depth 1 git@github.com:kkkkh/my-note.git .
-      - git -c url."git@github.com:".insteadOf="https://github.com/" \ 
-      submodule update --init --recursive
+      - ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+      - git clone --depth 1 --branch "$DRONE_COMMIT_BRANCH" git@github.com:kkkkh/my-note.git .
+      - git -c 'url.git@github.com:.insteadOf=https://github.com/' submodule update --init --recursive
     volumes:
       - name: dockersock
         path: /var/run/docker.sock
