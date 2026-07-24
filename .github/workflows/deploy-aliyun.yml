@@ -17,6 +17,7 @@ env:
   REGISTRY: crpi-7pv0379anafgyx21.cn-chengdu.personal.cr.aliyuncs.com
   IMAGE_NAME: kkkkh/blog
   ALIYUN_REGION: cn-chengdu
+  ALIBABA_CLOUD_REGION_ID: cn-chengdu
 
 jobs:
   build:
@@ -108,6 +109,7 @@ jobs:
           RULE_DESCRIPTION="github-actions-my-note-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
 
           aliyun ecs AuthorizeSecurityGroup \
+            --region "$ALIYUN_REGION" \
             --RegionId "$ALIYUN_REGION" \
             --SecurityGroupId "$SECURITY_GROUP_ID" \
             --IpProtocol tcp \
@@ -273,6 +275,7 @@ jobs:
           set -Eeuo pipefail
 
           aliyun ecs RevokeSecurityGroup \
+            --region "$ALIYUN_REGION" \
             --RegionId "$ALIYUN_REGION" \
             --SecurityGroupId "$SECURITY_GROUP_ID" \
             --IpProtocol tcp \
