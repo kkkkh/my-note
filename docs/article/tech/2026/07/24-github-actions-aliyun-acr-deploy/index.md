@@ -3,13 +3,12 @@ title: 从服务器本地构建迁移到 GitHub Actions + 阿里云 ACR
 日期: 2026-07-24
 date: 2026-07-24
 tags:
-  - DevOps
-  - GitHub Actions
-  - Docker
-  - Aliyun
+  - Ops
+  - Reploy
+  - GitHub
 ---
 
-# 从服务器本地构建迁移到 GitHub Actions + 阿里云 ACR
+# 【Reploy】从服务器本地构建迁移到 GitHub Actions + 阿里云 ACR
 
 最初的部署流程是：代码推送后，由云服务器上的 CI 直接执行 `docker build`，再用新镜像替换线上容器。
 
