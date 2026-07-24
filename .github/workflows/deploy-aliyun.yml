@@ -16,6 +16,7 @@ concurrency:
 env:
   REGISTRY: crpi-7pv0379anafgyx21.cn-chengdu.personal.cr.aliyuncs.com
   IMAGE_NAME: kkkkh/blog
+  ALIYUN_REGION: cn-chengdu
 
 jobs:
   build:
@@ -62,17 +63,87 @@ jobs:
   deploy:
     name: Deploy image to Aliyun ECS
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     needs:
       - build
 
     steps:
+      - name: Install Alibaba Cloud CLI
+        run: |
+          set -Eeuo pipefail
+          /bin/bash -c "$(curl -fsSL https://aliyuncli.alicdn.com/install.sh)"
+          aliyun version
+          aliyun plugin install --name ecs
+
+      - name: Get runner public IPv4
+        id: runner-ip
+        run: |
+          set -Eeuo pipefail
+
+          RUNNER_IP="$(curl -4 -fsSL https://api.ipify.org)"
+
+          python3 - "$RUNNER_IP" <<'PY'
+          import ipaddress
+          import sys
+
+          address = ipaddress.ip_address(sys.argv[1])
+          if address.version != 4:
+              raise SystemExit(f"Expected IPv4 address, got: {address}")
+          PY
+
+          echo "ip=$RUNNER_IP" >> "$GITHUB_OUTPUT"
+          echo "cidr=$RUNNER_IP/32" >> "$GITHUB_OUTPUT"
+          echo "GitHub Actions runner IPv4: $RUNNER_IP"
+
+      - name: Temporarily allow runner SSH access
+        id: allow-ssh
+        env:
+          ALIBABA_CLOUD_ACCESS_KEY_ID: ${{ secrets.ALIBABA_CLOUD_ACCESS_KEY_ID }}
+          ALIBABA_CLOUD_ACCESS_KEY_SECRET: ${{ secrets.ALIBABA_CLOUD_ACCESS_KEY_SECRET }}
+          SECURITY_GROUP_ID: ${{ secrets.ALIYUN_SECURITY_GROUP_ID }}
+          RUNNER_CIDR: ${{ steps.runner-ip.outputs.cidr }}
+        run: |
+          set -Eeuo pipefail
+
+          RULE_DESCRIPTION="github-actions-my-note-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+
+          aliyun ecs AuthorizeSecurityGroup \
+            --RegionId "$ALIYUN_REGION" \
+            --SecurityGroupId "$SECURITY_GROUP_ID" \
+            --IpProtocol tcp \
+            --PortRange 22/22 \
+            --SourceCidrIp "$RUNNER_CIDR" \
+            --Policy accept \
+            --Priority 1 \
+            --Description "$RULE_DESCRIPTION"
+
+          echo "Temporarily allowed SSH from $RUNNER_CIDR"
+
+      - name: Wait for SSH rule propagation
+        env:
+          ECS_HOST: ${{ secrets.ECS_HOST }}
+        run: |
+          set -Eeuo pipefail
+
+          for attempt in $(seq 1 20); do
+            if timeout 3 bash -c "</dev/tcp/${ECS_HOST}/22" 2>/dev/null; then
+              echo "SSH port is reachable"
+              exit 0
+            fi
+
+            echo "Waiting for SSH rule propagation ($attempt/20)..."
+            sleep 3
+          done
+
+          echo "SSH port did not become reachable"
+          exit 1
+
       - name: Configure SSH
         env:
           ECS_SSH_PRIVATE_KEY: ${{ secrets.ECS_SSH_PRIVATE_KEY }}
           ECS_KNOWN_HOSTS: ${{ secrets.ECS_KNOWN_HOSTS }}
         run: |
-          set -eu
+          set -Eeuo pipefail
           install -m 700 -d ~/.ssh
           printf '%s\n' "$ECS_SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_deploy
           chmod 600 ~/.ssh/id_deploy
@@ -85,7 +156,7 @@ jobs:
           ACR_USERNAME: ${{ secrets.ACR_USERNAME }}
           ACR_PASSWORD: ${{ secrets.ACR_PASSWORD }}
         run: |
-          set -eu
+          set -Eeuo pipefail
           printf '%s' "$ACR_PASSWORD" |
             ssh -i ~/.ssh/id_deploy root@"$ECS_HOST" \
               "docker login '${{ env.REGISTRY }}' --username '$ACR_USERNAME' --password-stdin"
@@ -96,7 +167,7 @@ jobs:
           IMAGE_REF: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ needs.build.outputs.digest }}
           COMMIT_SHA: ${{ github.sha }}
         run: |
-          set -eu
+          set -Eeuo pipefail
           ssh -i ~/.ssh/id_deploy root@"$ECS_HOST" \
             "IMAGE_REF='$IMAGE_REF' COMMIT_SHA='$COMMIT_SHA' bash -s" <<'REMOTE'
           set -Eeuo pipefail
@@ -190,3 +261,24 @@ jobs:
           docker image prune -f
           echo "Deployment succeeded: $COMMIT_SHA"
           REMOTE
+
+      - name: Revoke temporary SSH access
+        if: always() && steps.allow-ssh.outcome == 'success'
+        env:
+          ALIBABA_CLOUD_ACCESS_KEY_ID: ${{ secrets.ALIBABA_CLOUD_ACCESS_KEY_ID }}
+          ALIBABA_CLOUD_ACCESS_KEY_SECRET: ${{ secrets.ALIBABA_CLOUD_ACCESS_KEY_SECRET }}
+          SECURITY_GROUP_ID: ${{ secrets.ALIYUN_SECURITY_GROUP_ID }}
+          RUNNER_CIDR: ${{ steps.runner-ip.outputs.cidr }}
+        run: |
+          set -Eeuo pipefail
+
+          aliyun ecs RevokeSecurityGroup \
+            --RegionId "$ALIYUN_REGION" \
+            --SecurityGroupId "$SECURITY_GROUP_ID" \
+            --IpProtocol tcp \
+            --PortRange 22/22 \
+            --SourceCidrIp "$RUNNER_CIDR" \
+            --Policy accept \
+            --Priority 1
+
+          echo "Revoked temporary SSH access from $RUNNER_CIDR"
